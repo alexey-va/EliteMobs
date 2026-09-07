@@ -151,16 +151,23 @@ public class PlayerData {
                     boolean exists = PlayerDataRepository.readPlayer(uuid, resultSet -> readExistingData(uuid, resultSet));
                     if (!exists) writeNewData(uuid, playerName);
 
-                    synchronized (PlayerDataRepository.monitor()) {
-                        List<DeferredDatabaseValue> deferred = deferredDatabaseValues.remove(uuid);
-                        if (deferred != null && !deferred.isEmpty()) {
-                            for (DeferredDatabaseValue value : deferred)
-                                PlayerDataRepository.updateNow(uuid, value.column(), value.value());
-                            PlayerDataRepository.readPlayer(uuid, resultSet -> readExistingData(uuid, resultSet));
+                    while (true) {
+                        List<DeferredDatabaseValue> deferred;
+                        synchronized (PlayerDataRepository.monitor()) {
+                            if (!loadingPlayers.contains(uuid)) return;
+                            deferred = deferredDatabaseValues.remove(uuid);
+                            if (deferred == null || deferred.isEmpty()) {
+                                databaseDataLoaded = true;
+                                playerDataHashMap.put(uuid, PlayerData.this);
+                                loadingPlayers.remove(uuid);
+                                break;
+                            }
                         }
-                        databaseDataLoaded = true;
-                        playerDataHashMap.put(uuid, PlayerData.this);
-                        loadingPlayers.remove(uuid);
+                        // Writes arriving during this I/O go into the next batch. Publish only
+                        // after that batch is also applied, without blocking the server thread.
+                        for (DeferredDatabaseValue value : deferred)
+                            PlayerDataRepository.updateNow(uuid, value.column(), value.value());
+                        PlayerDataRepository.readPlayer(uuid, resultSet -> readExistingData(uuid, resultSet));
                     }
                 } catch (Exception e) {
                     Logger.warn("Something went wrong while generating a new player entry. This is bad! Tell the dev.");
@@ -811,8 +818,8 @@ public class PlayerData {
             playerDataHashMap.clear();
             loadingPlayers.clear();
             deferredDatabaseValues.clear();
-            PlayerDataRepository.close();
         }
+        PlayerDataRepository.close();
     }
 
     private void readExistingData(UUID uuid, ResultSet resultSet) throws Exception {

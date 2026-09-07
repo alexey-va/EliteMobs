@@ -19,6 +19,9 @@ import java.util.concurrent.ConcurrentHashMap;
 final class PlayerDataRepository {
 
     private static final Object MONITOR = new Object();
+    // No JDBC work may run while either of these main-thread-facing locks is held.
+    private static final Object PLAYER_STATE_MONITOR = new Object();
+    private static final Object QUEUE_MONITOR = new Object();
     private static final Object SCORE_RANKING_MONITOR = new Object();
     private static final Deque<DatabaseUpdate> pendingUpdates = new ArrayDeque<>();
     private static final Map<UUID, Integer> cachedScores = new ConcurrentHashMap<>();
@@ -32,7 +35,7 @@ final class PlayerDataRepository {
     }
 
     static Object monitor() {
-        return MONITOR;
+        return PLAYER_STATE_MONITOR;
     }
 
     static Connection connection() throws Exception {
@@ -89,7 +92,7 @@ final class PlayerDataRepository {
 
     static void enqueueUpdate(UUID playerId, String column, Object value) {
         validateColumn(column);
-        synchronized (MONITOR) {
+        synchronized (QUEUE_MONITOR) {
             pendingUpdates.addLast(new DatabaseUpdate(playerId, column, value));
             if (drainScheduled) return;
             drainScheduled = true;
@@ -248,7 +251,6 @@ final class PlayerDataRepository {
                 Logger.warn("Could not correctly close database connection.");
             } finally {
                 connection = null;
-                drainScheduled = false;
                 synchronized (SCORE_RANKING_MONITOR) {
                     scoreRankingLoadGeneration++;
                     cachedScores.clear();
@@ -262,17 +264,21 @@ final class PlayerDataRepository {
     private static void drainUpdates() {
         synchronized (MONITOR) {
             drainUpdatesLocked();
-            drainScheduled = false;
-            if (!pendingUpdates.isEmpty()) {
-                drainScheduled = true;
-                Bukkit.getScheduler().runTaskAsynchronously(MetadataHandler.PLUGIN, PlayerDataRepository::drainUpdates);
-            }
         }
     }
 
     private static void drainUpdatesLocked() {
-        DatabaseUpdate update;
-        while ((update = pendingUpdates.pollFirst()) != null) executeUpdate(update);
+        while (true) {
+            DatabaseUpdate update;
+            synchronized (QUEUE_MONITOR) {
+                update = pendingUpdates.pollFirst();
+                if (update == null) {
+                    drainScheduled = false;
+                    return;
+                }
+            }
+            executeUpdate(update);
+        }
     }
 
     private static void executeUpdate(DatabaseUpdate update) {
