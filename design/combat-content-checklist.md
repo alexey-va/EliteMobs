@@ -20,9 +20,9 @@ PID 65712. Prior jar/config backup is in the Windows temp directory named
 
 ## DLC evidence and automatic class loot
 
-- [ ] Inventory the entire available DLC generation, including coverage gaps.
-- [ ] Resolve actual item-to-mob loot references, difficulty and mob rank.
-- [ ] Report enchantment medians, prevalence and sample sizes by difficulty,
+- [x] Inventory the entire available DLC generation, including coverage gaps.
+- [x] Resolve actual item-to-mob loot references, difficulty and mob rank; retain unresolved references explicitly.
+- [x] Report enchantment medians, prevalence and sample sizes by difficulty,
       trash/miniboss/boss and weapon family; separate inferred classifications.
 - [ ] Derive explicit formulas from evidence and document sparse-data fallbacks.
 - [ ] Add editable YAML settings using the existing configuration conventions.
@@ -75,3 +75,24 @@ fireball speed. Do not add unimplemented enchantment labels.
 Canonical approved references: `class-trial-runtime.md`,
 `class-trial-encounters.md`, and the five `class-trials-<root>.md` files.
 No generic encounter is an acceptable fallback for an unfinished authored asset.
+
+## Final staff delivery, explicitly authorized by MagmaGuy
+
+- [ ] Finish the requested v0 autonomously, including all earlier checklist areas.
+- [ ] Compile final EliteMobs, ResourcePackManager and FreeMinecraftModels jars
+      and verify the exact artifacts. All three are explicitly requested.
+- [ ] Establish each plugin's previous full public release from current evidence.
+- [ ] Review every net change since that release, including existing WIP changes.
+- [ ] Prepare a substantial per-plugin changelog as chat text, not repository files.
+- [ ] Explain the major admin tools, including mob brains, verified mob/NPC patrol
+      support, combat/resources/controls, class trials and automatic class loot.
+- [ ] Give practical setup instructions and verified YAML/command examples for
+      each major tool, with relevant limitations and manual-test caveats.
+- [ ] Find the Nightbreak Discord `nightbreak_crew` channel in the authenticated UI.
+- [ ] Post the final builds and briefing, with real mentions for Dali and Frost.
+- [ ] Reload/inspect the channel to verify messages, mentions and jar attachments
+      persisted; record message links and exact artifact hashes.
+
+This is explicit authority to send these staff messages and attachments. It is
+not authority to publish a public plugin/DLC release. The user is sleeping;
+use informed judgment and preserve the promised manual review afterward.

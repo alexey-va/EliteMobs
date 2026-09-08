@@ -177,3 +177,35 @@ Final reporting must distinguish implemented, compiled, deployed, startup-checke
 and gameplay-verified. The user's thorough manual pass remains outstanding until
 it actually happens. A build or startup is not evidence of visual polish or fair
 balance.
+
+## 7. Final Discord staff handoff
+
+MagmaGuy explicitly authorized sending the completed builds to Dali and Frost in
+Nightbreak's `nightbreak_crew` chat. This final step is part of the goal, not an
+optional offer. Finish v0 autonomously while he sleeps.
+
+Build the final EliteMobs, ResourcePackManager and FreeMinecraftModels artifacts.
+MagmaGuy explicitly requested all three, including RSPM. Determine each plugin's actual last
+full public release and review all net source changes since that point, including
+pre-existing WIP changes included in the jars. Follow `.claude/rules/releases.md`
+for changelog style and baseline rules. This is a private tester/staff delivery,
+not public release authorization. Do not create repository changelog files.
+
+Write a substantial staff briefing with per-plugin change bullets and focused
+explanations of the big admin tools. Cover mob brains/AI configuration, verified
+mob and NPC patrol support, the combat model, health/resources, class controls,
+class progression and solo arena trials, automatic class loot and magic item
+enchantments. Discover additional major tools in the release comparison rather
+than assuming this list is exhaustive. Each important feature needs practical
+setup steps and a real configuration or command example. Validate names, paths,
+options and examples against the finished code. Distinguish partially implemented
+systems, version/dependency requirements and manual-test gaps without burying the
+staff in implementation trivia.
+
+Use the existing authenticated Discord UI and the workspace browser procedure.
+Locate the exact crew channel and correct Dali/Frost members. Select actual
+mentions through autocomplete or another supported UI flow; typed `@name` is not
+a ping. Attach the final jars, split the briefing into readable messages as
+needed, and verify the posted text, clickable mentions and attachments after a
+fresh channel render. Record message links and hashes. If posting is ambiguous,
+inspect the channel before retrying to avoid duplicate messages/uploads.
