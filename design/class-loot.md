@@ -37,6 +37,25 @@ in the pool, with the name `&6$boss's $weapon` and empty lore. An explicit
 the item's name and its lore. Level and supported enchantments are generated
 through the standard item pipeline.
 
+Magic weapons also participate in ordinary procedural drops and the procedural
+shop. In `ProceduralItemGenerationSettings.yml`, both default to enabled:
+
+```yaml
+validWeapons:
+  STAVES: true
+  WANDS: true
+```
+
+These switches control generated magic weapons in both procedural and baseline
+boss loot. FMM's magic weapon service must also be operational. Missing,
+incompatible, disabled or reloading FMM is excluded at selection time. These
+settings do not depend on Experimental Combat being enabled in the world.
+`dropProcedurallyGeneratedItems` still controls ordinary procedural drops.
+Each enabled magic type has one entry alongside the eligible vanilla materials;
+staff carriers remain separate from ordinary spears. `staffNames` and `wandNames`
+in `StaticItemNames.yml` configure their procedural names. Boss-specific names
+and lore still come from that boss's `classLootItems` entries.
+
 On load, the earlier `classLootNames` entries and shared `classLootLore` list
 migrate into the individual item entries. Existing per-item fields take
 precedence, including empty lore. The old fields are removed from the loaded
