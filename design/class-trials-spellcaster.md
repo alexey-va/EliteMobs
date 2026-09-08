@@ -1,7 +1,7 @@
 # Spellcaster branch encounters
 
 Authored designs under [the shared contract](class-trial-encounters.md). They
-have not been implemented or played. Wands/staffs below mean the canonical
+now have a bundled Lua v0 implementation that compiles. They have not been played or balance-approved. Wands/staffs below mean the canonical
 EliteMobs/FMM weapon representation; a decorative stick plus contact melee is
 not sufficient. Magic projectiles collide with terrain and entities. Curved
 paths use segment collision and cannot steer through walls. No ambient spell

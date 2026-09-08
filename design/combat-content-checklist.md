@@ -62,21 +62,21 @@ fireball speed. Do not add unimplemented enchantment labels.
 
 ## Authored class-trial bosses
 
-- [ ] Read and retain all 75 approved encounters in the linked design documents.
-- [ ] Replace the generic player-ability conversion using existing Lua powers.
+- [x] Read and retain all 75 approved encounters in the linked design documents.
+- [x] Replace the generic player-ability conversion using existing Lua powers.
 - [x] Author shared mobility powers once for the classes that inherit them (syntax compiled; integration and gameplay pending).
-- [ ] Load/validate each asset and equipment before accepting entry/payment.
+- [x] Load/validate each asset and equipment before accepting entry/payment.
 - [x] Author the five root scripts with equipment, timelines, visuals and dialogue (syntax compiled; integration and gameplay pending).
 - [x] Author Paladin's 14 branch encounters (syntax compiled; integration and gameplay pending).
 - [x] Author Berserker's 14 branch encounters (syntax compiled; integration and gameplay pending).
 - [x] Author Ranger's 14 branch encounters (syntax compiled; integration and gameplay pending).
-- [ ] Implement Cleric's 14 branch encounters.
-- [ ] Implement Spellcaster's 14 branch encounters.
-- [ ] Preserve sole challenger, external trainer NPC, arena exclusivity, fees,
+- [x] Implement Cleric's 14 branch encounters (syntax compiled; gameplay pending).
+- [x] Implement Spellcaster's 14 branch encounters (syntax compiled; gameplay pending).
+- [x] Preserve sole challenger, external trainer NPC, arena exclusivity, fees,
       prerequisites, unlock/activation, title and audio.
-- [ ] Implement death, failure, disconnect, abort and reload cleanup through the
+- [x] Implement death, failure, disconnect, abort and reload cleanup through the
       combat object's existing close hook, without editing arena orchestration.
-- [ ] Compile, commit, deploy and inspect all asset registration diagnostics.
+- [x] Compile, commit, deploy and inspect all asset registration diagnostics.
 - [ ] Manual acceptance cases in `class-trial-runtime.md` and all encounter reviews.
 
 Canonical approved references: `class-trial-runtime.md`,
@@ -118,20 +118,18 @@ Automatic class loot: EliteMobs `53b1b9c03`, deployed to 26.2. MagmaDeck PID
 Deployed EM SHA-256: `888F749853878C58A49AFA9ED5158DB42EA43C6EAF55854A73C2F1E2C345015B`.
 Backup: `%TEMP%/elitemobs-class-loot-20260908-080850`.
 
-The authored trial implementation is still a source-only checkpoint. Five root
-Lua programs and their shared mobility programs pass canonical Lua syntax/hook
-validation. All 75 presentation YAML files contain explicit equipment and the
-approved four dialogue beats. Paladin's 14 branch Lua programs now compile;
-Berserker's and Ranger's 14 each are also authored. Cleric's 14 branch programs also pass canonical Lua compilation. The remaining 14 Spellcaster branch programs are not written yet.
-`TrialEncounterAssets` validates the whole catalog and has no generic fallback.
-It is not wired into `ClassTrialDefinition` / `ClassTrialCombat` yet; those still
-contain the rejected old runtime, including on the live testbed. Complete the
-branch assets and replacement binding before deployment.
+All 75 authored Lua encounters pass canonical syntax/hook compilation. The old
+generic ClassTrialCombat implementation has been replaced with a LuaElitePower
+binding and TrialScriptActor. Equipment, thematic armor dyes, dialogue and boss
+health come from explicit per-form metadata. Spellcaster weapons use canonical
+FMM magic identity/presentation. Assets register on startup and equipment is
+preflighted before the existing admission code charges the attempt fee.
 
-The new trial actor adapter uses normal `LuaElitePower` / `ScriptableBoss` /
-`ScriptInstance` lifecycle and hooks. It owns projectiles, sparring actors, poses,
-physical movement, damage-budget delivery and temporary spectral panels. Java
-compilation passes. No arena code/configuration/world/orchestration was changed.
+Java compilation and a deployable shadowJar pass. No arena code/configuration,
+world, admission, reservation or teardown orchestration was changed. Existing
+challenge closure shuts down scripts, missiles, temporary effects, summoned
+actors and pose/movement state; an inactive Lua runtime reaches the existing
+failure/refund path. This is source and build evidence, not gameplay acceptance.
 
 FMM `a022909` adds the synchronous cancellable magic projectile travel query
 (magic API capability 5), needed for the authored spectral walls. It checks
@@ -164,3 +162,22 @@ LibsDisguises appearance, rather than vanilla armor-stand break rules. No arena
 orchestration, configuration or saved blocks were edited. Java and Lua compile;
 physical behavior and balance remain unverified. Cleric designs have been read.
 
+
+Spellcaster checkpoint: all 14 branches are authored, including breakable spell
+echoes, committed elemental stages, brazier-controlled fire, a bounded frost
+storm with clear ground, conjured blade sequences, finite corpse/portal charges,
+shared wards and damage links. Summons have explicit lifetimes and attack tells;
+healing has finite budgets. All 75 Lua assets compile after integration. Physical
+movement, curved arrows, collision, helper hitboxes, resource-pack presentation
+and every encounter's balance still require the requested manual pass.
+
+Authored-trial deployment: 26.2 restarted through MagmaDeck at 09:43 local,
+PID 21832. At 09:43:58 the server logged "Validated 75 authored class-trial
+encounters" and "EliteMobs fully initialized". EM SHA-256:
+`D8131A3CAD4F774EFD509B0C38AE14977F6E1CEBE431654138CC8B3BB6C394F5`.
+FMM API5 SHA-256: `A844E77514112E58946EF2743DE397096F830C7A83E35CF1B562B6DFE6562D1F`.
+Backup: `%TEMP%/elitemobs-authored-trials-20260908-094336`.
+Startup still has the existing Windows Perflib/OSHI errors. The current Geyser
+build also lacks BedrockEntityDefinition, so RSPM disables its custom Bedrock
+entity bridge with an explicit diagnostic. Neither is evidence of gameplay
+acceptance; no client or Autotester run was performed for this checkpoint.

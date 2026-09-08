@@ -59,6 +59,9 @@ for root,(title,hand,off,armor,voice) in ROOTS.items():
   elif root=='spellcaster': equipment['OFF_HAND']='BOOK'
   skin='necromancer' if form in ('necromancer','lich','plaguebringer') else 'pyromancer' if form=='pyromancer' else root
   data={'id':form,'title':title,'skin':skin,'equipment':equipment,'voice':dict(zip(('opening','halfway','victory','defeat'),voice))}
+  data['armorColor']={'paladin':'D8BD6C','berserker':'783C32','ranger':'456549','cleric':'EEE4CC','spellcaster':'705799'}[root]
+  data['armorColor']={'pyromancer':'C44D24','cryomancer':'B7E5EF','necromancer':'33394A','lich':'4E486A','plaguebringer':'61713C','demonologist':'6B263B','spiritbinder':'79ADBB','mistweaver':'B5DCD9','grovekeeper':'739252'}.get(form,data['armorColor'])
+  if root=='spellcaster': data['magicWeapon']='WAND' if hand=='BLAZE_ROD' else 'STAFF'
   (OUT/f'{form}.yml').write_text(yaml.safe_dump(data,sort_keys=False,allow_unicode=True,width=110),encoding='utf-8')
   count+=1
 print(f'Imported {count} explicit presentation assets; Lua mechanics remain separately authored.')
