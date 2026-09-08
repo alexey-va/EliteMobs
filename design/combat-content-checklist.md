@@ -122,7 +122,7 @@ The authored trial implementation is still a source-only checkpoint. Five root
 Lua programs and their shared mobility programs pass canonical Lua syntax/hook
 validation. All 75 presentation YAML files contain explicit equipment and the
 approved four dialogue beats. Paladin's 14 branch Lua programs now compile;
-Berserker's and Ranger's 14 each are also authored. The remaining 28 branch programs are not written yet.
+Berserker's and Ranger's 14 each are also authored. Cleric's 14 branch programs also pass canonical Lua compilation. The remaining 14 Spellcaster branch programs are not written yet.
 `TrialEncounterAssets` validates the whole catalog and has no generic fallback.
 It is not wired into `ClassTrialDefinition` / `ClassTrialCombat` yet; those still
 contain the rejected old runtime, including on the live testbed. Complete the
@@ -163,3 +163,4 @@ Props use the canonical normalized living-entity damage path with an armor-stand
 LibsDisguises appearance, rather than vanilla armor-stand break rules. No arena
 orchestration, configuration or saved blocks were edited. Java and Lua compile;
 physical behavior and balance remain unverified. Cleric designs have been read.
+
