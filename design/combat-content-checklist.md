@@ -68,7 +68,7 @@ fireball speed. Do not add unimplemented enchantment labels.
 - [ ] Load/validate each asset and equipment before accepting entry/payment.
 - [x] Author the five root scripts with equipment, timelines, visuals and dialogue (syntax compiled; integration and gameplay pending).
 - [x] Author Paladin's 14 branch encounters (syntax compiled; integration and gameplay pending).
-- [ ] Implement Berserker's 14 branch encounters.
+- [x] Author Berserker's 14 branch encounters (syntax compiled; integration and gameplay pending).
 - [ ] Implement Ranger's 14 branch encounters.
 - [ ] Implement Cleric's 14 branch encounters.
 - [ ] Implement Spellcaster's 14 branch encounters.
@@ -122,7 +122,7 @@ The authored trial implementation is still a source-only checkpoint. Five root
 Lua programs and their shared mobility programs pass canonical Lua syntax/hook
 validation. All 75 presentation YAML files contain explicit equipment and the
 approved four dialogue beats. Paladin's 14 branch Lua programs now compile;
-the remaining 56 branch programs are not written yet.
+Berserker's 14 are also authored. The remaining 42 branch programs are not written yet.
 `TrialEncounterAssets` validates the whole catalog and has no generic fallback.
 It is not wired into `ClassTrialDefinition` / `ClassTrialCombat` yet; those still
 contain the rejected old runtime, including on the live testbed. Complete the
