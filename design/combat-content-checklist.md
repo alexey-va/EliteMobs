@@ -34,7 +34,7 @@ PID 65712. Prior jar/config backup is in the Windows temp directory named
 - [x] Generate the appropriate difficulty/rank version from one item definition.
 - [x] Retain per-item name/lore and fully authored custom loot alongside coverage.
 - [x] Cover all supported class weapon families with deliberate equivalents.
-- [ ] Compile, commit, deploy and check registration/configuration.
+- [x] Compile, commit, deploy and check registration/configuration.
 - [ ] MagmaGuy's thorough manual balance and content review.
 
 Analysis source starts with immutable DLC generation
@@ -64,9 +64,9 @@ fireball speed. Do not add unimplemented enchantment labels.
 
 - [ ] Read and retain all 75 approved encounters in the linked design documents.
 - [ ] Replace the generic player-ability conversion using existing Lua powers.
-- [ ] Implement shared mobility powers once for the classes that inherit them.
+- [x] Author shared mobility powers once for the classes that inherit them (syntax compiled; integration and gameplay pending).
 - [ ] Load/validate each asset and equipment before accepting entry/payment.
-- [ ] Implement the five roots with equipment, timelines, visuals and dialogue.
+- [x] Author the five root scripts with equipment, timelines, visuals and dialogue (syntax compiled; integration and gameplay pending).
 - [ ] Implement Paladin's 14 branch encounters.
 - [ ] Implement Berserker's 14 branch encounters.
 - [ ] Implement Ranger's 14 branch encounters.
@@ -109,3 +109,37 @@ This is explicit authority to send these staff messages and attachments. It is
 not authority to publish a public plugin/DLC release. The user is sleeping;
 use informed judgment and preserve the promised manual review afterward.
 
+
+## Current implementation checkpoint
+
+Automatic class loot: EliteMobs `53b1b9c03`, deployed to 26.2. MagmaDeck PID
+92804, restart at 08:12 local, EliteMobs initialized at 08:12:28. Runtime logged
+90 class-loot profiles loaded and the effect settings appear in enchantment YAML.
+Deployed EM SHA-256: `888F749853878C58A49AFA9ED5158DB42EA43C6EAF55854A73C2F1E2C345015B`.
+Backup: `%TEMP%/elitemobs-class-loot-20260908-080850`.
+
+The authored trial implementation is still a source-only checkpoint. Five root
+Lua programs and their shared mobility programs pass canonical Lua syntax/hook
+validation. All 75 presentation YAML files contain explicit equipment and the
+approved four dialogue beats. The 70 branch Lua mechanics are not written yet.
+`TrialEncounterAssets` validates the whole catalog and has no generic fallback.
+It is not wired into `ClassTrialDefinition` / `ClassTrialCombat` yet; those still
+contain the rejected old runtime, including on the live testbed. Complete the
+branch assets and replacement binding before deployment.
+
+The new trial actor adapter uses normal `LuaElitePower` / `ScriptableBoss` /
+`ScriptInstance` lifecycle and hooks. It owns projectiles, sparring actors, poses,
+physical movement, damage-budget delivery and temporary spectral panels. Java
+compilation passes. No arena code/configuration/world/orchestration was changed.
+
+FMM `a022909` adds the synchronous cancellable magic projectile travel query
+(magic API capability 5), needed for the authored spectral walls. It checks
+travel and impact before damage/explosion, with no event allocation when there
+are no listeners. Built and installed to Maven Local; not yet deployed. Existing
+unrelated FMM working changes remain untouched. Latest testbed FMM is still the
+previous magic-enchantment checkpoint.
+
+Lua compilation command uses `design/tools/CompileTrialScripts.java` against the
+shaded EliteMobs jar and the local Spigot API jar. It invokes canonical
+`ScriptDefinition.validate`; it does not start a server, invoke encounter hooks,
+or establish behavior. Root scripts compile; manual gameplay remains pending.
