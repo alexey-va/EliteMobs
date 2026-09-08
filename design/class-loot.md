@@ -74,18 +74,117 @@ runtime rank does not guess from filenames.
 Supported item keys are SWORDS, AXES, BOWS, CROSSBOWS, TRIDENTS, HOES (scythes),
 MACES, SPEARS, STAVES, WANDS, DPS_HELMETS, DPS_CHESTPLATES, DPS_LEGGINGS, DPS_BOOTS,
 TANK_HELMETS, TANK_CHESTPLATES, TANK_LEGGINGS, TANK_BOOTS and SHIELDS.
-Every available family has equal selection weight. With all 19 available, weapons
-occupy 10/19 of the pool, DPS armor 4/19, tank armor 4/19 and shields 1/19.
-This guarantees pool coverage, not a full set per kill or a match to the recipient's
-current class. An omitted item still participates with `&6$boss's $weapon` and
+The default selection favors the active class: 80% relevant equipment and 20%
+off-class equipment. Within the chosen bucket, categories have configurable weights
+(WEAPONS 50, ARMOR 45, SHIELDS 5), then available families in that category are
+equally likely. Adding a family does not change its category's share of that bucket.
+This is one item per successful roll, not a full set. An omitted item still
+participates with `&6$boss's $weapon` and
 empty lore. `$boss`, `$weapon`, `$item` and `$difficulty` work in each item's name and lore.
-`lore: []` explicitly means no authored lore.
+`lore: []` explicitly means no authored lore and does not warn. Missing, blank or
+invalid names, missing/invalid lore and unknown family keys produce a dedicated
+`[ClassLoot presentation]` console warning with the boss filename and field paths
+when that enabled boss configuration loads. Inherited presentation counts as authored.
+Warnings do not disable drops or insert placeholder text into authored YAML.
 
 Default drop chances are 5% for trash, 25% for minibosses and 100% for bosses,
 per eligible contributor. These are editable v0 economy choices, not frequencies
 measured from DLC. Instanced drops enter the existing dungeon vote pool; eligible
 party drops use the existing party pool; other rewards use normal personal loot.
 Item level comes from the existing combat reward level and item-tier roll.
+
+## Class preferences
+
+Personal rolls use the recipient's active specialization. Each shared dungeon roll
+chooses one qualifying contributor uniformly, independently of damage beyond the
+existing 10% threshold, and uses that contributor's class for selection. Party
+rolls do the same within the contributing nearby members of that party. Items
+still enter the existing shared vote and are not reserved for the selected player.
+The number of rolls, threshold, lockouts and voting eligibility are unchanged.
+
+Weapon relevance comes from `ClassFormDefinition.weaponAffinities`, including
+specialization-specific bonuses. It does not use the weapon currently held. Armor
+and shield preferences appear for every class in the generated settings:
+
+```yaml
+selection:
+  classBiasEnabled: true
+  relevantChance: 0.8
+  categoryWeights:
+    WEAPONS: 50
+    ARMOR: 45
+    SHIELDS: 5
+  classes:
+    paladin:
+      armor: TANK
+      shields: true
+    champion:
+      armor: DPS
+      shields: false
+    ranger:
+      armor: DPS
+      shields: false
+    battlemage:
+      armor: BOTH
+      shields: false
+```
+
+The explicit tank defaults are Paladin, Guardian, Aegis, Bulwark, Shieldbearer,
+Templar, Bannerlord, Deathless, Dreadnought, Colossus and Arcane Knight. Justicar,
+Marshal, Juggernaut, Warmonger, Battlemage and Cryomancer accept both armor roles.
+Other forms prefer DPS armor, including Cleric forms. Shield preferences default
+to Paladin, Guardian, Aegis, Bulwark, Shieldbearer, Justicar, Templar, Marshal and
+Bannerlord. These are editable equipment preferences, not combat role restrictions.
+
+Missing class selection or disabled bias uses the category weights without the
+80/20 split. An empty bucket transfers its probability to the available bucket.
+Unavailable magic/material families are removed before calculating probabilities.
+A zero category weight excludes it from real rolls; all zero weights disable
+automatic rolls and warn. The weights are relative inside each relevance bucket,
+so they are not promises of an overall 50/45/5 distribution for every class.
+
+## Administrator review
+
+Permission: `elitemobs.loot.admin`. Commands require a player and support tab completion.
+
+```text
+/em loot preview <mob.yml> <level> <NORMAL|HARD|MYTHIC>
+/em loot preview <mob.yml> <level> <NORMAL|HARD|MYTHIC> <AUTO|TRASH|MINIBOSS|BOSS> <family|ALL>
+/em loot giveall <mob.yml> <level> <NORMAL|HARD|MYTHIC>
+/em loot giveall <mob.yml> <level> <NORMAL|HARD|MYTHIC> <AUTO|TRASH|MINIBOSS|BOSS>
+```
+
+For example:
+
+```text
+/em loot preview GK_boss_snickersnap.yml 100 MYTHIC
+/em loot preview GK_boss_snickersnap.yml 100 MYTHIC BOSS WANDS
+/em loot giveall GK_boss_snickersnap.yml 100 MYTHIC
+```
+
+`preview` reports presentation issues, family probabilities for the administrator's
+active class, authored enchantment ceilings/chances, rare rules, potion effects
+and authored table entries. A named family also gives one generated sample.
+Short forms use the boss's resolved rank. Explicit rank/difficulty arguments
+override it for inspection without modifying its configuration. Family probabilities
+are conditional on a successful automatic roll; configured drop chance is reported
+separately. Enchantment rules are authored ceilings before budget and global
+enchantment availability/caps, not guaranteed values on every sample.
+
+`giveall` gives one independently rolled sample of every available automatic family
+and one sample per authored item entry. It bypasses drop chances, relevance weights,
+permission conditions and configured quantities. Authored entries include **all
+difficulty variants**, with raw difficulty conditions reported: selected difficulty
+controls the automatic profiles, and the command makes no assumptions about which
+dungeon owns a reusable mob. Fixed and limited custom items retain their existing
+level rules; scalable samples use the requested level without the administrator's
+progression cap. Unavailable/invalid items are reported; missing generations also
+warn in console. Overflow drops at the administrator's feet.
+
+The commands do not spawn a mob, run death events, execute command rewards, pay
+currency or create loot votes. Non-item rewards are reported only. A disabled
+automatic-loot switch is reported but does not prevent deliberate preview samples.
+This is an inspection tool, not a drop-frequency simulation or dungeon loot audit.
 
 ## Enchantment formula
 
