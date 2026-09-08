@@ -32,8 +32,23 @@ classLootItems:
       - "&7The blizzard is still inside."
 ```
 
-The active instanced dungeon supplies the difficulty ID. `ClassLootSettings.yml`
-maps IDs 0/1/2 to NORMAL/HARD/MYTHIC by default. Outside an instance, the configured
+The active instanced dungeon supplies the difficulty ID. Numeric IDs 0/1/2,
+Normal/Hard/Mythic and Easy/Medium/Hard are supported, ignoring case, surrounding
+whitespace and color formatting. The package's authored mode declarations determine
+whether Hard is the middle or top tier: Easy or Medium selects the latter scheme,
+unless the IDs explicitly declare Normal or Mythic. Detection happens before
+translation. Numeric IDs always retain their 0/1/2 meaning. A recognized name can
+supply the tier for a custom ID, or supply the ID when it is missing.
+
+`ClassLootSettings.yml` maps resolved IDs 0/1/2 to NORMAL/HARD/MYTHIC by default;
+an explicit mapping for the original ID takes precedence. Unrecognized definitions
+produce a console warning with the package filename. Unknown custom IDs retain
+exact matching for authored filters and use an explicit loot mapping or the
+configured default tier. Power and loot `difficultyID` filters both accept a scalar
+or a YAML list, and accept either numeric or named IDs. Unknown filter values warn
+once per package/source/value; empty or malformed filters match nothing.
+
+Outside an instance, the configured
 `defaultDifficulty` applies. Set `classLootDifficulty` to a named difficulty for
 non-instanced content with a known difficulty. `classLootRank: AUTO` uses BOSS/EVENT
 or MINIBOSS boss types, then legacy `$bossLevel` / `$minibossLevel` name tokens,
