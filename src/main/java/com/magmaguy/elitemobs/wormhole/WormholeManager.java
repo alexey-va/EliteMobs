@@ -353,9 +353,9 @@ public class WormholeManager {
         private boolean isHasLeftTeleportRadius() {
             if (hasLeftTeleportRadius) return true;
             try {
-                if (!player.getWorld().equals(destination.getWorld())) return hasLeftTeleportRadius = true;
+                if (!player.getWorld().equals(destination.getWorld())) return false;
             } catch (IllegalArgumentException e) {
-                return hasLeftTeleportRadius = true;
+                return false;
             }
             if (destination.distanceSquared(player.getLocation()) > Math.pow(TELEPORT_DISTANCE_MULTIPLIER * wormholeEntry.getWormhole().getWormholeConfigFields().getSizeMultiplier() + SAFE_DISTANCE, 2))
                 return hasLeftTeleportRadius = true;
