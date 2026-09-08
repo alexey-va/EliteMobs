@@ -13,6 +13,8 @@ class CompileTrialScripts {
             String[] pair = args[i].split(":", 2);
             Path source = root.resolve("encounters/" + pair[1] + ".lua");
             String code = shared + "\n" + Files.readString(root.resolve("mobility/" + pair[0] + ".lua"))
+                    + "\n" + (Files.exists(root.resolve("powers/" + pair[0] + ".lua"))
+                        ? Files.readString(root.resolve("powers/" + pair[0] + ".lua")) : "")
                     + "\n" + Files.readString(source);
             ScriptDefinition.validate(pair[1], source.toFile(), code, new EliteMobsScriptProvider(root));
             count++;

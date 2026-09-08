@@ -67,7 +67,7 @@ fireball speed. Do not add unimplemented enchantment labels.
 - [x] Author shared mobility powers once for the classes that inherit them (syntax compiled; integration and gameplay pending).
 - [ ] Load/validate each asset and equipment before accepting entry/payment.
 - [x] Author the five root scripts with equipment, timelines, visuals and dialogue (syntax compiled; integration and gameplay pending).
-- [ ] Implement Paladin's 14 branch encounters.
+- [x] Author Paladin's 14 branch encounters (syntax compiled; integration and gameplay pending).
 - [ ] Implement Berserker's 14 branch encounters.
 - [ ] Implement Ranger's 14 branch encounters.
 - [ ] Implement Cleric's 14 branch encounters.
@@ -121,7 +121,8 @@ Backup: `%TEMP%/elitemobs-class-loot-20260908-080850`.
 The authored trial implementation is still a source-only checkpoint. Five root
 Lua programs and their shared mobility programs pass canonical Lua syntax/hook
 validation. All 75 presentation YAML files contain explicit equipment and the
-approved four dialogue beats. The 70 branch Lua mechanics are not written yet.
+approved four dialogue beats. Paladin's 14 branch Lua programs now compile;
+the remaining 56 branch programs are not written yet.
 `TrialEncounterAssets` validates the whole catalog and has no generic fallback.
 It is not wired into `ClassTrialDefinition` / `ClassTrialCombat` yet; those still
 contain the rejected old runtime, including on the live testbed. Complete the
@@ -143,3 +144,12 @@ Lua compilation command uses `design/tools/CompileTrialScripts.java` against the
 shaded EliteMobs jar and the local Spigot API jar. It invokes canonical
 `ScriptDefinition.validate`; it does not start a server, invoke encounter hooks,
 or establish behavior. Root scripts compile; manual gameplay remains pending.
+
+Paladin branch checkpoint: actual helper arrows, percentage damage transfer,
+finite spectral walls, breakable standard actors, mobile/fixed formation auras,
+committed thrusts/arcs, safe displacements and explicit recovery windows are
+authored. Java compilation and canonical Lua compilation pass for all 15 Paladin
+forms. This remains source-only until the whole 75-form catalog is complete and
+the old definition/combat binding is replaced. Berserker designs have been read;
+its one-use survival mechanic now has a narrow owned adapter at the normalized
+Bukkit damage boundary, preserving the original event and attacker.
