@@ -189,6 +189,7 @@ def main():
             items[rel] = {"package": parts[0], "item": rel, "family": family(data),
                           "material": data.get("material"), "itemLevel": data.get("level"),
                           "scalability": data.get("scalability", "scalable"),
+                          "potionEffects": data.get("potionEffects") or [],
                           "enchantments": enchantments(data, rel, issues), "enabled": data.get("isEnabled", True)}
             by_name[path.name.lower()].append(rel)
         elif kind == "custombosses":
@@ -270,6 +271,13 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     (output / "corpus.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     (output / "observations.json").write_text(json.dumps(rows, indent=2) + "\n", encoding="utf-8")
+    armor_rows = list({(row["item"], row["rank"], row["difficulty"]):
+                      {key: row[key] for key in ("item", "family", "rank", "difficulty", "enchantments", "potionEffects")}
+                      for row in rows if row["family"] in
+                      ("HELMETS", "CHESTPLATES", "LEGGINGS", "BOOTS", "SHIELDS")
+                      and row["difficulty"] in ("NORMAL", "HARD", "MYTHIC")}.values())
+    (output / "armor-observations.json").write_text(
+        json.dumps({"generation": str(root), "observations": armor_rows}, indent=2) + "\n", encoding="utf-8")
     (output / "unreferenced-items.json").write_text(json.dumps(unreferenced, indent=2) + "\n", encoding="utf-8")
     with (output / "medians.csv").open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)

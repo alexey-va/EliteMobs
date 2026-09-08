@@ -1,6 +1,6 @@
 # Automatic class loot
 
-`classLoot: true` adds a separate baseline weapon roll to a custom mob's death.
+`classLoot: true` adds a separate baseline equipment roll to a custom mob's death.
 It works even when `dropsEliteMobsLoot: false` or the authored loot table is empty.
 Existing custom items and unique loot remain available alongside it. New loaded
 custom-mob configurations default to coverage enabled; explicit `classLoot: false`
@@ -30,6 +30,21 @@ classLootItems:
     lore:
       - "&7Hold it to your ear."
       - "&7The blizzard is still inside."
+  DPS_CHESTPLATES:
+    name: "&bIcebreaker's Hauberk"
+    lore:
+      - "&7The smith sharpened every link."
+      - "&7Putting it on requires practice."
+  TANK_CHESTPLATES:
+    name: "&bGlacier Guard"
+    lore:
+      - "&7The last avalanche left a dent."
+      - "&7The next will have to try harder."
+  SHIELDS:
+    name: "&bWinter's Door"
+    lore:
+      - "&7Taken from a cabin buried in snow."
+      - "&7It still keeps the cold outside."
 ```
 
 The active instanced dungeon supplies the difficulty ID. Numeric IDs 0/1/2,
@@ -57,10 +72,13 @@ content. Name/filename classifications in the corpus are evidence inferences;
 runtime rank does not guess from filenames.
 
 Supported item keys are SWORDS, AXES, BOWS, CROSSBOWS, TRIDENTS, HOES (scythes),
-MACES, SPEARS, STAVES and WANDS. Every available family has equal selection weight.
-This guarantees pool coverage, not ten drops per kill or a match to the recipient's
+MACES, SPEARS, STAVES, WANDS, DPS_HELMETS, DPS_CHESTPLATES, DPS_LEGGINGS, DPS_BOOTS,
+TANK_HELMETS, TANK_CHESTPLATES, TANK_LEGGINGS, TANK_BOOTS and SHIELDS.
+Every available family has equal selection weight. With all 19 available, weapons
+occupy 10/19 of the pool, DPS armor 4/19, tank armor 4/19 and shields 1/19.
+This guarantees pool coverage, not a full set per kill or a match to the recipient's
 current class. An omitted item still participates with `&6$boss's $weapon` and
-empty lore. `$boss`, `$weapon` and `$difficulty` work in each item's name and lore.
+empty lore. `$boss`, `$weapon`, `$item` and `$difficulty` work in each item's name and lore.
 `lore: []` explicitly means no authored lore.
 
 Default drop chances are 5% for trash, 25% for minibosses and 100% for bosses,
@@ -71,7 +89,7 @@ Item level comes from the existing combat reward level and item-tier roll.
 
 ## Enchantment formula
 
-The generated `ClassLootSettings.yml` contains all 90 difficulty/rank/family
+The generated `ClassLootSettings.yml` contains all 171 difficulty/rank/family
 profiles. This excerpt shows the shape of an editable profile; edit the generated
 file rather than replacing all profiles with this excerpt:
 
@@ -120,6 +138,22 @@ availability, procedural eligibility and `maxEnchantmentLevel` still apply.
 `maxLevelV2` is the ordinary procedural/value reference; it does not truncate the
 authored ceilings. Unsupported weapon/enchantment combinations are skipped with
 a configuration diagnostic; wands and staves cannot acquire Punch from profiles.
+
+DPS armor uses Sharpness as its primary enchantment with lighter protection.
+EliteMobs already counts damage enchantments from equipped armor. Tank armor uses
+Protection as its primary, with defensive secondary enchantments. Shields use
+Protection through the existing offhand defense calculation. Helmet and boot
+profiles can include their supported slot enchantments. These are separate items,
+not a new full-set bonus or new skill types. Armor uses diamond materials; shields
+use SHIELD. Each slot has its own name and lore under `classLootItems`.
+
+Profiles optionally accept `potionEffects` using the existing item syntax, for
+example `potionEffects: ["STRENGTH,0,SELF,ONHIT"]`. Amplifiers are zero-based. These
+effects use the existing item effect rules and durations, independently of the
+enchantment budget. Invalid entries warn and are skipped. The bundled equipment
+profiles have no potion effects: the reviewed samples do not justify making a
+particular proc a baseline benefit. Existing weapon profiles remain unchanged;
+missing armor and shield profiles are supplied from the bundled defaults.
 
 Example: Power 7 plus Unbreaking 5 creates 12 native units. At 0.5, six are
 selected; one is reserved as Power, and five are drawn from the remaining bag.

@@ -91,6 +91,32 @@ Wands/staves inherit the bow Power and durability baselines. Multicast, blast ra
 
 ## Reproduce
 
+### Armor and shield extension
+
+`armor-observations.json` retains the focused equipment evidence from generation
+`20260908T214107324Z-5f99f78ee91b-2e97b569`. The earlier weapon evidence remains
+unchanged. The new snapshot contains 920 distinct tiered equipment items: 213
+helmets, 211 chestplates, 213 leggings, 210 boots and 73 shields. The filename
+labels identify 301 DPS items and 361 tank items, leaving 258 unlabelled. These
+labels are analysis evidence, not runtime guesses about a mob or item.
+
+The builder adds 81 profiles: eight role/armor-slot combinations and shields,
+across three ranks and three difficulties. DPS uses Sharpness, which the existing
+combat code counts from worn armor. Tank armor and shields use Protection. Each
+enchantment prefers at least five positive samples from the same role and slot,
+then the same role across slots, then the same slot across roles. Shields use
+shield samples only. Missing primary/durability samples use declared fallback
+levels, recorded as such. Positive medians round half up; secondary prevalence
+rounds to 5% increments. Levels cannot decrease across difficulties.
+
+Every rule's source, positive count, total count, level and chance is retained in
+`armor-profile-provenance.json`. Optional on-hit Strength/Resistance effects need
+five positive samples and at least 50% prevalence in the exact role/slot bucket.
+No bucket qualifies in this snapshot, so no potion effect is added by default.
+Run `python design/tools/build_class_loot_defaults.py` to rebuild all 171 profiles
+from the retained evidence. These are authored ceilings before the existing
+native enchantment budget, not guaranteed final item values or gameplay results.
+
 From the EliteMobs repository:
 
 ```powershell

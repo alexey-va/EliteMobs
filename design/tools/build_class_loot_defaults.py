@@ -3,6 +3,7 @@ from pathlib import Path
 import json
 import math
 import yaml
+from armor_loot_profiles import extend as extend_armor_profiles
 
 ROOT = Path(__file__).resolve().parents[2]
 report = json.loads((ROOT / "design/loot-analysis/corpus.json").read_text())
@@ -72,9 +73,11 @@ for diff in ("NORMAL", "HARD", "MYTHIC"):
                     profile["enchantments"][enchantment] = {"level": level, "chance": {"TRASH": .10, "MINIBOSS": .25, "BOSS": .40}[rank]}
             defaults["profiles"][diff][rank][family] = profile
 
+extend_armor_profiles(defaults, ROOT)
 destination = ROOT / "src/main/resources/classloot/defaults.yml"
 destination.parent.mkdir(parents=True, exist_ok=True)
 destination.write_text("# Authored ceilings derived from design/loot-analysis; native levels use the configured budget roll.\n"
                        + yaml.safe_dump(defaults, sort_keys=False, width=120), encoding="utf-8")
 (ROOT / "design/loot-analysis/profile-provenance.json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
-print(f"Wrote 90 profiles and {len(provenance)} measured/fallback rules to {destination}")
+count = sum(len(profiles) for ranks in defaults["profiles"].values() for profiles in ranks.values())
+print(f"Wrote {count} profiles to {destination}")
