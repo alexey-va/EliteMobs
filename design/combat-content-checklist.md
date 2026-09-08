@@ -4,6 +4,11 @@ Tracks MagmaGuy's approved work from 8 September 2026. Checked implementation
 does not imply gameplay acceptance. Compile and normal 26.2 deployment are
 authorized; new Autotester runs and repository tests are not.
 
+**Scope restriction:** Do not modify the arena: code, configuration, layout/world,
+admission, fees, reservation or teardown orchestration. Boss content must use
+existing trial entry points. This later user instruction takes precedence over
+earlier arena-related implementation suggestions.
+
 ## Default generated magic loot
 
 - [x] Add enabled-by-default staves/wands to procedural drops and shops.
@@ -59,6 +64,7 @@ fireball speed. Do not add unimplemented enchantment labels.
 
 - [ ] Read and retain all 75 approved encounters in the linked design documents.
 - [ ] Replace the generic player-ability conversion using existing Lua powers.
+- [ ] Implement shared mobility powers once for the classes that inherit them.
 - [ ] Load/validate each asset and equipment before accepting entry/payment.
 - [ ] Implement the five roots with equipment, timelines, visuals and dialogue.
 - [ ] Implement Paladin's 14 branch encounters.
@@ -68,7 +74,8 @@ fireball speed. Do not add unimplemented enchantment labels.
 - [ ] Implement Spellcaster's 14 branch encounters.
 - [ ] Preserve sole challenger, external trainer NPC, arena exclusivity, fees,
       prerequisites, unlock/activation, title and audio.
-- [ ] Wire death, failure, disconnect, abort and reload cleanup into trial teardown.
+- [ ] Implement death, failure, disconnect, abort and reload cleanup through the
+      combat object's existing close hook, without editing arena orchestration.
 - [ ] Compile, commit, deploy and inspect all asset registration diagnostics.
 - [ ] Manual acceptance cases in `class-trial-runtime.md` and all encounter reviews.
 
@@ -88,6 +95,11 @@ No generic encounter is an acceptable fallback for an unfinished authored asset.
       support, combat/resources/controls, class trials and automatic class loot.
 - [ ] Give practical setup instructions and verified YAML/command examples for
       each major tool, with relevant limitations and manual-test caveats.
+- [ ] Include the staff test workflow: loot debug grants/unlocks classes at the
+      selected level; class-forget debug removes an unlock to retest its trial.
+      Verify exact command syntax and prerequisite/descendant behavior in source.
+- [ ] Tell Dali and Frost that the class NPCs are in the Adventurer's Guild and
+      their current LibsDisguises appearances are placeholders requiring finalization.
 - [ ] Find the Nightbreak Discord `nightbreak_crew` channel in the authenticated UI.
 - [ ] Post the final builds and briefing, with real mentions for Dali and Frost.
 - [ ] Reload/inspect the channel to verify messages, mentions and jar attachments

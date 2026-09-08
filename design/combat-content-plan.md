@@ -6,6 +6,14 @@ dependencies and decisions; the checklist records progress. Keep both consistent
 as implementation reveals facts. The user requested informed decisions in his
 absence followed by a thorough manual review, not repeated design approvals.
 
+**Latest restriction:** MagmaGuy explicitly prohibited modifying the arena.
+Do not edit arena code, configuration, world/layout, container/reservation logic
+or admission/fee/teardown orchestration. Implement boss content through the
+existing trial entry points. This restriction supersedes any earlier suggestion
+below that would require changing arena infrastructure. If an authored mechanic
+cannot fit those entry points, record that specific limitation rather than
+expanding the arena system.
+
 ## Intended result
 
 Ordinary generated loot includes operational FMM wands and staves by default.
@@ -141,16 +149,24 @@ summons, meaningful response windows, visuals/sounds and instructor dialogue.
 The Ranger trial boss must visibly wield and fire a bow. No unequipped Husk or
 generic distance-damage fallback counts as an implemented encounter.
 
+MagmaGuy specifically requested shared boss mobility powers where classes inherit
+the same mobility skill. Implement each shared mobility mechanic once and have
+the appropriate encounters explicitly select it, with their authored timing.
+Do not duplicate mount/leap/roll/blink behavior per form or infer the entire fight
+from player ability flags. Signature, utility, choreography and dialogue remain
+authored per encounter.
+
 The trainer NPC remains outside the arena and handles enrollment. The challenger
 is the only admitted player; a separate trial boss fights them. Keep shared Wood
 League container exclusivity, solo admission, fees equivalent to 100 same-level
 mobs, class skill/mastery prerequisites, admin forget behavior, victory unlock
 and automatic activation, title and audio cue. Do not restore class focus/stars.
 
-Validate all required assets before admission/payment. A missing or invalid form
+Use existing pre-admission validation entry points for required assets. A missing or invalid form
 must identify its asset to the administrator and must not silently use generic
-combat. Wire Lua shutdown and every temporary actor/projectile/prop into the
-existing trial teardown for victory, failure, disconnect, abort and reload.
+combat. Use the combat object's existing close hook to shut down Lua and every
+temporary actor/projectile/prop for victory, failure, disconnect, abort and reload.
+Do not modify the arena's teardown orchestration.
 Warnings and hits share geometry. Respect terrain and projectile collision.
 
 Move approved numbers into executable assets as each form is implemented, and
@@ -201,6 +217,17 @@ setup steps and a real configuration or command example. Validate names, paths,
 options and examples against the finished code. Distinguish partially implemented
 systems, version/dependency requirements and manual-test gaps without burying the
 staff in implementation trivia.
+
+Explicitly include MagmaGuy's testing shortcut: the loot debug command grants the
+loadout and unlocks classes at its selected level, then the class-forget debug
+command removes a chosen unlock so staff can test that class's trial. Verify the
+actual command names/arguments, target-player support, prerequisite handling and
+descendant reset behavior against the final code. Do not repeat an approximate
+command from conversation as if it were tested syntax.
+
+Tell the staff explicitly that the class NPCs are already in the Adventurer's
+Guild and their current LibsDisguises appearances are placeholders to finalize.
+Do not present the current skins/disguises as approved final art.
 
 Use the existing authenticated Discord UI and the workspace browser procedure.
 Locate the exact crew channel and correct Dali/Frost members. Select actual
