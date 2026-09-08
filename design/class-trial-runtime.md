@@ -1,27 +1,38 @@
 # Authored trial runtime: implementation proposal
 
-This is a design decision record for review, not a claim that code has changed.
-The encounter catalog is complete at the first design-pass level. The generic
-`ClassTrialCombat` is still the implementation in the deployed build.
+This proposal covers authored encounters using the existing Lua boss runtime.
+The encounter catalog is complete at the first design-pass level; replacement
+scripts have not been implemented or deployed.
 
-## Decision to make
+## Implementation approach
 
-Use authored Lua boss powers on the existing EliteMobs/MagmaCore runtime, with
-an encounter scope for ownership and target filtering. Keep the arena admission,
-fees, class prerequisites, exclusive container reservation and victory activation
-in `ClassChallengeInstance`. Delete the generic player-effect-to-boss conversion
-once the authored catalog can replace it as a whole.
+The trainer NPC stays outside the arena and handles enrollment through the class
+menu. The challenger is the only player admitted to the arena. A separate trial
+boss fights that challenger; any helpers or props belong to the encounter. The
+trainer NPC does not move into the arena or become the boss.
+
+Use authored Lua boss powers on the existing EliteMobs/MagmaCore runtime. Keep
+admission, fees, class prerequisites, exclusive container reservation and victory
+activation in `ClassChallengeInstance`. Replace `ClassTrialCombat`'s generic
+player-effect conversion with the authored encounter scripts.
+
+No shared-runtime redesign, new encounter-scope API or general target-filtering
+system is a prerequisite. The earlier approval request for that work is withdrawn.
+Scripts target the known challenger, trial boss and their explicitly referenced
+helpers or props through existing targeting operations. The arena's existing
+solo admission and mutual exclusion remain responsible for who can enter.
 
 This is preferable to adding more cases to `ClassTrialCombat`: the fights need
 ordered choreography, interruptible channels, object dependencies, shared damage
 budgets and conditional phase behavior. Those are scripts with state, not
 conversions of `AbilityFamily` and `AbilityEffect` flags.
 
-It is also preferable to inventing a separate trial scripting engine. The
-existing Lua implementation already adapts bosses into the shared scripting
-runtime and exposes EliteMobs damage, zones, targeting, particles, entity
-operations, hooks and owned scheduled callbacks. Missing encounter capabilities
-should extend that canonical mechanism and remain useful to future arena modes.
+The existing Lua implementation exposes EliteMobs damage, zones, targeting,
+particles, entity operations, hooks and owned scheduled callbacks. Use those
+operations for the authored sequences. If implementing a specific mechanic
+reveals a missing operation, identify that mechanic and the exact missing
+capability, then make the smallest appropriate addition to the existing system.
+Do not invent infrastructure in anticipation of a gap.
 
 ## Source findings
 
@@ -41,49 +52,41 @@ These findings came from current local source inspection:
 - `LuaPowerScriptApi` exposes zones, target resolution, relative vectors,
   damage, facing, pushing and particles. `LuaPowerEntityTables` exposes damage
   event mutation and entity operations. These are reusable action mechanisms.
-- The older YAML `EliteScript.closeRuntime()` currently shuts down its zone;
-  delayed/repeating `ScriptAction` tasks are not all gathered there. This makes
-  blindly attaching a large YAML script graph insufficient for run ownership.
-- Ownership still needs work even on Lua: `LuaWorldTableBuilder` schedules some
-  spawned-entity expiration through `GameClock`, and a generic spawn is not
-  automatically made a member of a trial. Cancelled callbacks alone do not
-  remove a spawned arrow, fireball, prop, helper or horse.
-- Broad script targets such as `WORLD_PLAYERS`, `NEARBY_PLAYERS` and nearby mobs
-  currently resolve from world/entity queries. Trial damage-event protection
-  does not automatically constrain a script's potions, pushes or other effects.
+- `LuaElitePower.closeRuntime()` calls `ScriptInstance.shutdown()`; scheduled
+  work created through the owned scheduler already has a shutdown path.
+- `LuaWorldTableBuilder` gives some spawned entities an expiration through
+  `GameClock`. Expiration is distinct from ending a trial early: the encounter
+  must explicitly remove any surviving temporary objects when it ends.
 - Custom bosses already track reinforcements and cull them. Reuse that parent
-  relationship for elite helpers; add ownership for non-elite props/projectiles
-  rather than maintaining unrelated parallel helper lists in each class.
+  relationship for elite helpers. Keep references to other temporary entities
+  so the encounter's cleanup can remove them as well.
+- `ClassChallengeInstance` already cancels combat work, closes combat, removes
+  the trial boss and releases the arena during teardown. Wire the Lua encounter
+  and its temporary entities into that existing sequence.
 
 These observations do not establish that every needed Lua operation is already
 available. The implementation must inspect the exact projectile, equipment,
 pose, target and cleanup operations before selecting or extending them.
 
-## Small external interface, explicit content
+## Encounter state and cleanup
 
-The proposed encounter scope has three responsibilities:
+Keep attack phases, cooldowns, finite healing allowances and per-cast hit budgets
+in the encounter's script state. Use the existing damage hooks and damage
+pipeline for their effects. Multi-hit attacks must respect their stated total
+damage cap; redirected damage must not repeatedly redirect the same hit. These
+are requirements of the individual mechanics, not a proposal to redesign the
+global damage pipeline.
 
-1. Identify the challenger, instructor, registered actors and allowed arena
-   geometry. Resolve targets only within that membership. A script cannot
-   select a lobby NPC or spectator by issuing a broad nearby query.
-2. Own spawned entities, delayed work, transient status modifiers, damage
-   budgets and event subscriptions. Closing a run invalidates the scope first,
-   then closes scripts and removes owned effects/entities, then releases the
-   arena. Late callbacks check a closed scope before doing any work.
-3. Supply the canonical damage pipeline with one originating cast identity,
-   so piercing/fan/persistent attacks share their specified damage budget and
-   redirected damage cannot recursively redirect itself.
+At the end of a trial, stop its Lua powers through their existing shutdown path,
+cull its reinforcements, remove any remaining projectiles, props and mounts, and
+release its temporary effects before releasing the arena. Handle victory, defeat,
+disconnect and cancellation through the same cleanup. An entity's timed expiry
+does not replace this early-exit cleanup. Repeated cleanup must be harmless.
 
-The public seam should be one scope associated with a boss/run and one idempotent
-close operation. Per-attack details live in authored scripts. Do not expose 75
-Java classes or a switch on class ID to implement the content. Internally,
-projectile collision, visible geometry and tracked temporary actors can remain
-cohesive reusable implementations behind that scope.
-
-The scope is opt-in for class trials. Existing world bosses and DLC keep their
-current target and lifecycle behavior unless explicitly migrated. No rewrites of
-Yggdrasil DLC are proposed. Any unavoidable shared behavior change needs its own
-compatibility assessment; it must not be hidden in a trial content patch.
+Use the trial's existing teardown and reusable script helpers to implement that
+behavior. No new public runtime scope or separate trial scripting engine is
+planned. Yggdrasil is a content reference; its DLC and the behavior of unrelated
+bosses are outside this implementation.
 
 ## Content contract
 
@@ -123,8 +126,8 @@ Build movement and prop placements relative to validated arena ground. Check
 body/headroom and swept travel for horse charges, leaps, dashes and blinks. A
 bounded destination is insufficient if the route crosses a wall or leaves the
 container. Route failure produces a visible fizzle and recovery, not a teleport
-through terrain. Helpers inherit the same physical containment and participant
-restrictions. Ephemeral walls are entity/projectile interactions, never edits
+through terrain. Helpers use the same physical containment and target the
+challenger. Ephemeral walls are entity/projectile interactions, never edits
 to the shared arena's saved blocks.
 
 Warnings and damage must share the same geometry instance and committed target
@@ -146,10 +149,9 @@ not become a new full-strength normalized hit or trigger the same transfer twice
 
 ## Implementation and acceptance order
 
-Implement five root encounters as the first complete vertical slice of the same
-production runtime: ranged weapons, melee arcs, mount/leap/blink paths, a finite
-ward and an interruptible ally heal. The root slice exercises the shared seams
-before the branch catalog depends on them. Do not declare the other 70 replaced
+Implement the five root encounters first on the existing runtime: ranged weapons,
+melee arcs, mount/leap/blink paths, a finite ward and an interruptible ally heal.
+This establishes working examples for the branch scripts. Do not declare the other 70 replaced
 or deploy them with a generic fallback while completing that slice.
 
 Then implement branches by their actual mechanics: interception/formation,
@@ -165,7 +167,7 @@ run when that verification is authorized**, not claims that they have passed:
 
 - Ranger visibly draws and fires a bow; arbalist visibly loads/fires a crossbow.
   Center and outer model hitboxes, melee, wand, staff and projectile attacks all
-  damage the intended instructor/prop/attendant through the normal pipeline.
+  damage the intended trial boss/prop/attendant through the normal pipeline.
 - A late dodge avoids a committed projectile, terrain/another entity stops it,
   and collision damage cannot exceed the cast's shared cap. No native contact
   hits appear during a stated preparation, arrival or recovery.
@@ -177,7 +179,7 @@ run when that verification is authorized**, not claims that they have passed:
   waiting, spacing or objective work can answer defenses without a DPS gate.
 - Ending, quitting, dying, aborting and reloading during each kind of cast leaves
   no actors, missiles, statuses, tasks or reservations behind. The next Wood
-  League run starts cleanly; spectators/lobby occupants remain unaffected.
+  League run starts cleanly, and the trainer NPC remains outside the arena.
 - Entry fees, level and parent mastery prerequisites, solo exclusivity, victory
   unlock/activation, title and audio cue remain intact through the replacement.
 - Matched-equipment recordings establish duration, damage pressure and resource

@@ -1,4 +1,4 @@
-# Class instructor encounter redesign
+# Class trial encounter redesign
 
 Status: first complete authored design pass for all 75 catalog forms (five roots
 and 70 branches). The existing generic `ClassTrialCombat` is rejected. These
@@ -35,7 +35,7 @@ and reacts differently to failure. Jotun's rising frost is an actual windup into
 a persistent hazard. The transferable standard is this coordination and readable
 counterplay, not their encounter size or their punitive damage values.
 
-The rejected trials use a Husk for every instructor, no authored equipment,
+The rejected trials use a Husk for every trial boss, no authored equipment,
 one red circle for unrelated attacks, resource cost as an invented cooldown,
 immediate radius damage in place of projectiles, root-wide repeated dialogue,
 and unconditional healing in place of support mechanics. Changing numbers or
@@ -43,14 +43,18 @@ adding particles to that dispatcher does not address the problem.
 
 ## Shared encounter contract
 
+- The trainer NPC remains outside the arena and opens the enrollment menu.
+  The challenger is the arena's only player and fights a separately spawned
+  trial boss. Dialogue below belongs to that boss; it does not imply that the
+  trainer NPC enters the arena. The root trial titles do not reuse trainer names.
 - One human challenger. Training partners, constructs and summons are allowed
   only when a specific lesson needs them; they belong to the encounter and do
   not turn the run into a multiplayer challenge.
 - Teach the prospective class's mobility, signature and utility. Counterplay
   must remain possible using movement, ordinary attacks, cover and target
   selection. Never require the ability being unlocked to pass its own trial.
-- Defeating the instructor is the success condition. Objectives create openings
-  or stop an instructor advantage; they do not silently replace the duel.
+- Defeating the trial boss is the success condition. Objectives create openings
+  or stop a trial boss advantage; they do not silently replace the duel.
 - Use the existing EliteMobs power, damage and presentation mechanisms. Author
   attack timelines explicitly. No runtime conversion from player effect flags
   to a guessed boss attack.
@@ -76,7 +80,7 @@ adding particles to that dispatcher does not address the problem.
 - Root fights aim for 45–90 seconds at matched equipment; specializations for
   60–110; advanced/mastery fights for 90–150. These are balance targets, not
   measured results. A five-minute failsafe remains an abort, not an enrage.
-- Damage values use fractions of the instructor's normalized ordinary hit:
+- Damage values use fractions of the trial boss's normalized ordinary hit:
   light 0.35–0.55, standard 0.65–0.9, heavy 1.1–1.4. Multi-hit attacks get a
   shared hit budget. No full damage once per particle or per tick.
 - No chain crowd control. A damaging displacement grants a brief follow-up
@@ -89,7 +93,7 @@ adding particles to that dispatcher does not address the problem.
   stack a new phase attack over a previous unescapable attack.
 - Four authored voice beats per form: opening lesson, escalation, successful
   assessment, constructive failure. Add short attack cues only when useful.
-  The instructor speaks as an instructor, not an enemy issuing death threats.
+  The trial boss gives feedback as a sparring examiner; the trainer NPC stays outside.
 - Dialogue is event-driven, not an ability-name announcement every few seconds.
   Show opening and phase lines once, use at most one short teaching cue per
   mechanic's first demonstration, and select failure feedback from the mechanic
@@ -102,13 +106,13 @@ adding particles to that dispatcher does not address the problem.
 
 ## Root trials: the standard the branches must meet
 
-### Paladin — Aldric, The Oath Holds
+### Paladin — The Oath Holds
 
 **Equipment and posture.** Mace and shield, gold-accented plate. Walks deliberately
 between short melee exchanges. Divine Steed is a visible saddled, armored horse,
-not a velocity change applied to the instructor's feet.
+not a velocity change applied to the trial boss's feet.
 
-**Provoke, 12-second cooldown.** Aldric plants his shield and strikes it once.
+**Provoke, 12-second cooldown.** The boss plants his shield and strikes it once.
 A 4-block gold ring and a low shield note build for 1.3 seconds. For the next
 3 seconds he guards his front, takes 60% reduced frontal damage and turns
 slowly. The player can go around him; rear hits break the stance. If the player
@@ -124,8 +128,8 @@ no repeated pulse damage. Recovery 1.5 seconds.
 **Divine Steed, 20-second cooldown.** Summon/board for 1 second, then show an
 8-block charge lane for 1.5 seconds. The lane stops tracking for the final
 0.6 seconds. Charge once (0.75 hit, one collision per cast), dismount, and recover
-for 2.5 seconds. A miss exposes
-Aldric to 20% extra damage during recovery. At 50% health he demonstrates
+for 2.5 seconds. A miss exposes the boss to 20% extra damage during recovery.
+At 50% health he demonstrates
 Repulse followed by the charge, with 2 seconds to recover footing between them.
 
 **Voice.** Opening: “A shield buys time. Show me what you do with it.”
@@ -133,7 +137,7 @@ Escalation: “Good. Now hold your nerve when the line moves.”
 Success: “You found the opening without abandoning your ground. Take the oath.”
 Failure: “You watched the shield and missed the rider. We can practice again.”
 
-### Berserker — Ragna, Fury With a Purpose
+### Berserker — Fury With a Purpose
 
 **Equipment and posture.** Heavy axe, exposed fur-and-leather silhouette. Strong,
 spaced melee swings; she does not move like a fast zombie continuously touching
@@ -160,7 +164,7 @@ Escalation: “There! Keep that fire. Keep your head, too.”
 Success: “You waited for the right swing. Now make it count out there.”
 Failure: “You chased every opening, even the ones I hadn't given you yet.”
 
-### Ranger — Rowan, Between the Shots
+### Ranger — Between the Shots
 
 **Equipment and posture.** A visibly drawn bow, leather hunting gear and quiver
 skin. Functional ranged attacks; no unarmed Husk melee. Maintain 7–12 blocks,
@@ -190,7 +194,7 @@ Escalation: “You've found the gap. Let's see you find the next one.”
 Success: “You read the shot before it left the string. Welcome to the trail.”
 Failure: “You tried to outrun the arrow. Make me aim at where you used to be.”
 
-### Cleric — Seren, A Place to Recover
+### Cleric — A Place to Recover
 
 **Equipment and posture.** Mace, white-and-gold robes, gentle chime and feather
 effects. Deliberate short melee exchanges. A single sparring acolyte is used
@@ -199,18 +203,18 @@ only to demonstrate ally support; it deals light, spaced damage and cannot respa
 **Sanctuary, 20-second cooldown.** Draw a 3.5-block white-gold floor sigil for
 1.5 seconds. It lasts 6 seconds and heals only encounter allies in visible
 pulses, one-quarter matched hit per second per recipient.
-Seren's total healing budget is 12% of initial boss health across the fight.
-The player can lure the acolyte out and pressure Seren outside the sigil.
+The boss's total healing budget is 12% of initial boss health across the fight.
+The player can lure the acolyte out and pressure the boss outside the sigil.
 The healing source is shown at its center; crossing it does not harm the player.
 
-**Mend, 14-second cooldown.** A 2-second visible tether from Seren to the injured
+**Mend, 14-second cooldown.** A 2-second visible tether from the boss to the injured
 acolyte, restoring one matched hit, or to herself at half that strength if it
 has fallen. Two ordinary
 matched hits during the channel interrupt it. The interrupted tether breaks
-with a glass chime; Seren pauses for 2 seconds. No instantaneous hidden heal.
+with a glass chime; the boss pauses for 2 seconds. No instantaneous hidden heal.
 
 **Guardian Flight, 18-second cooldown.** A feather path identifies a sanctuary
-or ally before a 1-second flight. Seren cannot immediately heal on arrival;
+or ally before a 1-second flight. The boss cannot immediately heal on arrival;
 there is a 1.5-second landing window. At 50% health she uses Flight to demonstrate
 moving support to a threatened ally, then gives the player an interruptible Mend.
 
@@ -219,7 +223,7 @@ Escalation: “Well timed. Now follow the light to the one who needs it.”
 Success: “You saw the whole fight, not just the person before you. That is the gift.”
 Failure: “Take a breath. You can step out, choose your moment, and begin again.”
 
-### Spellcaster — Orin, The Space Between Spells
+### Spellcaster — The Space Between Spells
 
 **Equipment and posture.** Wand in the casting hand; the staff appears for ward
 preparation. Arcane violet and pale cyan, with quiet casting notes escalating
@@ -233,11 +237,11 @@ seconds. A physical, terrain-blocked bolt travels at a dodgeable speed, deals
 **Mana Ward, 18-second cooldown.** Three visible runes form over 1.4 seconds.
 The ward absorbs a finite amount equivalent to two matched hits for at most
 4 seconds. Breaking it produces a clean shatter and 2.5 seconds of exposed
-recovery. Waiting it out is slower but valid; it never heals the instructor.
+recovery. Waiting it out is slower but valid; it never heals the trial boss.
 
 **Blink, 15-second cooldown.** Mark a safe destination 4–6 blocks away with a
 small rising pillar for 1 second, then blink along an unobstructed route.
-Orin remains visible at the destination for 1.3 seconds before beginning
+the Spellcaster trial boss remains visible at the destination for 1.3 seconds before beginning
 another cast. At half health he teaches a two-bolt sequence with distinct
 releases, then a guaranteed ward-break or recovery opening.
 
@@ -259,7 +263,7 @@ apart with a 0.8-second raised-weapon tell; ordinary ranged shots 0.35 hit at
 least 3 seconds apart with a 1-second draw and 0.4-second aim lock. Boss ability
 damage is additional only where a timeline explicitly allows it. Baseline AI
 must not sneak in a contact hit while a script is winding up or recovering.
-Instructors face targets gradually while aiming and stop changing direction at
+Trial bosses face targets gradually while aiming and stop changing direction at
 their stated commitment. Poses and weapon visibility need real-client proof.
 Unless a move specifies a longer recovery, non-damaging utility preparations
 end with 1.5 seconds without basic attacks or a new major cast. Passive visual
@@ -287,7 +291,7 @@ Effective maximum health is set through the canonical normalized boss scaling.
 Start roots at the existing dungeon-boss multiplier of 10, first branches at 11,
 second branches at 12, and final branches at 13, then calibrate against the stated
 duration targets. Those multipliers are proposals, not measured hit counts.
-Reserve time for objectives by lowering instructor health when helper/prop work
+Reserve time for objectives by lowering trial boss health when helper/prop work
 would otherwise exceed the duration target. Root resources/weapon affinities
 must be usable in every encounter; no mandatory high-DPS class, shield, jump
 skill, unlock-specific heal or interrupt.
@@ -300,7 +304,7 @@ spawn-in period of at least 1 second precedes their first attack preparation.
 No helper may physically trap the challenger against another collider: cap
 simultaneous close attackers at two and let the rest reposition.
 
-Do not silently change actual skins or affinity rules to make an instructor's
+Do not silently change actual skins or affinity rules to make a trial boss's
 equipment fit. Cleric branches include tridents, spears and scythes according to
 their affinities. Battlemage-family blades are visibly conjured magic from a
 wand, not an assertion that those classes have physical-sword affinity. The

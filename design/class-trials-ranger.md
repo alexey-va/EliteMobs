@@ -3,7 +3,7 @@
 Authored designs under [the shared contract](class-trial-encounters.md). Nothing
 here establishes runtime implementation or balance verification.
 
-All instructors visibly carry the weapon named below and use its draw/reload
+All trial bosses visibly carry the weapon named below and use its draw/reload
 pose. Bows launch arrows; crossbows launch bolts. Projectile damage comes from
 collision, not a radius check at the captured target location. A multi-projectile
 cast owns one shared hit budget. Terrain stops all ordinary shots. Piercing may
@@ -63,7 +63,7 @@ notches indicate the upcoming shot's draw stages, not a hidden damage stack.
 **One Perfect Shot (18s CD):** 2.4s draw: track 1.4s, lock direction 1s, release
 one 1.3-hit arrow. Impact has a sharp single chime, no radius splash. Recovery
 3.5s with the bow lowered. The mark adds no damage on top of this heavy value.
-Dodging the arrow clears it and exposes the instructor (+20%) for the recovery.
+Dodging the arrow clears it and exposes the trial boss (+20%) for the recovery.
 
 **Escalation:** Windstep once to a visible flank before marking. No feint or
 late tracking on the heavy shot; precision must be trustworthy. Its speed is
@@ -85,7 +85,7 @@ upward, with a 2s warning over a 6-block circle split into three lanes. The
 middle lane stays dry for the first 2s; the left lane is warned and becomes dry
 for the final 2s. Hazard arrows fall in bounded waves, shared 1.2-hit budget,
 and are removed after contact. No damage check covers the safe lane. After
-the 4s rain, the instructor rests 3s.
+the 4s rain, the trial boss rests 3s.
 
 **Escalation:** Windstep repositions the archer before the next marked storm;
 the second safe lane switches right, visibly previewed. Ordinary shots stop
@@ -104,9 +104,9 @@ deliberate reload; ordinary bow AI is not an acceptable substitute.
 **Lock On (20s CD):** 1.5s lens glint, 6s targeting mark. It improves early
 tracking only; it never changes the committed bolt. **Breach Bolt (15s CD):**
 1.8s braced aim with a 0.7s fixed lane, one 0.9-hit physical bolt. Contact
-causes 15% increased damage received for 3s. The instructor must reload for
+causes 15% increased damage received for 3s. The trial boss must reload for
 3s, so the debuff does not guarantee another unavoidable shot. Dodging the
-bolt or crossing behind the instructor during the reload is rewarded.
+bolt or crossing behind the trial boss during the reload is rewarded.
 
 **Escalation:** Windstep establishes another firing stance after the reload.
 The weapon visibly returns to unloaded state on release. No melee contact
@@ -123,7 +123,7 @@ Loss: “Once the bolt passed, there was nothing left in the crossbow.”
 Burst timing and resupply are separate, interruptible advantages.
 
 **Repeater Burst (16s CD):** 1.6s bracing, then four bolts 0.65s apart. Each
-locks direction 0.35s before release, 0.35 hit, 1.05 total budget. The instructor
+locks direction 0.35s before release, 0.35 hit, 1.05 total budget. The trial boss
 stands still and cannot turn more than 35 degrees between shots. Recovery 3s.
 **Quickload Cache (26s CD):** 1.8s deployment places a two-hit cache, 8s lifetime.
 A 2s reload channel beside it can shorten the next burst's recovery to 2s,
@@ -149,7 +149,7 @@ training effigies demonstrate why one penetrating shot matters against big foes.
 challenger, fixed for the final 0.9s. The 1.2-hit bolt penetrates the effigy,
 collapses its armor and opens a 3.5s reload. Sidestep the lane; do not hide
 behind the marked giant. Breaking the effigy's two-hit base during the brace
-cancels the shot and exposes the instructor (+25%) for the same recovery.
+cancels the shot and exposes the trial boss (+25%) for the same recovery.
 
 **Escalation:** Windstep takes a new angle on the second effigy. No respawns;
 without an effigy the same clearly warned shot has no marking advantage.
@@ -275,7 +275,7 @@ slow, once per 3s; each anchor takes one matched hit. **Kill Zone (22s CD):**
 1.8s warning reveals three snare cells in a 5-block patch, activated in order
 1.3s apart with a 1s preview for each. A cell gives a 0.5s movement stop and
 then releases; the cast can catch the player only once. A clearly drawn route
-between cells remains open. The instructor fires one separately warned 0.65-hit
+between cells remains open. The trial boss fires one separately warned 0.65-hit
 bolt only after the stopped player has had 1.5s of free movement. Recovery 3s.
 Breaking an anchor removes its wire immediately, including slow eligibility.
 

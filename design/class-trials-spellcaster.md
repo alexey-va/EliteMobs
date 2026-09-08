@@ -81,7 +81,7 @@ at 1s intervals, capped at 0.8. Contact slows 20% for 0.8s; safe ground clears
 the encounter's own slow. **Ice Barrier (22s CD):** 1.6s three rising shards,
 two-hit shield for at most 5s; breaking it causes a 3s shatter recovery, expiry
 2s. It cleanses once and never heals. Attack the barrier from the clear sector
-or wait beyond the storm; the instructor cannot attack during shatter recovery.
+or wait beyond the storm; the trial boss cannot attack during shatter recovery.
 
 **Escalation:** Blink moves before the next storm, which must show its new
 sector for the full warning. Barrier cannot refresh itself while still intact.
@@ -144,11 +144,11 @@ cadet makes group shielding meaningful without a summoning theme.
 Recovery 2.8s. **Aegis Pulse (22s CD):** 1.8s outward rune pulse, one-hit shields
 for the pair within 5 blocks, lasting 5s. Two matched hits during preparation
 interrupt the pulse, otherwise separating the cadet before release denies their
-shield. The instructor receives no additional armor multiplier on top.
+shield. The trial boss receives no additional armor multiplier on top.
 
 **Escalation:** Blink returns to the cadet before preparing Aegis Pulse, with
 a full destination tell and landing pause. The cadet does not respawn; without
-them, the instructor still has a bounded personal shield.
+them, the trial boss still has a bounded personal shield.
 
 **Voice:** Open: “A guard can answer a spell. It must still be raised in time.”
 Half: “Watch the return to my companion. That is where the pulse begins.”
@@ -206,7 +206,7 @@ prepared corpses. Death prevention has a discoverable, destructible source.
 **Death Coil (24s CD):** 2.2s coil into one corpse raises a draining servant
 for 10s, four matched hits. Its slow 0.3-hit attacks heal 1% on contact, up to
 4% across the fight. **Phylactery Ward (once):** 2s assembly of a three-hit urn
-gives the instructor one fatal-hit prevention while the urn survives. A gold
+gives the trial boss one fatal-hit prevention while the urn survives. A gold
 bone thread always points to it. Destroying it ends the ward and opens 3.5s
 exposure. If spent by a fatal hit instead, the urn shatters, restores 6% health,
 and grants 2s kneeling protection followed by 2s safe recovery. It never respawns.
@@ -265,14 +265,14 @@ Loss: “The sigil was helping the wolf more than another hurried swing helped y
 ## demonologist — Read the Price
 
 **Equipment and lesson:** staff, pact seal, ember cloak. A dangerous summoned
-ally comes with a visible cost in the instructor's defense.
+ally comes with a visible cost in the trial boss's defense.
 
 **Abyssal Gate (two charges, 28s CD):** 2.3s three ground seals open a portal.
 Destroy its two-hit anchor to interrupt; otherwise a four-hit Nether servitor
 arrives for 10s. It fires one 1.4s-warned, terrain-blocked ember every 3s,
 0.4 hit, no fire-tick damage. **Pact of Ruin (24s CD):** 1.8s red thread binds
 caster to servitor for 5s, granting the servitor +20% damage and a one-hit shield,
-but the instructor takes +25% damage for the same duration. The price is shown
+but the trial boss takes +25% damage for the same duration. The price is shown
 by a broken shield over the caster. Killing the servitor ends the benefit,
 but not the paid vulnerability. Recovery 3s after the pact.
 

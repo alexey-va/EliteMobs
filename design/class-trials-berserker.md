@@ -12,7 +12,7 @@ Low health makes aggression stronger but also creates risk for its owner.
 
 **Frenzy (18s CD):** 1.5s breathing and rising red motes, then three alternating
 cuts across 4.5s. Above half health each is 0.45 hit; below, 0.6, with a 1.2 total
-budget. The instructor takes 20% extra damage during Frenzy. Cuts lock facing
+budget. The trial boss takes 20% extra damage during Frenzy. Cuts lock facing
 0.5s before impact. Recovery 3s. **Blood Roar (20s CD):** a 1.4s roar clears slows
 once and fills the halo; it causes no player interruption. Two matched hits
 during its windup cancel the next Frenzy's damage increase, with an audible
@@ -34,7 +34,7 @@ a connected attack; there is no periodic free heal.
 **Scent Blood (18s CD):** 1.3s sniff and tracing motes mark the challenger for
 5s and increase pursuit speed 15%. A missed Feast clears the mark immediately.
 **Blood Feast (16s CD):** 1.6s hooked-axe windup, then a forward hook and returning
-sweep 1.2s apart. Each deals 0.55 hit, with a 0.9 combined cap. The instructor
+sweep 1.2s apart. Each deals 0.55 hit, with a 0.9 combined cap. The trial boss
 heals 2% maximum health only on the first connected swing, at most six times
 per run. Stepping across the hook's committed side avoids both; recovery 2.8s.
 
@@ -52,7 +52,7 @@ Loss: “Every bite you gave me bought another exchange.”
 healing pool ask different positioning questions.
 
 **Gore Trail (22s CD):** 1.5s dragging the scythe marks a 6-block trail, at most
-2 blocks wide, lasting 6s. While inside it, the instructor can heal 1% per
+2 blocks wide, lasting 6s. While inside it, the trial boss can heal 1% per
 second, capped at 10% across the fight. It never damages players on its own.
 **Crimson Cyclone (18s CD):** 1.8s outward spiral, then a 3s advancing spin in
 a committed direction, 3-block radius. Three damage pulses have a shared
@@ -76,10 +76,10 @@ is a finite resource, visibly spent, not an endless second phase.
 **Defiant Roar (24s CD):** 2s audible inhale, then 4s of 40% protection and a
 2% heal, available only twice per run. Two matched hits interrupt the inhale.
 No attacks during the protected first second. **Refuse Death (once per run):**
-the first otherwise fatal hit breaks the chest rune, leaves the instructor at
+the first otherwise fatal hit breaks the chest rune, leaves the trial boss at
 1 health, and restores 8% maximum health over a protected 2s kneeling sequence.
 The challenger receives no damage during it. Protection ends with a clear
-exhale and 2s recovery before the instructor attacks again. The rune stays dark.
+exhale and 2s recovery before the trial boss attacks again. The rune stays dark.
 
 **Escalation:** half health adds a Crater Leap with normal warning. The one-time
 survival is the final dramatic beat, not a reset of helpers, CDs or healing budget.
@@ -100,7 +100,7 @@ and a thrust over 3.5s. Normal 0.4/0.4/0.65 hit; below 35% challenger health
 only the thrust becomes 0.9. The entire sequence caps at 1.2. Each direction
 locks 0.5s before release; recovery 3s. **Relentless Hunt (20s CD):** 1.2s eye
 glint and 5s of +15% pursuit speed, but no attack-rate increase. A missed final
-thrust ends the hunt and makes the instructor stop rather than immediately chase.
+thrust ends the hunt and makes the trial boss stop rather than immediately chase.
 
 **Escalation:** leap establishes pursuit before the next rhythm. Never shorten
 warnings when player health is low, and never preserve the mark after the run.
@@ -120,7 +120,7 @@ challenger for 6s. **Final Stroke (18s CD):** 2s raised axe, a 2-block-wide,
 6-block-long warning strip fixes for the final 0.8s, then one 1.1-hit impact
 (1.4 maximum against a wounded, marked target). A miss breaks Condemn.
 Recovery 3.5s with the axe embedded and +25% damage received. No invisible
-oversized melee box around the instructor.
+oversized melee box around the trial boss.
 
 **Escalation:** a Crater Leap gives a new angle; complete landing recovery
 precedes the axe raise. No second fake-out stroke or cancel into a tracking hit.
@@ -140,7 +140,7 @@ effigies make the chain mechanic visible without inventing multiple players.
 the effigies and then the challenger's captured position. Each leg has 0.6s
 travel plus a 0.5s pause. Only the final leg can hurt the challenger (0.9 hit).
 Breaking an effigy first removes that leg and causes a 2s recovery at the missing
-link; a completed chain ends in 3s recovery. Consumed effigies heal the instructor 2% each, with three pairs maximum
+link; a completed chain ends in 3s recovery. Consumed effigies heal the trial boss 2% each, with three pairs maximum
 (12% total). **Reap the Weak (18s CD):** 1.5s scythe hook line, modest horizontal
 pull within 6 blocks. No damage; Harvest cannot start until 1.5s after it resolves.
 
@@ -161,11 +161,11 @@ control resistance does not mean damage immunity.
 impact with a modest launch. A hit grants 1.5s protection from subsequent
 scripted damage; recovery 2.8s. **Unstoppable (22s CD):** 1.3s armor-lock sound,
 then 5s of control resistance with normal damage taken and 15% slower turning.
-The instructor visibly walks rather than suddenly dashes. Step outside the
+The trial boss visibly walks rather than suddenly dashes. Step outside the
 Earthshatter circle, then use recovery to close again.
 
 **Escalation:** Crater Leap introduces a distant landing circle, then the
-instructor must recover before Earthshatter. No overlap of landing and mace
+trial boss must recover before Earthshatter. No overlap of landing and mace
 damage and no launch-to-launch trap.
 
 **Voice:** Open: “You will not move me easily. You can still move yourself.”
@@ -207,7 +207,7 @@ movement. Leaving its circle avoids the payoff; its full damage remains capped
 at 1.3 after Breach. Breach does not disable food, player movement or healing.
 
 **Escalation:** leap establishes a new breach attempt; no refreshing the debuff
-through repeated contact hits. The instructor takes +20% damage during the
+through repeated contact hits. The trial boss takes +20% damage during the
 slam's recovery, providing an offensive answer to the defensive lesson.
 
 **Voice:** Open: “Breaking a guard is only the beginning. The opening can close.”
@@ -221,17 +221,17 @@ Loss: “Once exposed, buy space before trading another blow.”
 the anti-large identity legible; it is not a second full boss.
 
 **Anchor Chain (22s CD):** the construct begins a 2s warned, 2-block-wide charge.
-The instructor plants a visible chain stake and halts it; the chain stretches
+The trial boss plants a visible chain stake and halts it; the chain stretches
 across the arena for 4s. The challenger can break the stake (two matched hits)
-to interrupt the instructor's next attack. No chain roots the challenger.
+to interrupt the trial boss's next attack. No chain roots the challenger.
 **Giant Killer (20s CD):** 1.8s spear alignment at the anchored construct, then
 a committed thrust along the visibly extended chain line (0.9 hit if crossed).
-On success the construct kneels; on a broken chain the instructor overextends.
-Both outcomes give 3s instructor recovery, with +25% damage on interruption.
+On success the construct kneels; on a broken chain the trial boss overextends.
+Both outcomes give 3s trial boss recovery, with +25% damage on interruption.
 
 **Escalation:** leap takes the opposite side before the next demonstration.
 Construct charge can hit only once (0.45 hit), and never overlaps Giant Killer.
-If destroyed directly, it stays gone and the instructor uses warned spear thrusts.
+If destroyed directly, it stays gone and the trial boss uses warned spear thrusts.
 
 **Voice:** Open: “A larger enemy commits more weight. Give that weight a limit.”
 Half: “Now watch the anchor as closely as the giant.”
@@ -248,7 +248,7 @@ radii 2, 4 and 6 blocks, 0.8s apart. Each ring is 1 block thick and individually
 warned before activation. Move into the already-spent inner ground. One cast
 caps damage at 1.1 hits; no simultaneous full disc beneath all rings.
 **Iron Roar (20s CD):** 1.4s armor resonance, 5s control resistance, no damage
-reduction. The instructor remains still during the chain and rests 3s afterward.
+reduction. The trial boss remains still during the chain and rests 3s afterward.
 
 **Escalation:** leap shifts the center for the next chain. It still starts only
 after landing recovery, and the new center is visible before its first ring.
@@ -268,7 +268,7 @@ sector; contact causes 1s weakness, no forced facing. **Panic Engine (22s CD):**
 1.6s axe drumming followed by two 90-degree sweeps separated by 1.3s, each
 0.65 hit, shared cap 1.1. The first gives a small horizontal shove; 1.5s grace
 prevents the second from punishing an immobilized player. Recovery 3s.
-The quiet sector is a route to the instructor's back, not a stationary safe
+The quiet sector is a route to the trial boss's back, not a stationary safe
 point under an incoming unmarked attack.
 
 **Escalation:** leap changes the orientation of the sectors. Their warning

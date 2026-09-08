@@ -3,7 +3,7 @@
 Companion to [the encounter contract](class-trial-encounters.md). These are
 authored designs, not implemented fights. Timing and damage are starting values
 for playtesting. `CD` starts after recovery; `hit` means a normalized ordinary
-instructor hit. All temporary actors and objects use the ownership, finite
+trial boss hit. All temporary actors and objects use the ownership, finite
 budgets and readable hitboxes specified in the contract.
 
 ## guardian — The Space Between
@@ -13,7 +13,7 @@ making the protected ally impossible to reach. One apprentice attacks slowly
 with a sword. A thin gold tether identifies who is protected.
 
 **Intercession (16s CD):** 1.4s shield raise, then a 5s link transferring 60% of
-the apprentice's incoming damage to the instructor. The instructor takes that
+the apprentice's incoming damage to the trial boss. The trial boss takes that
 damage normally; this is an alternate way to hurt him, not free mitigation.
 **Guardian Ring (20s CD):** 1.5s expanding shield outline, then a stationary
 4-block ring for 6s. The apprentice has 40% reduction inside it. Lure him beyond
@@ -40,7 +40,7 @@ Separating them for 1s breaks the link and exposes Aegis for 2.5s (+20% damage).
 **Sanctuary Wall (22s CD):** a 1.6s rising rectangular warning places a 5-block-wide
 spectral shield for 5s. It stops hostile projectiles but is passable on foot;
 its side edges are visibly open. Crossing it does not damage or stun. The
-instructor must lower it to attack, leaving 1.5s between guard and sword thrust.
+trial boss must lower it to attack, leaving 1.5s between guard and sword thrust.
 
 **Escalation:** mount to the archer, dismount, then build the wall perpendicular
 to the old firing lane. No wall appears behind an untelegraphed shot. The wall
@@ -61,7 +61,7 @@ for 5s, reducing frontal damage 70%; rear damage is unchanged. Every 1.6s a
 clearly raised mace precedes one short frontal swing (0.65 hit). Turning is
 limited, never snapping to the challenger. **Unyielding Ground (22s CD):** 1.5s
 outlined 4-block circle, 6s control resistance while standing inside; it gives
-no additional damage reduction. Walk around the line or draw the instructor out
+no additional damage reduction. Walk around the line or draw the trial boss out
 after his stance ends. Both end in a 2.5s heavy-shield lowering animation.
 
 **Escalation:** a steed charge establishes a new line after its normal recovery.
@@ -78,15 +78,15 @@ Loss: “My shield covered the front. The rest of me was still there.”
 0.2-hit attacks every 3s. Protecting two allies stretches one defender.
 
 **Manyfold Intercession (20s CD):** 1.5s two gold links, then 6s redirecting 50%
-of damage from each cadet to the instructor. Each link breaks beyond 7 blocks;
+of damage from each cadet to the trial boss. Each link breaks beyond 7 blocks;
 breaking either causes a 1s guard stumble, both a 3s exposure. A single attack
 cannot recursively bounce damage through links. **Covering Wall (24s CD):** 1.5s
 shield fan then 4s of 35% cadet protection and a visible retreat corridor. The
 cadets move; they do not attack during the retreat. Follow outside the shield
 fan or meet them at its marked destination. Recovery 2s.
 
-**Escalation:** the instructor rides to the farther surviving cadet before
-linking. No replacements for defeated cadets; without them, the instructor
+**Escalation:** the trial boss rides to the farther surviving cadet before
+linking. No replacements for defeated cadets; without them, the trial boss
 retains swordplay and steed but loses these defenses.
 
 **Voice:** Open: “Two promises. One shield. See what that demands.”
@@ -122,7 +122,7 @@ retaliation into support, but earn the recovery instead of receiving free heals.
 
 **Consecrated Judgment (20s CD):** the Justicar collection and committed arc,
 with a lower 0.9-hit cap. Only a landed arc heals the novice for one matched hit,
-at most three times in the entire fight; it never heals the instructor.
+at most three times in the entire fight; it never heals the trial boss.
 Missing leaves both unprotected for 3s. **Purging Bell (22s CD):** three spaced
 chimes over 1.8s, then a 5-block cleanse and 4s debuff protection for the pair.
 Two matched hits during the channel silence the bell and cause 2s recovery.
@@ -142,7 +142,7 @@ Loss: “The bell can be stopped. You need not wait for it to finish.”
 never use an actual instant kill against a learning player.
 
 **Expose Heresy (18s CD):** a 1.2s seal traces the challenger, then marks for 6s
-(+15% instructor damage). The mark clears when a Final Sentence misses.
+(+15% trial boss damage). The mark clears when a Final Sentence misses.
 **Final Sentence (16s CD):** 1.8s sword held vertical, then a straight 7-block
 thrust, direction fixed for the final 0.7s. Damage is 0.9 hit, rising to at most
 1.2 below 35% challenger health. Passing to either side avoids it. The sword
@@ -159,14 +159,14 @@ Loss: “The seal warned you. The blade still had to reach you.”
 ## warlord — The Voice That Moves the Line
 
 **Equipment and lesson:** sword and command pennant; two cadets as above.
-The instructor is noticeably less dangerous when separated from his followers.
+The trial boss is noticeably less dangerous when separated from his followers.
 
 **Commanding Shout (18s CD):** 1.4s horn and expanding 5-block outline; nearby
 cadets gain 20% damage for 5s. Their next thrusts each get 1.2s independent tells
 and are staggered by 1.5s. **Rally (20s CD):** 1.2s pennant rise clears their
 slows once and guides them along two visible lanes for 3s. They do not strike
 while moving. Break formation by crossing a lane or draw one out before the
-shout. The instructor has a 2s unguarded recovery after either order.
+shout. The trial boss has a 2s unguarded recovery after either order.
 
 **Escalation:** ride to the far side and call one returning formation. No new
 cadets and no damage to reward unavoidable surrounding.
@@ -183,7 +183,7 @@ ground creates an advantage which can be destroyed or abandoned.
 
 **Battle Standard (24s CD):** 1.8s banner planting, 8s lifetime, 5-block aura
 giving the pair 20% damage. The banner takes two matched hits and grants a 3s
-instructor stagger when broken. It has a visible base hitbox; no tiny cosmetic
+trial boss stagger when broken. It has a visible base hitbox; no tiny cosmetic
 target. **Reform Ranks (18s CD):** 1.3s horn, 3s movement to either side of the
 banner with 30% protection. Both recovery positions are marked before movement;
 the challenger can intercept. No attacks until 1.5s after arrival.
@@ -203,7 +203,7 @@ Loss: “The banner had a reach, and a breakable base.”
 The mobile aura contrasts deliberately with Marshal's fixed banner.
 
 **Grand Standard (22s CD):** 1.5s unfurl, then an 8s, 4-block aura carried by
-the instructor, granting cadets 20% damage. **Advance (18s CD):** 1.4s lane
+the trial boss, granting cadets 20% damage. **Advance (18s CD):** 1.4s lane
 warning then a 4s marching line. Cadets lose the aura if they pursue beyond its
 edge; their attacks keep ordinary tells. Outflank the slow standard carrier or
 draw the front cadet away. The banner folds into a 3s exposed rest after its
@@ -228,7 +228,7 @@ and 30% protection while all three remain within 5 blocks of one another.
 The bow shoots first, shield advances 1.5s later; never simultaneous walls of
 damage. **Fallback (20s CD):** 1.4s dashed retreat paths, then a 3s shielded
 withdrawal with no attacks. Intercept the marked destination or draw one cadet
-out: breaking the triangle removes all bonuses and exposes the instructor 3s.
+out: breaking the triangle removes all bonuses and exposes the trial boss 3s.
 
 **Escalation:** reverse which cadet advances, visibly switching the order.
 Steed is used only to reach the new command position after Fallback. A dead
@@ -245,7 +245,7 @@ Loss: “One corner out of place would have changed that exchange.”
 without forcing an unavoidable pull-into-finisher combination.
 
 **Dominating Roar (18s CD):** 1.5s inward-moving 5-block rings, then a modest
-horizontal pull and 2s of 15% weakness; no damage. After contact, the instructor
+horizontal pull and 2s of 15% weakness; no damage. After contact, the trial boss
 waits 1.5s before preparing another attack. **Press Forward (16s CD):** 1.2s axe
 lift, then three deliberate forward cuts over 4s, 0.55 hit each, 1.1 total budget.
 Each fixes facing before its swing. Sidestep behind or disengage; 2.5s exhausted
@@ -262,7 +262,7 @@ Loss: “After the roar, you still had a moment to choose your direction.”
 
 ## tyrant — Refuse the Easy Order
 
-**Equipment and lesson:** heavy axe, severe black plate. Intimidating instructor,
+**Equipment and lesson:** heavy axe, severe black plate. Intimidating trial boss,
 still teaching; no forced camera turns or loss of player controls.
 
 **Kneel (20s CD):** 1.6s axe butt striking the ground, three outward ring fronts

@@ -2,13 +2,13 @@
 
 Designs under [the shared contract](class-trial-encounters.md), not implemented
 content. These remain solo duels: attendants are encounter-owned sparring
-partners on the instructor's side. No unlocked healing ability is required to
+partners on the trial boss's side. No unlocked healing ability is required to
 win. They demonstrate why protection, triage, range and interruption matter.
 
 Unless specified otherwise, attendants take three matched hits, make a warned
 0.2-hit attack no more than once per 3s, and retreat permanently when defeated.
-They give no drops or XP. At most three exist. Healing across instructor and
-attendants shares a **12% instructor-max-health budget for the whole fight**;
+They give no drops or XP. At most three exist. Healing across trial boss and
+attendants shares a **12% trial boss-max-health budget for the whole fight**;
 it cannot revive a defeated actor. Interruptible channels show two descending
 notes, are cancelled by two matched hits, and end in 2.5s recovery. These rules
 prevent healer encounters becoming unbounded damage-per-second checks.
@@ -28,7 +28,7 @@ health or damage reduction; recovery 1.8s.
 
 **Escalation:** Guardian Flight moves to the most injured attendant's announced
 position, with 1.5s landing recovery before a fresh prayer. Without attendants,
-the instructor can pray for herself using the same interruption and total budget.
+the trial boss can pray for herself using the same interruption and total budget.
 
 **Voice:** Open: “Before a prayer is answered, someone must find the moment to speak.”
 Half: “Watch who needs help. That is where my attention will go.”
@@ -43,12 +43,12 @@ Grouped healing trades broad coverage for a long, readable commitment.
 **Benediction (24s CD):** 2.3s ascending three-note chord outlines a 5-block
 circle, then heals each attendant inside for one matched hit, within the shared
 budget. It cannot reach those lured outside. Two matched hits interrupt the
-channel and expose the instructor for 3s. **Sacred Silence (20s CD):** 1.5s quiet
+channel and expose the trial boss for 3s. **Sacred Silence (20s CD):** 1.5s quiet
 inward ring, one cleanse of nearby attendants and a 1s, 15% weakness to the
 challenger inside 3 blocks. It does not disable controls, chat, movement or all
 abilities. No damaging attack for 1.5s afterward; recovery 2s.
 
-**Escalation:** Guardian Flight regathers the instructor with the remaining
+**Escalation:** Guardian Flight regathers the trial boss with the remaining
 attendants before the next Benediction. It does not teleport attendants back
 into healing range or undo the player's separation work.
 
@@ -71,8 +71,8 @@ spends it; it never prevents an otherwise fatal hit invisibly. Recovery 3s.
 All healing consumes the common budget, including Miracle.
 
 **Escalation:** Guardian Flight becomes the announced rescue approach at half
-instructor health; Miracle is not refreshed. With the novice gone, ground can
-heal the instructor at 1% per second, only from the remaining budget.
+trial boss health; Miracle is not refreshed. With the novice gone, ground can
+heal the trial boss at 1% per second, only from the remaining budget.
 
 **Voice:** Open: “Hope is precious. We must make room for it to work.”
 Half: “There is still someone to stand beside. Watch my approach.”
@@ -107,10 +107,10 @@ Announced future protection invites restraint or deliberate shield breaking.
 
 **Foreseen Rescue (22s CD):** 1.8s eye rune selects the attendant, then a ward
 absorbs two matched hits for at most 5s. A broken ward heals the attendant one
-matched hit; an expired ward heals nothing. Either outcome leaves the instructor
-unguarded for 2.5s of recovery. Attack the instructor while the ward expires, or break it
+matched hit; an expired ward heals nothing. Either outcome leaves the trial boss
+unguarded for 2.5s of recovery. Attack the trial boss while the ward expires, or break it
 to force that opening at a known, bounded healing cost. **Foresight (20s CD):**
-1.5s visible eye above the instructor, reduces the next received hit 50% within
+1.5s visible eye above the trial boss, reduces the next received hit 50% within
 4s, then vanishes. It never dodges every attack during the window.
 
 **Escalation:** Guardian Flight repositions before choosing the next ward
@@ -129,7 +129,7 @@ death-prevention charge is readable, finite, and transferable only by a channel.
 **Rewrite Fate (once per run):** 2s weaving chooses one attendant and visibly
 ties the sole gold knot to them. For 6s it prevents one fatal hit, consumes the
 knot and heals one matched hit. Let it expire or defeat the other attendant;
-the instructor cannot silently move it. **Prophecy (22s CD):** 1.6s three-note
+the trial boss cannot silently move it. **Prophecy (22s CD):** 1.6s three-note
 prediction, 5s ward reducing the next heavy hit (at least one matched hit) by
 50%. Its recipient is announced before activation. Recovery 2.5s; two matched
 hits during weaving interrupt the assignment. No damage reflection.
@@ -156,7 +156,7 @@ Intercept the middle attendant or lead them away before the chain. Recovery 3s.
 
 **Escalation:** Guardian Flight moves to the other end of the chain, reversing
 the audible and visible order. It does not extend jump range or revive missing
-links. The instructor remains vulnerable while attendants move.
+links. The trial boss remains vulnerable while attendants move.
 
 **Voice:** Open: “Mercy travels from one person to the next. Watch what joins them.”
 Half: “I will begin from the other side. Follow the notes.”
@@ -170,7 +170,7 @@ tether and a fixed totem offer two distinct ways to stop healing.
 
 **Life Current (20s CD):** 1.5s water thread, then 6s of healing one-quarter
 matched hit per second while the attendant stays within 6 blocks and line of
-sight. More than 1s beyond that reach breaks it, giving 2.5s instructor recovery.
+sight. More than 1s beyond that reach breaks it, giving 2.5s trial boss recovery.
 **Spirit Totem (24s CD):** 1.8s rising wood-and-light marker, two-hit totem,
 4-block aura lasting 7s. Its healing pulses at 2s intervals, each one-quarter
 matched hit. The totem and tether share one pulse allowance: standing in both
@@ -193,11 +193,11 @@ a heavy-hit-triggered shield create a choice between targets and attack weight.
 healing every 1.5s, broken after 1s beyond 7 blocks. **Sheltering Seed (24s CD):**
 1.8s seed formation on the attendant; for 5s the next heavy hit gives a one-hit
 shield after damage resolves. No trigger on light hits or an expired seed.
-The budding seed is visible and target-specific. Strike the instructor instead,
+The budding seed is visible and target-specific. Strike the trial boss instead,
 break the bond through distance, or deliberately spend the shield. Each expired
-or consumed seed gives the instructor 2.5s of unguarded tending recovery.
+or consumed seed gives the trial boss 2.5s of unguarded tending recovery.
 
-**Escalation:** Guardian Flight places the instructor on the far side of the
+**Escalation:** Guardian Flight places the trial boss on the far side of the
 bond, so the challenger can choose which direction stretches it. Healing remains
 budgeted; the seed never becomes a heal or repeats on every hit.
 
@@ -217,7 +217,7 @@ healing occupants one-quarter matched hit every 2s. **Thorn Ward (22s CD):**
 An obvious 90-degree gate stays open. Allies inside also receive a one-hit
 shield once per ward, never refreshed by a thorn pulse. Touching thorns deals 0.35 hit, at most
 twice per cast; the center is not secretly damaging. Each of two root stakes
-takes one matched hit; breaking both ends garden and ward, with 3s instructor
+takes one matched hit; breaking both ends garden and ward, with 3s trial boss
 recovery. Lure attendants through the gate or remove the roots.
 
 **Escalation:** Guardian Flight starts the next garden elsewhere only after
@@ -239,7 +239,7 @@ increase a support effect, and separating them directly reduces its value.
 matched hit per nearby attendant to each participant within 5 blocks, capped
 at three contributions and the fight budget. A separated singer's note drops
 out immediately. Interrupt with two matched hits, or draw one singer away.
-Channel recovery 3s; the instructor has no passive protection from the chorus.
+Channel recovery 3s; the trial boss has no passive protection from the chorus.
 
 **Escalation:** Guardian Flight reaches the most isolated attendant before
 Gather, forcing a new readable gathering location. Defeated attendants do not
@@ -256,14 +256,14 @@ Loss: “You fought us where every voice could answer.”
 second scheduled event which can be denied, not instant duplicate healing.
 
 **Ancestral Echo (24s CD):** 2s channel heals one attendant one matched hit,
-then leaves a visible echo at the instructor's captured location for 3s. The
+then leaves a visible echo at the trial boss's captured location for 3s. The
 echo repeats half that heal only if the recipient remains within 5 blocks and
 the one-hit echo focus survives. **Spirit Link (22s CD):** 1.6s linking beads,
-6s split of 30% attendant damage onto the instructor, once only per originating
+6s split of 30% attendant damage onto the trial boss, once only per originating
 hit. It creates no damage loop or net damage immunity. Separate by 7 blocks
-to break the link and cause 2.5s instructor recovery.
+to break the link and cause 2.5s trial boss recovery.
 
-**Escalation:** Guardian Flight moves the instructor away from the old echo;
+**Escalation:** Guardian Flight moves the trial boss away from the old echo;
 the echo itself stays fixed. The challenger chooses link pressure or echo denial.
 
 **Voice:** Open: “A kindness can echo. Listen for where the first voice leaves it.”
@@ -281,7 +281,7 @@ traveling 8 blocks over 2.5s. It heals each attendant once for half a matched
 hit and deals 0.65 hit to the challenger at most once. Move across its travel
 line, not with it. Sparse water ribbons leave the floor visible. **Veilstep
 (20s CD):** 1.5s two clear destination pillars, then a 4-block reposition to
-one indicated pillar, cleansing the instructor once and granting 25% protection
+one indicated pillar, cleansing the trial boss once and granting 25% protection
 for 2s. The selected pillar brightens before movement. Recovery 2.5s.
 
 **Escalation:** Guardian Flight reaches an attendant before the next Tide,
@@ -306,8 +306,8 @@ channel attempts a one-hit heal and a one-hit shield, within the fight budget.
 Two matched hits interrupt; defeated recipients are never revived. Recovery 3s.
 
 **Escalation:** Guardian Flight reaches the most threatened attendant before
-the remaining intervention. Breaking all links causes a 3s instructor exposure;
-focusing the instructor through redistribution is also viable. The shield never
+the remaining intervention. Breaking all links causes a 3s trial boss exposure;
+focusing the trial boss through redistribution is also viable. The shield never
 prevents a fatal hit before the announced channel completes.
 
 **Voice:** Open: “A burden can be shared. That does not make it disappear.”
