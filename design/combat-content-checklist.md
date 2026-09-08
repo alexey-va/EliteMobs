@@ -69,7 +69,7 @@ fireball speed. Do not add unimplemented enchantment labels.
 - [x] Author the five root scripts with equipment, timelines, visuals and dialogue (syntax compiled; integration and gameplay pending).
 - [x] Author Paladin's 14 branch encounters (syntax compiled; integration and gameplay pending).
 - [x] Author Berserker's 14 branch encounters (syntax compiled; integration and gameplay pending).
-- [ ] Implement Ranger's 14 branch encounters.
+- [x] Author Ranger's 14 branch encounters (syntax compiled; integration and gameplay pending).
 - [ ] Implement Cleric's 14 branch encounters.
 - [ ] Implement Spellcaster's 14 branch encounters.
 - [ ] Preserve sole challenger, external trainer NPC, arena exclusivity, fees,
@@ -122,7 +122,7 @@ The authored trial implementation is still a source-only checkpoint. Five root
 Lua programs and their shared mobility programs pass canonical Lua syntax/hook
 validation. All 75 presentation YAML files contain explicit equipment and the
 approved four dialogue beats. Paladin's 14 branch Lua programs now compile;
-Berserker's 14 are also authored. The remaining 42 branch programs are not written yet.
+Berserker's and Ranger's 14 each are also authored. The remaining 28 branch programs are not written yet.
 `TrialEncounterAssets` validates the whole catalog and has no generic fallback.
 It is not wired into `ClassTrialDefinition` / `ClassTrialCombat` yet; those still
 contain the rejected old runtime, including on the live testbed. Complete the
@@ -153,3 +153,13 @@ forms. This remains source-only until the whole 75-form catalog is complete and
 the old definition/combat binding is replaced. Berserker designs have been read;
 its one-use survival mechanic now has a narrow owned adapter at the normalized
 Bukkit damage boundary, preserving the original event and attacker.
+
+Ranger checkpoint: a cohesive `TrialProjectiles` component owns native collision,
+cast budgets, impact receipts, explicit penetration targets and fixed curve
+steering. Crossbow items switch charged state; volleys share caps; payloads have
+separate removable props/fuses; rain clears old arrows before changing its safe
+lane. Ordinary ranged attacks no longer backpedal without a mobility cooldown.
+Props use the canonical normalized living-entity damage path with an armor-stand
+LibsDisguises appearance, rather than vanilla armor-stand break rules. No arena
+orchestration, configuration or saved blocks were edited. Java and Lua compile;
+physical behavior and balance remain unverified. Cleric designs have been read.
