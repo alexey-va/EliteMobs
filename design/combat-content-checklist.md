@@ -85,24 +85,24 @@ No generic encounter is an acceptable fallback for an unfinished authored asset.
 
 ## Final staff delivery, explicitly authorized by MagmaGuy
 
-- [ ] Finish the requested v0 autonomously, including all earlier checklist areas.
-- [ ] Compile final EliteMobs, ResourcePackManager and FreeMinecraftModels jars
+- [x] Finish the requested v0 autonomously, including all earlier checklist areas.
+- [x] Compile final EliteMobs, ResourcePackManager and FreeMinecraftModels jars
       and verify the exact artifacts. All three are explicitly requested.
-- [ ] Establish each plugin's previous full public release from current evidence.
-- [ ] Review every net change since that release, including existing WIP changes.
-- [ ] Prepare a substantial per-plugin changelog as chat text, not repository files.
-- [ ] Explain the major admin tools, including mob brains, verified mob/NPC patrol
+- [x] Establish each plugin's previous full public release from current evidence.
+- [x] Review every net change since that release, including existing WIP changes.
+- [x] Prepare a substantial per-plugin changelog as chat text, not repository files.
+- [x] Explain the major admin tools, including mob brains, verified mob/NPC patrol
       support, combat/resources/controls, class trials and automatic class loot.
-- [ ] Give practical setup instructions and verified YAML/command examples for
+- [x] Give practical setup instructions and verified YAML/command examples for
       each major tool, with relevant limitations and manual-test caveats.
-- [ ] Include the staff test workflow: loot debug grants/unlocks classes at the
+- [x] Include the staff test workflow: loot debug grants/unlocks classes at the
       selected level; class-forget debug removes an unlock to retest its trial.
       Verify exact command syntax and prerequisite/descendant behavior in source.
-- [ ] Tell Dali and Frost that the class NPCs are in the Adventurer's Guild and
+- [x] Tell Dali and Frost that the class NPCs are in the Adventurer's Guild and
       their current LibsDisguises appearances are placeholders requiring finalization.
-- [ ] Find the Nightbreak Discord `nightbreak_crew` channel in the authenticated UI.
-- [ ] Post the final builds and briefing, with real mentions for Dali and Frost.
-- [ ] Reload/inspect the channel to verify messages, mentions and jar attachments
+- [x] Find the Nightbreak Discord `nightbreak_crew` channel in the authenticated UI.
+- [x] Post the final builds and briefing, with real mentions for Dali and Frost.
+- [x] Reload/inspect the channel to verify messages, mentions and jar attachments
       persisted; record message links and exact artifact hashes.
 
 This is explicit authority to send these staff messages and attachments. It is
@@ -110,7 +110,7 @@ not authority to publish a public plugin/DLC release. The user is sleeping;
 use informed judgment and preserve the promised manual review afterward.
 
 
-## Current implementation checkpoint
+## Implementation and delivery checkpoints (chronological)
 
 Automatic class loot: EliteMobs `53b1b9c03`, deployed to 26.2. MagmaDeck PID
 92804, restart at 08:12 local, EliteMobs initialized at 08:12:28. Runtime logged
@@ -181,3 +181,38 @@ Startup still has the existing Windows Perflib/OSHI errors. The current Geyser
 build also lacks BedrockEntityDefinition, so RSPM disables its custom Bedrock
 entity bridge with an explicit diagnostic. Neither is evidence of gameplay
 acceptance; no client or Autotester run was performed for this checkpoint.
+
+Final delivery, verified 8 September 2026 at 09:56 local:
+
+- Private staff post: https://discord.com/channels/320602228669022208/1008771253747855401/1546805531229032488
+- Twelve posts total: build introduction plus eleven per-plugin/administrator
+  briefing sections. Dali_ and Frost were selected through member autocomplete;
+  both rendered as clickable mentions after reloading the channel.
+- All three attached JARs were downloaded from their posted attachment URLs and
+  their SHA-256 hashes matched the immutable staged builds byte for byte.
+- EM: `D8131A3CAD4F774EFD509B0C38AE14977F6E1CEBE431654138CC8B3BB6C394F5` (8,955,118 bytes).
+- FMM: `A844E77514112E58946EF2743DE397096F830C7A83E35CF1B562B6DFE6562D1F` (4,497,223 bytes).
+- RSPM: `B5BDAD083D270B4ACFFF7093F550DCF992550E84D893FCA6BC68B6144C624167` (6,543,899 bytes).
+- Staging and verification receipts: `%TEMP%/nightbreak-staff-20260908-0947/`.
+  `discord-receipts.json` contains reloaded server message IDs; provisional
+  composer IDs changed after server acceptance and were reconciled without
+  resending. `delivery-verification.json` records all attachment hashes.
+- Public baselines corroborated through release-pipeline status: EM 10.8.1
+  (`5981bfe49`), FMM 2.11.2 (`98eeb49`), RSPM 2.3.1 (`1c70097`). Modrinth and
+  Reposilite agreed; the status tool could not resolve Spigot. The briefing
+  covers net code/working-tree features and applicable shared behavior; it does
+  not promote test-only WIP work into user-facing claims.
+- Final three-JAR testbed set restarted via MagmaDeck at 09:48, PID 76400.
+  At 09:48:30 the catalog validated all 75 encounters; EM and RSPM finished
+  initialization at 09:48:31. The existing Perflib/OSHI errors and incompatible
+  Geyser custom-entity bridge diagnostic remain explicitly noted.
+- The staff received exact debug commands, class prerequisite/reset caveats,
+  current controls, resource rates, loot and patrol YAML examples, and the
+  distinction between native Mind integration APIs and an absent admin YAML
+  loader. They were told the AG class NPC disguises are placeholders to finalize.
+- No arena orchestration/world/config changes, public publication, pushes,
+  Autotester runs or new client tests were performed in this implementation batch.
+
+The autonomous v0 and staff delivery are complete. Open manual-check boxes above
+are the explicitly retained player-facing acceptance and balance work, not
+claims of tests that ran.

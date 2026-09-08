@@ -1,10 +1,11 @@
 # Class trial encounter redesign
 
-Status: first complete authored design pass for all 75 catalog forms (five roots
-and 70 branches). The existing generic `ClassTrialCombat` is rejected. These
-documents do not establish that any replacement encounter has been implemented,
-played, balanced, or visually verified. The current testbed still runs the old
-encounter implementation; this design checkpoint is not a deployment.
+Status: all 75 catalog forms (five roots and 70 branches) have an authored Lua
+v0 implementation. The rejected generic ClassTrialCombat conversion has been
+replaced by the canonical Lua power binding. Java and all 75 Lua scripts compile;
+26.2 startup validates the catalog. No gameplay, balance or visual acceptance is
+claimed. See the implementation checklist for build, deployment and delivery
+receipts, and the runtime contract for the required manual pass.
 
 ## Catalog
 

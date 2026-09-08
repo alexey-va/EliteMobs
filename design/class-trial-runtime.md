@@ -1,8 +1,9 @@
-# Authored trial runtime: implementation proposal
+# Authored trial runtime: implementation contract
 
-This proposal covers authored encounters using the existing Lua boss runtime.
-The encounter catalog is complete at the first design-pass level; replacement
-scripts have not been implemented or deployed.
+The authored v0 now uses the existing Lua boss runtime for all 75 encounters.
+Java and canonical Lua compilation pass; 26.2 startup validates the full catalog.
+The scripts and binding are deployed. Gameplay, visual polish and balance still
+require the manual acceptance pass below; startup is not gameplay evidence.
 
 ## Implementation approach
 
