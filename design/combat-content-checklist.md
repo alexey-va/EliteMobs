@@ -29,11 +29,11 @@ PID 65712. Prior jar/config backup is in the Windows temp directory named
 - [x] Resolve actual item-to-mob loot references, difficulty and mob rank; retain unresolved references explicitly.
 - [x] Report enchantment medians, prevalence and sample sizes by difficulty,
       trash/miniboss/boss and weapon family; separate inferred classifications.
-- [ ] Derive explicit formulas from evidence and document sparse-data fallbacks.
-- [ ] Add editable YAML settings using the existing configuration conventions.
-- [ ] Generate the appropriate difficulty/rank version from one item definition.
-- [ ] Retain per-item name/lore and fully authored custom loot alongside coverage.
-- [ ] Cover all supported class weapon families with deliberate equivalents.
+- [x] Derive explicit formulas from evidence and document sparse-data fallbacks.
+- [x] Add editable YAML settings using the existing configuration conventions.
+- [x] Generate the appropriate difficulty/rank version from one item definition.
+- [x] Retain per-item name/lore and fully authored custom loot alongside coverage.
+- [x] Cover all supported class weapon families with deliberate equivalents.
 - [ ] Compile, commit, deploy and check registration/configuration.
 - [ ] MagmaGuy's thorough manual balance and content review.
 
@@ -44,16 +44,16 @@ Do not modify or publish DLC as part of this analysis.
 
 ## Item-specific magic enchantments
 
-- [ ] Block Punch on both wands and staves in generation and upgrade paths.
-- [ ] Implement wand Multicast: I = 2 bolts at 75% each; II = 2 at 85%;
+- [x] Block Punch on both wands and staves in generation and upgrade paths.
+- [x] Implement wand Multicast: I = 2 bolts at 75% each; II = 2 at 85%;
       III = 3 at 70%. Prefer distinct targets, reuse targets when necessary.
       Level II is an implementation judgment; I and III follow the request.
-- [ ] Make Multicast III rare in generated loot and configurable.
-- [ ] Implement staff blast-radius enchantment with bounded radius scaling.
-- [ ] Implement staff ignition enchantment with bounded duration and damage.
-- [ ] Use the existing enchantment configuration, item lore and upgrade systems.
-- [ ] Preserve projectile collision, target policy and zero wand knockback.
-- [ ] Compile affected FMM/EliteMobs, commit, deploy and check startup.
+- [x] Make Multicast III rare in generated loot and configurable.
+- [x] Implement staff blast-radius enchantment with bounded radius scaling.
+- [x] Implement staff ignition enchantment with bounded duration and damage.
+- [x] Use the existing enchantment configuration, item lore and upgrade systems.
+- [x] Preserve projectile collision, target policy and zero wand knockback.
+- [x] Compile affected FMM/EliteMobs, commit, deploy and check startup.
 - [ ] Manual projectile count, split targets, damage, AoE and fire verification.
 
 Additional enchantment ideas must have actual implemented effects before entering
@@ -108,3 +108,4 @@ No generic encounter is an acceptable fallback for an unfinished authored asset.
 This is explicit authority to send these staff messages and attachments. It is
 not authority to publish a public plugin/DLC release. The user is sleeping;
 use informed judgment and preserve the promised manual review afterward.
+

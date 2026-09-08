@@ -8,6 +8,8 @@ import hashlib
 import json
 import re
 import statistics
+import math
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
@@ -21,8 +23,52 @@ ALIASES = {
     "PROTECTION_EXPLOSIONS": "BLAST_PROTECTION", "PROTECTION_PROJECTILE": "PROJECTILE_PROTECTION",
     "OXYGEN": "RESPIRATION", "WATER_WORKER": "AQUA_AFFINITY", "SWEEPING": "SWEEPING_EDGE",
     "LUCK": "LUCK_OF_THE_SEA", "SOULBIND": "SOULBIND",
+    "CURSE_OF_VANISHING": "VANISHING_CURSE", "CURSE_OF_BINDING": "BINDING_CURSE",
+    "WATER_AFFINITY": "AQUA_AFFINITY",
 }
 DIFFICULTIES = {"0": "NORMAL", "1": "HARD", "2": "MYTHIC"}
+CUSTOM_ENCHANTMENTS = {"CRITICAL_STRIKES", "EARTHQUAKE", "FLAMETHROWER", "GRAPPLING_HOOK", "HUNTER",
+                       "LIGHTNING", "LOUD_STRIKES", "PLASMA_BOOTS", "MULTICAST", "BLAST_RADIUS", "IGNITION"}
+
+
+@lru_cache(maxsize=4096)
+def scalable_distribution(total, successes):
+    """Exact distribution of the existing shrinking-list loop: ceil(total/2) draws without replacement."""
+    draws = (total + 1) // 2
+    denominator = math.comb(total, draws)
+    return {k: math.comb(successes, k) * math.comb(total - successes, draws - k) / denominator
+            for k in range(max(0, draws - total + successes), min(successes, draws) + 1)}
+
+
+def generated_statistics(rows):
+    groups = collections.defaultdict(dict)
+    for row in rows:
+        groups[(row["difficulty"], row["rank"], row["family"])][row["item"]] = row
+    results = []
+    for (diff, mob_rank, kind), by_item in sorted(groups.items()):
+        keys = {key for row in by_item.values() for key in row["enchantments"]}
+        stats = {}
+        for key in sorted(keys):
+            mixture = collections.defaultdict(float)
+            for row in by_item.values():
+                level = max(0, row["enchantments"].get(key, 0))
+                native_total = sum(max(0, v) for k, v in row["enchantments"].items() if k not in CUSTOM_ENCHANTMENTS)
+                distribution = (scalable_distribution(native_total, level)
+                                if native_total and key not in CUSTOM_ENCHANTMENTS
+                                and str(row["scalability"]).upper() in ("SCALABLE", "LIMITED") else {level: 1.0})
+                for value, probability in distribution.items():
+                    mixture[value] += probability / len(by_item)
+            cumulative, median = 0.0, 0
+            for value, probability in sorted(mixture.items()):
+                cumulative += probability
+                if cumulative >= .5 - 1e-12:
+                    median = value
+                    break
+            stats[key] = {"median": median, "mean": round(sum(k * v for k, v in mixture.items()), 4),
+                          "prevalence": round(1 - mixture.get(0, 0), 4)}
+        results.append({"difficulty": diff, "rank": mob_rank, "family": kind,
+                        "items": len(by_item), "enchantments": stats})
+    return results
 
 
 def family(item):
@@ -142,7 +188,7 @@ def main():
         if kind == "customitems":
             items[rel] = {"package": parts[0], "item": rel, "family": family(data),
                           "material": data.get("material"), "itemLevel": data.get("level"),
-                          "scalability": data.get("scalability", "fixed"),
+                          "scalability": data.get("scalability", "scalable"),
                           "enchantments": enchantments(data, rel, issues), "enabled": data.get("isEnabled", True)}
             by_name[path.name.lower()].append(rel)
         elif kind == "custombosses":
@@ -217,6 +263,7 @@ def main():
               "difficultySources": dict(collections.Counter(r["difficultySource"] for r in rows)),
               "excluded": excluded, "issues": issues, "unresolved": unresolved,
               "statistics": stats, "unreferencedStatistics": summarize(unreferenced),
+              "modeledGeneratedStatistics": generated_statistics(rows),
               "pairedDifficultyDeltas": [{"difficulty": d, "rank": r, "family": f, "enchantment": e,
                                             "pairs": len(v), "medianDelta": statistics.median(v)}
                                            for (d, r, f, e), v in sorted(paired_deltas.items())]}

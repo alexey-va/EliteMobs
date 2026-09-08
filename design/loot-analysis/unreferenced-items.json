@@ -5,7 +5,7 @@
     "family": "BOOTS",
     "material": "DIAMOND_BOOTS",
     "itemLevel": 140,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -24,7 +24,7 @@
     "family": "CHESTPLATES",
     "material": "DIAMOND_CHESTPLATE",
     "itemLevel": 140,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -43,7 +43,7 @@
     "family": "HELMETS",
     "material": "DIAMOND_HELMET",
     "itemLevel": 140,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -62,7 +62,7 @@
     "family": "LEGGINGS",
     "material": "DIAMOND_LEGGINGS",
     "itemLevel": 140,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -81,7 +81,7 @@
     "family": "SWORDS",
     "material": "DIAMOND_SWORD",
     "itemLevel": 140,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "KNOCKBACK": 3,
@@ -101,7 +101,7 @@
     "family": "BOOTS",
     "material": "GOLDEN_BOOTS",
     "itemLevel": 120,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 6,
@@ -118,7 +118,7 @@
     "family": "CHESTPLATES",
     "material": "GOLDEN_CHESTPLATE",
     "itemLevel": 120,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 5,
@@ -135,7 +135,7 @@
     "family": "HELMETS",
     "material": "GOLDEN_HELMET",
     "itemLevel": 120,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 5,
@@ -152,7 +152,7 @@
     "family": "LEGGINGS",
     "material": "GOLDEN_LEGGINGS",
     "itemLevel": 120,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 5,
@@ -169,7 +169,7 @@
     "family": "SWORDS",
     "material": "GOLDEN_SWORD",
     "itemLevel": 120,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 6,
       "KNOCKBACK": 3,
@@ -187,7 +187,7 @@
     "family": "BOOTS",
     "material": "NETHERITE_BOOTS",
     "itemLevel": 150,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -206,7 +206,7 @@
     "family": "CHESTPLATES",
     "material": "NETHERITE_CHESTPLATE",
     "itemLevel": 150,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 8,
       "BLAST_PROTECTION": 6,
@@ -226,7 +226,7 @@
     "family": "HELMETS",
     "material": "NETHERITE_HELMET",
     "itemLevel": 150,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 8,
       "BLAST_PROTECTION": 6,
@@ -245,7 +245,7 @@
     "family": "LEGGINGS",
     "material": "NETHERITE_LEGGINGS",
     "itemLevel": 150,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 9,
       "BLAST_PROTECTION": 6,
@@ -264,7 +264,7 @@
     "family": "SWORDS",
     "material": "NETHERITE_SWORD",
     "itemLevel": 150,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 8,
       "BANE_OF_ARTHROPODS": 6,
@@ -285,7 +285,7 @@
     "family": "BOOTS",
     "material": "IRON_BOOTS",
     "itemLevel": 110,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "UNBREAKING": 5
@@ -301,7 +301,7 @@
     "family": "CHESTPLATES",
     "material": "IRON_CHESTPLATE",
     "itemLevel": 110,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "UNBREAKING": 5
@@ -317,7 +317,7 @@
     "family": "HELMETS",
     "material": "IRON_HELMET",
     "itemLevel": 110,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "UNBREAKING": 5
@@ -333,7 +333,7 @@
     "family": "LEGGINGS",
     "material": "IRON_LEGGINGS",
     "itemLevel": 110,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "UNBREAKING": 5
@@ -349,7 +349,7 @@
     "family": "SWORDS",
     "material": "IRON_SWORD",
     "itemLevel": 110,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 6,
       "SWEEPING_EDGE": 2,
@@ -366,7 +366,7 @@
     "family": "BOOTS",
     "material": "DIAMOND_BOOTS",
     "itemLevel": 130,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "PROJECTILE_PROTECTION": 5,
@@ -384,7 +384,7 @@
     "family": "CHESTPLATES",
     "material": "DIAMOND_CHESTPLATE",
     "itemLevel": 130,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "PROJECTILE_PROTECTION": 5,
@@ -402,7 +402,7 @@
     "family": "HELMETS",
     "material": "DIAMOND_HELMET",
     "itemLevel": 130,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "PROJECTILE_PROTECTION": 5,
@@ -420,7 +420,7 @@
     "family": "LEGGINGS",
     "material": "DIAMOND_LEGGINGS",
     "itemLevel": 130,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "PROJECTILE_PROTECTION": 5,
@@ -438,7 +438,7 @@
     "family": "AXES",
     "material": "DIAMOND_AXE",
     "itemLevel": 130,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 7,
       "KNOCKBACK": 4,
@@ -638,7 +638,7 @@
     "family": "BOOTS",
     "material": "DIAMOND_BOOTS",
     "itemLevel": 90,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "BLAST_PROTECTION": 4,
@@ -657,7 +657,7 @@
     "family": "CHESTPLATES",
     "material": "DIAMOND_CHESTPLATE",
     "itemLevel": 90,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "BLAST_PROTECTION": 4,
@@ -676,7 +676,7 @@
     "family": "HELMETS",
     "material": "DIAMOND_HELMET",
     "itemLevel": 90,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "BLAST_PROTECTION": 4,
@@ -695,7 +695,7 @@
     "family": "LEGGINGS",
     "material": "DIAMOND_LEGGINGS",
     "itemLevel": 90,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "BLAST_PROTECTION": 4,
@@ -714,7 +714,7 @@
     "family": "SWORDS",
     "material": "DIAMOND_SWORD",
     "itemLevel": 90,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 6,
       "KNOCKBACK": 2,
@@ -734,7 +734,7 @@
     "family": "BOOTS",
     "material": "GOLDEN_BOOTS",
     "itemLevel": 60,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 5,
@@ -751,7 +751,7 @@
     "family": "CHESTPLATES",
     "material": "GOLDEN_CHESTPLATE",
     "itemLevel": 60,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -768,7 +768,7 @@
     "family": "HELMETS",
     "material": "GOLDEN_HELMET",
     "itemLevel": 60,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -785,7 +785,7 @@
     "family": "LEGGINGS",
     "material": "GOLDEN_LEGGINGS",
     "itemLevel": 60,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -802,7 +802,7 @@
     "family": "SWORDS",
     "material": "GOLDEN_SWORD",
     "itemLevel": 60,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "KNOCKBACK": 2,
@@ -820,7 +820,7 @@
     "family": "BOOTS",
     "material": "NETHERITE_BOOTS",
     "itemLevel": 100,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -839,7 +839,7 @@
     "family": "CHESTPLATES",
     "material": "NETHERITE_CHESTPLATE",
     "itemLevel": 100,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -859,7 +859,7 @@
     "family": "HELMETS",
     "material": "NETHERITE_HELMET",
     "itemLevel": 100,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 7,
       "BLAST_PROTECTION": 5,
@@ -878,7 +878,7 @@
     "family": "LEGGINGS",
     "material": "NETHERITE_LEGGINGS",
     "itemLevel": 100,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 8,
       "BLAST_PROTECTION": 5,
@@ -897,7 +897,7 @@
     "family": "SWORDS",
     "material": "NETHERITE_SWORD",
     "itemLevel": 100,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 7,
       "BANE_OF_ARTHROPODS": 5,
@@ -918,7 +918,7 @@
     "family": "BOOTS",
     "material": "IRON_BOOTS",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -934,7 +934,7 @@
     "family": "CHESTPLATES",
     "material": "IRON_CHESTPLATE",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -950,7 +950,7 @@
     "family": "HELMETS",
     "material": "IRON_HELMET",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -966,7 +966,7 @@
     "family": "LEGGINGS",
     "material": "IRON_LEGGINGS",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -982,7 +982,7 @@
     "family": "SWORDS",
     "material": "IRON_SWORD",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "SWEEPING_EDGE": 1,
@@ -999,7 +999,7 @@
     "family": "BOOTS",
     "material": "DIAMOND_BOOTS",
     "itemLevel": 80,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 4,
@@ -1017,7 +1017,7 @@
     "family": "CHESTPLATES",
     "material": "DIAMOND_CHESTPLATE",
     "itemLevel": 80,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 4,
@@ -1035,7 +1035,7 @@
     "family": "HELMETS",
     "material": "DIAMOND_HELMET",
     "itemLevel": 80,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 4,
@@ -1053,7 +1053,7 @@
     "family": "LEGGINGS",
     "material": "DIAMOND_LEGGINGS",
     "itemLevel": 80,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 6,
       "PROJECTILE_PROTECTION": 4,
@@ -1071,7 +1071,7 @@
     "family": "AXES",
     "material": "DIAMOND_AXE",
     "itemLevel": 80,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 6,
       "KNOCKBACK": 3,
@@ -2453,7 +2453,7 @@
     "family": "BOOTS",
     "material": "DIAMOND_BOOTS",
     "itemLevel": 40,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2472,7 +2472,7 @@
     "family": "CHESTPLATES",
     "material": "DIAMOND_CHESTPLATE",
     "itemLevel": 40,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2491,7 +2491,7 @@
     "family": "HELMETS",
     "material": "DIAMOND_HELMET",
     "itemLevel": 40,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2510,7 +2510,7 @@
     "family": "LEGGINGS",
     "material": "DIAMOND_LEGGINGS",
     "itemLevel": 40,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2529,7 +2529,7 @@
     "family": "SWORDS",
     "material": "DIAMOND_SWORD",
     "itemLevel": 40,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "KNOCKBACK": 2,
@@ -2549,7 +2549,7 @@
     "family": "BOOTS",
     "material": "IRON_BOOTS",
     "itemLevel": 20,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 5,
@@ -2566,7 +2566,7 @@
     "family": "CHESTPLATES",
     "material": "IRON_CHESTPLATE",
     "itemLevel": 20,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -2583,7 +2583,7 @@
     "family": "HELMETS",
     "material": "IRON_HELMET",
     "itemLevel": 20,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -2600,7 +2600,7 @@
     "family": "LEGGINGS",
     "material": "IRON_LEGGINGS",
     "itemLevel": 20,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -2617,7 +2617,7 @@
     "family": "SWORDS",
     "material": "IRON_SWORD",
     "itemLevel": 20,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "KNOCKBACK": 2,
@@ -2635,7 +2635,7 @@
     "family": "BOOTS",
     "material": "NETHERITE_BOOTS",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2654,7 +2654,7 @@
     "family": "CHESTPLATES",
     "material": "NETHERITE_CHESTPLATE",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2673,7 +2673,7 @@
     "family": "HELMETS",
     "material": "NETHERITE_HELMET",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2692,7 +2692,7 @@
     "family": "LEGGINGS",
     "material": "NETHERITE_LEGGINGS",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "BLAST_PROTECTION": 4,
@@ -2711,7 +2711,7 @@
     "family": "SWORDS",
     "material": "NETHERITE_SWORD",
     "itemLevel": 50,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "KNOCKBACK": 2,
@@ -2731,7 +2731,7 @@
     "family": "BOOTS",
     "material": "LEATHER_BOOTS",
     "itemLevel": 10,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -2747,7 +2747,7 @@
     "family": "CHESTPLATES",
     "material": "LEATHER_CHESTPLATE",
     "itemLevel": 10,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -2763,7 +2763,7 @@
     "family": "HELMETS",
     "material": "LEATHER_HELMET",
     "itemLevel": 10,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -2779,7 +2779,7 @@
     "family": "LEGGINGS",
     "material": "LEATHER_LEGGINGS",
     "itemLevel": 10,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "UNBREAKING": 5
@@ -2795,7 +2795,7 @@
     "family": "SWORDS",
     "material": "STONE_SWORD",
     "itemLevel": 10,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "SWEEPING_EDGE": 1,
@@ -2812,7 +2812,7 @@
     "family": "BOOTS",
     "material": "GOLDEN_BOOTS",
     "itemLevel": 30,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -2830,7 +2830,7 @@
     "family": "CHESTPLATES",
     "material": "GOLDEN_CHESTPLATE",
     "itemLevel": 30,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -2848,7 +2848,7 @@
     "family": "HELMETS",
     "material": "GOLDEN_HELMET",
     "itemLevel": 30,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -2866,7 +2866,7 @@
     "family": "LEGGINGS",
     "material": "GOLDEN_LEGGINGS",
     "itemLevel": 30,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 5,
       "PROJECTILE_PROTECTION": 4,
@@ -2884,7 +2884,7 @@
     "family": "SWORDS",
     "material": "GOLDEN_SWORD",
     "itemLevel": 30,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "SHARPNESS": 5,
       "KNOCKBACK": 2,
@@ -3498,7 +3498,7 @@
     "family": "BOOTS",
     "material": "GOLDEN_BOOTS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3514,7 +3514,7 @@
     "family": "BOOTS",
     "material": "GOLDEN_BOOTS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3530,7 +3530,7 @@
     "family": "BOOTS",
     "material": "GOLDEN_BOOTS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3546,7 +3546,7 @@
     "family": "BOOTS",
     "material": "GOLDEN_BOOTS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 4,
       "EARTHQUAKE": 2
@@ -3562,7 +3562,7 @@
     "family": "CHESTPLATES",
     "material": "GOLDEN_CHESTPLATE",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3578,7 +3578,7 @@
     "family": "CHESTPLATES",
     "material": "GOLDEN_CHESTPLATE",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3594,7 +3594,7 @@
     "family": "CHESTPLATES",
     "material": "GOLDEN_CHESTPLATE",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3610,7 +3610,7 @@
     "family": "CHESTPLATES",
     "material": "GOLDEN_CHESTPLATE",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 4,
       "EARTHQUAKE": 2
@@ -3626,7 +3626,7 @@
     "family": "HELMETS",
     "material": "GOLDEN_HELMET",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3642,7 +3642,7 @@
     "family": "HELMETS",
     "material": "GOLDEN_HELMET",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3658,7 +3658,7 @@
     "family": "HELMETS",
     "material": "GOLDEN_HELMET",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3674,7 +3674,7 @@
     "family": "HELMETS",
     "material": "GOLDEN_HELMET",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 4,
       "EARTHQUAKE": 2
@@ -3690,7 +3690,7 @@
     "family": "LEGGINGS",
     "material": "GOLDEN_LEGGINGS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3706,7 +3706,7 @@
     "family": "LEGGINGS",
     "material": "GOLDEN_LEGGINGS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3722,7 +3722,7 @@
     "family": "LEGGINGS",
     "material": "GOLDEN_LEGGINGS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 2,
       "EARTHQUAKE": 1
@@ -3738,7 +3738,7 @@
     "family": "LEGGINGS",
     "material": "GOLDEN_LEGGINGS",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "PROTECTION": 4,
       "EARTHQUAKE": 2
@@ -3754,7 +3754,7 @@
     "family": "AXES",
     "material": "GOLDEN_AXE",
     "itemLevel": null,
-    "scalability": "fixed",
+    "scalability": "scalable",
     "enchantments": {
       "FIRE_ASPECT": 5,
       "SHARPNESS": 1

@@ -71,7 +71,21 @@ Difficulty-neutral content includes Yggdrasil and older adventure/shrine items. 
 
 For a supported enchantment in a sufficiently sampled group, use `floor(medianPositive + 0.5)` as its level and observed prevalence rounded to the nearest 5% as its secondary occurrence chance. Guarantee the primary damage enchantment for baseline weapons. Use at least five positive samples before treating a group as independently estimated; otherwise fall back to the documented closest supported weapon family and rank. Keep every selected level/chance explicit and editable in the generated YAML.
 
-Enforce nondecreasing strength across normal/hard/mythic for the same item rule. Do not multiply these enchantment levels by combat level: scalable authored items retain their authored enchantments while item level determines the combat baseline. Keep native/implemented-effect caps for binary enchants, projectile-count changes and movement, while preserving the plugin's supported elite levels for damage and durability.
+Enforce nondecreasing strength across normal/hard/mythic for the same item rule.
+Do not multiply enchantment levels by combat level. The existing scalable path
+randomly consumes `ceil(total native enchantment levels / 2)` units from the
+authored pool without replacement; custom enchants retain their authored levels.
+Thus the YAML medians are authored ceilings, not typical generated enchantments.
+`modeledGeneratedStatistics` in `corpus.json` calculates the exact mixture of
+those hypergeometric distributions across equally weighted item definitions.
+For boss bows it predicts Power medians of 2/3/3 and means of 1.94/2.67/3.48;
+these are mathematical source-derived predictions, not measured gameplay drops.
+Keep this distinction explicit when setting the new profile roll policy. A
+profile that grants its full YAML values would be stronger than the legacy
+scalable path, even when the authored numbers match exactly.
+
+Keep native/implemented-effect caps for binary enchants, projectile-count changes
+and movement, while preserving supported elite levels for damage and durability.
 
 Wands/staves inherit the bow Power and durability baselines. Multicast, blast radius and ignition replace arrow-specific effects with their own configured levels and rarity; they have no observed DLC median and must be labeled as deliberate new balance defaults. Crossbows use their supported ranged equivalents. Maces/spears/scythes use their observed damage levels where supported and sword fallback for sparse ranks. Exact generated profiles are implementation work, not yet shipped by this report.
 
