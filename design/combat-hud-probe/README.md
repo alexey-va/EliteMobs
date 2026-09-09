@@ -61,8 +61,8 @@ F shows the three skill cards for the actual ability-selection window, then the 
 The existing F,F, F+LMB and F+RMB bindings keep working.
 Signature and Utility show a green F badge + a mouse pictogram with the left or right button
 highlighted in amber. The inactive button stays gray; no LMB/RMB lettering is
-needed. Mobility shows a green F followed by a white F, separated by an arrow.
-Green indicates the first input has already been pressed; white is the next
+needed. Mobility shows a green F followed by an orange F, separated by an arrow.
+Green indicates the first input has already been pressed; orange is the next
 input. The central badge switches to green for the selection window.
 
 Cards appear in Signature, Utility, Mobility order, without printed slot names.

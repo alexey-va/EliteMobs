@@ -170,10 +170,10 @@ function mouseButton(button,x,y) {
  return s;
 }
 function skillBinding(binding,x,y) {
- const badge=(bx,pressed)=>rect(bx+1,y,8,9,pressed?'#9beca3':'#f8faf9')
-  +rect(bx,y+1,10,7,pressed?'#9beca3':'#f8faf9')
-  +rect(bx+1,y+1,8,7,pressed?'#439b58':'#dbe1df')
-  +smallText('F',bx+3,y+2,pressed?'#f0fff2':'#435158');
+ const badge=(bx,pressed)=>rect(bx+1,y,8,9,pressed?'#9beca3':'#ffe0a0')
+  +rect(bx,y+1,10,7,pressed?'#9beca3':'#ffe0a0')
+  +rect(bx+1,y+1,8,7,pressed?'#439b58':'#ffc36b')
+  +smallText('F',bx+3,y+2,pressed?'#f0fff2':'#5a361b');
  const first=badge(x,true);
  if(binding==='double-f') return first+poly(`${x+13},${y+2} ${x+16},${y+4} ${x+13},${y+6}`,'#add9e4')
   +badge(x+20,false);
