@@ -50,6 +50,7 @@ const glyphs = {
 // Whole-pixel 3x5 lettering for the narrow skill cards. Fractional scaling drops strokes.
 const smallGlyphs = {
  A:['010','101','111','101','101'], B:['110','101','110','101','110'],
+ C:['111','100','100','100','111'], H:['101','101','111','101','101'],
  E:['111','100','110','100','111'], F:['111','100','110','100','100'],
  G:['111','100','101','101','111'], I:['111','010','010','010','111'],
  L:['100','100','100','100','111'], M:['101','111','111','101','101'],
@@ -57,6 +58,7 @@ const smallGlyphs = {
  R:['110','101','110','101','101'], S:['111','100','111','001','111'],
  T:['111','010','010','010','010'], U:['101','101','101','101','111'],
  Y:['101','101','010','010','010'], '+':['000','010','111','010','000'],
+ V:['101','101','101','101','010'],
  ',':['000','000','000','010','100'],
 };
 const rect=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
@@ -87,15 +89,15 @@ function panel(active){
  let s=rect(0,0,190,60,'#211c17')+rect(1,1,188,58,'#503925');
  for(let y=2;y<60;y+=3) for(let x=2;x<188;x+=13) s+=rect(x,y,5+((x*7+y)%7),1,(x+y)%2?'#62472d':'#352a20');
  s+=rect(0,0,190,1,active?'#ffe099':'#b08e5d')+rect(0,0,1,60,'#957244')+rect(189,0,1,60,'#171712');
- s+=frame(4,3,89,26,active)+frame(97,3,89,26,active)+heart(8,9)+crystal(101,8);
- for(const x of [24,116]) s+=rect(x,20,65,5,'#080c0f')+rect(x+1,21,63,3,x<90?'#471c26':'#073e4b');
+ s+=frame(4,3,89,26,active)+frame(97,3,89,26,active)+heart(8,11)+crystal(102,9);
+ for(const x of [24,117]) s+=rect(x,22,65,5,'#080c0f')+rect(x+1,23,63,3,x<90?'#471c26':'#073e4b');
  s+=rect(4,30,182,6,'#17191a')+rect(4,30,182,1,'#806944')+rect(5,32,180,2,'#183123')+rect(5,35,180,1,'#392d21');
  if(active){
   const names=['MOBILITY','SIGNATURE','UTILITY']; const keys=['F , F','F + LMB','F + RMB'];
-  for(let i=0;i<3;i++){const x=4+i*61;s+=frame(x,37,60,23,true)+icon(i,x+3,41)+smallText(names[i],x+19,40,'#eee4cb')+smallText(keys[i],x+19,50,'#add9e4');}
+  for(let i=0;i<3;i++){const x=4+i*61;s+=frame(x,38,60,21,true)+icon(i,x+3,41)+smallText(names[i],x+19,41,'#eee4cb')+smallText(keys[i],x+19,50,'#add9e4');}
  } else {
   // The whole vanilla hotbar remains visible, including item counts and selected-slot border.
-  s+=`<rect x="4" y="37" width="182" height="23" fill="black"/>`;
+  s+=`<rect x="3" y="37" width="184" height="23" fill="black"/>`;
  }
  for(const x of [1,187]) for(const y of [2,56]) s+=rect(x,y,2,2,active?'#f4cb79':'#be9b62')+rect(x,y,1,1,'#ffebac');
  return s;
@@ -103,12 +105,19 @@ function panel(active){
 (async()=>{
  for(const [name,active] of [['gray',false],['red',true]]){
   let body=panel(active);
-  if(!active)body=`<defs><mask id="m">${rect(0,0,190,60,'white')}${rect(4,37,182,23,'black')}</mask></defs><g mask="url(#m)">${body}</g>`;
+  if(!active)body=`<defs><mask id="m">${rect(0,0,190,60,'white')}${rect(3,37,184,23,'black')}</mask></defs><g mask="url(#m)">${body}</g>`;
   fs.writeFileSync(path.join(__dirname,`${name}.svg`),svg(190,60,body));
   await sharp(Buffer.from(svg(190,60,body))).png().toFile(path.join(textures,name+'.png'));
  }
  const alphabet='0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
  await sharp(Buffer.from(svg(alphabet.length*6,7,text(alphabet,0,0,'#ffffff')))).png().toFile(path.join(textures,'text.png'));
+ // Five visible rows plus two transparent rows: no fractional resampling, and
+ // enough provider height for the full supported ascent range.
+ let labels='';
+ [...alphabet].forEach((c,i)=>{if(smallGlyphs[c]) labels+=smallText(c,i*4,0,'#ffffff');});
+ for(const name of ['HEALTH','ENERGY','MANA','RESOLVE','GRACE','FOCUS','FURY'])
+  for(const c of name) if(!smallGlyphs[c]) throw new Error(`Missing resource label glyph ${c}`);
+ await sharp(Buffer.from(svg(alphabet.length*4,7,labels))).png().toFile(path.join(textures,'labels.png'));
  for(const [name,color,h] of [['health','#ed3f57',3],['resource','#16cbe4',3],['xp','#74b941',2]])
   await sharp(Buffer.from(svg(1,h,rect(0,0,1,h,color)))).png().toFile(path.join(textures,name+'.png'));
  for(let y=-16;y<=16;y++){
@@ -118,8 +127,8 @@ function panel(active){
   };
   const providers=[{type:'space',advances:{'\ue100':1,'\ue101':-1}},
     bitmap('gray',60,-5,'\ue000'),bitmap('red',60,-5,'\ue001'),
-    bitmap('text',7,-16,alphabet),bitmap('text',6,-10,[...alphabet].map((c,i)=>String.fromCodePoint(0xe200+i)).join('')),
-    bitmap('health',3,-26,'\ue110'),bitmap('resource',3,-26,'\ue111'),bitmap('xp',2,-37,'\ue112')];
+    bitmap('text',7,-18,alphabet),bitmap('labels',7,-11,[...alphabet].map((c,i)=>String.fromCodePoint(0xe200+i)).join('')),
+    bitmap('health',3,-28,'\ue110'),bitmap('resource',3,-28,'\ue111'),bitmap('xp',2,-37,'\ue112')];
   fs.writeFileSync(path.join(fonts,`combat_hud_concept_${y+16}.json`),JSON.stringify({providers},null,2)+'\n');
  }
  console.log('Generated live HUD concept textures and 33 offset fonts.');

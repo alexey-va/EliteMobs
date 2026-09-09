@@ -45,7 +45,9 @@ the intended panel bounds are `[center-95, center+95)` horizontally and
 `[guiHeight-60, guiHeight)` vertically. The bitmap's extra one-pixel advance is
 cancelled with a negative space. Shadows are disabled on the component.
 
-The 182-pixel hotbar fits with four pixels of margin on each side. The height
+The 182-pixel hotbar sits four pixels from each side. Its 184-pixel selection
+outline has a transparent aperture starting at x=3, y=37, including both outer
+edges when the first or last slot is selected. The height
 also covers the usual XP, health, hunger and armor rows, with extra room above.
 Extra health/absorption rows and the offhand slot can extend outside this area.
 Minecraft GUI scale multiplies the panel and vanilla HUD together. Text
@@ -64,3 +66,45 @@ cards in the same bounds, then restored the hotbar. Resolve values and bar width
 increased together during passive regeneration. Final captures are retained in
 the workspace at `_triage/hud-concept-20260909/normal.png` and `active.png`.
 The final pack loaded without font errors. Bedrock has not been checked.
+
+### Alignment grid
+
+All coordinates below are relative to the panel's top-left corner, in GUI
+pixels. Rectangles use exclusive right and bottom edges. The font uses whole
+pixels throughout, with no fractional scaling.
+
+| Element | X | Y | Width | Height |
+| --- | ---: | ---: | ---: | ---: |
+| Health card | 4 | 3 | 89 | 26 |
+| Resource card | 97 | 3 | 89 | 26 |
+| Health label | 25 | 6 | 23 | 5 |
+| Resource label | 118 | 6 | up to 27 | 5 |
+| Health counter | 25 | 13 | up to 53 | 7 |
+| Resource counter | 118 | 13 | up to 53 | 7 |
+| Health fill | 25 | 23 | up to 63 | 3 |
+| Resource fill | 118 | 23 | up to 63 | 3 |
+| XP fill | 5 | 32 | up to 180 | 2 |
+| Native hotbar opening | 3 | 37 | 184 | 23 |
+| Mobility card | 4 | 38 | 60 | 21 |
+| Signature card | 65 | 38 | 60 | 21 |
+| Utility card | 126 | 38 | 60 | 21 |
+
+Labels occupy rows 6 through 10, followed by two empty rows. Counters occupy
+rows 13 through 19, followed by two empty rows before the trough at row 22.
+Each fill is inset one pixel inside its trough. Both stat cards use identical
+text and bar insets. Skill icons start at card x+3, y=41; labels at x+19, y=41;
+bindings at x+19, y=50. Skill frames end at row 58, reserving row 59 for the
+outer panel and avoiding clipping when the framebuffer height is not an exact
+multiple of the GUI scale.
+
+The alignment revision was deployed and checked on NBTest on 2026-09-09.
+Native F2 capture at 3840x2071, GUI scale 8, placed the panel at framebuffer
+1160,1592. Pixel-color measurements matched the coordinates above exactly:
+label rows 6..10, counter rows 13..19, fills 23..25, skill labels 41..45,
+and bindings 50..54. Both end-slot selection outlines were inspected in the
+real client. The F capture shows all three cards with their bottom borders
+inside the panel. Evidence is retained at
+`_triage/hud-alignment-20260909/active-native.png`, `normal.png`,
+`first-slot.png`, `last-slot.png`, and `measurements.json` in the workspace.
+The deployed jar SHA-256 is
+`d3b92d389b05382b9825bcba2be8bdc058d3df124016de5047b1ac780fc39d4a`.
