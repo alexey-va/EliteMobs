@@ -125,13 +125,18 @@ function panel(active){
  }
  const alphabet='0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
  await sharp(Buffer.from(svg(alphabet.length*6,7,text(alphabet,0,0,'#ffffff')))).png().toFile(path.join(textures,'text.png'));
- // Five visible rows plus two transparent rows: no fractional resampling, and
- // enough provider height for the full supported ascent range.
- let labels='';
- [...alphabet].forEach((c,i)=>{if(smallGlyphs[c]) labels+=smallText(c,i*4,0,'#ffffff');});
- for(const name of ['HEALTH','ENERGY','MANA','RESOLVE','GRACE','FOCUS','FURY'])
-  for(const c of name) if(!smallGlyphs[c]) throw new Error(`Missing resource label glyph ${c}`);
- await sharp(Buffer.from(svg(alphabet.length*4,7,labels))).png().toFile(path.join(textures,'labels.png'));
+ // Double-resolution labels: 6x10 source pixels still occupy 3x5 GUI pixels.
+ // The 8x14 cells render at font height 7, preserving the four-pixel advance
+ // and all existing anchors. Finer strokes distinguish M/N at larger GUI scales.
+ const labelLayers=[];
+ for(const [i,c] of [...alphabet].entries()) {
+  if(!glyphs[c]) throw new Error(`Missing label glyph ${c}`);
+  const input=await sharp(Buffer.from(svg(5,7,text(c,0,0,'#ffffff'))))
+   .resize(6,10,{kernel:'nearest',fit:'fill'}).png().toBuffer();
+  labelLayers.push({input,left:i*8,top:0});
+ }
+ await sharp({create:{width:alphabet.length*8,height:14,channels:4,background:'#00000000'}})
+  .composite(labelLayers).png().toFile(path.join(textures,'labels.png'));
  for(const [name,color,h] of [['health','#ed3f57',3],['resource','#16cbe4',3],['xp','#74b941',2]])
   await sharp(Buffer.from(svg(1,h,rect(0,0,1,h,color)))).png().toFile(path.join(textures,name+'.png'));
  for(let y=-16;y<=16;y++){

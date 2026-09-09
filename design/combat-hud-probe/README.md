@@ -70,8 +70,12 @@ The final pack loaded without font errors. Bedrock has not been checked.
 ### Alignment grid
 
 All coordinates below are relative to the panel's top-left corner, in GUI
-pixels. Rectangles use exclusive right and bottom edges. The font uses whole
-pixels throughout, with no fractional scaling.
+pixels. Rectangles use exclusive right and bottom edges. Frames, numbers and
+bars use whole GUI pixels. Resource labels use double-resolution artwork:
+6x10 texture pixels render within the same 3x5 GUI-pixel letter bounds, with
+the existing four-pixel character advance. This gives M and N distinct shapes
+and finer strokes without enlarging labels or moving their anchors. At GUI
+scale 1, the finer detail is limited by the available framebuffer pixels.
 
 | Element | X | Y | Width | Height |
 | --- | ---: | ---: | ---: | ---: |
