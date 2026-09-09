@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: BOOK
+powers:
+  - class_trial_occultist.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: occultist
-  title: What the Shadow Outlines
-  power: class_trial_occultist.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: Darkness is useful because people stop looking carefully.
-    halfway: You are still looking. Let us change what you are looking at.
-    victory: You saw the outline and ignored the theatrics. Sensible.
-    defeat: The dark center was not the important part. Its edges were.

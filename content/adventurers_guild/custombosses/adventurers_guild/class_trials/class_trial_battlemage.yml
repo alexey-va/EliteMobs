@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: BOOK
+powers:
+  - class_trial_battlemage.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: battlemage
-  title: The Rune Behind the Blade
-  power: class_trial_battlemage.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: The rune supports the blade. It does not lengthen my arm.
-    halfway: Another angle. The sword still has to finish its swing.
-    victory: You separated the spell's promise from the blade's reach.
-    defeat: You could have crossed behind the committed sweep.

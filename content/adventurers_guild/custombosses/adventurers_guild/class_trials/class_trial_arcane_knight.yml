@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: SHIELD
+powers:
+  - class_trial_arcane_knight.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: arcane_knight
-  title: Break the Cast, Keep the Guard
-  power: class_trial_arcane_knight.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: A guard can answer a spell. It must still be raised in time.
-    halfway: Watch the return to my companion. That is where the pulse begins.
-    victory: You found the cast before the guard could answer it.
-    defeat: The pulse needed time and nearby company. You could deny either.

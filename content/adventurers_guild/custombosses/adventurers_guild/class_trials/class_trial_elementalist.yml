@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: BOOK
+powers:
+  - class_trial_elementalist.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: elementalist
-  title: Three Different Answers
-  power: class_trial_elementalist.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: Three elements. Three questions. One answer will not suit them all.
-    halfway: A different order. Read the runes before the first release.
-    victory: You changed your answer when the question changed.
-    defeat: The runes gave you the order; the shapes gave you the response.

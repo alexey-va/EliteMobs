@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: BOOK
+powers:
+  - class_trial_spellblade.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: spellblade
-  title: The Gap Between Cuts
-  power: class_trial_spellblade.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: Quick hands still need a rhythm. Listen for the gap.
-    halfway: Keep the rhythm. I am changing only where it begins.
-    victory: You let the last thrust pass and answered the space it left.
-    defeat: Retreating down the line kept all three thrusts in play.

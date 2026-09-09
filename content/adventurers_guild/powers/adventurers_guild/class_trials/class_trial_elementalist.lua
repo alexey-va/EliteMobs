@@ -1,47 +1,65 @@
--- @include shared.inc
--- @include mobility/spellcaster.inc
--- @include abilities/spellcaster.inc
+-- @include ground_markers.inc
+-- @include mobility/arcane_blink.inc
 
-local colors={fire=S.fire,frost=S.ice,lightning=S.violet}
-local function runes(c,s)
- local p=c.trial:position()
- for i,element in ipairs(s.order) do
-  local q=T.offset(p,(i-2)*1.5,1.2,0)
-  if element=='fire' then T.draw(c,T.circle(q,.3),colors[element])
-  elseif element=='frost' then T.draw(c,T.lane(T.offset(q,-.4,0,0),T.offset(q,.4,0,0),.15),colors[element])
-  else for j=0,4 do T.point(c,T.offset(q,j%2*.3,j*.18,0),colors[element]) end end
- end
+-- Each element has its own marked area. The order changes once, at half health.
+-- Exposure empowers one full sequence, then the long recovery exposes the caster.
+local colors={{245,110,45},{100,200,245},{185,115,245}}
+local function prepare_element(c,player)
+ local s=c.state; s.element=s.order[s.sequence]; local p=c.boss:get_location(); local q=player:get_location()
+ if s.element==1 then s.zone=ground_circle(c,q,3)
+ elseif s.element==2 then s.zone=forward_cone(c,p,q,8,3)
+ else s.zone=forward_cone(c,p,q,12,.8) end
+ s.fireAt=s.tick+28; c.boss:play_sound_at_self('BLOCK_AMETHYST_BLOCK_CHIME',.6,.5+s.element*.4)
 end
-local function convergence(c,s)
- local steps={}; local budget={cap=1.1,spent=0}
- for _,element in ipairs(s.order) do local shape,origin,direction,hit
-  steps[#steps+1]=T.wait(28,function(c,s)
-   origin=c.trial:position(); local target=c.trial.player:get_location(); local x,z=T.direction(origin,target); direction={x=x,z=z}
-   if element=='fire' then shape=T.circle(target,3)
-   elseif element=='lightning' then shape=T.lane(origin,T.offset(origin,x*12,0,z*12),2)
-   else shape=T.lane(T.offset(origin,z*3,0,-x*3),T.offset(origin,-z*3,0,x*3),1.5) end
-   T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',element=='fire' and .7 or element=='frost' and 1 or 1.5)
-  end,function(c,s,t) if t%3==0 then T.draw(c,shape,colors[element]); runes(c,s) end end,
-  function(c,s)
-   if element~='frost' then local boosted=s.exposureReady and 1.1 or 1; if T.budgetHit(c,s,shape,.45*boosted,budget) then s.exposureReady=false end end
-  end)
-  if element=='frost' then steps[#steps+1]=T.wait(16,nil,function(c,s,t)
-   local p=T.offset(origin,direction.x*t*.5,0,direction.z*t*.5)
-   shape=T.lane(T.offset(p,direction.z*3,0,-direction.x*3),T.offset(p,-direction.z*3,0,direction.x*3),1.5)
-   if t%2==0 then T.draw(c,shape,S.ice) end
-   if not hit and T.budgetHit(c,s,shape,.45*(s.exposureReady and 1.1 or 1),budget) then hit=true; s.exposureReady=false; c.trial:slow_player(.15,10) end
-  end) end
-  steps[#steps+1]=T.rest(16)
- end
- steps[#steps+1]=T.rest(70); return steps
-end
-return T.encounter{
- init=function(c,s) S.init(c,s,'STAFF'); s.order={'fire','frost','lightning'}; s.exposureReady=false end,
- passive=S.passive,damaged=S.damage,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'blink') then s.phasePending=false; s.order={'frost','lightning','fire'}; s.ready.exposure=s.tick; T.start(c,s,'blink',M.move(c,s),M.cooldown)
-  elseif T.ready(s,'exposure') then T.start(c,s,'exposure',{T.wait(32,function(c,s)  end,function(c,s,t) if t%3==0 then runes(c,s) end end,function(c,s) s.exposureReady=true end),T.rest(12)},480)
-  elseif T.ready(s,'convergence') then T.start(c,s,'convergence',convergence(c,s),520)
-  else S.basic(c,s) end
- end
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.order={1,2,3}; s.nextExposure=40; s.nextSequence=110
+   player:send_message('&6Elementalist Instructor: &fFire gathers. Frost spreads. Lightning holds a narrow line.')
+  end
+  if s.fireAt then
+   local color=colors[s.element]
+   if s.tick%4==0 then show_circle(c,s.zone,color[1],color[2],color[3]) end
+   if s.tick>=s.fireAt then
+    c.script:damage(s.zone:full_target(),1,s.empowered and .5 or .45)
+    if s.element==2 then
+     local p=player:get_location(); p.y=p.y+.75
+     if s.zone:contains(p) then player:apply_potion_effect('SLOWNESS',20,0) end
+    end
+    s.fireAt=nil; s.betweenAt=s.tick+16
+   end
+   return
+  end
+  if s.betweenAt then
+   if s.tick>=s.betweenAt then
+    s.betweenAt=nil; s.sequence=s.sequence+1
+    if s.sequence<=3 then prepare_element(c,player)
+    else s.empowered=false; s.exposedUntil=s.tick+70; s.busyUntil=s.tick+70 end
+   end
+   return
+  end
+  if s.exposureAt then
+   if s.tick%4==0 then c.boss:spawn_particle_at_self({particle='ENCHANT',amount=8},1) end
+   if s.tick>=s.exposureAt then s.exposureAt=nil; s.empowered=true; s.busyUntil=s.tick+12 end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; s.order={2,3,1}
+   player:send_message('&6Elementalist Instructor: &fNow frost leads, lightning follows, and fire has the last word.')
+   if arcane_blink(c,player) then s.busyUntil=s.tick+46; return end
+  end
+  if s.tick>=s.nextExposure then
+   s.nextExposure=s.tick+480; s.exposureAt=s.tick+32; pause_movement(c,44)
+  elseif s.tick>=s.nextSequence then
+   s.nextSequence=s.tick+520; s.sequence=1; prepare_element(c,player); pause_movement(c,202)
+  end
+ end,
+ on_boss_damaged_by_player=function(c)
+  if (c.state.exposedUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.2) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Elementalist Instructor: &fYou read each element on its own terms. Keep that patience.',24) end
 }

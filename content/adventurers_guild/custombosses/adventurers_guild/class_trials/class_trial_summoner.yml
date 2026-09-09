@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: BOOK
+powers:
+  - class_trial_summoner.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: summoner
-  title: Who Gives the Order
-  power: class_trial_summoner.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: A summon is a companion with a task. Watch who gives the order.
-    halfway: We will try another angle. The command still needs its focus.
-    victory: You understood the partnership, and interrupted it intelligently.
-    defeat: The sigil was helping the wolf more than another hurried swing helped you.

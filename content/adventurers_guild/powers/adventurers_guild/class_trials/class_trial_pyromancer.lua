@@ -1,42 +1,64 @@
--- @include shared.inc
--- @include mobility/spellcaster.inc
--- @include abilities/spellcaster.inc
+-- @include ground_markers.inc
+-- @include mobility/arcane_blink.inc
 
-local function removeFire(c,s,broken)
- s.fire=nil; s.brazierUntil=0; c.trial:remove_actor('brazier')
- if broken then T.sound(c,'BLOCK_GLASS_BREAK',.8); c.trial:say('The source, exactly.'); S.recover(c,s,60,1.2) end
-end
-local function flashover(c,s)
- local location
- return {T.wait(30,function(c,s) location=T.copy(c.trial.player:get_location()); T.sound(c,'ENTITY_BLAZE_AMBIENT',.8) end,
-  function(c,s,t) if t%4==0 then for i=1,3 do local a=i*math.pi*2/3; T.point(c,T.offset(location,math.cos(a),.4,math.sin(a)),S.fire) end end end,
-  function(c,s) local prop=S.prop(c,'brazier',location,2,'&6Ember Brazier','CAMPFIRE'); if prop then s.brazierUntil=s.tick+140 end end),T.rest(12)}
-end
-local function inferno(c,s)
- local shape; local steps={T.wait(36,function(c,s) local prop=c.trial:actor('brazier'); if prop then shape=T.circle(prop:get_location(),4) end;  end,
-  function(c,s,t) if shape and t%4==0 then T.draw(c,shape,S.fire) end end,
-  function(c,s) if shape and c.trial:actor('brazier') then s.fire={shape=shape,expires=s.tick+80,nextPulse=s.tick,budget={cap=1,spent=0}}; s.brazierUntil=s.tick+80 end end)}
- if s.phase==2 then T.append(steps,M.move(c,s)) end
- steps[#steps+1]=T.untilDone(80,nil,nil,nil,function(c,s) return s.fire==nil end)
- steps[#steps+1]=T.rest(50); return steps
-end
-return T.encounter{
- init=function(c,s) S.init(c,s,'STAFF'); s.brazierUntil=0 end,
- passive=function(c,s)
-  S.passive(c,s)
-  if s.brazierUntil>0 then
-   if not c.trial:actor('brazier') then removeFire(c,s,true)
-   elseif s.tick>=s.brazierUntil then removeFire(c,s,false)
-   elseif s.fire then
-    if s.tick%4==0 then T.draw(c,s.fire.shape,S.fire) end
-    if s.tick>=s.fire.nextPulse then T.budgetHit(c,s,s.fire.shape,.3,s.fire.budget); s.fire.nextPulse=s.tick+20 end
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextBrazier=45
+   player:send_message('&6Pyromancer Instructor: &fThe brazier feeds the flame. You can put an end to both.')
+  end
+  if s.brazier then
+   if not s.brazier:is_alive() or s.tick>=s.brazierUntil then
+    local broken=not s.brazier:is_alive()
+    if not broken then s.brazier:remove_elite() end
+    s.brazier=nil; s.fireUntil=0; s.igniteAt=nil
+    if broken then
+     s.exposedUntil=s.tick+60; s.busyUntil=s.tick+60; pause_movement(c,60)
+     player:send_message('&6Pyromancer Instructor: &fThe source, exactly. Fire needs something to feed it.')
+    end
+   elseif (s.fireUntil or 0)>s.tick then
+    if s.tick%4==0 then show_circle(c,s.fire,245,115,40) end
+    if s.tick>=s.nextPulse then
+     s.nextPulse=s.tick+20; c.script:damage(s.fire:full_target(),1,.25)
+     s.brazier:spawn_particle_at_self({particle='FLAME',amount=8},1)
+    end
    end
   end
- end,damaged=S.damage,
- choose=function(c,s)
-  if s.phasePending then s.phasePending=false end
-  if c.trial:actor('brazier') and not s.fire and T.ready(s,'inferno') then T.start(c,s,'inferno',inferno(c,s),480)
-  elseif not c.trial:actor('brazier') and T.ready(s,'flashover') then T.start(c,s,'flashover',flashover(c,s),440)
-  else S.basic(c,s) end
- end
+  if s.summonAt then
+   if s.tick%4==0 then show_circle(c,s.marker,245,180,80) end
+   if s.tick>=s.summonAt then
+    s.summonAt=nil; s.brazier=c.world:spawn_custom_boss_at_location('class_trial_ember_brazier.yml',s.anchor,
+     {level=c.boss.level,add_as_reinforcement=true,silent=true})
+    assert(s.brazier,'Ember Brazier could not spawn'); s.brazierUntil=s.tick+140; s.busyUntil=s.tick+12
+   end
+   return
+  end
+  if s.igniteAt then
+   if s.tick%4==0 then show_circle(c,s.fire,245,115,40) end
+   if s.tick>=s.igniteAt then
+    s.igniteAt=nil; s.fireUntil=s.tick+80; s.brazierUntil=s.fireUntil; s.nextPulse=s.tick; s.busyUntil=s.tick+130
+    if s.phaseTwo then arcane_blink(c,player) end
+   end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; player:send_message('&6Pyromancer Instructor: &fI can leave the fire behind. Can you?')
+  end
+  if s.brazier and (s.fireUntil or 0)<=s.tick then
+   s.fire=ground_circle(c,s.anchor,4); s.igniteAt=s.tick+36; pause_movement(c,166)
+   c.boss:play_sound_at_self('ITEM_FIRECHARGE_USE',.6,.8)
+  elseif not s.brazier and s.tick>=s.nextBrazier then
+   s.nextBrazier=s.tick+440; s.anchor=player:get_location(); s.marker=ground_circle(c,s.anchor,1)
+   s.summonAt=s.tick+30; pause_movement(c,42)
+   c.boss:play_sound_at_self('ENTITY_BLAZE_AMBIENT',.5,.8)
+  end
+ end,
+ on_boss_damaged_by_player=function(c)
+  if (c.state.exposedUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.2) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Pyromancer Instructor: &fYou kept your head while the ground burned. That matters more than heat.',24) end
 }

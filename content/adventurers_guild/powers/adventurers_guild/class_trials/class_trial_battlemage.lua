@@ -1,29 +1,60 @@
--- @include shared.inc
--- @include mobility/spellcaster.inc
--- @include abilities/spellcaster.inc
+-- @include ground_markers.inc
+-- @include mobility/arcane_blink.inc
 
-local function cleave(c,s)
- local shape
- return {T.wait(30,function(c,s)  T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.1) end,
-  function(c,s,t) if not shape or t<18 then shape=T.cone(c.trial:position(),c.trial.player:get_location(),4,80); c.trial:face(c.trial.player:get_location(),8) end
-   if t%3==0 then T.draw(c,shape); S.blade(c,shape) end end,
-  function(c,s)  if T.hit(c,shape,.85) then S.ward(c,s,'boss',1,60) end end),T.rest(56)}
-end
-return T.encounter{
- init=function(c,s) S.init(c,s); s.guardHits=0; s.guardUntil=0 end,
- passive=function(c,s) S.passive(c,s); if s.guardUntil>s.tick and s.guardHits>0 and s.tick%5==0 then T.eye(c,c.trial:position()) end end,
- damaged=function(c,s)
-  if c.trial:damaged_actor()~='boss' then return end
-  local damage=c.event.get_damage_amount(); local ward=s.wards.boss
-  if s.guardUntil>s.tick and s.guardHits>0 and (not ward or ward.remaining<damage*.4) then
-   c.event.multiply_damage_amount(.6); s.guardHits=s.guardHits-1
-   if s.guardHits==0 then s.wards.boss=nil; S.recover(c,s,50,1.2) end
-  else S.damage(c,s) end
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextGuard=40; s.nextCleave=100
+   player:send_message('&6Battlemage Instructor: &fThe blade feeds the ward only if it finds you. Keep outside the sweep.')
+  end
+  if (s.wardUntil or 0)<=s.tick then s.ward=0 end
+  if (s.guardUntil or 0)>s.tick and (s.guardHits or 0)>0 and s.tick%6==0 then c.boss:spawn_particle_at_self({particle='ENCHANT',amount=6},1) end
+  if s.cleaveAt then
+   if s.tick<s.cleaveAt-12 then s.zone=forward_cone(c,c.boss:get_location(),player:get_location(),4,2.5) end
+   if s.tick%4==0 then show_circle(c,s.zone,170,120,245) end
+   if s.tick>=s.cleaveAt then
+    s.cleaving=true; c.script:damage(s.zone:full_target(),1,.85); s.cleaving=false
+    s.cleaveAt=nil; s.busyUntil=s.tick+56; c.boss:play_sound_at_self('ENTITY_PLAYER_ATTACK_SWEEP',.6,.8)
+   end
+   return
+  end
+  if s.guardAt then
+   if s.tick%4==0 then c.boss:spawn_particle_at_self({particle='ENCHANT',amount=6},1) end
+   if s.tick>=s.guardAt then s.guardAt=nil; s.guardHits=2; s.guardUntil=s.tick+80; s.busyUntil=s.tick+20 end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; player:send_message('&6Battlemage Instructor: &fTwo guarded blows. Count them, then commit.')
+   if arcane_blink(c,player) then s.busyUntil=s.tick+46; return end
+  end
+  if s.tick>=s.nextGuard then
+   s.nextGuard=s.tick+400; s.guardAt=s.tick+28; pause_movement(c,48)
+   c.boss:play_sound_at_self('BLOCK_AMETHYST_BLOCK_RESONATE',.6,1.1)
+  elseif s.tick>=s.nextCleave then
+   s.nextCleave=s.tick+320; s.cleaveAt=s.tick+30
+   s.zone=forward_cone(c,c.boss:get_location(),player:get_location(),4,2.5); pause_movement(c,86)
+  end
  end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'blink') then s.phasePending=false; T.start(c,s,'blink',M.move(c,s,T.rotate(c.trial.player:get_location(),c.trial:position(),90,3)),M.cooldown)
-  elseif T.ready(s,'guard') then T.start(c,s,'guard',{T.wait(28,function(c,s)  end,function(c,s,t) if t%4==0 then T.eye(c,c.trial:position()) end end,function(c,s) s.guardHits=2; s.guardUntil=s.tick+80 end),T.rest(20)},400)
-  elseif T.ready(s,'cleave') then if not T.approach(c,s,3) then T.start(c,s,'cleave',cleave(c,s),320) end
-  else S.basic(c,s) end
- end
+ on_player_damaged_by_boss=function(c)
+  if c.state.cleaving and c.event.get_damage_amount()>0 then
+   c.state.ward=c.boss:get_maximum_health()*.04; c.state.wardUntil=c.state.tick+60
+  end
+ end,
+ on_boss_damaged_by_player=function(c)
+  local s=c.state; local amount=c.event.get_damage_amount(); if amount<=0 then return end
+  if (s.ward or 0)>0 then
+   local used=math.min(amount,s.ward); s.ward=s.ward-used; c.event.multiply_damage_amount((amount-used)/amount)
+  elseif (s.guardUntil or 0)>(s.tick or 0) and (s.guardHits or 0)>0 then
+   s.guardHits=s.guardHits-1; c.event.multiply_damage_amount(.6)
+   if s.guardHits==0 then
+    s.exposedUntil=(s.tick or 0)+50; s.busyUntil=s.exposedUntil; s.cleaveAt=nil; pause_movement(c,50)
+    c.boss:play_sound_at_self('BLOCK_GLASS_BREAK',.6,1.2)
+   end
+  elseif (s.exposedUntil or 0)>(s.tick or 0) then c.event.multiply_damage_amount(1.2) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Battlemage Instructor: &fSteel and spell both need an opening. You found ours.',24) end
 }

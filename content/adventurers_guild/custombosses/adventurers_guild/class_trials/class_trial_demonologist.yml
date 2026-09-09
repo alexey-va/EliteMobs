@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:6B263B
 leggings: LEATHER_LEGGINGS:6B263B
 boots: LEATHER_BOOTS:6B263B
 offHand: BOOK
+powers:
+  - class_trial_demonologist.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: demonologist
-  title: Read the Price
-  power: class_trial_demonologist.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: Power has a price. You are welcome to collect mine.
-    halfway: A larger promise. The same unpleasant terms.
-    victory: You read the cost before admiring the power. A useful habit.
-    defeat: The broken shield told you who was paying for that pact.

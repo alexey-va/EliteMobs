@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:79ADBB
 leggings: LEATHER_LEGGINGS:79ADBB
 boots: LEATHER_BOOTS:79ADBB
 offHand: BOOK
+powers:
+  - class_trial_spiritbinder.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: spiritbinder
-  title: Separate the Guardians
-  power: class_trial_spiritbinder.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: Protection is a relationship. Watch the distance it can survive.
-    halfway: We have moved apart. That is a choice you can use.
-    victory: You found the point where shared strength became a strained bond.
-    defeat: The lantern and the tether both gave you a way to separate us.

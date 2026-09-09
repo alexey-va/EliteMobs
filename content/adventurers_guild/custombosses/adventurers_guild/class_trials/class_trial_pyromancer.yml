@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:C44D24
 leggings: LEATHER_LEGGINGS:C44D24
 boots: LEATHER_BOOTS:C44D24
 offHand: BOOK
+powers:
+  - class_trial_pyromancer.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: pyromancer
-  title: Leave the Kindling
-  power: class_trial_pyromancer.lua
-  actors:
-    HUSK: class_trial_actor_pyromancer_partner.yml
-  voice:
-    opening: Fire is very persuasive. You are still allowed to leave.
-    halfway: You have learned to leave the heat. Now consider its source.
-    victory: A fine answer. No wasted steps, and very little singeing.
-    defeat: The brazier fed the flame. It was not merely decoration.

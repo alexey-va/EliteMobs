@@ -1,0 +1,9 @@
+extends: class_trial_actor_base.yml
+isEnabled: true
+entityType: HUSK
+disguise: ARMOR_STAND
+name: '&dSpell Echo'
+healthMultiplier: 0.15
+damageMultiplier: 0
+ai: false
+helmet: AMETHYST_BLOCK

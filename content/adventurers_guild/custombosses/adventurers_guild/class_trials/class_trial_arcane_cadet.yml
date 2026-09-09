@@ -1,0 +1,10 @@
+extends: class_trial_actor_spellcaster_partner.yml
+isEnabled: true
+name: '&dArcane Cadet'
+healthMultiplier: 0.4
+damageMultiplier: 0.2
+ai: true
+mainHand: IRON_SWORD
+chestplate: CHAINMAIL_CHESTPLATE
+leggings: CHAINMAIL_LEGGINGS
+boots: CHAINMAIL_BOOTS

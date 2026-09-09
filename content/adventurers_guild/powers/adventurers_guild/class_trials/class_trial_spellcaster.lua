@@ -1,38 +1,53 @@
--- @include shared.inc
--- @include mobility/spellcaster.inc
--- @include abilities/spellcaster.inc
+-- @include ground_markers.inc
+-- @include mobility/arcane_blink.inc
+-- @include abilities/arcane_bolt.inc
 
-local function bolt(c,s)
- return T.aimShot(c,s,{kind='SNOWBALL',damage=.65,windup=24,lock=10,recovery=26,speed=.7})
-end
-local function ward(c,s)
- return {
-   T.wait(28,function(c,s)  T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',.8) end,
-     function(c,s,t) if t%4==0 then for i=1,3 do local a=i*math.pi*2/3; T.point(c,T.offset(c.trial:position(),math.cos(a)*1.2,.5+i*.2,math.sin(a)*1.2),T.gold) end end end,
-     function(c,s) s.ward=2*c.trial.matched_hit; s.wardActive=true end),
-   T.wait(80,nil,function(c,s,t) if s.wardActive and t%5==0 then T.draw(c,T.circle(c.trial:position(),1.3),T.gold) end end,
-     function(c,s) s.ward=0; s.wardActive=false;  end),
-   T.rest(26)
- }
-end
-return T.encounter{
- init=function(c,s) s.ward=0; s.wardActive=false end,
- choose=function(c,s)
-   if s.phasePending and T.ready(s,'ward') then
-     s.phasePending=false; local seq=bolt(c,s); T.append(seq,bolt(c,s)); T.append(seq,ward(c,s));
-     T.append(seq,{T.wait(1,nil,nil,function(c,s) s.ready.bolt=s.tick+140 end)}); T.start(c,s,'ward',seq,360)
-   elseif T.distance(c.trial:position(),c.trial.player:get_location())<5 and T.ready(s,'blink') then T.start(c,s,'blink',M.move(c,s),M.cooldown)
-   elseif T.ready(s,'bolt') then T.start(c,s,'bolt',bolt(c,s),140)
-   elseif T.ready(s,'ward') then T.start(c,s,'ward',ward(c,s),360)
-   else T.basic(c,s,'magic') end
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextBolt=40; s.nextWard=180; s.nextBlink=300
+   player:send_message('&6Spellcaster Instructor: &fWatch the aim settle. A spell is only dangerous where it lands.')
+  end
+  if (s.wardUntil or 0)<=s.tick then s.ward=0 end
+  if (s.ward or 0)>0 and s.tick%6==0 then c.boss:spawn_particle_at_self({particle='ENCHANT',amount=8},1) end
+  if s.fireAt then
+   if s.tick<s.fireAt-10 then s.aim=player:get_eye_location(); c.boss:face_direction_or_location(s.aim) end
+   if s.tick%4==0 then spell_aim(c,s.aim) end
+   if s.tick>=s.fireAt then spell_bolt(c,s.aim,.7); s.fireAt=nil; s.busyUntil=s.tick+86 end
+   return
+  end
+  if s.wardAt then
+   if s.tick%4==0 then c.boss:spawn_particle_at_self({particle='ENCHANT',amount=6},1) end
+   if s.tick>=s.wardAt then s.wardAt=nil; s.ward=c.boss:get_maximum_health()*.06; s.wardUntil=s.tick+80; s.busyUntil=s.tick+26 end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; s.nextWard=s.tick
+   player:send_message('&6Spellcaster Instructor: &fA ward has a limit. Decide whether to break it or let it fade.')
+  end
+  if s.tick>=s.nextWard then
+   s.nextWard=s.tick+360; s.wardAt=s.tick+28; pause_movement(c,54)
+   c.boss:play_sound_at_self('BLOCK_AMETHYST_BLOCK_RESONATE',.6,.8)
+  elseif s.tick>=s.nextBlink then
+   s.nextBlink=s.tick+300; if arcane_blink(c,player) then s.busyUntil=s.tick+46 end
+  elseif s.tick>=s.nextBolt then
+   s.nextBolt=s.tick+140; s.fireAt=s.tick+24; s.aim=player:get_eye_location(); pause_movement(c,110)
+  end
  end,
- damaged=function(c,s)
-   if c.trial:damaged_actor()~='boss' or not s.wardActive then return end
-   local incoming=c.event.damage_amount; local absorbed=math.min(incoming,s.ward); s.ward=s.ward-absorbed; c.event.set_damage_amount(incoming-absorbed)
+ on_player_damaged_by_boss=function(c) if c.event.projectile then c.event.multiply_damage_amount(.65) end end,
+ on_boss_damaged_by_player=function(c)
+  local s=c.state; local amount=c.event.get_damage_amount()
+  if (s.ward or 0)>0 and amount>0 then
+   local used=math.min(s.ward,amount); s.ward=s.ward-used; c.event.multiply_damage_amount((amount-used)/amount)
    if s.ward<=0 then
-     s.wardActive=false; T.sound(c,'BLOCK_GLASS_BREAK',1.2); c.trial:say('Exactly. A ward has a limit.')
-     T.start(c,s,'ward',{T.rest(50,1.2)},360)
+    s.exposedUntil=(s.tick or 0)+50; s.busyUntil=s.exposedUntil; pause_movement(c,50)
+    c.boss:play_sound_at_self('BLOCK_GLASS_BREAK',.5,1.2)
    end
- end
+  elseif (s.exposedUntil or 0)>(s.tick or 0) then c.event.multiply_damage_amount(1.2) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Spellcaster Instructor: &fYou chose your moment. That is the beginning of control.',24) end
 }
-

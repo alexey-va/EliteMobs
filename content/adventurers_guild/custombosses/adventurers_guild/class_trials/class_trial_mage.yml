@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: BOOK
+powers:
+  - class_trial_mage.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: mage
-  title: Read the Second Cast
-  power: class_trial_mage.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: A spell may finish once and still have something left to say.
-    halfway: I have moved. Notice which part of the spell has not.
-    victory: You accounted for the second cast before it surprised you.
-    defeat: The afterimage was still drawing when you stopped moving.

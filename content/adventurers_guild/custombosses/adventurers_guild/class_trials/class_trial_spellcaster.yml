@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:705799
 leggings: LEATHER_LEGGINGS:705799
 boots: LEATHER_BOOTS:705799
 offHand: BOOK
+powers:
+  - class_trial_spellcaster.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: spellcaster
-  title: The Space Between Spells
-  power: class_trial_spellcaster.lua
-  actors:
-    HUSK: class_trial_actor_spellcaster_partner.yml
-  voice:
-    opening: A spell has a beginning and an end. Fight in the space between.
-    halfway: One pattern understood. Now keep it in mind while I add another.
-    victory: You stopped chasing the light and started reading the caster. Good.
-    defeat: You moved at the flash. Listen for the breath before it.
