@@ -103,7 +103,7 @@ function panel(active){
  return s;
 }
 (async()=>{
- // Each 32x42 glyph contains the diamond and its F keycap. Drawing them as
+ // Each 32x42 glyph contains the diamond and its F badge. Drawing them as
  // one overlay keeps the key above the dynamic XP strip, clear of the hotbar.
  // The diamond retains its 32x32 rim and 28 bottom-up fill rows.
  let diamonds='';
@@ -116,11 +116,10 @@ function panel(active){
    if(distance<=14 && yy>=30-fill) color=yy===30-fill?'#f5d476':'#916b24';
    diamonds+=rect(ox+xx,oy+yy,1,1,color);
   }
-  diamonds+=rect(ox+11,oy+33,10,1,'#f8faf9')
-   +rect(ox+10,oy+34,12,6,'#f8faf9')
-   +rect(ox+11,oy+34,10,6,'#dce1e0')
-   +rect(ox+10,oy+40,12,1,'#8b9495')
-   +rect(ox+11,oy+41,10,1,'#41494b');
+  // Flat, clipped-corner badge with one border row and tight letter padding.
+  diamonds+=rect(ox+13,oy+34,6,7,'#f8faf9')
+   +rect(ox+12,oy+35,8,5,'#f8faf9')
+   +rect(ox+13,oy+35,6,5,'#dce1e0');
   ['1111','1000','1110','1000','1000'].forEach((row,y)=>[...row].forEach((v,x)=>{
    if(v==='1') diamonds+=rect(ox+14+x,oy+35+y,1,1,'#505b5e');
   }));
