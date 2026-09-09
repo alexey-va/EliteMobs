@@ -12,7 +12,7 @@
     "source": "sources/paladin.mobility.png",
     "texture": "paladin.mobility.png",
     "textureSize": 64,
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "paladin.signature",
@@ -27,7 +27,7 @@
     "source": "sources/paladin.signature.png",
     "texture": "paladin.signature.png",
     "textureSize": 64,
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "paladin.utility",
@@ -42,7 +42,7 @@
     "source": "sources/paladin.utility.png",
     "texture": "paladin.utility.png",
     "textureSize": 64,
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "guardian.signature",
@@ -57,7 +57,7 @@
     "status": "reviewed",
     "source": "sources/guardian.signature.png",
     "texture": "guardian.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "guardian.utility",
@@ -72,7 +72,7 @@
     "status": "reviewed",
     "source": "sources/guardian.utility.png",
     "texture": "guardian.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "aegis.signature",
@@ -87,7 +87,7 @@
     "status": "reviewed",
     "source": "sources/aegis.signature.png",
     "texture": "aegis.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "aegis.utility",
@@ -102,7 +102,7 @@
     "status": "reviewed",
     "source": "sources/aegis.utility.png",
     "texture": "aegis.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bulwark.signature",
@@ -117,7 +117,7 @@
     "status": "reviewed",
     "source": "sources/bulwark.signature.png",
     "texture": "bulwark.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bulwark.utility",
@@ -132,7 +132,7 @@
     "status": "reviewed",
     "source": "sources/bulwark.utility.png",
     "texture": "bulwark.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "shieldbearer.signature",
@@ -147,7 +147,7 @@
     "status": "reviewed",
     "source": "sources/shieldbearer.signature.png",
     "texture": "shieldbearer.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "shieldbearer.utility",
@@ -162,7 +162,7 @@
     "status": "reviewed",
     "source": "sources/shieldbearer.utility.png",
     "texture": "shieldbearer.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "justicar.signature",
@@ -177,7 +177,7 @@
     "status": "reviewed",
     "source": "sources/justicar.signature.png",
     "texture": "justicar.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "justicar.utility",
@@ -192,7 +192,7 @@
     "status": "reviewed",
     "source": "sources/justicar.utility.png",
     "texture": "justicar.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "templar.signature",
@@ -207,7 +207,7 @@
     "status": "reviewed",
     "source": "sources/templar.signature.png",
     "texture": "templar.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "templar.utility",
@@ -222,7 +222,7 @@
     "status": "reviewed",
     "source": "sources/templar.utility.png",
     "texture": "templar.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "inquisitor.signature",
@@ -237,7 +237,7 @@
     "status": "reviewed",
     "source": "sources/inquisitor.signature.png",
     "texture": "inquisitor.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "inquisitor.utility",
@@ -252,7 +252,7 @@
     "status": "reviewed",
     "source": "sources/inquisitor.utility.png",
     "texture": "inquisitor.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "warlord.signature",
@@ -267,7 +267,7 @@
     "status": "reviewed",
     "source": "sources/warlord.signature.png",
     "texture": "warlord.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "warlord.utility",
@@ -282,7 +282,7 @@
     "status": "reviewed",
     "source": "sources/warlord.utility.png",
     "texture": "warlord.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "marshal.signature",
@@ -297,7 +297,7 @@
     "status": "reviewed",
     "source": "sources/marshal.signature.png",
     "texture": "marshal.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "marshal.utility",
@@ -312,7 +312,7 @@
     "status": "reviewed",
     "source": "sources/marshal.utility.png",
     "texture": "marshal.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bannerlord.signature",
@@ -327,7 +327,7 @@
     "status": "reviewed",
     "source": "sources/bannerlord.signature.png",
     "texture": "bannerlord.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bannerlord.utility",
@@ -342,7 +342,7 @@
     "status": "reviewed",
     "source": "sources/bannerlord.utility.png",
     "texture": "bannerlord.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "strategist.signature",
@@ -357,7 +357,7 @@
     "status": "reviewed",
     "source": "sources/strategist.signature.png",
     "texture": "strategist.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "strategist.utility",
@@ -372,7 +372,7 @@
     "status": "reviewed",
     "source": "sources/strategist.utility.png",
     "texture": "strategist.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "conqueror.signature",
@@ -387,7 +387,7 @@
     "status": "reviewed",
     "source": "sources/conqueror.signature.png",
     "texture": "conqueror.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "conqueror.utility",
@@ -402,7 +402,7 @@
     "status": "reviewed",
     "source": "sources/conqueror.utility.png",
     "texture": "conqueror.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "tyrant.signature",
@@ -417,7 +417,7 @@
     "status": "reviewed",
     "source": "sources/tyrant.signature.png",
     "texture": "tyrant.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "tyrant.utility",
@@ -432,7 +432,7 @@
     "status": "reviewed",
     "source": "sources/tyrant.utility.png",
     "texture": "tyrant.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "champion.signature",
@@ -447,7 +447,7 @@
     "status": "reviewed",
     "source": "sources/champion.signature.png",
     "texture": "champion.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "champion.utility",
@@ -462,7 +462,7 @@
     "status": "reviewed",
     "source": "sources/champion.utility.png",
     "texture": "champion.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "berserker.mobility",
@@ -477,7 +477,7 @@
     "source": "sources/berserker.mobility.png",
     "texture": "berserker.mobility.png",
     "textureSize": 64,
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "berserker.signature",
@@ -492,7 +492,7 @@
     "status": "reviewed",
     "source": "sources/berserker.signature.png",
     "texture": "berserker.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "berserker.utility",
@@ -507,7 +507,7 @@
     "status": "reviewed",
     "source": "sources/berserker.utility.png",
     "texture": "berserker.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bloodrager.signature",
@@ -516,8 +516,13 @@
     "slot": "signature",
     "name": "Frenzy",
     "description": "Gain damage and speed as health falls.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodrager's 'Frenzy'. Actual gameplay effect: Gain damage and speed as health falls. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodrager's 'Frenzy'. Actual gameplay effect: Gain damage and speed as health falls. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A jagged iron axe head surging forward, a cracked crimson heart behind it feeding bright red energy into the edge. Bold axe and heart emblem, no figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/bloodrager.signature.png",
+    "texture": "bloodrager.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bloodrager.utility",
@@ -526,8 +531,13 @@
     "slot": "utility",
     "name": "Blood Roar",
     "description": "Cleanse slows and gain Fury.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodrager's 'Blood Roar'. Actual gameplay effect: Cleanse slows and gain Fury. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodrager's 'Blood Roar'. Actual gameplay effect: Cleanse slows and gain Fury. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A roaring red wolf muzzle shattering an icy blue collar, orange fury sparks gathering below its jaw. Close head silhouette.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/bloodrager.utility.png",
+    "texture": "bloodrager.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "reaver.signature",
@@ -536,8 +546,13 @@
     "slot": "signature",
     "name": "Blood Feast",
     "description": "Briefly heal from damage dealt.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Reaver's 'Blood Feast'. Actual gameplay effect: Briefly heal from damage dealt. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Reaver's 'Blood Feast'. Actual gameplay effect: Briefly heal from damage dealt. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A curved iron axe drawing a thick crimson ribbon from its blade into one glowing red heart. Symbolic life steal, no bodies or gore.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/reaver.signature.png",
+    "texture": "reaver.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "reaver.utility",
@@ -546,8 +561,13 @@
     "slot": "utility",
     "name": "Scent Blood",
     "description": "Reveal foes, gain speed and hunt the wounded.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Reaver's 'Scent Blood'. Actual gameplay effect: Reveal foes, gain speed and hunt the wounded. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Reaver's 'Scent Blood'. Actual gameplay effect: Reveal foes, gain speed and hunt the wounded. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A wolf's large keen nose and amber eye catching a bright red scent trail leading toward a distant small heart symbol. Close profile, dark background.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/reaver.utility.png",
+    "texture": "reaver.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bloodstorm.signature",
@@ -556,8 +576,13 @@
     "slot": "signature",
     "name": "Crimson Cyclone",
     "description": "Spin through groups, harm foes and heal.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodstorm's 'Crimson Cyclone'. Actual gameplay effect: Spin through groups, harm foes and heal. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodstorm's 'Crimson Cyclone'. Actual gameplay effect: Spin through groups, harm foes and heal. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Two broad iron axe blades whirling in a circular crimson cyclone, a small bright red heart at its calm center. Strong circular spiral silhouette.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/bloodstorm.signature.png",
+    "texture": "bloodstorm.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "bloodstorm.utility",
@@ -566,8 +591,13 @@
     "slot": "utility",
     "name": "Gore Trail",
     "description": "Create a blood pool that heals you inside.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodstorm's 'Gore Trail'. Actual gameplay effect: Create a blood pool that heals you inside. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Bloodstorm's 'Gore Trail'. Actual gameplay effect: Create a blood pool that heals you inside. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A single heavy boot planted inside a luminous crimson pool, three broad red healing wisps rising from the pool. Symbolic red magic, no gore.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/bloodstorm.utility.png",
+    "texture": "bloodstorm.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "deathless.signature",
@@ -576,8 +606,13 @@
     "slot": "signature",
     "name": "Refuse Death",
     "description": "Survive one fatal hit, heal and ward.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Deathless's 'Refuse Death'. Actual gameplay effect: Survive one fatal hit, heal and ward. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Deathless's 'Refuse Death'. Actual gameplay effect: Survive one fatal hit, heal and ward. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A skull-shaped dark death blade stopped by a brilliant crimson heart encased in iron bands. Single heart wins the collision, dramatic white flash, no gore.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/deathless.signature.png",
+    "texture": "deathless.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "deathless.utility",
@@ -586,8 +621,13 @@
     "slot": "utility",
     "name": "Defiant Roar",
     "description": "Heal and gain heavy protection.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Deathless's 'Defiant Roar'. Actual gameplay effect: Heal and gain heavy protection. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Deathless's 'Defiant Roar'. Actual gameplay effect: Heal and gain heavy protection. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A roaring iron helmet with a glowing red heart-shaped core at the throat, broad silver shield-shaped sound arc. No full figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/deathless.utility.png",
+    "texture": "deathless.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "slayer.signature",
@@ -596,8 +636,13 @@
     "slot": "signature",
     "name": "Executioner's Rhythm",
     "description": "Hit harder as target health falls.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Slayer's 'Executioner's Rhythm'. Actual gameplay effect: Hit harder as target health falls. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Slayer's 'Executioner's Rhythm'. Actual gameplay effect: Hit harder as target health falls. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An execution axe with three stepped orange impact echoes sweeping toward a cracked red target crest. Strong rhythmic repeated edge, no bodies.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/slayer.signature.png",
+    "texture": "slayer.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "slayer.utility",
@@ -606,8 +651,13 @@
     "slot": "utility",
     "name": "Relentless Hunt",
     "description": "Reveal nearby foes and gain pursuit speed.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Slayer's 'Relentless Hunt'. Actual gameplay effect: Reveal nearby foes and gain pursuit speed. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Slayer's 'Relentless Hunt'. Actual gameplay effect: Reveal nearby foes and gain pursuit speed. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A single iron hunting boot rushing toward a bright red reticle, amber speed streaks stretched behind. Diagonal chase motif.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/slayer.utility.png",
+    "texture": "slayer.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "headsman.signature",
@@ -616,8 +666,13 @@
     "slot": "signature",
     "name": "Final Stroke",
     "description": "Deal extreme damage to a wounded target.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Headsman's 'Final Stroke'. Actual gameplay effect: Deal extreme damage to a wounded target. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Headsman's 'Final Stroke'. Actual gameplay effect: Deal extreme damage to a wounded target. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A huge squared execution axe dropping vertically through a shattered crimson target crest. Black iron, bright white edge, no gore or figures.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/headsman.signature.png",
+    "texture": "headsman.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "headsman.utility",
@@ -626,8 +681,13 @@
     "slot": "utility",
     "name": "Condemn",
     "description": "Mark a foe to deal more as its health falls.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Headsman's 'Condemn'. Actual gameplay effect: Mark a foe to deal more as its health falls. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Headsman's 'Condemn'. Actual gameplay effect: Mark a foe to deal more as its health falls. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One dark target helmet trapped inside a sharp crimson diamond mark, the mark tapering downward like an execution blade. Close emblem.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/headsman.utility.png",
+    "texture": "headsman.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "harvester.signature",
@@ -636,8 +696,13 @@
     "slot": "signature",
     "name": "Harvest Chain",
     "description": "Chain through wounded foes and heal.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Harvester's 'Harvest Chain'. Actual gameplay effect: Chain through wounded foes and heal. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Harvester's 'Harvest Chain'. Actual gameplay effect: Chain through wounded foes and heal. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three iron sickle blades linked by a sweeping red energy ribbon leading into a glowing heart. Curved chain composition, no victims.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/harvester.signature.png",
+    "texture": "harvester.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "harvester.utility",
@@ -646,8 +711,13 @@
     "slot": "utility",
     "name": "Reap the Weak",
     "description": "Pull wounded foes into reach.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Harvester's 'Reap the Weak'. Actual gameplay effect: Pull wounded foes into reach. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Harvester's 'Reap the Weak'. Actual gameplay effect: Pull wounded foes into reach. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One enormous hooked iron sickle pulling two small dim crimson heart crests inward on a thick red ribbon. No people.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/harvester.utility.png",
+    "texture": "harvester.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "juggernaut.signature",
@@ -656,8 +726,13 @@
     "slot": "signature",
     "name": "Earthshatter",
     "description": "Launch foes and weaken their attacks.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Juggernaut's 'Earthshatter'. Actual gameplay effect: Launch foes and weaken their attacks. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Juggernaut's 'Earthshatter'. Actual gameplay effect: Launch foes and weaken their attacks. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A giant iron fist breaking the ground upward in two huge orange stone plates. Dominant fist and rising rubble, no figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/juggernaut.signature.png",
+    "texture": "juggernaut.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "juggernaut.utility",
@@ -666,8 +741,13 @@
     "slot": "utility",
     "name": "Unstoppable",
     "description": "Resist slows, knockback and disruption.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Juggernaut's 'Unstoppable'. Actual gameplay effect: Resist slows, knockback and disruption. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Juggernaut's 'Unstoppable'. Actual gameplay effect: Resist slows, knockback and disruption. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A massive dark iron boot breaking through icy shackles with a bright orange forward streak. Unstoppable heavy movement, no figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/juggernaut.utility.png",
+    "texture": "juggernaut.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "crusher.signature",
@@ -676,8 +756,13 @@
     "slot": "signature",
     "name": "Sunderquake",
     "description": "Launch foes and weaken their attacks.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Crusher's 'Sunderquake'. Actual gameplay effect: Launch foes and weaken their attacks. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Crusher's 'Sunderquake'. Actual gameplay effect: Launch foes and weaken their attacks. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A spiked iron mace striking cracked stone with a broad orange shock ring and two lifted boulders. Close impact motif.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/crusher.signature.png",
+    "texture": "crusher.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "crusher.utility",
@@ -686,8 +771,13 @@
     "slot": "utility",
     "name": "Fault Line",
     "description": "Launch foes ahead.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Crusher's 'Fault Line'. Actual gameplay effect: Launch foes ahead. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Crusher's 'Fault Line'. Actual gameplay effect: Launch foes ahead. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A jagged orange fissure racing forward between two dark stone slabs that tip violently upward. Ground split fills square, no weapon or figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/crusher.utility.png",
+    "texture": "crusher.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "siegebreaker.signature",
@@ -696,8 +786,13 @@
     "slot": "signature",
     "name": "Ruinous Impact",
     "description": "Smash groups and leave them weakened.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Siegebreaker's 'Ruinous Impact'. Actual gameplay effect: Smash groups and leave them weakened. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Siegebreaker's 'Ruinous Impact'. Actual gameplay effect: Smash groups and leave them weakened. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A heavy iron warhammer smashing a broad masonry shield into a few large chunks. Orange impact, bold hammer silhouette.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/siegebreaker.signature.png",
+    "texture": "siegebreaker.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "siegebreaker.utility",
@@ -706,8 +801,13 @@
     "slot": "utility",
     "name": "Breach",
     "description": "Allies hurt foes more after you break defense.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Siegebreaker's 'Breach'. Actual gameplay effect: Allies hurt foes more after you break defense. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Siegebreaker's 'Breach'. Actual gameplay effect: Allies hurt foes more after you break defense. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A dark fortress shield split wide down the center with a bright red gap and one orange arrow passing through. Defense breach emblem.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/siegebreaker.utility.png",
+    "texture": "siegebreaker.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "titanbane.signature",
@@ -716,8 +816,13 @@
     "slot": "signature",
     "name": "Giant Killer",
     "description": "Strongly interrupt large foes and bosses.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Titanbane's 'Giant Killer'. Actual gameplay effect: Strongly interrupt large foes and bosses. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Titanbane's 'Giant Killer'. Actual gameplay effect: Strongly interrupt large foes and bosses. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A relatively small bright iron axe stopping a gigantic dark stone fist, bright orange impact where the axe bites. Strong scale contrast, no gore.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/titanbane.signature.png",
+    "texture": "titanbane.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "titanbane.utility",
@@ -726,8 +831,13 @@
     "slot": "utility",
     "name": "Anchor Chain",
     "description": "Stop one foe from fleeing or charging.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Titanbane's 'Anchor Chain'. Actual gameplay effect: Stop one foe from fleeing or charging. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Titanbane's 'Anchor Chain'. Actual gameplay effect: Stop one foe from fleeing or charging. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One oversized iron chain wrapped tightly around a dark boot and anchored to a heavy rock. Taut diagonal chain, orange highlights.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/titanbane.utility.png",
+    "texture": "titanbane.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "dreadnought.signature",
@@ -736,8 +846,13 @@
     "slot": "signature",
     "name": "Seismic Chain",
     "description": "Create expanding impacts around you.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Dreadnought's 'Seismic Chain'. Actual gameplay effect: Create expanding impacts around you. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Dreadnought's 'Seismic Chain'. Actual gameplay effect: Create expanding impacts around you. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three expanding orange concentric shock rings radiating through dark cracked stone around a central iron spike. Top-down seismic motif.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/dreadnought.signature.png",
+    "texture": "dreadnought.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "dreadnought.utility",
@@ -746,8 +861,13 @@
     "slot": "utility",
     "name": "Iron Roar",
     "description": "Briefly ignore displacement and severe slows.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Dreadnought's 'Iron Roar'. Actual gameplay effect: Briefly ignore displacement and severe slows. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Dreadnought's 'Iron Roar'. Actual gameplay effect: Briefly ignore displacement and severe slows. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An iron helmet roaring through a thick riveted circular steel barrier, icy arrows break on its rim. Orange glow inside, no full figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/dreadnought.utility.png",
+    "texture": "dreadnought.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "warmonger.signature",
@@ -756,8 +876,13 @@
     "slot": "signature",
     "name": "Panic Engine",
     "description": "Damage, interrupt and frighten groups.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Warmonger's 'Panic Engine'. Actual gameplay effect: Damage, interrupt and frighten groups. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Warmonger's 'Panic Engine'. Actual gameplay effect: Damage, interrupt and frighten groups. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A snarling dark iron war mask projecting three jagged red fear rays toward small fleeing dark silhouettes. Mask dominates, no detailed crowd.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/warmonger.signature.png",
+    "texture": "warmonger.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "warmonger.utility",
@@ -766,8 +891,13 @@
     "slot": "utility",
     "name": "Challenge All",
     "description": "Turn nearby foes and disrupt positions.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Warmonger's 'Challenge All'. Actual gameplay effect: Turn nearby foes and disrupt positions. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Warmonger's 'Challenge All'. Actual gameplay effect: Turn nearby foes and disrupt positions. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A raised iron gauntlet at center twisting three dark arrowheads around it in a disruptive orange spiral. Challenge and redirected foes, no people.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/warmonger.utility.png",
+    "texture": "warmonger.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "colossus.signature",
@@ -776,8 +906,13 @@
     "slot": "signature",
     "name": "Worldbreaker",
     "description": "Charge a devastating ground strike.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Colossus's 'Worldbreaker'. Actual gameplay effect: Charge a devastating ground strike. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Colossus's 'Worldbreaker'. Actual gameplay effect: Charge a devastating ground strike. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An enormous iron hammer raised over a tiny glowing cracked world-shaped stone sphere, charged with thick orange energy. Imminent devastating impact.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/colossus.signature.png",
+    "texture": "colossus.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "colossus.utility",
@@ -786,8 +921,13 @@
     "slot": "utility",
     "name": "Immovable",
     "description": "Gain huge defense while charging.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Colossus's 'Immovable'. Actual gameplay effect: Gain huge defense while charging. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Colossus's 'Immovable'. Actual gameplay effect: Gain huge defense while charging. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: burnt orange and crimson, dark iron; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A heavy iron breastplate fused into a squat mountain of dark stone, a compact molten orange core glowing behind the armor. Stable triangular silhouette.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/colossus.utility.png",
+    "texture": "colossus.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "ranger.mobility",
@@ -802,7 +942,7 @@
     "source": "sources/ranger.mobility.png",
     "texture": "ranger.mobility.png",
     "textureSize": 64,
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "ranger.signature",
@@ -817,7 +957,7 @@
     "status": "reviewed",
     "source": "sources/ranger.signature.png",
     "texture": "ranger.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "ranger.utility",
@@ -832,7 +972,7 @@
     "status": "reviewed",
     "source": "sources/ranger.utility.png",
     "texture": "ranger.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "sniper.signature",
@@ -1127,7 +1267,7 @@
     "source": "sources/cleric.mobility.png",
     "texture": "cleric.mobility.png",
     "textureSize": 64,
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "cleric.signature",
@@ -1142,7 +1282,7 @@
     "status": "reviewed",
     "source": "sources/cleric.signature.png",
     "texture": "cleric.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "cleric.utility",
@@ -1157,7 +1297,7 @@
     "status": "reviewed",
     "source": "sources/cleric.utility.png",
     "texture": "cleric.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "priest.signature",
@@ -1452,7 +1592,7 @@
     "source": "sources/spellcaster.mobility.png",
     "texture": "spellcaster.mobility.png",
     "textureSize": 64,
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spellcaster.signature",
@@ -1467,7 +1607,7 @@
     "status": "reviewed",
     "source": "sources/spellcaster.signature.png",
     "texture": "spellcaster.signature.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spellcaster.utility",
@@ -1482,7 +1622,7 @@
     "status": "reviewed",
     "source": "sources/spellcaster.utility.png",
     "texture": "spellcaster.utility.png",
-    "review": "64px texture and scale-4 HUD-size rendering visually inspected; identifying shape retained."
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "mage.signature",
