@@ -88,9 +88,9 @@ pixels throughout, with no fractional scaling.
 | Class level | centered at 95 | 1 | 5 per digit, 1 spacing | 7 |
 | XP fill | 5 | 32 | up to 180 | 2 |
 | Native hotbar opening | 3 | 37 | 184 | 23 |
-| Mobility card | 4 | 38 | 60 | 21 |
-| Signature card | 65 | 38 | 60 | 21 |
-| Utility card | 126 | 38 | 60 | 21 |
+| Signature card | 4 | 38 | 60 | 21 |
+| Utility card | 65 | 38 | 60 | 21 |
+| Mobility card | 126 | 38 | 60 | 21 |
 
 Labels occupy rows 6 through 10, followed by two empty rows. Counters occupy
 rows 13 through 19, followed by two empty rows before the trough at row 22.
