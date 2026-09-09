@@ -102,7 +102,7 @@ the native hotbar position. The separate label alphabet is no longer shipped.
 | Health fill | 25 | 17 | up to 63 | 3 |
 | Resource fill | 165 minus fill width | 17 | up to 63 | 3 |
 | Resource icon | 171 | 5 | 10 | 15 |
-| Cropped class XP diamond | 79 | 0 | 32 | 20 |
+| Cropped class XP diamond | 79 | -3 | 32 | 23 |
 | Class level | centered at 95 | 3 | 5 per digit, 1 spacing | 7 |
 | F badge | 91 | 22 | 8 | 7 |
 | XP fill | 5 | 26 | up to 180 | 2 |
@@ -123,10 +123,10 @@ end before row 50, inside the card interior. Skill frames end at row 52, reservi
 outer panel and avoiding clipping when the framebuffer height is not an exact
 multiple of the GUI scale.
 
-The class diamond is cut horizontally four pixels above its original midpoint,
-removing the top 12 rows. Its flat brass rim now meets the panel's top border;
-the lower point stays in place. The level sits two pixels lower to clear the
-new rim. The remaining interior has 16 fill rows; the runtime's 29 progress
+The class diamond is cut horizontally seven pixels above its original midpoint,
+removing the top nine rows. Its flat brass rim projects three pixels above the
+panel's top border; the lower point and level number stay in place.
+The remaining interior has 19 fill rows; the runtime's 29 progress
 frames map proportionately onto those rows. Gold rises from the
 bottom according to XP toward the active class's next effective level, using
 the class band's XP baseline. At the current progression cap it stays full.

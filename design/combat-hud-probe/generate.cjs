@@ -158,9 +158,9 @@ function panel(active){
   .png().toFile(path.join(textures,'resource_icons.png'));
  // Each 32x42 glyph contains the diamond and its F badge. Drawing them as
  // one overlay keeps the key above the dynamic XP strip, clear of the hotbar.
- // Crop at row 12, four pixels above the original midpoint. Preserve the
- // glyph origin and remap the runtime's 29 progress frames onto 16 fill rows.
- const diamondCut=12, fillTop=diamondCut+2, fillBottom=30;
+ // Crop at row 9 so the rim projects three pixels above the panel. Preserve
+ // the glyph origin and remap the runtime's 29 progress frames onto 19 fill rows.
+ const diamondCut=9, fillTop=diamondCut+2, fillBottom=30;
  let diamonds='';
  for(let fill=0;fill<=28;fill++) {
   const ox=(fill%8)*32, oy=Math.floor(fill/8)*42;
