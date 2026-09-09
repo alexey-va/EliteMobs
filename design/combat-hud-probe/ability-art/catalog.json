@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "paladin.mobility",
+    "root": "paladin",
+    "className": "Paladin",
+    "slot": "mobility",
+    "name": "Divine Steed",
+    "description": "Ride an armored steed and taunt foes struck."
+  },
+  {
+    "id": "paladin.signature",
+    "root": "paladin",
+    "className": "Paladin",
+    "slot": "signature",
+    "name": "Provoke",
+    "description": "Taunt nearby foes and gain defense."
+  },
+  {
+    "id": "paladin.utility",
+    "root": "paladin",
+    "className": "Paladin",
+    "slot": "utility",
+    "name": "Repulse",
+    "description": "Blast nearby foes away."
+  },
+  {
+    "id": "guardian.signature",
+    "root": "paladin",
+    "className": "Guardian",
+    "slot": "signature",
+    "name": "Intercession",
+    "description": "Redirect ally damage and taunt attackers."
+  },
+  {
+    "id": "guardian.utility",
+    "root": "paladin",
+    "className": "Guardian",
+    "slot": "utility",
+    "name": "Guardian Ring",
+    "description": "Shield allies and resist knockback."
+  },
+  {
+    "id": "aegis.signature",
+    "root": "paladin",
+    "className": "Aegis",
+    "slot": "signature",
+    "name": "Aegis Link",
+    "description": "Intercept attacks aimed at one ally."
+  },
+  {
+    "id": "aegis.utility",
+    "root": "paladin",
+    "className": "Aegis",
+    "slot": "utility",
+    "name": "Sanctuary Wall",
+    "description": "Shield allies and reduce damage in an area."
+  },
+  {
+    "id": "bulwark.signature",
+    "root": "paladin",
+    "className": "Bulwark",
+    "slot": "signature",
+    "name": "Hold the Line",
+    "description": "Root, taunt nearby foes and gain defense."
+  },
+  {
+    "id": "bulwark.utility",
+    "root": "paladin",
+    "className": "Bulwark",
+    "slot": "utility",
+    "name": "Unyielding Ground",
+    "description": "Shield allies from damage and control."
+  },
+  {
+    "id": "shieldbearer.signature",
+    "root": "paladin",
+    "className": "Shieldbearer",
+    "slot": "signature",
+    "name": "Manyfold Intercession",
+    "description": "Redirect damage from two allies."
+  },
+  {
+    "id": "shieldbearer.utility",
+    "root": "paladin",
+    "className": "Shieldbearer",
+    "slot": "utility",
+    "name": "Covering Wall",
+    "description": "Shield allies and grant defense and speed."
+  },
+  {
+    "id": "justicar.signature",
+    "root": "paladin",
+    "className": "Justicar",
+    "slot": "signature",
+    "name": "Judgment",
+    "description": "Store taunted damage, then strike back."
+  },
+  {
+    "id": "justicar.utility",
+    "root": "paladin",
+    "className": "Justicar",
+    "slot": "utility",
+    "name": "Censure",
+    "description": "Briefly weaken your attackers."
+  },
+  {
+    "id": "templar.signature",
+    "root": "paladin",
+    "className": "Templar",
+    "slot": "signature",
+    "name": "Consecrated Judgment",
+    "description": "Stored damage now hurts and heals."
+  },
+  {
+    "id": "templar.utility",
+    "root": "paladin",
+    "className": "Templar",
+    "slot": "utility",
+    "name": "Purging Bell",
+    "description": "Cleanse allies and briefly block debuffs."
+  },
+  {
+    "id": "inquisitor.signature",
+    "root": "paladin",
+    "className": "Inquisitor",
+    "slot": "signature",
+    "name": "Final Sentence",
+    "description": "Strike elites harder as health falls."
+  },
+  {
+    "id": "inquisitor.utility",
+    "root": "paladin",
+    "className": "Inquisitor",
+    "slot": "utility",
+    "name": "Expose Heresy",
+    "description": "Reveal one foe and increase party damage."
+  },
+  {
+    "id": "warlord.signature",
+    "root": "paladin",
+    "className": "Warlord",
+    "slot": "signature",
+    "name": "Commanding Shout",
+    "description": "Taunt foes and boost nearby allies."
+  },
+  {
+    "id": "warlord.utility",
+    "root": "paladin",
+    "className": "Warlord",
+    "slot": "utility",
+    "name": "Rally",
+    "description": "Cleanse slows and speed up allies."
+  },
+  {
+    "id": "marshal.signature",
+    "root": "paladin",
+    "className": "Marshal",
+    "slot": "signature",
+    "name": "Battle Standard",
+    "description": "Plant a banner that taunts and empowers."
+  },
+  {
+    "id": "marshal.utility",
+    "root": "paladin",
+    "className": "Marshal",
+    "slot": "utility",
+    "name": "Reform Ranks",
+    "description": "Grant allies speed and brief defense."
+  },
+  {
+    "id": "bannerlord.signature",
+    "root": "paladin",
+    "className": "Bannerlord",
+    "slot": "signature",
+    "name": "Grand Standard",
+    "description": "Carry an aura that taunts and empowers."
+  },
+  {
+    "id": "bannerlord.utility",
+    "root": "paladin",
+    "className": "Bannerlord",
+    "slot": "utility",
+    "name": "Advance",
+    "description": "Speed allies while your aura lasts."
+  },
+  {
+    "id": "strategist.signature",
+    "root": "paladin",
+    "className": "Strategist",
+    "slot": "signature",
+    "name": "Perfect Formation",
+    "description": "Boost grouped damage and defense."
+  },
+  {
+    "id": "strategist.utility",
+    "root": "paladin",
+    "className": "Strategist",
+    "slot": "utility",
+    "name": "Fallback",
+    "description": "Shield allies and speed their retreat."
+  },
+  {
+    "id": "conqueror.signature",
+    "root": "paladin",
+    "className": "Conqueror",
+    "slot": "signature",
+    "name": "Dominating Roar",
+    "description": "Pull, taunt and weaken nearby foes."
+  },
+  {
+    "id": "conqueror.utility",
+    "root": "paladin",
+    "className": "Conqueror",
+    "slot": "utility",
+    "name": "Press Forward",
+    "description": "Grant allies brief speed and power."
+  },
+  {
+    "id": "tyrant.signature",
+    "root": "paladin",
+    "className": "Tyrant",
+    "slot": "signature",
+    "name": "Kneel",
+    "description": "Frighten, turn and weaken nearby foes."
+  },
+  {
+    "id": "tyrant.utility",
+    "root": "paladin",
+    "className": "Tyrant",
+    "slot": "utility",
+    "name": "No Escape",
+    "description": "Reveal and heavily slow nearby foes."
+  },
+  {
+    "id": "champion.signature",
+    "root": "paladin",
+    "className": "Champion",
+    "slot": "signature",
+    "name": "Blade Dominion",
+    "description": "Cleave taunted foes and extend taunts."
+  },
+  {
+    "id": "champion.utility",
+    "root": "paladin",
+    "className": "Champion",
+    "slot": "utility",
+    "name": "Duel Order",
+    "description": "Knock back and taunt foes ahead."
+  },
+  {
+    "id": "berserker.mobility",
+    "root": "berserker",
+    "className": "Berserker",
+    "slot": "mobility",
+    "name": "Crater Leap",
+    "description": "Leap, then crush and stagger nearby foes."
+  },
+  {
+    "id": "berserker.signature",
+    "root": "berserker",
+    "className": "Berserker",
+    "slot": "signature",
+    "name": "Rampage",
+    "description": "Briefly gain damage and speed."
+  },
+  {
+    "id": "berserker.utility",
+    "root": "berserker",
+    "className": "Berserker",
+    "slot": "utility",
+    "name": "War Cry",
+    "description": "Briefly interrupt nearby foes."
+  },
+  {
+    "id": "bloodrager.signature",
+    "root": "berserker",
+    "className": "Bloodrager",
+    "slot": "signature",
+    "name": "Frenzy",
+    "description": "Gain damage and speed as health falls."
+  },
+  {
+    "id": "bloodrager.utility",
+    "root": "berserker",
+    "className": "Bloodrager",
+    "slot": "utility",
+    "name": "Blood Roar",
+    "description": "Cleanse slows and gain Fury."
+  },
+  {
+    "id": "reaver.signature",
+    "root": "berserker",
+    "className": "Reaver",
+    "slot": "signature",
+    "name": "Blood Feast",
+    "description": "Briefly heal from damage dealt."
+  },
+  {
+    "id": "reaver.utility",
+    "root": "berserker",
+    "className": "Reaver",
+    "slot": "utility",
+    "name": "Scent Blood",
+    "description": "Reveal foes, gain speed and hunt the wounded."
+  },
+  {
+    "id": "bloodstorm.signature",
+    "root": "berserker",
+    "className": "Bloodstorm",
+    "slot": "signature",
+    "name": "Crimson Cyclone",
+    "description": "Spin through groups, harm foes and heal."
+  },
+  {
+    "id": "bloodstorm.utility",
+    "root": "berserker",
+    "className": "Bloodstorm",
+    "slot": "utility",
+    "name": "Gore Trail",
+    "description": "Create a blood pool that heals you inside."
+  },
+  {
+    "id": "deathless.signature",
+    "root": "berserker",
+    "className": "Deathless",
+    "slot": "signature",
+    "name": "Refuse Death",
+    "description": "Survive one fatal hit, heal and ward."
+  },
+  {
+    "id": "deathless.utility",
+    "root": "berserker",
+    "className": "Deathless",
+    "slot": "utility",
+    "name": "Defiant Roar",
+    "description": "Heal and gain heavy protection."
+  },
+  {
+    "id": "slayer.signature",
+    "root": "berserker",
+    "className": "Slayer",
+    "slot": "signature",
+    "name": "Executioner's Rhythm",
+    "description": "Hit harder as target health falls."
+  },
+  {
+    "id": "slayer.utility",
+    "root": "berserker",
+    "className": "Slayer",
+    "slot": "utility",
+    "name": "Relentless Hunt",
+    "description": "Reveal nearby foes and gain pursuit speed."
+  },
+  {
+    "id": "headsman.signature",
+    "root": "berserker",
+    "className": "Headsman",
+    "slot": "signature",
+    "name": "Final Stroke",
+    "description": "Deal extreme damage to a wounded target."
+  },
+  {
+    "id": "headsman.utility",
+    "root": "berserker",
+    "className": "Headsman",
+    "slot": "utility",
+    "name": "Condemn",
+    "description": "Mark a foe to deal more as its health falls."
+  },
+  {
+    "id": "harvester.signature",
+    "root": "berserker",
+    "className": "Harvester",
+    "slot": "signature",
+    "name": "Harvest Chain",
+    "description": "Chain through wounded foes and heal."
+  },
+  {
+    "id": "harvester.utility",
+    "root": "berserker",
+    "className": "Harvester",
+    "slot": "utility",
+    "name": "Reap the Weak",
+    "description": "Pull wounded foes into reach."
+  },
+  {
+    "id": "juggernaut.signature",
+    "root": "berserker",
+    "className": "Juggernaut",
+    "slot": "signature",
+    "name": "Earthshatter",
+    "description": "Launch foes and weaken their attacks."
+  },
+  {
+    "id": "juggernaut.utility",
+    "root": "berserker",
+    "className": "Juggernaut",
+    "slot": "utility",
+    "name": "Unstoppable",
+    "description": "Resist slows, knockback and disruption."
+  },
+  {
+    "id": "crusher.signature",
+    "root": "berserker",
+    "className": "Crusher",
+    "slot": "signature",
+    "name": "Sunderquake",
+    "description": "Launch foes and weaken their attacks."
+  },
+  {
+    "id": "crusher.utility",
+    "root": "berserker",
+    "className": "Crusher",
+    "slot": "utility",
+    "name": "Fault Line",
+    "description": "Launch foes ahead."
+  },
+  {
+    "id": "siegebreaker.signature",
+    "root": "berserker",
+    "className": "Siegebreaker",
+    "slot": "signature",
+    "name": "Ruinous Impact",
+    "description": "Smash groups and leave them weakened."
+  },
+  {
+    "id": "siegebreaker.utility",
+    "root": "berserker",
+    "className": "Siegebreaker",
+    "slot": "utility",
+    "name": "Breach",
+    "description": "Allies hurt foes more after you break defense."
+  },
+  {
+    "id": "titanbane.signature",
+    "root": "berserker",
+    "className": "Titanbane",
+    "slot": "signature",
+    "name": "Giant Killer",
+    "description": "Strongly interrupt large foes and bosses."
+  },
+  {
+    "id": "titanbane.utility",
+    "root": "berserker",
+    "className": "Titanbane",
+    "slot": "utility",
+    "name": "Anchor Chain",
+    "description": "Stop one foe from fleeing or charging."
+  },
+  {
+    "id": "dreadnought.signature",
+    "root": "berserker",
+    "className": "Dreadnought",
+    "slot": "signature",
+    "name": "Seismic Chain",
+    "description": "Create expanding impacts around you."
+  },
+  {
+    "id": "dreadnought.utility",
+    "root": "berserker",
+    "className": "Dreadnought",
+    "slot": "utility",
+    "name": "Iron Roar",
+    "description": "Briefly ignore displacement and severe slows."
+  },
+  {
+    "id": "warmonger.signature",
+    "root": "berserker",
+    "className": "Warmonger",
+    "slot": "signature",
+    "name": "Panic Engine",
+    "description": "Damage, interrupt and frighten groups."
+  },
+  {
+    "id": "warmonger.utility",
+    "root": "berserker",
+    "className": "Warmonger",
+    "slot": "utility",
+    "name": "Challenge All",
+    "description": "Turn nearby foes and disrupt positions."
+  },
+  {
+    "id": "colossus.signature",
+    "root": "berserker",
+    "className": "Colossus",
+    "slot": "signature",
+    "name": "Worldbreaker",
+    "description": "Charge a devastating ground strike."
+  },
+  {
+    "id": "colossus.utility",
+    "root": "berserker",
+    "className": "Colossus",
+    "slot": "utility",
+    "name": "Immovable",
+    "description": "Gain huge defense while charging."
+  },
+  {
+    "id": "ranger.mobility",
+    "root": "ranger",
+    "className": "Ranger",
+    "slot": "mobility",
+    "name": "Windstep",
+    "description": "Dash without lowering your ranged weapon."
+  },
+  {
+    "id": "ranger.signature",
+    "root": "ranger",
+    "className": "Ranger",
+    "slot": "signature",
+    "name": "Volley",
+    "description": "Fire projectiles across an area."
+  },
+  {
+    "id": "ranger.utility",
+    "root": "ranger",
+    "className": "Ranger",
+    "slot": "utility",
+    "name": "Hunter's Mark",
+    "description": "Reveal nearby foes for 10% party damage."
+  },
+  {
+    "id": "sniper.signature",
+    "root": "ranger",
+    "className": "Sniper",
+    "slot": "signature",
+    "name": "Aimed Shot",
+    "description": "Charge a powerful shot at a distant target."
+  },
+  {
+    "id": "sniper.utility",
+    "root": "ranger",
+    "className": "Sniper",
+    "slot": "utility",
+    "name": "Expose Weakness",
+    "description": "Apply a stronger Hunter's Mark."
+  },
+  {
+    "id": "bowmaster.signature",
+    "root": "ranger",
+    "className": "Bowmaster",
+    "slot": "signature",
+    "name": "Piercing Flight",
+    "description": "Shoot through every foe in a line."
+  },
+  {
+    "id": "bowmaster.utility",
+    "root": "ranger",
+    "className": "Bowmaster",
+    "slot": "utility",
+    "name": "Far Sight",
+    "description": "Mark foes from much farther away."
+  },
+  {
+    "id": "deadeye.signature",
+    "root": "ranger",
+    "className": "Deadeye",
+    "slot": "signature",
+    "name": "One Perfect Shot",
+    "description": "Fire a far shot with huge criticals."
+  },
+  {
+    "id": "deadeye.utility",
+    "root": "ranger",
+    "className": "Deadeye",
+    "slot": "utility",
+    "name": "Spotter's Mark",
+    "description": "Reveal one target to the party."
+  },
+  {
+    "id": "raincaller.signature",
+    "root": "ranger",
+    "className": "Raincaller",
+    "slot": "signature",
+    "name": "Arrow Storm",
+    "description": "Bombard an area with projectiles."
+  },
+  {
+    "id": "raincaller.utility",
+    "root": "ranger",
+    "className": "Raincaller",
+    "slot": "utility",
+    "name": "Storm Mark",
+    "description": "Reveal and weaken foes entering an area."
+  },
+  {
+    "id": "arbalist.signature",
+    "root": "ranger",
+    "className": "Arbalist",
+    "slot": "signature",
+    "name": "Breach Bolt",
+    "description": "Fire a heavy shot that weakens attacks."
+  },
+  {
+    "id": "arbalist.utility",
+    "root": "ranger",
+    "className": "Arbalist",
+    "slot": "utility",
+    "name": "Lock On",
+    "description": "Keep a target marked through speed or concealment."
+  },
+  {
+    "id": "artillerist.signature",
+    "root": "ranger",
+    "className": "Artillerist",
+    "slot": "signature",
+    "name": "Repeater Burst",
+    "description": "Rapidly fire crossbow bolts."
+  },
+  {
+    "id": "artillerist.utility",
+    "root": "ranger",
+    "className": "Artillerist",
+    "slot": "utility",
+    "name": "Quickload Cache",
+    "description": "Gain speed, power and a burst of Focus."
+  },
+  {
+    "id": "dragonslayer.signature",
+    "root": "ranger",
+    "className": "Dragonslayer",
+    "slot": "signature",
+    "name": "Heartpiercer",
+    "description": "Pierce large elite foes with one shot."
+  },
+  {
+    "id": "dragonslayer.utility",
+    "root": "ranger",
+    "className": "Dragonslayer",
+    "slot": "utility",
+    "name": "Giant's Mark",
+    "description": "Mark a boss for more party damage."
+  },
+  {
+    "id": "skirmisher.signature",
+    "root": "ranger",
+    "className": "Skirmisher",
+    "slot": "signature",
+    "name": "Fan Volley",
+    "description": "Fire a wide spread while moving."
+  },
+  {
+    "id": "skirmisher.utility",
+    "root": "ranger",
+    "className": "Skirmisher",
+    "slot": "utility",
+    "name": "Running Hunt",
+    "description": "Reveal and weaken foes, then gain speed."
+  },
+  {
+    "id": "windrunner.signature",
+    "root": "ranger",
+    "className": "Windrunner",
+    "slot": "signature",
+    "name": "Strafe Volley",
+    "description": "Fire while moving and gain speed."
+  },
+  {
+    "id": "windrunner.utility",
+    "root": "ranger",
+    "className": "Windrunner",
+    "slot": "utility",
+    "name": "Tailwind",
+    "description": "Gain speed and restore Focus."
+  },
+  {
+    "id": "pathfinder.signature",
+    "root": "ranger",
+    "className": "Pathfinder",
+    "slot": "signature",
+    "name": "Pack Hunt",
+    "description": "Attack a target and speed pursuers."
+  },
+  {
+    "id": "pathfinder.utility",
+    "root": "ranger",
+    "className": "Pathfinder",
+    "slot": "utility",
+    "name": "Guide's Trail",
+    "description": "Place a beacon that speeds nearby allies."
+  },
+  {
+    "id": "tempest_archer.signature",
+    "root": "ranger",
+    "className": "Tempest Archer",
+    "slot": "signature",
+    "name": "Cyclone Shot",
+    "description": "Chain an arc through nearby foes."
+  },
+  {
+    "id": "tempest_archer.utility",
+    "root": "ranger",
+    "className": "Tempest Archer",
+    "slot": "utility",
+    "name": "Gale Mark",
+    "description": "Reveal foes, gain speed and restore Focus."
+  },
+  {
+    "id": "saboteur.signature",
+    "root": "ranger",
+    "className": "Saboteur",
+    "slot": "signature",
+    "name": "Payload Bolt",
+    "description": "Plant a delayed explosive on one foe."
+  },
+  {
+    "id": "saboteur.utility",
+    "root": "ranger",
+    "className": "Saboteur",
+    "slot": "utility",
+    "name": "Snare Beacon",
+    "description": "Slow and reveal foes crossing its area."
+  },
+  {
+    "id": "trapper.signature",
+    "root": "ranger",
+    "className": "Trapper",
+    "slot": "signature",
+    "name": "Kill Zone",
+    "description": "Deploy snares that repeatedly stop foes."
+  },
+  {
+    "id": "trapper.utility",
+    "root": "ranger",
+    "className": "Trapper",
+    "slot": "utility",
+    "name": "Tanglewire",
+    "description": "Extend your slows and movement limits."
+  },
+  {
+    "id": "demolitionist.signature",
+    "root": "ranger",
+    "className": "Demolitionist",
+    "slot": "signature",
+    "name": "Cluster Bolt",
+    "description": "Scatter smaller blasts from one shot."
+  },
+  {
+    "id": "demolitionist.utility",
+    "root": "ranger",
+    "className": "Demolitionist",
+    "slot": "utility",
+    "name": "Blast Marker",
+    "description": "Make the next valid hit trigger a blast."
+  },
+  {
+    "id": "cleric.mobility",
+    "root": "cleric",
+    "className": "Cleric",
+    "slot": "mobility",
+    "name": "Guardian Flight",
+    "description": "Rush safely to an ally or Sanctuary."
+  },
+  {
+    "id": "cleric.signature",
+    "root": "cleric",
+    "className": "Cleric",
+    "slot": "signature",
+    "name": "Mend",
+    "description": "Heal an ally, or yourself for less."
+  },
+  {
+    "id": "cleric.utility",
+    "root": "cleric",
+    "className": "Cleric",
+    "slot": "utility",
+    "name": "Sanctuary",
+    "description": "Heal allies and anchor Guardian Flight."
+  },
+  {
+    "id": "priest.signature",
+    "root": "cleric",
+    "className": "Priest",
+    "slot": "signature",
+    "name": "Prayer of Mending",
+    "description": "Heal the three weakest nearby allies."
+  },
+  {
+    "id": "priest.utility",
+    "root": "cleric",
+    "className": "Priest",
+    "slot": "utility",
+    "name": "Purify",
+    "description": "Cleanse one ally."
+  },
+  {
+    "id": "hierophant.signature",
+    "root": "cleric",
+    "className": "Hierophant",
+    "slot": "signature",
+    "name": "Benediction",
+    "description": "Heal nearby allies heavily."
+  },
+  {
+    "id": "hierophant.utility",
+    "root": "cleric",
+    "className": "Hierophant",
+    "slot": "utility",
+    "name": "Sacred Silence",
+    "description": "Cleanse allies and interrupt nearby foes."
+  },
+  {
+    "id": "saint.signature",
+    "root": "cleric",
+    "className": "Saint",
+    "slot": "signature",
+    "name": "Miracle",
+    "description": "Massively heal a dying ally."
+  },
+  {
+    "id": "saint.utility",
+    "root": "cleric",
+    "className": "Saint",
+    "slot": "utility",
+    "name": "Hallowed Ground",
+    "description": "Steadily heal allies in an area."
+  },
+  {
+    "id": "exorcist.signature",
+    "root": "cleric",
+    "className": "Exorcist",
+    "slot": "signature",
+    "name": "Smite and Succor",
+    "description": "Hurt a foe and heal the weakest ally."
+  },
+  {
+    "id": "exorcist.utility",
+    "root": "cleric",
+    "className": "Exorcist",
+    "slot": "utility",
+    "name": "Banish",
+    "description": "Knock foes away and weaken their damage."
+  },
+  {
+    "id": "oracle.signature",
+    "root": "cleric",
+    "className": "Oracle",
+    "slot": "signature",
+    "name": "Foreseen Rescue",
+    "description": "Shield an ally, then heal when broken."
+  },
+  {
+    "id": "oracle.utility",
+    "root": "cleric",
+    "className": "Oracle",
+    "slot": "utility",
+    "name": "Foresight",
+    "description": "Briefly reduce damage to one ally."
+  },
+  {
+    "id": "fateweaver.signature",
+    "root": "cleric",
+    "className": "Fateweaver",
+    "slot": "signature",
+    "name": "Rewrite Fate",
+    "description": "Block a fatal hit and heal that ally."
+  },
+  {
+    "id": "fateweaver.utility",
+    "root": "cleric",
+    "className": "Fateweaver",
+    "slot": "utility",
+    "name": "Prophecy",
+    "description": "Auto-protect an ally from the next major threat."
+  },
+  {
+    "id": "seraph.signature",
+    "root": "cleric",
+    "className": "Seraph",
+    "slot": "signature",
+    "name": "Chain of Mercy",
+    "description": "Chain healing through injured allies."
+  },
+  {
+    "id": "seraph.utility",
+    "root": "cleric",
+    "className": "Seraph",
+    "slot": "utility",
+    "name": "Ascension",
+    "description": "Shield and speed an ally; redirect some damage."
+  },
+  {
+    "id": "shaman.signature",
+    "root": "cleric",
+    "className": "Shaman",
+    "slot": "signature",
+    "name": "Life Current",
+    "description": "Tether and heal an ally until too far away."
+  },
+  {
+    "id": "shaman.utility",
+    "root": "cleric",
+    "className": "Shaman",
+    "slot": "utility",
+    "name": "Spirit Totem",
+    "description": "Repeatedly heal nearby allies."
+  },
+  {
+    "id": "lifewarden.signature",
+    "root": "cleric",
+    "className": "Lifewarden",
+    "slot": "signature",
+    "name": "Renewing Bond",
+    "description": "Tether one ally for steady healing."
+  },
+  {
+    "id": "lifewarden.utility",
+    "root": "cleric",
+    "className": "Lifewarden",
+    "slot": "utility",
+    "name": "Sheltering Seed",
+    "description": "Delay a shield until heavy damage hits."
+  },
+  {
+    "id": "grovekeeper.signature",
+    "root": "cleric",
+    "className": "Grovekeeper",
+    "slot": "signature",
+    "name": "Verdant Bloom",
+    "description": "Continuously heal allies in an area."
+  },
+  {
+    "id": "grovekeeper.utility",
+    "root": "cleric",
+    "className": "Grovekeeper",
+    "slot": "utility",
+    "name": "Thorn Ward",
+    "description": "Shield an area and damage nearby foes."
+  },
+  {
+    "id": "shepherd.signature",
+    "root": "cleric",
+    "className": "Shepherd",
+    "slot": "signature",
+    "name": "Guardian Chorus",
+    "description": "Heal more for each nearby ally."
+  },
+  {
+    "id": "shepherd.utility",
+    "root": "cleric",
+    "className": "Shepherd",
+    "slot": "utility",
+    "name": "Gather",
+    "description": "Grant allies speed and brief defense."
+  },
+  {
+    "id": "spiritcaller.signature",
+    "root": "cleric",
+    "className": "Spiritcaller",
+    "slot": "signature",
+    "name": "Ancestral Echo",
+    "description": "Repeat part of your next true heal."
+  },
+  {
+    "id": "spiritcaller.utility",
+    "root": "cleric",
+    "className": "Spiritcaller",
+    "slot": "utility",
+    "name": "Spirit Link",
+    "description": "Heal, shield and share damage across allies."
+  },
+  {
+    "id": "mistweaver.signature",
+    "root": "cleric",
+    "className": "Mistweaver",
+    "slot": "signature",
+    "name": "Restorative Tide",
+    "description": "Heal allies and harm nearby foes."
+  },
+  {
+    "id": "mistweaver.utility",
+    "root": "cleric",
+    "className": "Mistweaver",
+    "slot": "utility",
+    "name": "Veilstep",
+    "description": "Cleanse, speed and protect nearby allies."
+  },
+  {
+    "id": "soulwarden.signature",
+    "root": "cleric",
+    "className": "Soulwarden",
+    "slot": "signature",
+    "name": "Ancestral Intervention",
+    "description": "Heal, shield and link allies."
+  },
+  {
+    "id": "soulwarden.utility",
+    "root": "cleric",
+    "className": "Soulwarden",
+    "slot": "utility",
+    "name": "Communion",
+    "description": "Heal, shield and share ally damage."
+  },
+  {
+    "id": "spellcaster.mobility",
+    "root": "spellcaster",
+    "className": "Spellcaster",
+    "slot": "mobility",
+    "name": "Blink",
+    "description": "Blink a short distance along a safe, clear path."
+  },
+  {
+    "id": "spellcaster.signature",
+    "root": "spellcaster",
+    "className": "Spellcaster",
+    "slot": "signature",
+    "name": "Arcane Bolt",
+    "description": "Fire a focused bolt at your target."
+  },
+  {
+    "id": "spellcaster.utility",
+    "root": "spellcaster",
+    "className": "Spellcaster",
+    "slot": "utility",
+    "name": "Mana Ward",
+    "description": "Spend Mana for a temporary shield."
+  },
+  {
+    "id": "mage.signature",
+    "root": "spellcaster",
+    "className": "Mage",
+    "slot": "signature",
+    "name": "Arcane Volley",
+    "description": "Fire bolts through foes ahead."
+  },
+  {
+    "id": "mage.utility",
+    "root": "spellcaster",
+    "className": "Mage",
+    "slot": "utility",
+    "name": "Spell Echo",
+    "description": "Briefly boost your damage."
+  },
+  {
+    "id": "elementalist.signature",
+    "root": "spellcaster",
+    "className": "Elementalist",
+    "slot": "signature",
+    "name": "Elemental Convergence",
+    "description": "Damage and disrupt a target area."
+  },
+  {
+    "id": "elementalist.utility",
+    "root": "spellcaster",
+    "className": "Elementalist",
+    "slot": "utility",
+    "name": "Elemental Exposure",
+    "description": "Reveal foes for more party damage."
+  },
+  {
+    "id": "pyromancer.signature",
+    "root": "spellcaster",
+    "className": "Pyromancer",
+    "slot": "signature",
+    "name": "Inferno",
+    "description": "Burn an area with repeated heavy damage."
+  },
+  {
+    "id": "pyromancer.utility",
+    "root": "spellcaster",
+    "className": "Pyromancer",
+    "slot": "utility",
+    "name": "Flashover",
+    "description": "Mark foes to take more damage briefly."
+  },
+  {
+    "id": "cryomancer.signature",
+    "root": "spellcaster",
+    "className": "Cryomancer",
+    "slot": "signature",
+    "name": "Whiteout",
+    "description": "Repeatedly damage and slow foes in a storm."
+  },
+  {
+    "id": "cryomancer.utility",
+    "root": "spellcaster",
+    "className": "Cryomancer",
+    "slot": "utility",
+    "name": "Ice Barrier",
+    "description": "Cleanse and gain a strong shield."
+  },
+  {
+    "id": "battlemage.signature",
+    "root": "spellcaster",
+    "className": "Battlemage",
+    "slot": "signature",
+    "name": "Arcane Cleave",
+    "description": "Sweep foes and strengthen your ward."
+  },
+  {
+    "id": "battlemage.utility",
+    "root": "spellcaster",
+    "className": "Battlemage",
+    "slot": "utility",
+    "name": "Runic Guard",
+    "description": "Reduce incoming damage with runes."
+  },
+  {
+    "id": "spellblade.signature",
+    "root": "spellcaster",
+    "className": "Spellblade",
+    "slot": "signature",
+    "name": "Aether Blade",
+    "description": "Cut through foes ahead with fast magic."
+  },
+  {
+    "id": "spellblade.utility",
+    "root": "spellcaster",
+    "className": "Spellblade",
+    "slot": "utility",
+    "name": "Warcasting",
+    "description": "Briefly gain speed, power and a shield."
+  },
+  {
+    "id": "arcane_knight.signature",
+    "root": "spellcaster",
+    "className": "Arcane Knight",
+    "slot": "signature",
+    "name": "Spellbreaker",
+    "description": "Damage foes and weaken their attacks."
+  },
+  {
+    "id": "arcane_knight.utility",
+    "root": "spellcaster",
+    "className": "Arcane Knight",
+    "slot": "utility",
+    "name": "Aegis Pulse",
+    "description": "Shield allies and reduce incoming damage."
+  },
+  {
+    "id": "occultist.signature",
+    "root": "spellcaster",
+    "className": "Occultist",
+    "slot": "signature",
+    "name": "Umbral Lance",
+    "description": "Pierce and weaken one foe."
+  },
+  {
+    "id": "occultist.utility",
+    "root": "spellcaster",
+    "className": "Occultist",
+    "slot": "utility",
+    "name": "Occult Sight",
+    "description": "Reveal foes for more party damage."
+  },
+  {
+    "id": "necromancer.signature",
+    "root": "spellcaster",
+    "className": "Necromancer",
+    "slot": "signature",
+    "name": "Soul Drain",
+    "description": "Raise an undead servant from an Elite corpse."
+  },
+  {
+    "id": "necromancer.utility",
+    "root": "spellcaster",
+    "className": "Necromancer",
+    "slot": "utility",
+    "name": "Grave Chill",
+    "description": "Slow and weaken nearby foes."
+  },
+  {
+    "id": "lich.signature",
+    "root": "spellcaster",
+    "className": "Lich",
+    "slot": "signature",
+    "name": "Death Coil",
+    "description": "Raise an undead that drains and weakens foes."
+  },
+  {
+    "id": "lich.utility",
+    "root": "spellcaster",
+    "className": "Lich",
+    "slot": "utility",
+    "name": "Phylactery Ward",
+    "description": "Block one fatal hit while warded."
+  },
+  {
+    "id": "plaguebringer.signature",
+    "root": "spellcaster",
+    "className": "Plaguebringer",
+    "slot": "signature",
+    "name": "Rotting Ground",
+    "description": "Raise an undead servant that spreads rot."
+  },
+  {
+    "id": "plaguebringer.utility",
+    "root": "spellcaster",
+    "className": "Plaguebringer",
+    "slot": "utility",
+    "name": "Miasma",
+    "description": "Slow and weaken nearby foes."
+  },
+  {
+    "id": "summoner.signature",
+    "root": "spellcaster",
+    "className": "Summoner",
+    "slot": "signature",
+    "name": "Arcane Servitor",
+    "description": "Call an animal servant to defend you."
+  },
+  {
+    "id": "summoner.utility",
+    "root": "spellcaster",
+    "className": "Summoner",
+    "slot": "utility",
+    "name": "Commanding Sigil",
+    "description": "Empower and shield nearby allies."
+  },
+  {
+    "id": "demonologist.signature",
+    "root": "spellcaster",
+    "className": "Demonologist",
+    "slot": "signature",
+    "name": "Abyssal Gate",
+    "description": "Open a portal that calls a Nether servant."
+  },
+  {
+    "id": "demonologist.utility",
+    "root": "spellcaster",
+    "className": "Demonologist",
+    "slot": "utility",
+    "name": "Pact of Ruin",
+    "description": "Trade defense for spell damage and a shield."
+  },
+  {
+    "id": "spiritbinder.signature",
+    "root": "spellcaster",
+    "className": "Spiritbinder",
+    "slot": "signature",
+    "name": "Guardian Eidolon",
+    "description": "Call a protective Vex servant."
+  },
+  {
+    "id": "spiritbinder.utility",
+    "root": "spellcaster",
+    "className": "Spiritbinder",
+    "slot": "utility",
+    "name": "Shared Essence",
+    "description": "Shield allies and spread incoming damage."
+  }
+]
