@@ -5,15 +5,15 @@ ResourcePackManager pack. This is an opt-in Java-client calibration pack, kept
 separate from the exported defaults so the artist can replace its two textures.
 It is not automatically exported by the plugin jar.
 
-The wood/brass concept occupies exactly 190 by 60 GUI pixels. `gray.png` and
+The wood/brass concept occupies exactly 190 by 54 GUI pixels. `gray.png` and
 `red.png` retain their calibration filenames, but now contain the normal and
-F-active artwork. The images are 190x60 with a font height of 60. A single bitmap glyph must fit Minecraft's 256x256 font atlas. The normal
+F-active artwork. The images are 190x54 with a font height of 54. A single bitmap glyph must fit Minecraft's 256x256 font atlas. The normal
 hotbar aperture is transparent; the skill cards are opaque and cover item pixels.
 `node generate.cjs` regenerates artwork, fill strips, text atlas, and the 33
 offset fonts with `sharp`. `generate-calibration.py` retains the old half-opacity
 rectangles in a separate `calibration` output folder.
 
-The probe renders real health, class-resource name/amount, and vanilla XP progress.
+The probe renders real health, class-resource amount, and vanilla XP progress.
 Health/resource bars update from those same values. Skill labels/icons are a
 visual concept, not class-specific art. Armor, hunger and conditional vital rows
 are covered by this opt-in experiment; it is not a replacement production HUD.
@@ -40,13 +40,13 @@ key bindings. Other plugins can still write to the same action-bar channel.
 
 The vanilla 26.2 client extracts the action bar after the hotbar on a new render
 stratum. Its text origin is `(floor(guiWidth/2), guiHeight-72)`. Bitmap glyphs
-start 7 pixels below that origin minus their configured ascent. With ascent -5,
+start 7 pixels below that origin minus their configured ascent. With ascent -11,
 the intended panel bounds are `[center-95, center+95)` horizontally and
-`[guiHeight-60, guiHeight)` vertically. The bitmap's extra one-pixel advance is
+`[guiHeight-54, guiHeight)` vertically. The bitmap's extra one-pixel advance is
 cancelled with a negative space. Shadows are disabled on the component.
 
 The 182-pixel hotbar sits four pixels from each side. Its 184-pixel selection
-outline has a transparent aperture starting at x=3, y=37, including both outer
+outline has a transparent aperture starting at x=3, y=31, including both outer
 edges when the first or last slot is selected. The height
 also covers the usual XP, health, hunger and armor rows, with extra room above.
 Extra health/absorption rows and the offhand slot can extend outside this area.
@@ -70,40 +70,36 @@ The final pack loaded without font errors. Bedrock has not been checked.
 ### Alignment grid
 
 All coordinates below are relative to the panel's top-left corner, in GUI
-pixels. Rectangles use exclusive right and bottom edges. Frames, numbers and
-bars use whole GUI pixels. Resource labels use double-resolution artwork:
-6x10 texture pixels render within the same 3x5 GUI-pixel letter bounds, with
-the existing four-pixel character advance. This gives M and N distinct shapes
-and finer strokes without enlarging labels or moving their anchors. At GUI
-scale 1, the finer detail is limited by the available framebuffer pixels.
+pixels. Rectangles use exclusive right and bottom edges. Health and resource
+labels are omitted; icons, counters and bars identify the values. Removing the
+label row reduces the main panel height by six GUI pixels while preserving
+the native hotbar position. The separate label alphabet is no longer shipped.
 
 | Element | X | Y | Width | Height |
 | --- | ---: | ---: | ---: | ---: |
-| Health card | 4 | 3 | 89 | 26 |
-| Resource card | 97 | 3 | 89 | 26 |
-| Health label | 25 | 6 | 23 | 5 |
-| Resource label | 165 minus visible width | 6 | up to 27 | 5 |
-| Health counter | 25 | 13 | up to 53 | 7 |
-| Resource counter | 165 minus visible width | 13 | up to 53 | 7 |
-| Health fill | 25 | 23 | up to 63 | 3 |
-| Resource fill | 165 minus fill width | 23 | up to 63 | 3 |
-| Resource icon | 171 | 9 | 10 | 15 |
+| Health card | 4 | 3 | 89 | 20 |
+| Resource card | 97 | 3 | 89 | 20 |
+| Health counter | 25 | 7 | up to 53 | 7 |
+| Resource counter | 165 minus visible width | 7 | up to 53 | 7 |
+| Health fill | 25 | 17 | up to 63 | 3 |
+| Resource fill | 165 minus fill width | 17 | up to 63 | 3 |
+| Resource icon | 171 | 5 | 10 | 15 |
 | Class XP diamond | 79 | -12 | 32 | 32 |
 | Class level | centered at 95 | 1 | 5 per digit, 1 spacing | 7 |
-| XP fill | 5 | 32 | up to 180 | 2 |
-| Native hotbar opening | 3 | 37 | 184 | 23 |
-| Signature card | 4 | 38 | 60 | 21 |
-| Utility card | 65 | 38 | 60 | 21 |
-| Mobility card | 126 | 38 | 60 | 21 |
+| XP fill | 5 | 26 | up to 180 | 2 |
+| Native hotbar opening | 3 | 31 | 184 | 23 |
+| Signature card | 4 | 32 | 60 | 21 |
+| Utility card | 65 | 32 | 60 | 21 |
+| Mobility card | 126 | 32 | 60 | 21 |
 
-Labels occupy rows 6 through 10, followed by two empty rows. Counters occupy
-rows 13 through 19, followed by two empty rows before the trough at row 22.
+Counters occupy rows 7 through 13, followed by two empty rows before the
+trough at row 16.
 Each fill is inset one pixel inside its trough. The resource card mirrors the
 health card: icon on the right, trough at x=101, and fill within [102,165).
-Resource labels and counters end at x=165, excluding their trailing spacing
+Resource counters end at x=165, excluding their trailing spacing
 pixel. Resource fill grows leftward from that same right edge.
-Skill icons start at card x+3, y=41; labels at x+19, y=41;
-bindings at x+19, y=50. Skill frames end at row 58, reserving row 59 for the
+Skill icons start at card x+3, y=35; labels at x+19, y=35;
+bindings at x+19, y=44. Skill frames end at row 52, reserving row 53 for the
 outer panel and avoiding clipping when the framebuffer height is not an exact
 multiple of the GUI scale.
 
@@ -118,7 +114,7 @@ take precedence over the profile's selection. The 29 fill states share a
 
 The initial alignment revision was deployed and checked on NBTest on 2026-09-09.
 Native F2 capture at 3840x2071, GUI scale 8, placed the panel at framebuffer
-1160,1592. Pixel-color measurements matched the coordinates above exactly:
+1160,1592. Pixel-color measurements matched that earlier 60-pixel layout exactly:
 label rows 6..10, counter rows 13..19, fills 23..25, skill labels 41..45,
 and bindings 50..54. Both end-slot selection outlines were inspected in the
 real client. The F capture shows all three cards with their bottom borders
@@ -147,3 +143,8 @@ bounds are [89,100) horizontally and [1,8) vertically. Evidence is retained at
 `measurements.json`, and `server.log`. Live XP gain and rollover were not
 exercised; the player's progression was preserved. The deployed jar SHA-256 is
 `ce1f66f4a3670cc26fe9b78e236bbb41c06a593947d6b1c3d94499ae80154e5d`.
+
+The compact revision removes the health/resource words and their font provider.
+It was built and deployed to NBTest on 2026-09-09; server startup and resource
+pack hosting completed. In-game inspection of this 54-pixel revision is pending.
+Jar SHA-256: c61526fec35baf85ec5bf78575c94bedab23ea7a44e1f246417938846f7461a7.
