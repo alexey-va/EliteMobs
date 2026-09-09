@@ -19,6 +19,21 @@ visual concept, not class-specific art. Armor, hunger and conditional vital rows
 are covered by this opt-in experiment; it is not a replacement production HUD.
 Fonts are `elitemobs:combat_hud_concept_0` through `_32`; the default font is untouched.
 
+Resource icons are a separate dynamic glyph at x=171, y=5, in a 10x15 cell.
+The resource snapshot selects the root class's icon, including specializations:
+
+| Root class | Resource | Icon | Glyph |
+| --- | --- | --- | --- |
+| Paladin | Resolve | Gold shield | U+E500 |
+| Berserker | Fury | Red-orange flame | U+E501 |
+| Ranger | Focus | Green feather | U+E502 |
+| Cleric | Grace | Ivory sunburst | U+E503 |
+| Spellcaster | Mana | Blue crystal | U+E504 |
+
+The 50x15 `resource_icons.png` atlas uses five 10x15 cells, each with an
+11-pixel advance. Both backgrounds leave the icon area empty; a missing
+resource snapshot shows no icon. The counter and bar retain their alignment.
+
 ```
 /em hudprobe show magmaguy 0 0
 /em hudprobe show magmaguy 0 -2

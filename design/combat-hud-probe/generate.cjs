@@ -95,6 +95,42 @@ function skillBinding(binding,x,y) {
 function frame(x,y,w,h,active=false){return rect(x,y,w,h,'#181611')+rect(x,y,w,1,active?'#f6d07b':'#9d8154')+rect(x,y,1,h,active?'#d9ae5b':'#79613e')+rect(x+1,y+1,w-2,h-2,'#4b3725')+rect(x+2,y+2,w-4,h-4,'#121b20')+rect(x+2,y+2,w-4,1,'#263237')+rect(x+1,y+h-2,w-2,1,'#2d241c');}
 function heart(x,y){return `<g transform="translate(${x} ${y})">`+poly('0,2 2,0 4,0 6,2 8,0 10,0 12,2 12,6 6,12 0,6','#681f28')+poly('1,2 2,1 4,1 6,3 8,1 10,1 11,2 11,5 6,10 1,5','#ec364c')+rect(2,2,2,3,'#ff8c95')+rect(8,2,2,1,'#ff6575')+`</g>`;}
 function crystal(x,y){return `<g transform="translate(${x} ${y})">`+poly('5,0 10,5 10,11 5,15 0,11 0,5','#074854')+poly('5,1 9,5 9,10 5,13 1,10 1,5','#12bed7')+poly('5,1 5,13 2,9 2,5','#78eeef')+poly('6,3 8,5 8,9 6,11','#0086b9')+rect(4,3,1,7,'#c0ffff')+`</g>`;}
+// Order is the explicit U+E500..E504 contract in CombatHudProbe.resourceIcon.
+const resourceTypes=['resolve','fury','focus','grace','mana'];
+function resourceIcon(type,x,y) {
+ if(type==='mana') return crystal(x,y);
+ let s='';
+ switch(type) {
+  case 'resolve':
+   s=poly('0,1 5,0 10,1 10,8 8,11 5,15 2,11 0,8','#69471c')
+    +poly('1,2 5,1 9,2 9,8 7,11 5,13 3,11 1,8','#eab953')
+    +poly('2,3 5,2 8,3 8,8 5,12 2,8','#956921')
+    +rect(4,3,2,7,'#fff0ac')+rect(2,5,6,2,'#fff0ac')+rect(1,2,1,5,'#fff1b4');
+   break;
+  case 'fury':
+   s=poly('5,0 8,4 7,6 9,5 10,9 9,12 7,14 3,15 0,12 0,8 2,4 2,8 4,6','#75232a')
+    +poly('5,2 7,5 6,8 8,7 9,10 8,12 6,14 3,14 1,11 1,9 3,6 3,10 5,7','#ec4b30')
+    +poly('5,7 7,10 7,12 5,14 3,13 2,11 4,9 4,11','#ffad3c')
+    +poly('5,10 6,12 5,14 4,12','#fff1a0');
+   break;
+  case 'focus':
+   s=poly('7,0 10,1 10,6 8,9 5,11 3,11 1,15 0,14 2,10 2,6 4,2','#164936')
+    +poly('7,1 9,2 9,6 7,8 4,10 3,9 3,6 5,3','#5bb765')
+    +poly('7,2 8,2 7,5 5,7 3,10 3,7 5,4','#afe297')
+    +poly('8,2 9,3 5,9 1,15 0,14 4,8','#e2e8bc')
+    +rect(6,6,3,1,'#215f43')+rect(4,9,3,1,'#215f43');
+   break;
+  case 'grace':
+   s=rect(4,0,2,15,'#a5803f')+rect(0,6,10,3,'#a5803f')
+    +poly('1,3 3,3 9,11 7,12','#a5803f')+poly('7,3 9,3 3,12 1,11','#a5803f')
+    +poly('5,2 7,5 10,7 7,10 5,13 3,10 0,7 3,5','#eed69a')
+    +poly('5,4 7,7 5,11 3,7','#fff9e0')
+    +rect(4,5,2,5,'#ffffff')+rect(2,6,6,2,'#ffffff');
+   break;
+  default: throw new Error(`Unknown resource icon: ${type}`);
+ }
+ return `<g transform="translate(${x} ${y})">${s}</g>`;
+}
 function icon(kind,x,y){let s=rect(x,y,13,15,'#080e13')+rect(x+1,y+1,11,13,'#203239');
  if(kind===0) s+=poly(`${x+8},${y+3} ${x+11},${y+3} ${x+10},${y+10} ${x+5},${y+12} ${x+3},${y+11} ${x+8},${y+7}`,'#b58a4e')+poly(`${x+2},${y+2} ${x+8},${y+5} ${x+6},${y+6} ${x+1},${y+4}`,'#d5faff')+poly(`${x+1},${y+6} ${x+7},${y+7} ${x+5},${y+9} ${x+2},${y+8}`,'#81b4c2');
  if(kind===1) s+=poly(`${x+8},${y+2} ${x+11},${y+4} ${x+7},${y+8} ${x+8},${y+8} ${x+2},${y+13} ${x+5},${y+7} ${x+3},${y+7}`,'#009ddd')+poly(`${x+8},${y+3} ${x+9},${y+4} ${x+5},${y+9} ${x+6},${y+6}`,'#b5ffff');
@@ -104,7 +140,7 @@ function panel(active){
  let s=rect(0,0,190,54,'#211c17')+rect(1,1,188,52,'#503925');
  for(let y=2;y<54;y+=3) for(let x=2;x<188;x+=13) s+=rect(x,y,5+((x*7+y)%7),1,(x+y)%2?'#62472d':'#352a20');
  s+=rect(0,0,190,1,active?'#ffe099':'#b08e5d')+rect(0,0,1,54,'#957244')+rect(189,0,1,54,'#171712');
- s+=frame(4,3,89,20,active)+frame(97,3,89,20,active)+heart(8,7)+crystal(171,5);
+ s+=frame(4,3,89,20,active)+frame(97,3,89,20,active)+heart(8,7);
  for(const x of [24,101]) s+=rect(x,16,65,5,'#080c0f')+rect(x+1,17,63,3,x<90?'#471c26':'#073e4b');
  s+=rect(4,24,182,6,'#17191a')+rect(4,24,182,1,'#806944')+rect(5,26,180,2,'#183123')+rect(5,29,180,1,'#392d21');
  if(active){
@@ -118,6 +154,8 @@ function panel(active){
  return s;
 }
 (async()=>{
+ await sharp(Buffer.from(svg(50,15,resourceTypes.map((type,i)=>resourceIcon(type,i*10,0)).join(''))))
+  .png().toFile(path.join(textures,'resource_icons.png'));
  // Each 32x42 glyph contains the diamond and its F badge. Drawing them as
  // one overlay keeps the key above the dynamic XP strip, clear of the hotbar.
  // Crop at row 12, four pixels above the original midpoint. Preserve the
@@ -166,6 +204,7 @@ function panel(active){
     bitmap('text',7,-18,alphabet),
     bitmap('health',3,-28,'\ue110'),bitmap('resource',3,-28,'\ue111'),bitmap('xp',2,-37,'\ue112')];
   providers.push(bitmap('class_level',16,-14,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
+  providers.push(bitmap('resource_icons',15,-16,resourceTypes.map((_,i)=>String.fromCodePoint(0xe500+i)).join('')));
   const diamond=bitmap('class_diamond',42,1,'');
   diamond.chars=Array.from({length:4},(_,row)=>Array.from({length:8},(_,col)=>{
    const index=row*8+col; return index<=28?String.fromCodePoint(0xe400+index):'\u0000';
