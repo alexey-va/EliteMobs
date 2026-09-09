@@ -1,41 +1,87 @@
--- @include shared.inc
--- @include mobility/cleric.inc
--- @include abilities/cleric.inc
+-- @include ground_markers.inc
+-- @include cleric_support.inc
+-- @include mobility/radiant_flight.inc
 
-local function current(c,s)
- return {T.wait(30,function(c,s)  T.sound(c,'BLOCK_CONDUIT_AMBIENT_SHORT',1.3) end,
-  function(c,s,t) local actor=c.trial:actor('attendant_1'); if actor and t%4==0 then T.tether(c,c.trial:position(),actor:get_location(),C.water) end end,
-  function(c,s) s.currentUntil=s.tick+120; s.separated=0 end),T.rest(30)}
-end
-local function totem(c,s)
- local p
- return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),1.5,0,0); T.sound(c,'BLOCK_WOOD_PLACE',1.2) end,
-  function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,4),C.water) end end,
-  function(c,s) c.trial:remove_actor('totem'); if C.focus(c,'totem',p,2,'&eSpirit Totem','JUNGLE_LOG') then s.totem=p; s.totemUntil=s.tick+140; s.totemAlive=true; s.sanctuary=p end end),T.rest(30)}
-end
-return T.encounter{
- init=function(c,s) C.init(c,s,1); s.currentUntil=0; s.totemUntil=0; s.nextPulse=20; s.separated=0 end, damaged=C.damage,
- passive=function(c,s)
-  C.passive(c,s); if s.tick%5~=0 then return end
-  local actor=c.trial:actor('attendant_1'); local linked=actor and T.distance(c.trial:position(),actor:get_location())<=6 and c.trial:actor_los('boss','attendant_1')
-  if s.currentUntil>s.tick then
-   s.separated=linked and 0 or s.separated+5
-   if s.separated>=20 then s.currentUntil=0; c.trial:say('The current cannot reach that far.'); C.recover(c,s,50)
-   elseif linked then T.tether(c,c.trial:position(),actor:get_location(),C.water) end
+-- Life Current breaks after one second of separation. Spirit Totem is a normal
+-- destructible reinforcement; its fixed healing ground invites a target switch.
+return {
+ api_version=1,
+ on_spawn=function(c)
+  local p=c.boss:get_location()
+  c.state.attendant=c.world:spawn_custom_boss_at_location('class_trial_shaman_attendant.yml',
+   {world=p.world,x=p.x+3,y=p.y,z=p.z+1},{level=c.boss.level,add_as_reinforcement=true,silent=true})
+  assert(c.state.attendant,'Shaman attendant could not spawn')
+  c.state.healingLeft=c.boss:get_maximum_health()*.15
+ end,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player()
+  if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextCurrent=80; s.nextTotem=200
+   player:send_message('&6Shaman Instructor: &fA current needs a path. Draw us apart, and watch the totem.')
   end
-  if s.totemAlive and not c.trial:actor('totem') then s.totemAlive=false; s.totemUntil=0; s.nextPulse=math.max(s.nextPulse,s.tick+20); T.sound(c,'BLOCK_WOOD_BREAK',1) end
-  if s.totemUntil>s.tick and s.totemAlive then T.draw(c,T.circle(s.totem,4),C.water)
-  elseif s.totem then c.trial:remove_actor('totem'); s.totem=nil; s.totemAlive=false end
-  if actor and s.tick>=s.nextPulse then
-   local fromCurrent=s.currentUntil>s.tick and linked
-   local fromTotem=s.totemAlive and s.totemUntil>s.tick and T.distance(s.totem,actor:get_location())<=4
-   if fromCurrent or fromTotem then C.heal(c,s,'attendant_1',.25*c.trial.matched_hit); s.nextPulse=s.tick+(fromCurrent and 20 or 40) end
+  if s.currentUntil and s.tick<s.currentUntil then
+   local linked=cleric_in_circle(s.attendant,c.boss:get_location(),6)
+   s.separated=linked and 0 or (s.separated or 0)+1
+   if s.separated>=20 then
+    s.currentUntil=nil
+    player:send_message('&6Shaman Instructor: &fThe current cannot reach that far. Well read.')
+   elseif linked then
+    if s.tick%5==0 then cleric_tether(c,c.boss,s.attendant,true) end
+    if s.tick%20==0 then cleric_heal(c,s.attendant,.06) end
+   end
+  end
+  if s.totem then
+   if not s.totem:is_alive() or s.tick>=s.totemUntil then
+    if s.totem:is_alive() then s.totem:remove_elite() end
+    s.totem=nil; c.boss:play_sound_at_self('BLOCK_WOOD_BREAK',.5,1)
+   else
+    if s.tick%5==0 then show_circle(c,s.totemZone,85,220,245) end
+    if s.tick%40==0 then
+     if cleric_in_circle(s.attendant,s.totemPosition,4) then cleric_heal(c,s.attendant,.08) end
+     if cleric_in_circle(c.boss,s.totemPosition,4) then cleric_heal(c,c.boss,.0075) end
+    end
+   end
+  end
+  if s.currentAt then
+   if s.attendant:is_alive() and s.tick%5==0 then cleric_tether(c,c.boss,s.attendant,true) end
+   if s.tick>=s.currentAt then
+    s.currentAt=nil; s.currentUntil=s.tick+120; s.separated=0; s.restUntil=s.tick+30
+   end
+   return
+  end
+  if s.totemAt then
+   if s.tick%4==0 then show_circle(c,s.totemZone,85,220,245) end
+   if s.tick>=s.totemAt then
+    s.totemAt=nil
+    s.totem=c.world:spawn_custom_boss_at_location('class_trial_spirit_totem.yml',s.totemPosition,
+     {level=c.boss.level,add_as_reinforcement=true,silent=true})
+    assert(s.totem,'Spirit Totem could not spawn')
+    s.totemUntil=s.tick+140; s.restUntil=s.tick+30
+   end
+   return
+  end
+  if s.tick<(s.restUntil or 0) then return end
+  if s.restUntil then s.restUntil=nil; c.boss:set_ai_enabled(true) end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true
+   player:send_message('&6Shaman Instructor: &fThe spirits gather where we stand. Choose that ground with care.')
+   local anchor=s.totem and s.totem:get_location() or s.attendant:is_alive() and s.attendant:get_location()
+   if radiant_flight(c,anchor) then s.restUntil=s.tick+60; return end
+  end
+  if s.healingLeft<=0 then return end
+  if s.tick>=s.nextTotem and not s.totem then
+   s.nextTotem=s.tick+480
+   local p=c.boss:get_location(); s.totemPosition={world=p.world,x=p.x+1.5,y=p.y,z=p.z}
+   s.totemZone=ground_circle(c,s.totemPosition,4); s.totemAt=s.tick+36
+   c.boss:set_ai_enabled(false); c.boss:play_sound_at_self('BLOCK_WOOD_PLACE',.6,1.2)
+  elseif s.tick>=s.nextCurrent and s.attendant:is_alive() then
+   s.nextCurrent=s.tick+400; s.currentAt=s.tick+30
+   c.boss:set_ai_enabled(false); c.boss:play_sound_at_self('BLOCK_CONDUIT_AMBIENT_SHORT',.6,1.3)
   end
  end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'flight') then s.phasePending=false; local seq=M.move(c,s,s.totem); T.append(seq,current(c,s)); T.lockout(seq,'current',400); T.start(c,s,'flight',seq,M.cooldown)
-  elseif s.healBudget>0 and s.totemUntil<=s.tick and T.ready(s,'totem') then T.start(c,s,'totem',totem(c,s),480)
-  elseif c.trial:actor('attendant_1') and s.healBudget>0 and T.ready(s,'current') then T.start(c,s,'current',current(c,s),400)
-  else T.basic(c,s,'melee') end
+ on_death=function(c)
+  c.boss:send_message('&6Shaman Instructor: &fYou listened to the current and chose your footing. The spirits heard.',24)
  end
 }

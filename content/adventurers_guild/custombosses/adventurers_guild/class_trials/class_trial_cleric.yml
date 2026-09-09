@@ -9,14 +9,9 @@ mainHand: MACE
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_cleric.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: cleric
-  title: A Place to Recover
-  power: class_trial_cleric.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: Watch where healing comes from. You can answer it without haste.
-    halfway: Well timed. Now follow the light to the one who needs it.
-    victory: You saw the whole fight, not just the person before you. That is the gift.
-    defeat: Take a breath. You can step out, choose your moment, and begin again.

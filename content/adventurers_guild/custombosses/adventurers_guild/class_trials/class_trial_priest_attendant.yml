@@ -1,0 +1,5 @@
+extends: class_trial_cleric_acolyte.yml
+isEnabled: true
+name: '&fPrayer Attendant'
+healthMultiplier: 0.35
+damageMultiplier: 0.12

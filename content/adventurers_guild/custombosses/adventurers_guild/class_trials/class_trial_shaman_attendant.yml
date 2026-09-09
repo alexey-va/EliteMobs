@@ -1,0 +1,9 @@
+extends: class_trial_cleric_acolyte.yml
+isEnabled: true
+name: '&bSpirit Attendant'
+healthMultiplier: 0.5
+damageMultiplier: 0.2
+mainHand: TRIDENT
+chestplate: LEATHER_CHESTPLATE:608B78
+leggings: LEATHER_LEGGINGS:608B78
+boots: LEATHER_BOOTS:608B78

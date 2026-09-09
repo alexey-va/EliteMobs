@@ -9,14 +9,9 @@ mainHand: MACE
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_priest.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: priest
-  title: The Moment Before the Prayer
-  power: class_trial_priest.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: Before a prayer is answered, someone must find the moment to speak.
-    halfway: Watch who needs help. That is where my attention will go.
-    victory: You saw the need, the answer, and the moment between them.
-    defeat: The bright thread showed where the prayer was going. Try that first.

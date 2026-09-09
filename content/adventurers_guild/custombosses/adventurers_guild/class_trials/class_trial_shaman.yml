@@ -9,14 +9,9 @@ mainHand: TRIDENT
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_shaman.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: shaman
-  title: Beyond the Tether
-  power: class_trial_shaman.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: A current can carry strength only while its course remains open.
-    halfway: The source is there. The tether still has a limit.
-    victory: You found where the current could no longer flow.
-    defeat: The totem could be broken; the tether could be stretched.
