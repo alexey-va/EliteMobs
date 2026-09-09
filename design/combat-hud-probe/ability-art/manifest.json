@@ -2478,5 +2478,44 @@
     "texture": "spiritbinder.utility.png",
     "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot.",
     "derivative": "32x32 Lanczos3 reduction from original ImageGen source; original artwork review retained."
+  },
+  {
+    "id": "adventurer.signature",
+    "root": "adventurer",
+    "className": "Adventurer",
+    "slot": "signature",
+    "name": "Quick Strike",
+    "description": "Strike one foe within melee reach.",
+    "generation": "Existing ImageGen placeholder artwork reused",
+    "status": "placeholder",
+    "texture": "champion.signature.png",
+    "textureSize": 32,
+    "sourceAbility": "champion.signature"
+  },
+  {
+    "id": "adventurer.utility",
+    "root": "adventurer",
+    "className": "Adventurer",
+    "slot": "utility",
+    "name": "Second Wind",
+    "description": "Recover a little health.",
+    "generation": "Existing ImageGen placeholder artwork reused",
+    "status": "placeholder",
+    "texture": "cleric.signature.png",
+    "textureSize": 32,
+    "sourceAbility": "cleric.signature"
+  },
+  {
+    "id": "adventurer.mobility",
+    "root": "adventurer",
+    "className": "Adventurer",
+    "slot": "mobility",
+    "name": "Dodge",
+    "description": "Dash a short distance along your aim.",
+    "generation": "Existing ImageGen placeholder artwork reused",
+    "status": "placeholder",
+    "texture": "ranger.mobility.png",
+    "textureSize": 32,
+    "sourceAbility": "ranger.mobility"
   }
 ]

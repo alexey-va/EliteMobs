@@ -35,8 +35,9 @@ The resource snapshot selects the root class's icon, including specializations:
 | Ranger | Focus | Green feather | U+E502 | Green |
 | Cleric | Grace | Ivory sunburst | U+E503 | Ivory-gold |
 | Spellcaster | Mana | Blue crystal | U+E504 | Cyan-blue |
+| Adventurer | Stamina | Leather boot | U+E505 | Amber |
 
-The 50x15 `resource_icons.png` atlas uses five 10x15 cells, each with an
+The 60x15 `resource_icons.png` atlas uses six 10x15 cells, each with an
 11-pixel advance. Both backgrounds leave the icon area empty; a missing
 resource snapshot shows no icon. The counter and bar retain their alignment.
 
@@ -49,8 +50,8 @@ the current fill, anchored to the trough when amounts change. The diamond's
 rim and empty area remain still, as do icons and counters. The existing
 action-bar compositor sends frame changes without an additional scheduled task.
 
-Strip glyphs occupy U+E800 through U+E9BF in 64-character groups: health,
-Resolve, Fury, Focus, Grace, Mana, XP. Each group contains four sixteen-column
+Strip glyphs occupy U+E800 through U+E9FF in 64-character groups: health,
+Resolve, Fury, Focus, Grace, Mana, XP, Stamina. Each group contains four sixteen-column
 poses. The separate F badge atlas uses U+E520 through U+E527: four neutral
 pulse frames, then four green active frames. Its 8x7 cells advance nine pixels.
 
