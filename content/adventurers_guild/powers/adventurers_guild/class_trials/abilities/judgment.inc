@@ -3,7 +3,7 @@
 local function judgment(c,cap)
   local s=c.state
   s.judgmentWeights=0; s.judgmentCollecting=true; s.busyUntil=s.tick+120
-  c.boss:set_ai_enabled(false,120)
+  pause_movement(c,120)
   c.boss:play_sound_at_self('BLOCK_ANVIL_PLACE',.55,.6)
   c.scheduler:run_later(60,function()
     s.judgmentCollecting=false

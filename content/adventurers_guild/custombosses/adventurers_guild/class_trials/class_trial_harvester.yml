@@ -9,14 +9,9 @@ mainHand: IRON_HOE
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_harvester.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: harvester
-  title: Break the Chain
-  power: class_trial_harvester.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: A harvest follows a line. Remove what the line depends on.
-    halfway: Two more links. I suspect you know what to do with them.
-    victory: You broke the chain before it reached you.
-    defeat: The next destination was drawn before I moved.

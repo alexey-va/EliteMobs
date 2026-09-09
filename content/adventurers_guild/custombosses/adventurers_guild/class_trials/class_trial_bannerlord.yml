@@ -9,14 +9,10 @@ mainHand: IRON_SPEAR
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+  - class_trial_bannerlord.lua
+ai: true
+offHand: WHITE_BANNER
+cullReinforcements: true
 classTrial:
   class: bannerlord
-  title: Keep Pace
-  power: class_trial_bannerlord.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: A standard can move. Its people still have to keep up.
-    halfway: Stay with me, cadets. Challenger, make that difficult.
-    victory: You found the distance a promise could not cover.
-    defeat: You retreated with our march. Try crossing it.

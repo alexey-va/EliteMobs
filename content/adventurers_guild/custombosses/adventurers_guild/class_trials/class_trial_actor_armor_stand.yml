@@ -2,5 +2,3 @@ extends: class_trial_actor_base.yml
 isEnabled: true
 entityType: HUSK
 disguise: ARMOR_STAND
-trialActor:
-  prop: true

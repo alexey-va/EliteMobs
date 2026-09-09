@@ -9,14 +9,9 @@ mainHand: MACE
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_crusher.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: crusher
-  title: Read the Fault
-  power: class_trial_crusher.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: Stone tells you where it will break. Watch the crack.
-    halfway: The next fault runs a different way.
-    victory: You read the ground before it moved.
-    defeat: The line was narrow. Running along it kept you in reach.

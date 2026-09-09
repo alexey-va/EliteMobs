@@ -22,7 +22,7 @@ return {
     end
     if not s.breathed and c.boss:get_health()<=c.boss:get_maximum_health()*.65 then
       s.breathed=true; s.breathUntil=s.tick+60; s.strikeAt=nil
-      c.boss:set_ai_enabled(false,60)
+      pause_movement(c,60)
       player:send_message('&6Adventurer Instructor: &fSecond Wind. A quick hit can stop mine.')
       c.boss:play_sound_at_self('BLOCK_NOTE_BLOCK_CHIME',.6,.8)
       return
@@ -52,14 +52,14 @@ return {
       return
     end
     c.boss:face_direction_or_location(q)
-    c.boss:set_ai_enabled(false,28)
+    pause_movement(c,28)
     s.strike=ground_circle(c,q,1.4); s.strikeAt=s.tick+28
     c.boss:play_sound_at_self('BLOCK_WOODEN_BUTTON_CLICK_ON',.5,.8)
   end,
   on_boss_damaged_by_player=function(c)
     if c.state.breathUntil then
       c.state.breathUntil=nil; c.state.nextStrike=c.state.tick+50
-      c.scheduler:run_later(50,function() c.boss:set_ai_enabled(true) end)
+      pause_movement(c,50)
       c.players:current_target():send_message('&6Adventurer Instructor: &fExactly. Do not give me that opening.')
       c.boss:play_sound_at_self('BLOCK_WOODEN_BUTTON_CLICK_OFF',.5,1.3)
     end
@@ -68,5 +68,3 @@ return {
     c.boss:send_message('&6Adventurer Instructor: &fA steady start. The road is yours now.',24)
   end
 }
-
-

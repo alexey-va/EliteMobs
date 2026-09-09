@@ -9,14 +9,9 @@ mainHand: IRON_SWORD
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_slayer.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: slayer
-  title: Do Not Offer the Finish
-  power: class_trial_slayer.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: A wounded foe is dangerous. Haste makes that easy to forget.
-    halfway: The finish is tempting. Show me you will not offer it.
-    victory: You denied the last stroke and took your own.
-    defeat: Being hurt did not remove the opening. Panic hid it.

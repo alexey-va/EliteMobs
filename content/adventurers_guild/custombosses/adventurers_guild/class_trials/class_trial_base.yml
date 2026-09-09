@@ -15,12 +15,4 @@ dropsRandomLoot: false
 dropsSkillXP: false
 classLoot: false
 uniqueLootList: []
-classTrial:
-  actors:
-    SKELETON: class_trial_actor_skeleton.yml
-    WOLF: class_trial_actor_wolf.yml
-    IRON_GOLEM: class_trial_actor_iron_golem.yml
-    WITHER_SKELETON: class_trial_actor_wither_skeleton.yml
-    BLAZE: class_trial_actor_blaze.yml
-    VEX: class_trial_actor_vex.yml
-    ARMOR_STAND: class_trial_actor_armor_stand.yml
+cullReinforcements: true

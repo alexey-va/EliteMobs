@@ -9,14 +9,9 @@ mainHand: IRON_SPEAR
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_titanbane.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: titanbane
-  title: Stop the Charge
-  power: class_trial_titanbane.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: A larger enemy commits more weight. Give that weight a limit.
-    halfway: Now watch the anchor as closely as the giant.
-    victory: You found what held the exchange together, and broke it.
-    defeat: The chain marked the thrust. It also gave you something to break.

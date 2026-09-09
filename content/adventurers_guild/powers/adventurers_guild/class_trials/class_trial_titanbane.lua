@@ -1,51 +1,77 @@
--- @include shared.inc
--- @include mobility/berserker.inc
--- @include abilities/berserker.inc
+-- @include ground_markers.inc
+-- @include mobility/leap_slam.inc
 
-local function anchor(c,s)
- local destination,line,stake; local hit=false
- return {T.wait(40,function(c,s)
-  local construct=c.trial:actor('construct'); if not construct then return end
-  local p=construct:get_location(); local x,z=T.direction(p,c.trial.player:get_location()); destination=T.offset(p,x*4,0,z*4)
-  line=T.lane(p,T.offset(p,x*8,0,z*8),2); stake=T.offset(destination,z*2,0,-x*2)
-  T.sound(c,'ENTITY_IRON_GOLEM_STEP',.6)
- end,function(c,s,t) if line and t%4==0 then T.draw(c,line); T.draw(c,T.circle(stake,.7),T.gold) end end),
- T.wait(20,nil,function(c,s,t)
-  local construct=c.trial:actor('construct'); if not construct or not destination then return end
-  c.trial:actor_step('construct',destination,.3,false)
-  if not hit and T.contains(line,c.trial.player:get_location()) and T.distance(construct:get_location(),c.trial.player:get_location())<1.5 then hit=c.trial:actor_damage('construct',.45) end
- end,function(c,s)
-  local construct=c.trial:actor('construct'); if not construct or not stake then return end
-  construct:set_velocity_vector({x=0,y=0,z=0}); c.trial:remove_actor('chain_stake')
-  if B.prop(c,'chain_stake',stake,2,'&eBreakable Chain Stake','IRON_BLOCK') then s.stake=stake; s.anchorUntil=s.tick+80; s.anchorAlive=true end
- end),T.rest(30)}
-end
-local function killer(c,s)
- local line
- return {T.wait(36,function(c,s)
-  local construct=c.trial:actor('construct'); local p=c.trial:position()
-  local target=construct and construct:get_location() or c.trial.player:get_location()
-  line=T.lane(p,T.rotate(p,target,0,10),1.4); c.boss:set_equipment('HAND','IRON_SPEAR',{}); T.sound(c,'BLOCK_CHAIN_PLACE',.7)
- end,function(c,s,t) if t%4==0 then T.draw(c,line) end end,
-  function(c,s)  T.hit(c,line,.9); local construct=c.trial:actor('construct'); if construct then construct:set_velocity_vector({x=0,y=0,z=0}); T.draw(c,T.circle(construct:get_location(),1.2),T.gold) end end),T.rest(60)}
-end
-return T.encounter{
- init=function(c,s) B.init(c,s); c.trial:spawn_actor('construct',T.offset(c.trial:position(),5,0,2),4,'&fTraining Construct','IRON_GOLEM'); s.anchorUntil=0 end,
- passive=function(c,s)
-  B.passive(c,s)
-  if s.anchorAlive then
-   local construct=c.trial:actor('construct')
-   if s.tick>=s.anchorUntil or not construct then c.trial:remove_actor('chain_stake'); s.anchorAlive=false
-   elseif not c.trial:actor('chain_stake') then
-    s.anchorAlive=false; c.trial:remove_actor('chain_stake'); s.ready.killer=s.tick+460
-    c.trial:say('Anchor broken. You have the opening.'); if s.cast then T.interrupt(c,s,{T.rest(60,1.25)}) else T.start(c,s,'broken_anchor',{T.rest(60,1.25)},0) end
-   elseif s.tick%5==0 then T.tether(c,s.stake,construct:get_location(),T.gold) end
+return {
+ api_version=1,
+ on_spawn=function(c)
+  local p=c.boss:get_location()
+  c.state.construct=c.world:spawn_custom_boss_at_location('class_trial_training_construct.yml',
+   {world=p.world,x=p.x+4,y=p.y,z=p.z+2},{level=c.boss.level,add_as_reinforcement=true,silent=true})
+  assert(c.state.construct,'Titanbane construct could not spawn')
+ end,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextAnchor=50; s.nextKiller=200
+   player:send_message('&6Titanbane Instructor: &fA giant is only dangerous while it can reach you. Watch the anchor.')
+  end
+  if s.stake then
+   if not s.stake:is_alive() or not s.construct:is_alive() or s.tick>=s.anchorUntil then
+    local broken=not s.stake:is_alive()
+    if s.stake:is_alive() then s.stake:remove_elite() end
+    s.stake=nil
+    if s.construct:is_alive() then s.construct:set_ai_enabled(true) end
+    if broken then
+     s.killerAt=nil; s.nextKiller=s.tick+400; s.busyUntil=s.tick+60; s.exposedUntil=s.tick+60; pause_movement(c,60)
+     player:send_message('&6Titanbane Instructor: &fAnchor broken. You have the opening.')
+    end
+   elseif s.tick%5==0 then
+    local a,b=s.stake:get_location(),s.construct:get_location()
+    for i=0,8 do c.world:spawn_particle_at_location({world=a.world,x=a.x+(b.x-a.x)*i/8,
+     y=a.y+.8,z=a.z+(b.z-a.z)*i/8},{particle='DUST',red=230,green=200,blue=110,amount=1},1) end
+   end
+  end
+  if s.anchorAt then
+   if s.tick%4==0 then show_circle(c,s.anchorZone,230,200,110) end
+   if s.tick>=s.anchorAt then
+    s.anchorAt=nil
+    if s.construct:is_alive() then
+     s.stake=c.world:spawn_custom_boss_at_location('class_trial_chain_stake.yml',s.anchorPosition,
+      {level=c.boss.level,add_as_reinforcement=true,silent=true})
+     assert(s.stake,'Titanbane chain stake could not spawn')
+     s.anchorUntil=s.tick+120; s.construct:set_ai_enabled(false); s.nextKiller=s.tick+30
+    end
+    s.busyUntil=s.tick+30
+   end
+   return
+  end
+  if s.killerAt then
+   if s.tick%4==0 then show_circle(c,s.killer,190,130,80) end
+   if s.tick>=s.killerAt then
+    c.script:damage(s.killer:full_target(),1,.9); s.killerAt=nil; s.busyUntil=s.tick+60; s.exposedUntil=s.tick+60
+    c.boss:play_sound_at_self('ENTITY_PLAYER_ATTACK_SWEEP',.6,.6)
+   end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; player:send_message('&6Titanbane Instructor: &fControl the reach, and size means very little.')
+   if leap_slam(c,player) then s.busyUntil=s.tick+100; return end
+  end
+  if s.tick>=s.nextAnchor and not s.stake and s.construct:is_alive() then
+   s.nextAnchor=s.tick+440; local q=s.construct:get_location()
+   s.anchorPosition={world=q.world,x=q.x+2,y=q.y,z=q.z}; s.anchorZone=ground_circle(c,s.anchorPosition,.8)
+   s.anchorAt=s.tick+40; pause_movement(c,70); c.boss:play_sound_at_self('BLOCK_CHAIN_PLACE',.6,.7)
+  elseif s.tick>=s.nextKiller then
+   s.nextKiller=s.tick+400
+   local aim=s.stake and s.construct:get_location() or player:get_location()
+   s.killer=forward_cone(c,c.boss:get_location(),aim,10,.7); s.killerAt=s.tick+40; pause_movement(c,100)
+   c.boss:face_direction_or_location(aim); c.boss:play_sound_at_self('BLOCK_CHAIN_PLACE',.6,.9)
   end
  end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'leap') then s.phasePending=false; local construct=c.trial:actor('construct'); local target=construct and T.rotate(construct:get_location(),c.trial:position(),180,4) or nil; T.start(c,s,'leap',M.move(c,s,target),M.cooldown)
-  elseif c.trial:actor('construct') and not s.anchorAlive and T.ready(s,'anchor') then T.start(c,s,'anchor',anchor(c,s),440)
-  elseif T.ready(s,'killer') then T.start(c,s,'killer',killer(c,s),400)
-  else T.basic(c,s,'melee') end
- end
+ on_boss_damaged_by_player=function(c)
+  if not c.event.is_damage_transfer and (c.state.exposedUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.25) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Titanbane Instructor: &fYou chose what to break. That matters more than how hard you swing.',24) end
 }

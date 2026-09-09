@@ -9,14 +9,9 @@ mainHand: IRON_SPEAR
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+  - class_trial_marshal.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: marshal
-  title: Where the Standard Stands
-  power: class_trial_marshal.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: This cloth means nothing until we choose to stand by it.
-    halfway: New ground. Read the formation again.
-    victory: You took away our ground before it could take away yours.
-    defeat: The banner had a reach, and a breakable base.

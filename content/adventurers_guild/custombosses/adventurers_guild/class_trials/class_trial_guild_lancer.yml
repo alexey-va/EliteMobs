@@ -1,0 +1,4 @@
+extends: class_trial_guardian_apprentice.yml
+isEnabled: true
+name: '&fGuild Lancer'
+mainHand: IRON_SPEAR

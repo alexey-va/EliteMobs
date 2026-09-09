@@ -9,14 +9,9 @@ mainHand: IRON_SWORD
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+  - class_trial_inquisitor.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: inquisitor
-  title: No Rushed Verdict
-  power: class_trial_inquisitor.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: A verdict is only as sound as the opening that supports it.
-    halfway: Now I will test whether haste makes you predictable.
-    victory: You gave me no clean sentence. Well contested.
-    defeat: The seal warned you. The blade still had to reach you.

@@ -46,12 +46,12 @@ return {
   elseif s.tick>=s.nextGuard then
    s.nextGuard=s.tick+280; s.pressure=0; s.guardUntil=s.tick+80
    s.guard=forward_cone(c,c.boss:get_location(),player:get_location(),5,3)
-   c.boss:face_direction_or_location(player:get_location()); c.boss:set_ai_enabled(false,144)
+   c.boss:face_direction_or_location(player:get_location()); pause_movement(c,144)
    c.boss:play_sound_at_self('ITEM_SHIELD_BLOCK',.6,.7)
   elseif s.tick>=s.nextRepulse then
    s.nextRepulse=s.tick+300; s.repulseAt=s.tick+28
    s.repulse=ground_circle(c,c.boss:get_location(),3.5)
-   c.boss:set_ai_enabled(false,58); c.boss:play_sound_at_self('BLOCK_BELL_USE',.6,1.1)
+   pause_movement(c,58); c.boss:play_sound_at_self('BLOCK_BELL_USE',.6,1.1)
   end
  end,
  on_boss_damaged_by_player=function(c)
@@ -65,7 +65,7 @@ return {
    c.boss:play_sound_at_self('ITEM_SHIELD_BLOCK',.4,.8)
   else
    s.guardUntil=nil; s.recoveryUntil=s.tick+40
-   c.scheduler:run_later(40,function() c.boss:set_ai_enabled(true) end)
+   pause_movement(c,40)
    if player then player:send_message('&6Paladin Instructor: &fThere. A shield has a back.') end
   end
  end,
@@ -73,5 +73,3 @@ return {
   c.boss:send_message('&6Paladin Instructor: &fYou found the opening without abandoning your footing. Well fought.',24)
  end
 }
-
-

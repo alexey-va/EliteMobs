@@ -16,4 +16,3 @@ ai: true
 cullReinforcements: true
 classTrial:
   class: paladin
-

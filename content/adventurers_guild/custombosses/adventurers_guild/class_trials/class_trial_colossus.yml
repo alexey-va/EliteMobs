@@ -9,14 +9,9 @@ mainHand: MACE
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_colossus.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: colossus
-  title: The Cost of Commitment
-  power: class_trial_colossus.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: All this weight goes somewhere. Find where it does not.
-    halfway: I am committing everything. You should not.
-    victory: You understood the price of that swing, and collected it.
-    defeat: When the ground began to split, my direction was already chosen.

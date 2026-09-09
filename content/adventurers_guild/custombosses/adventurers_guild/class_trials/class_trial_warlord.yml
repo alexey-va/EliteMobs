@@ -9,14 +9,9 @@ mainHand: IRON_SWORD
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+  - class_trial_warlord.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: warlord
-  title: The Voice That Moves the Line
-  power: class_trial_warlord.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: A command is measured in the feet it moves.
-    halfway: You broke our line. Let us see how quickly it reforms.
-    victory: You heard the order and found the answer.
-    defeat: Do not fight three blades where one voice makes them strongest.

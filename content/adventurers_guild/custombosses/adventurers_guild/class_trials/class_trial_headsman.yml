@@ -9,14 +9,9 @@ mainHand: IRON_AXE
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_headsman.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: headsman
-  title: The Blade Must Fall Somewhere
-  power: class_trial_headsman.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: A great blade cannot fall everywhere. Remember that.
-    halfway: You know where it will land. Trust your feet.
-    victory: You made the weight of my axe your advantage.
-    defeat: You retreated along the blade. Step across its path.

@@ -83,4 +83,3 @@ return {
     c.boss:send_message('&6Ranger Instructor: &fYou read the shot before it left the string. Welcome to the trail.',24)
   end
 }
-

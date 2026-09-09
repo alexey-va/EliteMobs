@@ -1,44 +1,61 @@
--- @include shared.inc
--- @include mobility/paladin.inc
--- @include abilities/paladin.inc
+-- @include ground_markers.inc
+-- @include mobility/steed_charge.inc
 
-local function kneel(c,s)
- local p,hit=false
- return {T.wait(32,function(c,s) p=T.copy(c.trial:position()); T.sound(c,'BLOCK_ANVIL_LAND',.5) end,
-  function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,5)) end end),
- T.wait(60,nil,function(c,s,t)
-  for wave=0,2 do local age=t-wave*12
-   if age>=0 and age<36 then local r=age/36*5; local front=T.circle(p,r,math.max(0,r-.6))
-    if t%3==0 then T.draw(c,front) end
-    if not hit and T.contains(front,c.trial.player:get_location()) then hit=true; c.trial:push(p,.25); T.weak(c,s,40,.15) end
+-- Three successive ground circles leave a visibly marked escape direction.
+-- Crossing out of the circle is always sufficient; no invisible movement lock.
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextKneel=50; s.nextEscape=220
+   player:send_message('&6Tyrant Instructor: &fI will demand your ground. Make me fight for it.')
+  end
+  if s.kneelAt then
+   if s.tick%4==0 then show_circle(c,s.kneel,185,85,55) end
+   if s.tick>=s.kneelAt then
+    if s.kneel:contains(player:get_location()) then
+     player:push_relative_to(c.boss:get_location(),.28,0,.08,0); player:apply_potion_effect('WEAKNESS',40,0)
+    end
+    s.kneelAt=nil; s.busyUntil=s.tick+40; s.exposedUntil=s.tick+40
    end
+   return
   end
- end),T.rest(40)}
-end
-local function escape(c,s)
- local p,exit,arcs; local contact=false
- local seq={T.wait(30,function(c,s)
-  p=T.copy(c.trial:position()); exit=T.rotate(p,c.trial.player:get_location(),s.phase==2 and 90 or -90,6); s.lastExit=exit
-  arcs={}; local facing=T.rotate(p,exit,180,6)
-  for _,r in ipairs({3,4,5,6}) do arcs[#arcs+1]=T.arc(p,facing,r,r-.45,360-math.deg(2*math.asin(math.min(1,1.5/r)))) end
-  T.sound(c,'ENTITY_RAVAGER_ROAR',.6)
- end,function(c,s,t)
-  if t%4==0 then for _,arc in ipairs(arcs) do T.draw(c,arc) end; T.draw(c,T.lane(p,exit,3),T.gold) end
- end),T.wait(36,nil,function(c,s,t)
-  for i,arc in ipairs(arcs) do arc.r=2+i-t/36; arc.inner=arc.r-.45; arc.angle=math.pi-math.asin(math.min(1,1.5/arc.r)); local player=c.trial.player:get_location()
-   if t%4==0 then T.draw(c,arc) end
-   if not contact and T.contains(arc,player) then contact=true; c.trial:effect('player','SLOWNESS',20,0) end
+  if s.escapeAt then
+   if s.tick%4==0 then
+    show_circle(c,s.escape,185,85,55); show_circle(c,s.safe,245,220,130)
+   end
+   if s.tick>=s.escapeAt then
+    local p=player:get_location(); p.y=p.y+.75
+    if s.escape:contains(player:get_location()) and not s.safe:contains(p) then
+     player:apply_potion_effect('SLOWNESS',20,0)
+     c.script:damage(ground_circle(c,player:get_location(),.5):full_target(),1,.35)
+    end
+    s.pulse=s.pulse+1
+    if s.pulse>3 then s.escapeAt=nil; s.busyUntil=s.tick+60; s.exposedUntil=s.tick+60
+    else s.escapeAt=s.tick+20; s.escape=ground_circle(c,s.center,5-s.pulse*.6) end
+   end
+   return
   end
- end),T.rest(20)}
- T.append(seq,T.melee(c,s,{windup=28,radius=3.5,angle=80,damage=.8,recovery=60}))
- return seq
-end
-return T.encounter{
- init=function(c,s) P.init(c,s) end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'steed') then s.phasePending=false; local seq=M.move(c,s,s.lastExit); T.append(seq,escape(c,s)); T.lockout(seq,'escape',360); T.start(c,s,'steed',seq,M.cooldown)
-  elseif T.ready(s,'kneel') then T.start(c,s,'kneel',kneel(c,s),400)
-  elseif T.ready(s,'escape') then T.start(c,s,'escape',escape(c,s),360)
-  else T.basic(c,s,'melee') end
- end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; s.busyUntil=s.tick+65; steed_charge(c,player)
+   player:send_message('&6Tyrant Instructor: &fYou refuse to kneel. Show me you can hold that answer.')
+  elseif s.tick>=s.nextKneel then
+   s.nextKneel=s.tick+380; s.kneel=ground_circle(c,c.boss:get_location(),4)
+   s.kneelAt=s.tick+36; pause_movement(c,76); c.boss:play_sound_at_self('BLOCK_ANVIL_LAND',.5,.7)
+  elseif s.tick>=s.nextEscape then
+   s.nextEscape=s.tick+440; s.center=c.boss:get_location(); s.escape=ground_circle(c,s.center,5)
+   local target=player:get_location(); local dx,dz=target.x-s.center.x,target.z-s.center.z
+   local side=s.phaseTwo and 1 or -1
+   s.safe=forward_cone(c,s.center,{x=s.center.x-dz*side,y=s.center.y,z=s.center.z+dx*side},7,3)
+   s.escapeAt=s.tick+40; s.pulse=1; pause_movement(c,140)
+   c.boss:play_sound_at_self('ENTITY_RAVAGER_ROAR',.5,.6)
+  end
+ end,
+ on_boss_damaged_by_player=function(c)
+  if not c.event.is_damage_transfer and (c.state.exposedUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.2) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Tyrant Instructor: &fYou kept your footing. I have nothing more to demand.',24) end
 }

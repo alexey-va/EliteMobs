@@ -10,14 +10,9 @@ chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
 offHand: SHIELD
+powers:
+  - class_trial_shieldbearer.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: shieldbearer
-  title: Two Promises
-  power: class_trial_shieldbearer.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: Two promises. One shield. See what that demands.
-    halfway: You are making me work for both of them.
-    victory: You found the limit without mistaking it for weakness.
-    defeat: Separate our footing before you test our guard.

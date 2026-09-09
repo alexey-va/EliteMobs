@@ -32,7 +32,7 @@ return {
   elseif s.tick>=s.nextLine then
    s.nextLine=s.tick+360; s.lineUntil=s.tick+110; s.nextSwing=s.tick+34
    s.line=forward_cone(c,c.boss:get_location(),player:get_location(),3.5,2.1)
-   c.boss:face_direction_or_location(player:get_location()); c.boss:set_ai_enabled(false,160)
+   c.boss:face_direction_or_location(player:get_location()); pause_movement(c,160)
    c.boss:play_sound_at_self('ITEM_SHIELD_BLOCK',.55,.5)
   elseif s.tick>=s.nextGround then
    s.nextGround=s.tick+440; s.groundUntil=s.tick+150

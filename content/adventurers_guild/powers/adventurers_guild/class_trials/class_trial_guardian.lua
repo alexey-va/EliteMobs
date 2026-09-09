@@ -62,4 +62,3 @@ return {
     c.boss:send_message('&6Guardian Instructor: &fYou understood whom I was protecting, and why.',24)
   end
 }
-

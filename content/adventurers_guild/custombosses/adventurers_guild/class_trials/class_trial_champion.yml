@@ -9,14 +9,9 @@ mainHand: IRON_SWORD
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+- class_trial_champion.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: champion
-  title: The Honest Duel
-  power: class_trial_champion.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: No ranks behind me. No wall between us. Read the blade.
-    halfway: You know the rhythm. Watch which hand begins it.
-    victory: A fair opening, well taken. You have earned this.
-    defeat: The last swing was the commitment. That was your opening.

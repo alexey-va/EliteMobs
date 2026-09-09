@@ -9,14 +9,9 @@ mainHand: IRON_AXE
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+- class_trial_tyrant.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: tyrant
-  title: Refuse the Easy Order
-  power: class_trial_tyrant.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: I can command you to kneel. You can make it an empty order.
-    halfway: Still standing. Good. Find your way out again.
-    victory: You did not mistake a loud command for an inevitable one.
-    defeat: You watched me. You should have watched the opening I left.

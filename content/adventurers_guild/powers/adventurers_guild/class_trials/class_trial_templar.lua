@@ -38,7 +38,7 @@ return {
    judgment(c,.9); s.nextJudgment=s.tick+400
   elseif s.tick>=s.nextBell and s.novice and s.novice:is_alive() and s.heals<3 then
    s.nextBell=s.tick+440; s.bellAt=s.tick+36; s.channelDamage=0
-   c.boss:set_ai_enabled(false,76)
+   pause_movement(c,76)
   end
  end,
  on_boss_damaged_by_player=function(c)

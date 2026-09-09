@@ -16,3 +16,14 @@ local function forward_cone(c,origin,target,length,width)
     target={targetType='LOCATION',location='same_as_boss,'..origin.x..','..(origin.y+.75)..','..origin.z},
     target2={targetType='LOCATION',location='same_as_boss,'..finish.x..','..finish.y..','..finish.z}})
 end
+
+-- A power owns one movement pause. Replacing it cancels its earlier restoration,
+-- so an interrupted channel cannot unfreeze the next ability prematurely.
+local function pause_movement(c,ticks)
+  if c.state.movementRestore then c.scheduler:cancel(c.state.movementRestore) end
+  c.boss:set_ai_enabled(false)
+  c.state.movementRestore=c.scheduler:run_later(ticks,function()
+    c.state.movementRestore=nil
+    if c.boss:is_alive() then c.boss:set_ai_enabled(true) end
+  end)
+end

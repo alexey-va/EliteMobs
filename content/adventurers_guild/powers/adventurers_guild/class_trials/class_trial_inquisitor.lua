@@ -1,31 +1,58 @@
--- @include shared.inc
--- @include mobility/paladin.inc
--- @include abilities/paladin.inc
+-- @include ground_markers.inc
+-- @include mobility/steed_charge.inc
 
-local function expose(c,s)
- return {T.wait(24,function(c,s)  T.sound(c,'BLOCK_ENCHANTMENT_TABLE_USE',.7) end,
-  function(c,s,t) if t%4==0 then T.eye(c,c.trial.player:get_location()) end end,
-  function(c,s) s.markUntil=s.tick+120 end),T.rest(20)}
-end
-local function sentence(c,s)
- local lane
- return {T.wait(36,function(c,s)  T.sound(c,'BLOCK_ANVIL_PLACE',1.3) end,
-  function(c,s,t)
-   if not lane or t<22 then local p=c.trial:position(); local target=T.rotate(p,c.trial.player:get_location(),0,7); lane=T.lane(p,target,1.2); c.trial:face(target,5) end
-   if t%4==0 then T.draw(c,lane) end
-  end,function(c,s)  T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP',.8)
-   local low=c.trial.player:get_health()<c.trial.player:get_maximum_health()*.35
-   local damage=math.min(1.2,(low and 1.05 or .9)*T.damageScale(c))/T.damageScale(c)
-   if not T.hit(c,lane,damage) then s.markUntil=0; c.trial:say('No opening. No sentence.') end
-  end),T.rest(60)}
-end
-return T.encounter{
- init=function(c,s) P.init(c,s); s.markUntil=0 end,
- passive=function(c,s) s.outgoing=s.markUntil>s.tick and 1.15 or 1; if s.markUntil>s.tick and s.tick%10==0 then T.eye(c,c.trial.player:get_location()) end end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'steed') then s.phasePending=false; local seq=M.move(c,s); T.append(seq,expose(c,s)); T.append(seq,sentence(c,s)); T.lockout(seq,'mark',360); T.lockout(seq,'sentence',320); T.start(c,s,'steed',seq,M.cooldown)
-  elseif T.ready(s,'mark') then T.start(c,s,'mark',expose(c,s),360)
-  elseif T.ready(s,'sentence') then T.start(c,s,'sentence',sentence(c,s),320)
-  else T.basic(c,s,'melee') end
- end
+-- Expose marks the next committed sentence. Sidestepping the locked narrow lane
+-- breaks the mark. Low health makes the sentence stronger, never unavoidable.
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player()
+  if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextMark=60; s.nextSentence=120
+   player:send_message('&6Inquisitor Instructor: &fI need an opening. Do not offer me one.')
+  end
+  if (s.markUntil or 0)>s.tick and s.tick%10==0 then
+   c.world:spawn_particle_at_location(player:get_eye_location(),{particle='DUST',red=245,green=190,blue=60,amount=3},3)
+  end
+  if s.sentenceAt then
+   if s.tick<s.lockAt then
+    s.lane=forward_cone(c,c.boss:get_location(),player:get_location(),7,.8)
+    c.boss:face_direction_or_location(player:get_location())
+   end
+   if s.tick%4==0 then show_circle(c,s.lane,235,160,60) end
+   if s.tick>=s.sentenceAt then
+    local p=player:get_location(); p.y=p.y+.75
+    local hits=s.lane:contains(p)
+    local low=player:get_health()<player:get_maximum_health()*.35
+    c.script:damage(s.lane:full_target(),1,low and 1.05 or .9)
+    if not hits then
+     s.markUntil=0
+     player:send_message('&6Inquisitor Instructor: &fNo opening. No sentence.')
+    end
+    c.boss:play_sound_at_self('ENTITY_PLAYER_ATTACK_SWEEP',.55,.8)
+    s.sentenceAt=nil; s.busyUntil=s.tick+60
+   end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; s.busyUntil=s.tick+65; s.nextMark=s.tick+65
+   player:send_message('&6Inquisitor Instructor: &fYou read the charge. Now read what follows.')
+   steed_charge(c,player)
+  elseif s.tick>=s.nextMark then
+   s.nextMark=s.tick+360; s.busyUntil=s.tick+24
+   c.boss:play_sound_at_self('BLOCK_ENCHANTMENT_TABLE_USE',.5,.7)
+   c.scheduler:run_later(24,function() s.markUntil=s.tick+120 end)
+  elseif s.tick>=s.nextSentence then
+   s.nextSentence=s.tick+320; s.sentenceAt=s.tick+36; s.lockAt=s.tick+22
+   s.lane=forward_cone(c,c.boss:get_location(),player:get_location(),7,.8)
+   pause_movement(c,96); c.boss:play_sound_at_self('BLOCK_ANVIL_PLACE',.5,1.3)
+  end
+ end,
+ on_player_damaged_by_boss=function(c)
+  if (c.state.markUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.15) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Inquisitor Instructor: &fYou gave me nothing to condemn. A satisfactory lesson.',24) end
 }

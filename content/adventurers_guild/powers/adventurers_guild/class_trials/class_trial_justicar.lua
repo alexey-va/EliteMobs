@@ -23,7 +23,7 @@ return {
   elseif s.tick>=s.nextCensure then
    s.nextCensure=s.tick+320; s.busyUntil=s.tick+56
    local zone=ground_circle(c,c.boss:get_location(),4)
-   c.boss:set_ai_enabled(false,56); c.boss:play_sound_at_self('BLOCK_BELL_USE',.5,.85)
+   pause_movement(c,56); c.boss:play_sound_at_self('BLOCK_BELL_USE',.5,.85)
    local age,task=0,nil
    task=c.scheduler:run_repeating(0,4,function()
     show_circle(c,zone,245,215,110); age=age+4

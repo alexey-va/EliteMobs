@@ -9,14 +9,9 @@ mainHand: IRON_AXE
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_deathless.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: deathless
-  title: One More Breath
-  power: class_trial_deathless.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: Count the breath you still have. Spend it well.
-    halfway: Not finished. Neither are you.
-    victory: That last exchange was earned. I have no breath left to dispute it.
-    defeat: Surviving the blow is useful only if you use the moment after.

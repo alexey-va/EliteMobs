@@ -16,4 +16,3 @@ cullReinforcements: true
 classTrial:
   class: guardian
 ai: true
-

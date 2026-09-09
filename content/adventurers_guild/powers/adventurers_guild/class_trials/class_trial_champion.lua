@@ -1,33 +1,45 @@
--- @include shared.inc
--- @include mobility/paladin.inc
--- @include abilities/paladin.inc
+-- @include ground_markers.inc
+-- @include mobility/steed_charge.inc
+-- @include abilities/three_swing_drill.inc
 
-local function salute(c,s)
- local cone
- return {T.wait(26,function(c,s) cone=T.cone(c.trial:position(),c.trial.player:get_location(),4,70); c.boss:set_equipment('HAND','IRON_SWORD',{}); T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',1.3) end,
-  function(c,s,t) if t%4==0 then T.draw(c,cone,T.gold) end end,
-  function(c,s) if T.contains(cone,c.trial.player:get_location()) then c.trial:push(cone.p,.2); s.duelUntil=s.tick+100 end end),T.rest(30)}
-end
-local function dominion(c,s)
- local budget={spent=0,cap=1.4}; local seq={}; local lead=s.phase==2 and 1 or -1
- for i,v in ipairs({{30,lead*22,.45,90},{20,-lead*22,.45,90},{26,0,1.1,50}}) do
-  local arc
-  T.append(seq,{T.wait(v[1],function(c,s) c.boss:set_equipment('HAND',i==3 and 'IRON_AXE' or 'IRON_SWORD',{}); T.sound(c,'BLOCK_NOTE_BLOCK_BASEDRUM',i==3 and .5 or 1) end,
-   function(c,s,t)
-    if not arc or t<v[1]-10 then local p=c.trial:position(); arc=T.cone(p,T.rotate(p,c.trial.player:get_location(),v[2],4),3.6,v[4]); c.trial:face(T.offset(p,arc.x,0,arc.z),4) end
-    if t%4==0 then T.draw(c,arc) end
-   end,function(c,s)  T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP',i==3 and .6 or 1.1); T.budgetHit(c,s,arc,v[3],budget) end)})
- end
- T.append(seq,{T.rest(60,1.2),T.wait(1,nil,nil,function(c,s) c.boss:set_equipment('HAND','IRON_SWORD',{}) end)})
- return seq
-end
-return T.encounter{
- init=function(c,s) P.init(c,s); s.duelUntil=0 end,
- passive=function(c,s) if s.duelUntil>s.tick and s.tick%10==0 then T.eye(c,c.trial.player:get_location()) end end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'steed') then s.phasePending=false; local seq=M.move(c,s); T.append(seq,salute(c,s)); T.append(seq,dominion(c,s)); T.lockout(seq,'salute',320); T.lockout(seq,'dominion',360); T.start(c,s,'steed',seq,M.cooldown)
-  elseif T.ready(s,'salute') then T.start(c,s,'salute',salute(c,s),320)
-  elseif T.ready(s,'dominion') then T.start(c,s,'dominion',dominion(c,s),360)
-  else T.basic(c,s,'melee') end
- end
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextSalute=40; s.nextDominion=150
+   player:send_message('&6Champion Instructor: &fA salute, then three strokes. Do not mistake the pause for the end.')
+  end
+  if s.saluteAt then
+   if s.tick%4==0 then show_circle(c,s.salute,245,215,135) end
+   if s.tick>=s.saluteAt then
+    if s.salute:contains(player:get_location()) then
+     player:push_relative_to(c.boss:get_location(),.2,0,.06,0); s.duelUntil=s.tick+100
+    end
+    s.saluteAt=nil; s.busyUntil=s.tick+30
+   end
+   return
+  end
+  if (s.duelUntil or 0)>s.tick and s.tick%10==0 then player:spawn_particle_at_self({particle='CRIT',amount=2},1) end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; s.busyUntil=s.tick+65; steed_charge(c,player)
+   player:send_message('&6Champion Instructor: &fGood. Now keep that composure at a faster pace.')
+  elseif s.tick>=s.nextDominion then
+   s.nextDominion=s.tick+360
+   three_swing_drill(c,player,s.phaseTwo and {26,20,26} or {30,24,30},{.3,.3,.65})
+  elseif s.tick>=s.nextSalute then
+   s.nextSalute=s.tick+340; s.salute=forward_cone(c,c.boss:get_location(),player:get_location(),4,2)
+   s.saluteAt=s.tick+28; pause_movement(c,58)
+   c.boss:face_direction_or_location(player:get_location()); c.boss:play_sound_at_self('BLOCK_NOTE_BLOCK_CHIME',.6,1.3)
+  end
+ end,
+ on_boss_damaged_by_player=function(c)
+  if not c.event.is_damage_transfer and (c.state.exposedUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.2) end
+ end,
+ on_player_damaged_by_boss=function(c)
+  if (c.state.duelUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.1) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Champion Instructor: &fThe final salute is yours. You have earned it.',24) end
 }

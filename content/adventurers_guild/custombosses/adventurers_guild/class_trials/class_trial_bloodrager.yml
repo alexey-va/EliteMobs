@@ -9,14 +9,9 @@ mainHand: IRON_AXE
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+- class_trial_bloodrager.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: bloodrager
-  title: Heat Without Haste
-  power: class_trial_bloodrager.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: Feeling the heat is easy. Keeping your hands steady is the work.
-    halfway: Less blood. More fire. More openings, too!
-    victory: You kept your head while I tried to take it off. That will do!
-    defeat: You matched my temper when you needed to read my shoulders.

@@ -7,7 +7,7 @@ local function leap_slam(c,player)
   if length<.1 or length>8 then return false end
   local zone=ground_circle(c,target,3)
   local age,task=0,nil
-  c.boss:set_ai_enabled(false,60)
+  pause_movement(c,60)
   c.boss:play_sound_at_self('BLOCK_GRAVEL_BREAK',.6,.7)
   task=c.scheduler:run_repeating(0,1,function()
     age=age+1

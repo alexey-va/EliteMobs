@@ -9,14 +9,9 @@ mainHand: IRON_SWORD
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+- class_trial_strategist.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: strategist
-  title: Break the Triangle
-  power: class_trial_strategist.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: Three positions. One advantage. Find the dependency.
-    halfway: You read the first formation. I have changed the order.
-    victory: You attacked the arrangement, not just the armor.
-    defeat: One corner out of place would have changed that exchange.

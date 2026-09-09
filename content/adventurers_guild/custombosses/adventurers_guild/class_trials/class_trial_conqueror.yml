@@ -9,14 +9,9 @@ mainHand: IRON_SWORD
 chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
+powers:
+- class_trial_conqueror.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: conqueror
-  title: Give Ground Deliberately
-  power: class_trial_conqueror.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: Ground can be yielded. Initiative should not be.
-    halfway: You have room. Show me that you know how to use it.
-    victory: You gave ground on your terms, and took it back.
-    defeat: After the roar, you still had a moment to choose your direction.

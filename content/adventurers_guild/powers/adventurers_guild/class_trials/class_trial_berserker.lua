@@ -48,11 +48,11 @@ return {
     elseif s.tick>=s.nextRampage then
       s.swings=0; s.swingAt=s.tick+30
       s.swing=forward_cone(c,p,q,3.5,1.8)
-      c.boss:face_direction_or_location(q); c.boss:set_ai_enabled(false,128)
+      c.boss:face_direction_or_location(q); pause_movement(c,128)
       c.boss:play_sound_at_self('BLOCK_NOTE_BLOCK_BASEDRUM',.6,.6)
     elseif s.tick>=s.nextCry then
       s.cry=ground_circle(c,p,4); s.cryAt=s.tick+24; s.nextCry=s.tick+280
-      c.boss:set_ai_enabled(false,54); c.boss:play_sound_at_self('ENTITY_RAVAGER_ROAR',.6,1.4)
+      pause_movement(c,54); c.boss:play_sound_at_self('ENTITY_RAVAGER_ROAR',.6,1.4)
     end
   end,
   on_boss_damaged_by_player=function(c)
