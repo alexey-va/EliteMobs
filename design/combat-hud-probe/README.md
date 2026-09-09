@@ -78,11 +78,12 @@ pixels throughout, with no fractional scaling.
 | Health card | 4 | 3 | 89 | 26 |
 | Resource card | 97 | 3 | 89 | 26 |
 | Health label | 25 | 6 | 23 | 5 |
-| Resource label | 118 | 6 | up to 27 | 5 |
+| Resource label | 165 minus visible width | 6 | up to 27 | 5 |
 | Health counter | 25 | 13 | up to 53 | 7 |
-| Resource counter | 118 | 13 | up to 53 | 7 |
+| Resource counter | 165 minus visible width | 13 | up to 53 | 7 |
 | Health fill | 25 | 23 | up to 63 | 3 |
-| Resource fill | 118 | 23 | up to 63 | 3 |
+| Resource fill | 165 minus fill width | 23 | up to 63 | 3 |
+| Resource icon | 171 | 9 | 10 | 15 |
 | XP fill | 5 | 32 | up to 180 | 2 |
 | Native hotbar opening | 3 | 37 | 184 | 23 |
 | Mobility card | 4 | 38 | 60 | 21 |
@@ -91,13 +92,16 @@ pixels throughout, with no fractional scaling.
 
 Labels occupy rows 6 through 10, followed by two empty rows. Counters occupy
 rows 13 through 19, followed by two empty rows before the trough at row 22.
-Each fill is inset one pixel inside its trough. Both stat cards use identical
-text and bar insets. Skill icons start at card x+3, y=41; labels at x+19, y=41;
+Each fill is inset one pixel inside its trough. The resource card mirrors the
+health card: icon on the right, trough at x=101, and fill within [102,165).
+Resource labels and counters end at x=165, excluding their trailing spacing
+pixel. Resource fill grows leftward from that same right edge.
+Skill icons start at card x+3, y=41; labels at x+19, y=41;
 bindings at x+19, y=50. Skill frames end at row 58, reserving row 59 for the
 outer panel and avoiding clipping when the framebuffer height is not an exact
 multiple of the GUI scale.
 
-The alignment revision was deployed and checked on NBTest on 2026-09-09.
+The initial alignment revision was deployed and checked on NBTest on 2026-09-09.
 Native F2 capture at 3840x2071, GUI scale 8, placed the panel at framebuffer
 1160,1592. Pixel-color measurements matched the coordinates above exactly:
 label rows 6..10, counter rows 13..19, fills 23..25, skill labels 41..45,
@@ -106,5 +110,15 @@ real client. The F capture shows all three cards with their bottom borders
 inside the panel. Evidence is retained at
 `_triage/hud-alignment-20260909/active-native.png`, `normal.png`,
 `first-slot.png`, `last-slot.png`, and `measurements.json` in the workspace.
-The deployed jar SHA-256 is
+That revision's jar SHA-256 was
 `d3b92d389b05382b9825bcba2be8bdc058d3df124016de5047b1ac780fc39d4a`.
+
+The mirrored resource revision was compiled, deployed and checked in the same
+client on NBTest on 2026-09-09. Native screenshot measurements place the resource
+label, counter and fill at the same exclusive right edge, x=165. The crystal
+sits to their right at x=171. Live regeneration grew the fill leftwards while
+the text kept its right edge. Evidence is retained at
+`_triage/hud-energy-right-20260909/normal-native.png`, `normal.png`,
+`measurements.json`, and `server.log` in the workspace.
+The deployed jar SHA-256 is
+`d3d1b183d48a1bacf956f324e2812bd00e0679f5cec3cadaf1ddfa0d7cb2cf11`.

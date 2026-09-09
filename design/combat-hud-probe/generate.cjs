@@ -89,8 +89,8 @@ function panel(active){
  let s=rect(0,0,190,60,'#211c17')+rect(1,1,188,58,'#503925');
  for(let y=2;y<60;y+=3) for(let x=2;x<188;x+=13) s+=rect(x,y,5+((x*7+y)%7),1,(x+y)%2?'#62472d':'#352a20');
  s+=rect(0,0,190,1,active?'#ffe099':'#b08e5d')+rect(0,0,1,60,'#957244')+rect(189,0,1,60,'#171712');
- s+=frame(4,3,89,26,active)+frame(97,3,89,26,active)+heart(8,11)+crystal(102,9);
- for(const x of [24,117]) s+=rect(x,22,65,5,'#080c0f')+rect(x+1,23,63,3,x<90?'#471c26':'#073e4b');
+ s+=frame(4,3,89,26,active)+frame(97,3,89,26,active)+heart(8,11)+crystal(171,9);
+ for(const x of [24,101]) s+=rect(x,22,65,5,'#080c0f')+rect(x+1,23,63,3,x<90?'#471c26':'#073e4b');
  s+=rect(4,30,182,6,'#17191a')+rect(4,30,182,1,'#806944')+rect(5,32,180,2,'#183123')+rect(5,35,180,1,'#392d21');
  if(active){
   const names=['MOBILITY','SIGNATURE','UTILITY']; const keys=['F , F','F + LMB','F + RMB'];
