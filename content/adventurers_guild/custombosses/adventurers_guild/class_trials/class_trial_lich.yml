@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:4E486A
 leggings: LEATHER_LEGGINGS:4E486A
 boots: LEATHER_BOOTS:4E486A
 offHand: BOOK
+powers:
+- class_trial_lich.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: lich
-  title: An Anchor Can Be Broken
-  power: class_trial_lich.lua
-  actors:
-    HUSK: class_trial_actor_necromancer_partner.yml
-  voice:
-    opening: Immortality is an arrangement. Find the other party.
-    halfway: Yes, the urn matters. I had hoped you would be less observant.
-    victory: You read the terms and terminated the agreement. Adequate.
-    defeat: The thread led to my insurance. You were free to cancel it.

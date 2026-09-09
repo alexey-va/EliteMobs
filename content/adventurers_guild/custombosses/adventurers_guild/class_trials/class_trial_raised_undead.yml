@@ -1,0 +1,7 @@
+extends: class_trial_actor_wither_skeleton.yml
+isEnabled: true
+name: '&7Raised Servant'
+healthMultiplier: 0.3
+damageMultiplier: 0.3
+mainHand: STONE_SWORD
+ai: true

@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:61713C
 leggings: LEATHER_LEGGINGS:61713C
 boots: LEATHER_BOOTS:61713C
 offHand: BOOK
+powers:
+- class_trial_plaguebringer.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: plaguebringer
-  title: Stop the Carrier
-  power: class_trial_plaguebringer.lua
-  actors:
-    HUSK: class_trial_actor_necromancer_partner.yml
-  voice:
-    opening: A plague needs a carrier. I suggest you take an interest in mine.
-    halfway: You have contained one outbreak. Here is another source.
-    victory: Containment before panic. Unexpectedly professional.
-    defeat: You kept fighting the stain while its carrier made more.

@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:33394A
 leggings: LEATHER_LEGGINGS:33394A
 boots: LEATHER_BOOTS:33394A
 offHand: BOOK
+powers:
+- class_trial_necromancer.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: necromancer
-  title: Deny the Body
-  power: class_trial_necromancer.lua
-  actors:
-    HUSK: class_trial_actor_necromancer_partner.yml
-  voice:
-    opening: I brought my own dead. You may try to keep them unemployed.
-    halfway: You noticed the bodies. There may be a useful mind in there yet.
-    victory: The dead were less useful than you were. An irritatingly good result.
-    defeat: You watched the corpse stand up. Next time, interrupt the invitation.

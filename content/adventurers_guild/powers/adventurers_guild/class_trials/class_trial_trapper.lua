@@ -45,12 +45,15 @@ return {
     s.cell=s.cell+1
     if s.cell>3 then
      s.cellAt=nil; s.busyUntil=s.tick+40
-     c.scheduler:run_later(40,function()
-      if not player:is_alive() then return end
-      s.fireAt=s.tick+38; s.lockAt=s.tick+22; s.aim=player:get_eye_location()
-      c.boss:play_sound_at_self('ITEM_CROSSBOW_LOADING_START',.5,.7)
-     end)
+     s.followupAt=s.tick+40
     else s.cellAt=s.tick+26 end
+   end
+   return
+  end
+  if s.followupAt then
+   if s.tick>=s.followupAt then
+    s.followupAt=nil; s.fireAt=s.tick+38; s.lockAt=s.tick+22; s.aim=player:get_eye_location()
+    c.boss:play_sound_at_self('ITEM_CROSSBOW_LOADING_START',.5,.7)
    end
    return
   end
