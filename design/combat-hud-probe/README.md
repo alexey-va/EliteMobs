@@ -5,8 +5,9 @@ ResourcePackManager pack. This is an opt-in Java-client calibration pack, kept
 separate from the exported defaults so the artist can replace its two textures.
 It is not automatically exported by the plugin jar.
 
-Both opaque textures are exactly 190 by 60 pixels. Gray is RGB 128,128,128;
-red is RGB 220,40,40. `python generate.py` regenerates the PNGs and font JSON.
+Both textures are exactly 190 by 60 pixels at 50% opacity (alpha 128/255).
+Gray is RGB 128,128,128; red is RGB 220,40,40.
+`python generate.py` regenerates the PNGs and font JSON.
 The font is `elitemobs:combat_hud_probe`; no default Minecraft font is replaced.
 
 ```
@@ -42,7 +43,7 @@ Minecraft GUI scale multiplies the panel and vanilla HUD together. Text
 background settings, client mods or shaders can affect the final appearance.
 
 Client screenshot calibration remains necessary: confirm the lower edge,
-horizontal centering, opaque coverage over item icons, and identical placement
+horizontal centering, translucent coverage over item icons, and identical placement
 in gray and red. Record any offsets chosen for the artist. Do not treat server
 startup or pack delivery as visual acceptance. Inventory hiding is outside
 this experiment; none is needed to establish whether the glyph covers items.

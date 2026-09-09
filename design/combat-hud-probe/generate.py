@@ -1,4 +1,4 @@
-"""Generate the two solid HUD panels and their calibration font, using only Python's stdlib."""
+"""Generate the two translucent HUD panels and their calibration font, using only Python's stdlib."""
 import json
 from pathlib import Path
 import struct
@@ -6,6 +6,7 @@ import zlib
 
 ROOT = Path(__file__).resolve().parent / "mods"
 WIDTH, HEIGHT = 190, 60
+ALPHA = 128
 
 
 def png_chunk(kind, data):
@@ -14,7 +15,7 @@ def png_chunk(kind, data):
 
 def rectangle(path, rgb):
     path.parent.mkdir(parents=True, exist_ok=True)
-    pixels = (b"\x00" + bytes((*rgb, 255)) * WIDTH) * HEIGHT
+    pixels = (b"\x00" + bytes((*rgb, ALPHA)) * WIDTH) * HEIGHT
     path.write_bytes(b"\x89PNG\r\n\x1a\n"
                      + png_chunk(b"IHDR", struct.pack(">IIBBBBB", WIDTH, HEIGHT, 8, 6, 0, 0, 0))
                      + png_chunk(b"IDAT", zlib.compress(pixels, 9))
