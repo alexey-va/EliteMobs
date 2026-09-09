@@ -1,0 +1,74 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "": 1,
+        "": -1
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "height": 60,
+      "ascent": -1,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "height": 60,
+      "ascent": -1,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/text.png",
+      "height": 7,
+      "ascent": -12,
+      "chars": [
+        "0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/text.png",
+      "height": 6,
+      "ascent": -6,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/health.png",
+      "height": 3,
+      "ascent": -22,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource.png",
+      "height": 3,
+      "ascent": -22,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/xp.png",
+      "height": 2,
+      "ascent": -33,
+      "chars": [
+        ""
+      ]
+    }
+  ]
+}

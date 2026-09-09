@@ -4,7 +4,7 @@ from pathlib import Path
 import struct
 import zlib
 
-ROOT = Path(__file__).resolve().parent / "mods"
+ROOT = Path(__file__).resolve().parent / "calibration/mods"
 WIDTH, HEIGHT = 190, 60
 ALPHA = 128
 

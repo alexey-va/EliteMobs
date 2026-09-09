@@ -1,14 +1,23 @@
-# Combat HUD rectangle experiment
+# Combat HUD live concept
 
 Copy `mods` into `plugins/EliteMobs/resource_pack/`, then rebuild and send the
 ResourcePackManager pack. This is an opt-in Java-client calibration pack, kept
 separate from the exported defaults so the artist can replace its two textures.
 It is not automatically exported by the plugin jar.
 
-Both textures are exactly 190 by 60 pixels at 50% opacity (alpha 128/255).
-Gray is RGB 128,128,128; red is RGB 220,40,40.
-`python generate.py` regenerates the PNGs and font JSON.
-The font is `elitemobs:combat_hud_probe`; no default Minecraft font is replaced.
+The wood/brass concept occupies exactly 190 by 60 GUI pixels. `gray.png` and
+`red.png` retain their calibration filenames, but now contain the normal and
+F-active artwork. The images are 190x60 with a font height of 60. A single bitmap glyph must fit Minecraft's 256x256 font atlas. The normal
+hotbar aperture is transparent; the skill cards are opaque and cover item pixels.
+`node generate.cjs` regenerates artwork, fill strips, text atlas, and the 33
+offset fonts with `sharp`. `generate-calibration.py` retains the old half-opacity
+rectangles in a separate `calibration` output folder.
+
+The probe renders real health, class-resource name/amount, and vanilla XP progress.
+Health/resource bars update from those same values. Skill labels/icons are a
+visual concept, not class-specific art. Armor, hunger and conditional vital rows
+are covered by this opt-in experiment; it is not a replacement production HUD.
+Fonts are `elitemobs:combat_hud_concept_0` through `_32`; the default font is untouched.
 
 ```
 /em hudprobe show magmaguy 0 0
@@ -19,7 +28,7 @@ The font is `elitemobs:combat_hud_probe`; no default Minecraft font is replaced.
 The coordinates are offsets in GUI pixels. Positive x moves right and positive
 y moves down. Accepted ranges are x=-64..64 and y=-16..16. They apply identically
 to both colors. A class must be active and its skill controls enabled; pressing
-F makes the panel red for the actual ability-selection window, then gray again.
+F shows the three skill cards for the actual ability-selection window, then the hotbar again.
 The existing F,F, F+LMB and F+RMB bindings keep working.
 
 The probe temporarily replaces EliteMobs' action-bar output for that player.
@@ -43,7 +52,15 @@ Minecraft GUI scale multiplies the panel and vanilla HUD together. Text
 background settings, client mods or shaders can affect the final appearance.
 
 Client screenshot calibration remains necessary: confirm the lower edge,
-horizontal centering, translucent coverage over item icons, and identical placement
-in gray and red. Record any offsets chosen for the artist. Do not treat server
+horizontal centering, opaque skill-card coverage over item icons, and identical placement
+in the normal and skill states. Record any offsets chosen for the artist. Do not treat server
 startup or pack delivery as visual acceptance. Inventory hiding is outside
 this experiment; none is needed to establish whether the glyph covers items.
+
+The concept was checked in the Java 26.2 client on NBTest on 2026-09-09 with
+offsets `0 0`, in both a small window and the maximized window. The normal hotbar
+and selected-slot border fit the aperture. Pressing F showed all three labeled
+cards in the same bounds, then restored the hotbar. Resolve values and bar width
+increased together during passive regeneration. Final captures are retained in
+the workspace at `_triage/hud-concept-20260909/normal.png` and `active.png`.
+The final pack loaded without font errors. Bedrock has not been checked.

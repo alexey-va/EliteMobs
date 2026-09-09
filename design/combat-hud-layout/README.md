@@ -32,8 +32,9 @@ built-in image generator. It illustrates a wood/brass frame, persistent health
 and resource information, and three F-layer skill cards. It is not a calibrated
 sprite sheet. Use the outline for final dimensions. The current 600 ms F window
 is appropriate for a quick binding cue, not for reading long ability descriptions.
-No inventory contents are modified by this design work, and the concept has not
-been installed as a live HUD.
+No inventory contents are modified by this design work. A pixel-grid adaptation
+of the concept is implemented by `../combat-hud-probe/generate.cjs` for the opt-in
+live HUD, with real health/resource values and a transparent normal hotbar aperture.
 
 Regenerate the SVG/PNG outlines with `node generate.cjs` and the `sharp` package.
 The full-frame output also needs the retained input at
