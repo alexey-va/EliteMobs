@@ -9,14 +9,9 @@ mainHand: MACE
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_spiritcaller.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: spiritcaller
-  title: Hear the Echo End
-  power: class_trial_spiritcaller.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: A kindness can echo. Listen for where the first voice leaves it.
-    halfway: I can move. The echo I left behind cannot.
-    victory: You heard both the voice and the silence that followed.
-    defeat: The echo had a place, a delay, and a focus you could reach.

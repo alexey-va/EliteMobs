@@ -9,14 +9,9 @@ mainHand: IRON_HOE
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_lifewarden.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: lifewarden
-  title: Before the Seed Opens
-  power: class_trial_lifewarden.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: A seed waits for its season. Watch what makes this one open.
-    halfway: The bond is longer now, but it can still be strained.
-    victory: You understood the care before choosing where to strike.
-    defeat: The seed answered a heavy blow. You had other ways to spend that moment.

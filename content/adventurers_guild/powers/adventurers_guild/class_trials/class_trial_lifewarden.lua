@@ -1,48 +1,84 @@
--- @include shared.inc
--- @include mobility/cleric.inc
--- @include abilities/cleric.inc
+-- @include ground_markers.inc
+-- @include cleric_support.inc
+-- @include mobility/radiant_flight.inc
 
-local function bond(c,s)
- return {T.wait(32,function(c,s)  T.sound(c,'BLOCK_AZALEA_LEAVES_PLACE',1.2) end,
-  function(c,s,t) local actor=c.trial:actor('attendant_1'); if actor and t%4==0 then T.tether(c,c.trial:position(),actor:get_location(),C.green) end end,
-  function(c,s) s.bondUntil=s.tick+140; s.separated=0; s.nextPulse=s.tick+30 end),T.rest(30)}
-end
-local function seed(c,s)
- return {T.wait(36,function(c,s)  T.sound(c,'BLOCK_CHORUS_FLOWER_GROW',1.2) end,
-  function(c,s,t) local actor=c.trial:actor('attendant_1'); if actor and t%4==0 then T.draw(c,T.circle(actor:get_location(),.6),C.green) end end,
-  function(c,s) s.seedUntil=s.tick+100; s.seedActive=true end),T.rest(30)}
-end
-return T.encounter{
- init=function(c,s) C.init(c,s,1); s.bondUntil=0; s.seedUntil=0; s.separated=0 end,
- passive=function(c,s)
-  C.passive(c,s); local actor=c.trial:actor('attendant_1')
+-- The seed waits until a heavy hit actually lowers health, then shelters the
+-- following attacks. Renewing Bond breaks after sustained separation.
+return {
+ api_version=1,
+ on_spawn=function(c)
+  local p=c.boss:get_location()
+  c.state.attendant=c.world:spawn_custom_boss_at_location('class_trial_shaman_attendant.yml',
+   {world=p.world,x=p.x+3,y=p.y,z=p.z+2},{level=c.boss.level,add_as_reinforcement=true,silent=true})
+  assert(c.state.attendant,'Lifewarden attendant could not spawn')
+  c.state.healingLeft=c.boss:get_maximum_health()*.15
+ end,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player()
+  if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextBond=50; s.nextSeed=230
+   player:send_message('&6Lifewarden Instructor: &fThe bond has a reach. The seed answers after the wound.')
+  end
   if s.seedPending then
-   local pending=s.seedPending; s.seedPending=nil
-   if actor and actor:get_health()<pending.health then C.shield(c,s,'attendant_1',c.trial.matched_hit,100); s.seedActive=false; C.recover(c,s,50)
-   elseif actor then s.seedUntil=pending.expiry; s.seedActive=true
-   else s.seedActive=false; C.recover(c,s,50) end
+   if s.attendant:is_alive() and s.attendant:get_health()<s.seedPending then
+    s.seedUntil=0; s.shield=s.attendant:get_maximum_health()*.25; s.shieldUntil=s.tick+100
+    s.attendant:spawn_particle_at_self({particle='HAPPY_VILLAGER',amount=8},1)
+   end
+   s.seedPending=nil
   end
-  if s.seedActive then
-   if not actor or s.tick>=s.seedUntil then s.seedActive=false; C.recover(c,s,50)
-   elseif s.tick%6==0 then T.draw(c,T.circle(actor:get_location(),.6),C.green) end
+  if (s.shieldUntil or 0)<=s.tick then s.shield=0 end
+  if s.attendant:is_alive() and ((s.seedUntil or 0)>s.tick or (s.shield or 0)>0) and s.tick%6==0 then
+   s.attendant:spawn_particle_at_self({particle='COMPOSTER',amount=4},1)
   end
-  if s.bondUntil>s.tick and s.tick%5==0 then
-   local linked=actor and T.distance(c.trial:position(),actor:get_location())<=7
-   s.separated=linked and 0 or s.separated+5
-   if s.separated>=20 then s.bondUntil=0; c.trial:say('The bond has been stretched beyond its reach.'); C.recover(c,s,50)
-   elseif linked then T.tether(c,c.trial:position(),actor:get_location(),C.green); if s.tick>=s.nextPulse then C.heal(c,s,'attendant_1',.25*c.trial.matched_hit); s.nextPulse=s.tick+30 end end
+  if (s.bondUntil or 0)>s.tick then
+   local linked=cleric_in_circle(s.attendant,c.boss:get_location(),7)
+   s.separated=linked and 0 or (s.separated or 0)+1
+   if s.separated>=20 then
+    s.bondUntil=0
+    player:send_message('&6Lifewarden Instructor: &fThe bond has been stretched beyond its reach.')
+   elseif linked then
+    if s.tick%5==0 then cleric_tether(c,c.boss,s.attendant,true) end
+    if s.tick%30==0 then cleric_heal(c,s.attendant,.06) end
+   end
+  end
+  if s.castAt then
+   if s.attendant:is_alive() and s.tick%4==0 then cleric_tether(c,c.boss,s.attendant,true) end
+   if s.tick>=s.castAt then
+    if s.castingSeed then s.seedUntil=s.tick+100 else s.bondUntil=s.tick+140; s.separated=0 end
+    s.castAt=nil; s.restUntil=s.tick+30
+   end
+   return
+  end
+  if s.tick<(s.restUntil or 0) then return end
+  if s.restUntil then s.restUntil=nil; c.boss:set_ai_enabled(true) end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true
+   player:send_message('&6Lifewarden Instructor: &fI will close the distance. Find room to stretch the bond again.')
+   if s.attendant:is_alive() and radiant_flight(c,s.attendant:get_location()) then s.restUntil=s.tick+60; return end
+  end
+  if not s.attendant:is_alive() then return end
+  if s.tick>=s.nextBond and s.healingLeft>0 then
+   s.nextBond=s.tick+440; s.castingSeed=false; s.castAt=s.tick+32
+   c.boss:set_ai_enabled(false); c.boss:play_sound_at_self('BLOCK_AZALEA_LEAVES_PLACE',.6,1.2)
+  elseif s.tick>=s.nextSeed then
+   s.nextSeed=s.tick+480; s.castingSeed=true; s.castAt=s.tick+36
+   c.boss:set_ai_enabled(false); c.boss:play_sound_at_self('BLOCK_CHORUS_FLOWER_GROW',.6,1.2)
   end
  end,
- damaged=function(c,s)
-  C.damage(c,s)
-  if c.trial:damaged_actor()=='attendant_1' and s.seedActive and not s.seedPending and s.seedUntil>s.tick and c.event.get_damage_amount()>=c.trial.matched_hit then
-   local actor=c.trial:actor('attendant_1'); s.seedPending={health=actor:get_health(),expiry=s.seedUntil}; s.seedActive=false
-  end
+ on_reinforcement_damaged_by_player=function(c)
+  local s=c.state
+  if c.event.is_damage_transfer or not s.attendant or c.event.entity.uuid~=s.attendant.uuid then return end
+  local amount=c.event.get_damage_amount()
+  if amount<=0 then return end
+  if (s.shield or 0)>0 then
+   local absorbed=math.min(s.shield,amount); s.shield=s.shield-absorbed
+   c.event.multiply_damage_amount((amount-absorbed)/amount)
+  elseif (s.seedUntil or 0)>(s.tick or 0) and not s.seedPending
+    and amount>=s.attendant:get_maximum_health()*.15 then s.seedPending=s.attendant:get_health() end
  end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'flight') then s.phasePending=false; local actor=c.trial:actor('attendant_1'); local target=actor and T.rotate(actor:get_location(),c.trial:position(),180,4) or nil; T.start(c,s,'flight',M.move(c,s,target),M.cooldown)
-  elseif c.trial:actor('attendant_1') and s.healBudget>0 and T.ready(s,'bond') then T.start(c,s,'bond',bond(c,s),440)
-  elseif c.trial:actor('attendant_1') and T.ready(s,'seed') then T.start(c,s,'seed',seed(c,s),480)
-  else T.basic(c,s,'melee') end
+ on_death=function(c)
+  c.boss:send_message('&6Lifewarden Instructor: &fYou saw what sustained us, and what it could not reach.',24)
  end
 }

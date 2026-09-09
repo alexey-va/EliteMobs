@@ -9,14 +9,9 @@ mainHand: IRON_SPEAR
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_shepherd.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: shepherd
-  title: Gather Without Crowding
-  power: class_trial_shepherd.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: Listen to the chorus. Every voice near me changes what it can do.
-    halfway: Some voices are farther away. That changes the song.
-    victory: You heard the difference one missing voice could make.
-    defeat: You fought us where every voice could answer.

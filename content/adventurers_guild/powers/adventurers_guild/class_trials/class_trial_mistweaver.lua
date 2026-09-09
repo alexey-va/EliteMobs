@@ -1,36 +1,88 @@
--- @include shared.inc
--- @include mobility/cleric.inc
--- @include abilities/cleric.inc
+-- @include ground_markers.inc
+-- @include cleric_support.inc
+-- @include mobility/radiant_flight.inc
 
-local function tide(c,s)
- local p,x,z,preview; local healed={}; local hit=false
- return {T.wait(36,function(c,s) p=T.copy(c.trial:position()); x,z=T.direction(p,c.trial.player:get_location()); preview=T.lane(T.offset(p,-x*.4,0,-z*.4),T.offset(p,x*8.4,0,z*8.4),5); T.sound(c,'BLOCK_CONDUIT_AMBIENT_SHORT',1) end,
-  function(c,s,t) if t%4==0 then T.draw(c,preview,C.water) end end),
- T.wait(50,nil,function(c,s,t)
-  local distance=8*(t+1)/50; local front=T.offset(p,x*distance,0,z*distance); local shape=T.lane(T.offset(front,-x*.4,0,-z*.4),T.offset(front,x*.4,0,z*.4),5)
-  if t%4==0 then T.draw(c,shape,C.water) end
-  if not hit then hit=T.hit(c,shape,.65) end
-  for _,v in ipairs(C.living(c,s)) do if not healed[v.id] and T.contains(shape,v.actor:get_location()) then healed[v.id]=true; C.heal(c,s,v.id,.5*c.trial.matched_hit) end end
- end),T.rest(50)}
-end
-local function veil(c,s)
- local destinations,chosen
- return {T.wait(30,function(c,s)
-  local p=c.trial:position(); local x,z=T.direction(p,c.trial.player:get_location()); destinations={T.offset(p,-z*4,0,x*4),T.offset(p,z*4,0,-x*4)}; chosen=s.phase==2 and 2 or 1
-  T.sound(c,'ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM',1.4)
- end,function(c,s,t)
-  if t%4==0 then for i,point in ipairs(destinations) do T.draw(c,T.circle(point,.6),i==chosen and T.gold or C.water); for h=0,3 do T.point(c,T.offset(point,0,h*.5,0),i==chosen and T.gold or C.water) end end end
- end,function(c,s)
-  if c.trial:blink(destinations[chosen]) then c.trial:cleanse('boss',false,0); s.veilUntil=s.tick+40 else T.sound(c,'BLOCK_FIRE_EXTINGUISH',1.2) end
- end),T.rest(50)}
-end
-return T.encounter{
- init=function(c,s) C.init(c,s,2); s.veilUntil=0 end, passive=C.passive,
- damaged=function(c,s) C.damage(c,s); if c.trial:damaged_actor()=='boss' and s.veilUntil>s.tick then c.event.multiply_damage_amount(.75) end end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'mobility') then s.phasePending=false; local weakest=C.weakest(c,s,false); T.start(c,s,'mobility',C.flight(c,s,weakest[1] and weakest[1].id),M.cooldown)
-  elseif T.ready(s,'tide') then T.start(c,s,'tide',tide(c,s),440)
-  elseif T.ready(s,'mobility') then T.start(c,s,'mobility',veil(c,s),400)
-  else T.basic(c,s,'melee') end
+-- Restorative Tide advances through four overlapping pools along a fixed path.
+-- It heals each attendant once and strikes the challenger once per cast.
+-- Veilstep is a native sidestep with a highlighted destination, never a teleport.
+return {
+ api_version=1,
+ on_spawn=function(c)
+  local p=c.boss:get_location(); c.state.attendants={}
+  for i=1,2 do
+   local ally=c.world:spawn_custom_boss_at_location('class_trial_shaman_attendant.yml',
+    {world=p.world,x=p.x+(i==1 and -3 or 3),y=p.y,z=p.z+2},{level=c.boss.level,add_as_reinforcement=true,silent=true})
+   assert(ally,'Mistweaver attendant could not spawn'); table.insert(c.state.attendants,ally)
+  end
+  c.state.healingLeft=c.boss:get_maximum_health()*.18
+ end,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player()
+  if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextTide=60; s.nextVeil=220
+   player:send_message('&6Mistweaver Instructor: &fThe tide follows its course. Step aside, and watch who it carries.')
+  end
+  if s.tideAt then
+   if s.tick<s.tideAt then
+    if s.tick%5==0 then for _,pool in ipairs(s.pools) do show_circle(c,pool,85,180,225) end end
+   elseif s.tick<s.tideAt+48 then
+    local index=math.min(4,math.floor((s.tick-s.tideAt)/12)+1); local pool=s.pools[index]
+    if s.tick%4==0 then show_circle(c,pool,120,225,245) end
+    for _,ally in ipairs(s.attendants) do
+     if not s.healed[ally.uuid] and ally:is_alive() and pool:contains(ally:get_location()) then
+      s.healed[ally.uuid]=true; cleric_heal(c,ally,.2)
+     end
+    end
+    if not s.tideHit and pool:contains(player:get_location()) then
+     s.tideHit=true; c.script:damage(pool:full_target(),1,.65)
+    end
+   else s.tideAt=nil; s.restUntil=s.tick+50 end
+   return
+  end
+  if s.veilAt then
+   if s.tick%4==0 then
+    for i,zone in ipairs(s.veilZones) do show_circle(c,zone,i==s.chosen and 245 or 85,220,i==s.chosen and 150 or 245) end
+   end
+   if s.tick>=s.veilAt then
+    c.boss:set_velocity_vector({x=s.stepX,y=.12,z=s.stepZ})
+    s.veilAt=nil; s.veilUntil=s.tick+40; s.restUntil=s.tick+50
+    c.boss:spawn_particle_at_self({particle='CLOUD',amount=12},1)
+   end
+   return
+  end
+  if s.tick<(s.restUntil or 0) then return end
+  if s.restUntil then s.restUntil=nil; c.boss:set_ai_enabled(true) end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; local weakest=nil
+   for _,ally in ipairs(s.attendants) do
+    if ally:is_alive() and (not weakest or ally:get_health()/ally:get_maximum_health()<weakest:get_health()/weakest:get_maximum_health()) then weakest=ally end
+   end
+   player:send_message('&6Mistweaver Instructor: &fThe mist turns. Follow the golden light, not its reflection.')
+   if weakest and radiant_flight(c,weakest:get_location()) then s.restUntil=s.tick+60; return end
+  end
+  local p,q=c.boss:get_location(),player:get_location(); local dx,dz=q.x-p.x,q.z-p.z
+  local distance=math.sqrt(dx*dx+dz*dz); if distance<.01 then dx,dz,distance=0,1,1 end
+  dx,dz=dx/distance,dz/distance
+  if s.tick>=s.nextTide then
+   s.nextTide=s.tick+440; s.tideAt=s.tick+36; s.pools={}; s.healed={}; s.tideHit=false
+   for i=1,4 do s.pools[i]=ground_circle(c,{world=p.world,x=p.x+dx*i*2,y=p.y,z=p.z+dz*i*2},2.5) end
+   c.boss:set_ai_enabled(false); c.boss:play_sound_at_self('BLOCK_CONDUIT_AMBIENT_SHORT',.6,1)
+  elseif s.tick>=s.nextVeil then
+   s.nextVeil=s.tick+400; s.veilAt=s.tick+30; s.chosen=s.phaseTwo and 2 or 1; s.veilZones={}
+   for i=1,2 do
+    local sign=i==1 and 1 or -1
+    s.veilZones[i]=ground_circle(c,{world=p.world,x=p.x-dz*3*sign,y=p.y,z=p.z+dx*3*sign},.6)
+   end
+   local sign=s.chosen==1 and 1 or -1; s.stepX=-dz*.6*sign; s.stepZ=dx*.6*sign
+   c.boss:set_ai_enabled(false); c.boss:play_sound_at_self('ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM',.6,1.4)
+  end
+ end,
+ on_boss_damaged_by_player=function(c)
+  if (c.state.veilUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(.75) end
+ end,
+ on_death=function(c)
+  c.boss:send_message('&6Mistweaver Instructor: &fYou kept your footing when the path was hard to see. That will serve you well.',24)
  end
 }

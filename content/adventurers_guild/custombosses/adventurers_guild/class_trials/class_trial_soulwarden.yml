@@ -10,14 +10,9 @@ chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
 offHand: SHIELD
+powers:
+  - class_trial_soulwarden.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: soulwarden
-  title: What We Carry Together
-  power: class_trial_soulwarden.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: A burden can be shared. That does not make it disappear.
-    halfway: Watch which thread is carrying the most weight.
-    victory: You understood what joined us, and what each of us still had to bear.
-    defeat: The threads showed where the damage traveled. Distance could change it.

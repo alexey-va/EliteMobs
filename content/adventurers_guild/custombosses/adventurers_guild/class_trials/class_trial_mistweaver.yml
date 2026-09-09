@@ -9,14 +9,9 @@ mainHand: TRIDENT
 chestplate: LEATHER_CHESTPLATE:B5DCD9
 leggings: LEATHER_LEGGINGS:B5DCD9
 boots: LEATHER_BOOTS:B5DCD9
+powers:
+  - class_trial_mistweaver.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: mistweaver
-  title: Cross the Tide
-  power: class_trial_mistweaver.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: The same tide can carry help and danger. Watch its course.
-    halfway: I will change the shore it begins from. The water still shows the way.
-    victory: You crossed the current without being carried by it.
-    defeat: A step across the wave would have cost less than running with it.

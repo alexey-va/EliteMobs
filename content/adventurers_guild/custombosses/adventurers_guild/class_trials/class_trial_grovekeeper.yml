@@ -9,14 +9,9 @@ mainHand: IRON_HOE
 chestplate: LEATHER_CHESTPLATE:739252
 leggings: LEATHER_LEGGINGS:739252
 boots: LEATHER_BOOTS:739252
+powers:
+  - class_trial_grovekeeper.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: grovekeeper
-  title: The Garden's Edge
-  power: class_trial_grovekeeper.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: A garden protects what grows within it. It still needs an open gate.
-    halfway: New roots. Look for the path I have left you.
-    victory: You found the edge without losing sight of the roots.
-    defeat: The gate was open, and the roots were within reach.
