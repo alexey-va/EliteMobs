@@ -18,3 +18,5 @@ All 155 unique built-in abilities have artwork: 150 Signature/Utility abilities 
 The separate Goblin transport correction passed its authorized Paper 26.2 Autotester fixture and is included in this build. That fixture does not establish coverage of every authored Goblin cannon route.
 
 Current comparison revision: all 155 textures were reduced directly from their retained ImageGen originals to 32x32 using Lanczos3. HUD geometry and glyph mappings are unchanged. The five root card rows were visually inspected at GUI scale 4. All 155 served PNG dimensions and exact bytes were verified after an RSPM reload on NBTest. No server restart was needed.
+
+Every exported ability icon now carries a centered PLACE / HOLDER label. The generator applies the shared pixel lettering when exporting the pack, preserving the unmarked artwork and original sources. Card previews read the actual exported textures.
