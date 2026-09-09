@@ -9,8 +9,6 @@ const abilityDirectory = path.join(__dirname, 'ability-art');
 const abilityManifest = JSON.parse(fs.readFileSync(path.join(abilityDirectory, 'manifest.json')));
 const abilityIcons = abilityManifest.map((entry,index) => ({...entry, glyph: 0xea00 + index}))
  .filter(entry => entry.texture);
-const classBadges = [...new Map(abilityManifest.map(e => [e.id.split('.')[0], e.className])).entries()]
- .map(([id,name],index)=>({id,name,glyph:0xe600+index}));
 fs.mkdirSync(textures, {recursive:true}); fs.mkdirSync(fonts, {recursive:true});
 const glyphs = {
  '+':['00000','00100','00100','11111','00100','00100','00000'],
@@ -254,16 +252,12 @@ function panel(active){
   await sharp(Buffer.from(svg(30,5,pixels))).png().toFile(path.join(textures,`cost_${name}.png`));
  }
  fs.mkdirSync(path.join(textures, 'abilities'), {recursive:true});
- fs.mkdirSync(path.join(textures, 'class_badges'), {recursive:true});
- for(const badge of classBadges) {
-  const label=badge.name.toUpperCase(), width=label.length*4-1;
-  if(width>66) throw new Error(`Class badge label exceeds its frame: ${badge.name}`);
-  await sharp(Buffer.from(svg(74,9,frame(0,0,74,9,true)
-   +smallText(label,Math.floor((74-width)/2),2,'#fff0be')))).png()
-   .toFile(path.join(textures,'class_badges',badge.id+'.png'));
- }
- fs.writeFileSync(path.join(__dirname,'../../src/main/resources/combat-hud-class-badges.properties'),
-  '# Generated class badge glyphs\n'+classBadges.map(e=>`${e.id}=${e.glyph.toString(16)}`).join('\n')+'\n');
+ // Full vanilla accents need more headroom than the old five-pixel alphabet.
+ // Grow upward; keep the lower edge at y=6, above the heart and vitals.
+ const badgeFrame=await sharp(Buffer.from(svg(74,14,frame(0,0,74,14,true)))).png().toBuffer();
+ for(const [name,left,width] of [['left',0,3],['middle',3,1],['right',71,3]])
+  await sharp(badgeFrame).extract({left,top:0,width,height:14}).png()
+   .toFile(path.join(textures,`class_badge_${name}.png`));
  // Stamp every exported ability with the same legible UI label, preserving source art.
  const placeholderLabel = await sharp(Buffer.from(placeholderStamp())).png().toBuffer();
  for (const entry of abilityIcons) {
@@ -339,8 +333,8 @@ function panel(active){
   providers.push(bitmap('resource_icons',7,-55,chars(0xe540,5)));
   providers.push(bitmap('cost_ready',5,-57,chars(0xe700,10)),bitmap('cost_unaffordable',5,-57,chars(0xe710,10)));
   bindings.forEach((_,i)=>providers.push(bitmap(`skill_unaffordable_${i}`,21,-43,String.fromCodePoint(0xe680+i))));
-  for (const badge of classBadges)
-   providers.push(bitmap(`class_badges/${badge.id}`,9,-7,String.fromCodePoint(badge.glyph)));
+  ['left','middle','right'].forEach((name,i)=>providers.push(
+   bitmap(`class_badge_${name}`,14,-4,String.fromCodePoint(0xe600+i))));
   for (const entry of abilityIcons)
    providers.push(bitmap(`abilities/${entry.id}`,13,-47,String.fromCodePoint(entry.glyph)));
   for(let frame=0;frame<4;frame++) {

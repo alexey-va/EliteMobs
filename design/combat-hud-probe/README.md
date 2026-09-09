@@ -77,9 +77,29 @@ Unavailable cards replace only their own background before the icon and cost
 are drawn. Their glyphs are U+E680..E682; green/red cost digits use U+E700..E709
 and U+E710..E719. The five small resource icons use U+E540..E544.
 
-The existing class badge projects four pixels above the panel, two pixels
-higher than its previous position. Its baked lettering remains pending the
-choice of a localizable font positioning mechanism.
+The class badge reads the active form's display name at runtime. It uses
+positioned vanilla lettering, not a class-name image or the HUD's small custom
+alphabet. The right edge stays at x=78, clear of the diamond; names wider than
+the 74-pixel minimum frame expand left. Extremely long names are shortened
+with an ellipsis at 134 pixels so the badge stays within a 320-pixel GUI.
+
+The frame grows upward to fit vanilla accents: bounds are y=-7..6, with text
+anchored at y=-3 for ordinary eight-pixel glyphs. Its lower edge remains above
+the heart at y=7. The native feedback row remains above the badge, including
+its taller accented characters. All overlays have zero net advance, so changing
+the name or feedback does not move the centered HUD.
+
+`prepare-feedback-font.py client.jar unifont.zip unifont.json` derives the two
+font definitions and matching runtime advances from matching vanilla assets.
+The badge references Minecraft's ordinary bitmap sheets, with a vertical
+offset. Because the native unihex provider has no offset option, its complete
+Unicode coverage is converted into width-grouped bitmap sheets at the original
+resolution. This includes Japanese and supplementary code points, without
+requiring new art for translated names. The source font license is retained.
+The current Unicode sheets occupy about 2.8 MiB on disk and 96.4 MiB decoded;
+only one positioned Unicode font is generated, not one per calibration offset.
+Font metrics match the bitmap provider's rounded advances. This enables Unicode
+rendering; it does not itself author translations for the class catalogue.
 
 The HUD uses EliteMobs' existing action-bar compositor. Transient feedback
 appears above the panel and uses its extended reading time. It does not alter
