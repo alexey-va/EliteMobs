@@ -58,7 +58,7 @@ dropsSkillXP: false
 powers: [] # Ordinary powers may supply animation or other presentation.
 ```
 
-The configured entity needs `ai: true` and must not be frozen. Its physical body must fit the supported envelope: at most 1.3 blocks wide/deep and 1.4 blocks high. Boarding rejects larger bodies. Clearance reserves 1.3 blocks horizontally and 3.3 blocks vertically for mount and rider; visible model wings may extend farther, so the artist/admin must allow room for those too. Missing or disabled entity files, unavailable configured models, and missing LibsDisguises for an explicit disguise reject boarding. The journey temporarily makes the mount invulnerable and nonpersistent; it does not replace its equipment or power list.
+The configured entity needs `ai: true` and must not be frozen. Its physical body must fit the supported envelope: at most 1.3 blocks wide/deep and 1.4 blocks high. Boarding rejects larger bodies. Clearance reserves 1.3 blocks horizontally and 3.3 blocks vertically for mount and rider; visible model wings may extend farther, so the artist/admin must allow room for those too. Missing or disabled entity files and unavailable configured models reject boarding. Without LibsDisguises, the ordinary boss loader leaves the base mob visible. The journey temporarily makes the mount invulnerable and nonpersistent; it does not replace its equipment or power list.
 
 Routes support normal `isEnabled` and `extends` behavior. The editor preserves existing comments and unrecognized fields when saving. Obsolete `carrier`, route-level `customModel` and `flightAnimation` fields are rejected with an explanatory console error. Existing definitions are never converted automatically; author the entity file and update the route explicitly.
 
