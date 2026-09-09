@@ -103,6 +103,20 @@ function panel(active){
  return s;
 }
 (async()=>{
+ // One 32x32 glyph per fill height, packed below the 256px atlas limit.
+ // Two-pixel stepped brass rim; the interior has 28 rows filled bottom-up.
+ let diamonds='';
+ for(let fill=0;fill<=28;fill++) {
+  for(let yy=0;yy<32;yy++) for(let xx=0;xx<32;xx++) {
+   const distance=Math.abs(xx-15.5)+Math.abs(yy-15.5);
+   if(distance>16) continue;
+   let color=distance>15?'#241a12':distance>14?(yy<16?'#edcc82':'#927044'):'#172128';
+   if(distance<=14 && yy>=30-fill) color=yy===30-fill?'#f5d476':'#916b24';
+   diamonds+=rect((fill%8)*32+xx,Math.floor(fill/8)*32+yy,1,1,color);
+  }
+ }
+ await sharp(Buffer.from(svg(256,128,diamonds))).png().toFile(path.join(textures,'class_diamond.png'));
+ await sharp(Buffer.from(svg(60,16,text('0123456789',0,0,'#ffffff')))).png().toFile(path.join(textures,'class_level.png'));
  for(const [name,active] of [['gray',false],['red',true]]){
   let body=panel(active);
   if(!active)body=`<defs><mask id="m">${rect(0,0,190,60,'white')}${rect(3,37,184,23,'black')}</mask></defs><g mask="url(#m)">${body}</g>`;
@@ -129,6 +143,12 @@ function panel(active){
     bitmap('gray',60,-5,'\ue000'),bitmap('red',60,-5,'\ue001'),
     bitmap('text',7,-18,alphabet),bitmap('labels',7,-11,[...alphabet].map((c,i)=>String.fromCodePoint(0xe200+i)).join('')),
     bitmap('health',3,-28,'\ue110'),bitmap('resource',3,-28,'\ue111'),bitmap('xp',2,-37,'\ue112')];
+  providers.push(bitmap('class_level',16,-6,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
+  const diamond=bitmap('class_diamond',32,7,'');
+  diamond.chars=Array.from({length:4},(_,row)=>Array.from({length:8},(_,col)=>{
+   const index=row*8+col; return index<=28?String.fromCodePoint(0xe400+index):'\u0000';
+  }).join(''));
+  providers.push(diamond);
   fs.writeFileSync(path.join(fonts,`combat_hud_concept_${y+16}.json`),JSON.stringify({providers},null,2)+'\n');
  }
  console.log('Generated live HUD concept textures and 33 offset fonts.');

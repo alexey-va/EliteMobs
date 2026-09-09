@@ -84,6 +84,8 @@ pixels throughout, with no fractional scaling.
 | Health fill | 25 | 23 | up to 63 | 3 |
 | Resource fill | 165 minus fill width | 23 | up to 63 | 3 |
 | Resource icon | 171 | 9 | 10 | 15 |
+| Class XP diamond | 79 | -12 | 32 | 32 |
+| Class level | centered at 95 | 1 | 5 per digit, 1 spacing | 7 |
 | XP fill | 5 | 32 | up to 180 | 2 |
 | Native hotbar opening | 3 | 37 | 184 | 23 |
 | Mobility card | 4 | 38 | 60 | 21 |
@@ -100,6 +102,15 @@ Skill icons start at card x+3, y=41; labels at x+19, y=41;
 bindings at x+19, y=50. Skill frames end at row 58, reserving row 59 for the
 outer panel and avoiding clipping when the framebuffer height is not an exact
 multiple of the GUI scale.
+
+The class diamond projects 12 pixels above the panel and cuts across the top
+center border. Its stepped brass rim encloses 28 fill rows. Gold rises from the
+bottom according to XP toward the active class's next effective level, using
+the class band's XP baseline. At the current progression cap it stays full.
+The white number shows effective class level, including specialization levels.
+An absent or locked class hides the diamond. Instance-locked class selections
+take precedence over the profile's selection. The 29 fill states share a
+256x128 bitmap atlas; the level is a separate glyph layer above the fill.
 
 The initial alignment revision was deployed and checked on NBTest on 2026-09-09.
 Native F2 capture at 3840x2071, GUI scale 8, placed the panel at framebuffer
@@ -122,3 +133,13 @@ the text kept its right edge. Evidence is retained at
 `measurements.json`, and `server.log` in the workspace.
 The deployed jar SHA-256 is
 `d3d1b183d48a1bacf956f324e2812bd00e0679f5cec3cadaf1ddfa0d7cb2cf11`.
+
+The class diamond revision was compiled and deployed to NBTest on 2026-09-09.
+The Java client showed the live class at level 10 with a full capped fill,
+clear of both counters and bars. All 29 atlas states were measured for
+horizontal symmetry and successive bottom-up rows. Native screenshot level
+bounds are [89,100) horizontally and [1,8) vertically. Evidence is retained at
+`_triage/hud-class-diamond-20260909/normal-native.png`, `normal.png`,
+`measurements.json`, and `server.log`. Live XP gain and rollover were not
+exercised; the player's progression was preserved. The deployed jar SHA-256 is
+`ce1f66f4a3670cc26fe9b78e236bbb41c06a593947d6b1c3d94499ae80154e5d`.
