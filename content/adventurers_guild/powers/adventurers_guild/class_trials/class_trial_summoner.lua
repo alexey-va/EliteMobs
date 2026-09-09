@@ -4,7 +4,7 @@
 
 local function portal(c,s)
  local p
- return {T.wait(40,function(c,s) s.charges=s.charges-1; p=T.offset(c.trial:position(),3,0,2); c.trial:pose('cast'); T.sound(c,'BLOCK_PORTAL_AMBIENT',1.4) end,
+ return {T.wait(40,function(c,s) s.charges=s.charges-1; p=T.offset(c.trial:position(),3,0,2); T.sound(c,'BLOCK_PORTAL_AMBIENT',1.4) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,1.2),S.violet); T.draw(c,T.circle(p,.5),T.gold) end end,
   function(c,s) S.summon(c,s,'familiar',p,'WOLF',240,'pounce',{damage=.4,name='&dArcane Familiar',onEnd=function(c,s) s.sigilUntil=0; c.trial:remove_actor('sigil') end}) end),T.rest(40)}
 end
@@ -12,7 +12,7 @@ local function sigil(c,s)
  local p
  return {T.wait(32,function(c,s)
   local ally=c.trial:actor('familiar'); if ally then local a=c.trial:position(); local b=ally:get_location(); p=T.offset(a,(b.x-a.x)/2,0,(b.z-a.z)/2) end
-  c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.3)
+  T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.3)
  end,function(c,s,t) if p and t%3==0 then T.draw(c,T.circle(p,5),T.gold); T.eye(c,p) end end,
  function(c,s) if p and c.trial:actor('familiar') and S.prop(c,'sigil',p,2,'&dBinding Sigil','AMETHYST_BLOCK') then s.sigilUntil=s.tick+120; S.ward(c,s,'familiar',1,120) end end),T.rest(40)}
 end

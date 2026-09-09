@@ -3,13 +3,13 @@
 -- @include abilities/cleric.inc
 
 local function current(c,s)
- return {T.wait(30,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_CONDUIT_AMBIENT_SHORT',1.3) end,
+ return {T.wait(30,function(c,s)  T.sound(c,'BLOCK_CONDUIT_AMBIENT_SHORT',1.3) end,
   function(c,s,t) local actor=c.trial:actor('attendant_1'); if actor and t%4==0 then T.tether(c,c.trial:position(),actor:get_location(),C.water) end end,
   function(c,s) s.currentUntil=s.tick+120; s.separated=0 end),T.rest(30)}
 end
 local function totem(c,s)
  local p
- return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),1.5,0,0); c.trial:pose('cast'); T.sound(c,'BLOCK_WOOD_PLACE',1.2) end,
+ return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),1.5,0,0); T.sound(c,'BLOCK_WOOD_PLACE',1.2) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,4),C.water) end end,
   function(c,s) c.trial:remove_actor('totem'); if C.focus(c,'totem',p,2,'&eSpirit Totem','JUNGLE_LOG') then s.totem=p; s.totemUntil=s.tick+140; s.totemAlive=true; s.sanctuary=p end end),T.rest(30)}
 end

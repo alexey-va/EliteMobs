@@ -14,6 +14,6 @@ function M.move(c,s,anchor)
       if T.distance(c.trial:position(),target)>.5 then valid=c.trial:step(target,.65,true,false) else c.trial:stop() end
       if not hit and T.contains(lane,c.trial.player:get_location()) and T.distance(c.trial:position(),c.trial.player:get_location())<1.4 then hit=c.trial:damage(.75) end
     end,function(c,s) c.trial:stop(); c.trial:dismount(); s.exposure=hit and 1 or 1.2 end),
-    T.wait(50,function(c,s) c.trial:pose('idle') end,nil,function(c,s) s.exposure=1 end)
+    T.wait(50,function(c,s)  end,nil,function(c,s) s.exposure=1 end)
   }
 end

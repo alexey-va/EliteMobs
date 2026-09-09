@@ -12,7 +12,7 @@ local function cry(c,s)
   }
 end
 local function rampage(c,s)
-  local seq={T.wait(30,function(c,s) s.comboSpent=0; c.trial:pose('draw') end,
+  local seq={T.wait(30,function(c,s) s.comboSpent=0;  end,
     function(c,s,t) if t%10==0 then T.sound(c,'BLOCK_NOTE_BLOCK_BASEDRUM',.6+t/30) end end)}
   for i=1,3 do
     local side=i%2==1 and -25 or 25
@@ -25,7 +25,7 @@ local function rampage(c,s)
         local x,z=T.direction(p,target); local a=math.rad(side)
         shape=T.cone(p,T.offset(p,x*math.cos(a)-z*math.sin(a),0,x*math.sin(a)+z*math.cos(a)),3.5,85)
       end,function(c,s,t) if t%4==0 then T.draw(c,shape) end end,
-      function(c,s) c.trial:pose('swing'); local amount=math.min(.55,1.1-s.comboSpent); if amount>0 and T.hit(c,shape,amount) then s.comboSpent=s.comboSpent+amount end; T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP',.75) end)
+      function(c,s)  local amount=math.min(.55,1.1-s.comboSpent); if amount>0 and T.hit(c,shape,amount) then s.comboSpent=s.comboSpent+amount end; T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP',.75) end)
     })
   end
   return T.append(seq,{T.rest(50,1.2)})

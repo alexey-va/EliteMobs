@@ -8,7 +8,7 @@ local function sever(c,s,opening)
 end
 local function lantern(c,s)
  local p
- return {T.wait(40,function(c,s) s.charges=s.charges-1; p=T.offset(c.trial:position(),3,0,3); c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.5) end,
+ return {T.wait(40,function(c,s) s.charges=s.charges-1; p=T.offset(c.trial:position(),3,0,3); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.5) end,
   function(c,s,t) if t%3==0 then T.draw(c,T.circle(p,1.2),S.ice); T.point(c,T.offset(p,0,1,0),T.gold) end end,
   function(c,s)
    if S.prop(c,'lantern',p,2,'&bEidolon Lantern','SOUL_LANTERN') then
@@ -44,7 +44,7 @@ return T.encounter{
   if s.phasePending and T.ready(s,'blink') then s.phasePending=false; T.start(c,s,'blink',M.move(c,s),M.cooldown)
   elseif s.charges>0 and S.servantCount(c,s)==0 and T.ready(s,'lantern') then T.start(c,s,'lantern',lantern(c,s),520)
   elseif c.trial:actor('eidolon') and s.linkUntil==0 and T.ready(s,'essence') then
-   T.start(c,s,'essence',{T.wait(34,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',1.6) end,
+   T.start(c,s,'essence',{T.wait(34,function(c,s)  T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',1.6) end,
     function(c,s,t) local ally=c.trial:actor('eidolon'); if ally and t%4==0 then T.tether(c,c.trial:position(),ally:get_location(),S.ice) end end,
     function(c,s) if c.trial:actor('eidolon') then s.linkUntil=s.tick+120; s.sharedWard=c.trial.matched_hit; s.separated=0 end end),T.rest(40)},440)
   else S.basic(c,s) end

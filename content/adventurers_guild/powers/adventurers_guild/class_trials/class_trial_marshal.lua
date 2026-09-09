@@ -5,7 +5,7 @@
 local ids={'lancer'}
 local function plant(c,s)
  local p
- return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),2,0,0); c.trial:pose('cast'); T.sound(c,'BLOCK_WOOD_PLACE',.7) end,
+ return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),2,0,0); T.sound(c,'BLOCK_WOOD_PLACE',.7) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,5),T.gold); T.draw(c,T.circle(p,.7),T.gold) end end,
   function(c,s)
    local banner=c.trial:spawn_actor('standard',p,2,'&eBattle Standard','ARMOR_STAND')

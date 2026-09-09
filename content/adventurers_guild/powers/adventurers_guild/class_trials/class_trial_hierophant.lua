@@ -10,7 +10,7 @@ local function benediction(c,s)
 end
 local function silence(c,s)
  local ring
- return {T.wait(30,function(c,s) ring=T.circle(c.trial:position(),3); T.sound(c,'BLOCK_BELL_USE',.8); c.trial:pose('cast') end,
+ return {T.wait(30,function(c,s) ring=T.circle(c.trial:position(),3); T.sound(c,'BLOCK_BELL_USE',.8);  end,
   function(c,s,t) if t%4==0 then T.draw(c,ring,T.gold) end end,
   function(c,s)
    for _,v in ipairs(C.living(c,s)) do if T.distance(c.trial:position(),v.actor:get_location())<=5 then c.trial:cleanse(v.id,false,0) end end

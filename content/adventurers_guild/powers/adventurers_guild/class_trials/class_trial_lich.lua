@@ -15,7 +15,7 @@ return T.encounter{
   S.passive(c,s); S.servants(c,s)
   if c.trial:consume_survival('phylactery') then
    s.vesselActive=false; c.trial:remove_actor('phylactery'); s.rebirthBudget=c.boss:get_maximum_health()*.06
-   T.start(c,s,'rebirth',{T.wait(40,function(c,s) c.trial:pose('guard'); T.sound(c,'BLOCK_RESPAWN_ANCHOR_DEPLETE',.8) end,
+   T.start(c,s,'rebirth',{T.wait(40,function(c,s)  T.sound(c,'BLOCK_RESPAWN_ANCHOR_DEPLETE',.8) end,
     function(c,s,t) if t%5==0 and c.boss:is_alive() then local amount=math.min(s.rebirthBudget,c.boss:get_maximum_health()*.0075); local before=c.boss:get_health(); c.boss:restore_health(amount); s.rebirthBudget=math.max(0,s.rebirthBudget-(c.boss:get_health()-before)); T.draw(c,T.circle(c.trial:position(),1.5),T.gold) end end),T.rest(40)},0)
   elseif s.vesselActive then
    local prop=c.trial:actor('phylactery')

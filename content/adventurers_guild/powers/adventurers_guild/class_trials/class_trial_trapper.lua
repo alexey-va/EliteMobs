@@ -8,7 +8,7 @@ local function wires(c,s)
  return {T.wait(36,function(c,s)
   local p=c.trial.player:get_location(); local x,z=T.direction(c.trial:position(),p); shapes={}
   for _,side in ipairs({-2.5,2.5}) do shapes[#shapes+1]=T.lane(T.offset(p,-x*2.5-z*side,0,-z*2.5+x*side),T.offset(p,x*2.5-z*side,0,z*2.5+x*side),2) end
-  c.trial:pose('cast'); T.sound(c,'BLOCK_TRIPWIRE_ATTACH',.7)
+  T.sound(c,'BLOCK_TRIPWIRE_ATTACH',.7)
  end,function(c,s,t) if t%4==0 then for _,shape in ipairs(shapes) do T.draw(c,shape) end end end,
   function(c,s)
    s.wires=shapes; s.wiresUntil=s.tick+140; s.wireInside={}

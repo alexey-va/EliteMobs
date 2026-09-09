@@ -3,7 +3,7 @@
 -- @include abilities/ranger.inc
 
 local function mark(c,s)
- return {T.wait(30,function(c,s) s.stormCenter=T.copy(c.trial.player:get_location()); c.trial:pose('draw'); T.sound(c,'BLOCK_NOTE_BLOCK_FLUTE',1) end,
+ return {T.wait(30,function(c,s) s.stormCenter=T.copy(c.trial.player:get_location()); T.sound(c,'BLOCK_NOTE_BLOCK_FLUTE',1) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(s.stormCenter,6),R.feather) end end),T.rest(20)}
 end
 local function storm(c,s)
@@ -27,7 +27,7 @@ local function storm(c,s)
  return {T.wait(40,function(c,s)
   center=T.copy(s.stormCenter or c.trial.player:get_location()); x,z=T.direction(c.trial:position(),center); lanes={}
   for i=1,3 do local side=(i-2)*4; lanes[i]=T.lane(T.offset(center,-x*5-z*side,0,-z*5+x*side),T.offset(center,x*5-z*side,0,z*5+x*side),4) end
-  c.trial:pose('draw'); T.sound(c,'ENTITY_ARROW_SHOOT',.6)
+  T.sound(c,'ENTITY_ARROW_SHOOT',.6)
   local origin=c.boss:get_eye_location(); for i=-2,2 do c.trial:arrow(origin,T.offset(origin,i*.2,6,0),.7,0,group..'_lift',0,{lifetime=25,gravity=true}) end
  end,function(c,s,t) if t%4==0 then strips(c,s,1) end end),
  T.wait(80,nil,function(c,s,t)

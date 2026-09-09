@@ -5,7 +5,7 @@
 local stakes={'west_root','east_root'}
 local function bloom(c,s)
  local p
- return {T.wait(36,function(c,s) p=T.copy(c.trial:position()); c.trial:pose('cast'); T.sound(c,'BLOCK_AZALEA_LEAVES_PLACE',.8) end,
+ return {T.wait(36,function(c,s) p=T.copy(c.trial:position()); T.sound(c,'BLOCK_AZALEA_LEAVES_PLACE',.8) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,4),C.green) end end,
   function(c,s)
    s.garden=T.circle(p,4); s.gardenUntil=s.tick+120; s.nextPulse=s.tick+40; s.sanctuary=p; s.roots=true
@@ -14,7 +14,7 @@ local function bloom(c,s)
 end
 local function ward(c,s)
  local shape
- return {T.wait(32,function(c,s) shape=T.arc(s.garden.p,c.trial.player:get_location(),4,3,270); c.trial:pose('cast'); T.sound(c,'BLOCK_SWEET_BERRY_BUSH_PLACE',.8) end,
+ return {T.wait(32,function(c,s) shape=T.arc(s.garden.p,c.trial.player:get_location(),4,3,270); T.sound(c,'BLOCK_SWEET_BERRY_BUSH_PLACE',.8) end,
   function(c,s,t) if t%4==0 then T.draw(c,shape) end end,
   function(c,s)
    s.thorns=shape; s.wardUntil=s.tick+80; s.thornHits=0; s.thornInside=false; s.nextThorn=s.tick

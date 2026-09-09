@@ -7,7 +7,7 @@ local function fault(c,s)
  return {T.wait(30,function(c,s)
   local p=c.trial:position(); local target=T.rotate(p,c.trial.player:get_location(),0,10); lane=T.lane(p,target,2); sections={}
   for i=0,2 do local a=T.offset(p,lane.x*10*i/3,0,lane.z*10*i/3); local b=T.offset(p,lane.x*10*(i+1)/3,0,lane.z*10*(i+1)/3); sections[#sections+1]=T.lane(a,b,2) end
-  c.trial:pose('draw'); T.sound(c,'BLOCK_STONE_BREAK',.6)
+  T.sound(c,'BLOCK_STONE_BREAK',.6)
  end,function(c,s,t) if t%4==0 then T.draw(c,lane) end end),
  T.wait(24,nil,function(c,s,t)
   if t%8==0 then local shape=sections[1+t/8]; T.draw(c,shape,{particle='DUST',red=130,green=120,blue=110,amount=1}); T.sound(c,'ENTITY_GENERIC_EXPLODE',.6+t/50)

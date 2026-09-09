@@ -6,12 +6,12 @@ local function whiteout(c,s)
  local shape
  return {T.wait(36,function(c,s)
   local p=c.trial:position(); local target=c.trial.player:get_location(); shape=T.arc(p,target,5,1.2,270)
-  c.trial:pose('cast'); T.sound(c,'BLOCK_GLASS_HIT',.7)
+  T.sound(c,'BLOCK_GLASS_HIT',.7)
  end,function(c,s,t) if t%3==0 then T.draw(c,shape,S.ice); for i=0,3 do local p=T.rotate(shape.p,c.trial.player:get_location(),i*90,4); T.draw(c,T.lane(shape.p,p,.1),S.ice) end end end,
  function(c,s) s.storm={shape=shape,expires=s.tick+100,nextPulse=s.tick,budget={cap=.8,spent=0}} end),T.rest(12)}
 end
 local function barrier(c,s)
- return {T.wait(32,function(c,s) c.trial:pose('guard'); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.4) end,
+ return {T.wait(32,function(c,s)  T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.4) end,
   function(c,s,t) if t%4==0 then for i=1,3 do T.point(c,T.offset(c.trial:position(),(i-2)*.8,t/24,0),S.ice) end end end,
   function(c,s) c.trial:cleanse('boss',false,0); S.ward(c,s,'boss',2,100,function(c,s,reason)
    s.storm=nil; c.trial:clear_player_slow(); S.recover(c,s,reason=='broken' and 60 or 40)

@@ -3,7 +3,7 @@ S.violet={particle='DUST',red=185,green=130,blue=255,amount=1}
 S.ice={particle='DUST',red=165,green=225,blue=255,amount=1}
 S.fire={particle='DUST',red=255,green=110,blue=45,amount=1}
 function S.init(c,s,weapon)
- c.trial:magic_weapon(weapon or 'WAND'); s.wards={}; s.groups={}
+ ; s.wards={}; s.groups={}
 end
 function S.actor(c,id) return id=='boss' and c.boss or c.trial:actor(id) end
 function S.prop(c,id,p,hits,name,head)
@@ -50,7 +50,7 @@ function S.channel(c,s,key,ticks,draw,finish,options)
  options=options or {}
  return {T.wait(ticks,function(c,s)
   s.channel={limit=options.hits or 2,damage=0,cancel=options.cancel,recovery=options.interruptRecovery or 60,exposure=options.exposure}
-  c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',.7); if options.begin then options.begin(c,s) end
+  T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',.7); if options.begin then options.begin(c,s) end
  end,function(c,s,t) if t%4==0 and draw then draw(c,s,t) end end,
  function(c,s) if s.channel then s.channel=nil; finish(c,s) end end),T.rest(options.recovery or 50)}
 end
@@ -64,7 +64,7 @@ function S.bolt(c,s,options)
  local target,origin; local group=options.group or ('spell_'..s.tick)
  return T.wait(options.warn or 30,function(c,s)
   origin=options.origin and T.copy(options.origin) or c.boss:get_eye_location(); target=T.offset(c.trial.player:get_location(),0,1,0)
-  c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',.9)
+  T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',.9)
  end,function(c,s,t)
   if t<(options.warn or 30)-(options.lock or 8) and not options.target then target=T.offset(c.trial.player:get_location(),0,1,0); c.trial:face(target,8) end
   if options.target then target=options.target end
@@ -78,7 +78,7 @@ function S.flight(c,s,group,recovery,finish)
  return {T.untilDone(82,nil,nil,function(c,s)
   local hit=c.trial:group_damage(group)>0; c.trial:clear_projectiles(group); if finish then exposure=finish(c,s,hit) or 1 end
   c.trial:forget_group(group); s.groups[group]=nil
- end,function(c,s) return c.trial:projectile_count(group)==0 end),T.wait(recovery or 50,function(c,s) c.trial:pose('idle'); c.trial:stop(); s.exposure=exposure end,nil,function(c,s) s.exposure=1 end)}
+ end,function(c,s) return c.trial:projectile_count(group)==0 end),T.wait(recovery or 50,function(c,s)  c.trial:stop(); s.exposure=exposure end,nil,function(c,s) s.exposure=1 end)}
 end
 function S.blade(c,g)
  local p=T.offset(g.p,0,1,0); local x,z=g.x,g.z
@@ -158,7 +158,7 @@ function S.nextCorpse(c,s)
 end
 function S.raise(c,s,ticks,options)
  local id=S.nextCorpse(c,s); local p; local completed=false
- return {T.wait(ticks,function(c,s) local prop=id and c.trial:actor(id); p=prop and prop:get_location(); s.raiseFocus=id; c.trial:pose('cast'); T.sound(c,'BLOCK_SOUL_SAND_HIT',.6) end,
+ return {T.wait(ticks,function(c,s) local prop=id and c.trial:actor(id); p=prop and prop:get_location(); s.raiseFocus=id; T.sound(c,'BLOCK_SOUL_SAND_HIT',.6) end,
   function(c,s,t)
    if not id or not c.trial:actor(id) then s.raiseFocus=nil; S.recover(c,s,60); return end
    if t%4==0 then T.tether(c,c.trial:position(),p,S.violet); T.draw(c,T.circle(p,1.5),S.violet) end

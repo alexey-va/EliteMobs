@@ -3,12 +3,12 @@
 -- @include abilities/cleric.inc
 
 local function bond(c,s)
- return {T.wait(32,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_AZALEA_LEAVES_PLACE',1.2) end,
+ return {T.wait(32,function(c,s)  T.sound(c,'BLOCK_AZALEA_LEAVES_PLACE',1.2) end,
   function(c,s,t) local actor=c.trial:actor('attendant_1'); if actor and t%4==0 then T.tether(c,c.trial:position(),actor:get_location(),C.green) end end,
   function(c,s) s.bondUntil=s.tick+140; s.separated=0; s.nextPulse=s.tick+30 end),T.rest(30)}
 end
 local function seed(c,s)
- return {T.wait(36,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_CHORUS_FLOWER_GROW',1.2) end,
+ return {T.wait(36,function(c,s)  T.sound(c,'BLOCK_CHORUS_FLOWER_GROW',1.2) end,
   function(c,s,t) local actor=c.trial:actor('attendant_1'); if actor and t%4==0 then T.draw(c,T.circle(actor:get_location(),.6),C.green) end end,
   function(c,s) s.seedUntil=s.tick+100; s.seedActive=true end),T.rest(30)}
 end

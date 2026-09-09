@@ -15,7 +15,7 @@ local function chain(c,s)
  local seq={T.wait(36,function(c,s)
   start=T.copy(c.trial:position()); route={}
   for _,id in ipairs(s.effigies) do local actor=c.trial:actor(id); if actor then route[#route+1]={id=id,p=T.copy(actor:get_location())} end end
-  route[#route+1]={p=T.copy(c.trial.player:get_location())}; c.trial:pose('draw'); T.sound(c,'BLOCK_CHAIN_PLACE',.8)
+  route[#route+1]={p=T.copy(c.trial.player:get_location())}; T.sound(c,'BLOCK_CHAIN_PLACE',.8)
  end,function(c,s,t)
   if t%4==0 then local previous=start; for _,leg in ipairs(route) do T.draw(c,T.lane(previous,leg.p,1.4)); previous=leg.p end end
  end)}
@@ -43,7 +43,7 @@ local function chain(c,s)
 end
 local function reap(c,s)
  local line
- return {T.wait(30,function(c,s) local p=c.trial:position(); line=T.lane(p,T.rotate(p,c.trial.player:get_location(),0,6),1.5); c.trial:pose('draw'); T.sound(c,'BLOCK_CHAIN_PLACE',.6) end,
+ return {T.wait(30,function(c,s) local p=c.trial:position(); line=T.lane(p,T.rotate(p,c.trial.player:get_location(),0,6),1.5); T.sound(c,'BLOCK_CHAIN_PLACE',.6) end,
   function(c,s,t) if t%4==0 then T.draw(c,line) end end,
   function(c,s) if T.contains(line,c.trial.player:get_location()) then c.trial:push(line.p,-.25) end end),T.rest(30)}
 end

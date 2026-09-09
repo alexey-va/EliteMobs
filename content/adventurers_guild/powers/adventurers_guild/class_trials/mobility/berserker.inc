@@ -3,7 +3,7 @@ M.cooldown=360
 function M.move(c,s,anchor)
   local target,g,launched,landed=false
   return {
-    T.wait(30,function(c,s) target=T.copy(anchor or c.trial.player:get_location()); g=T.circle(target,3); c.trial:pose('draw'); T.sound(c,'BLOCK_GRAVEL_BREAK',.65) end,
+    T.wait(30,function(c,s) target=T.copy(anchor or c.trial.player:get_location()); g=T.circle(target,3); T.sound(c,'BLOCK_GRAVEL_BREAK',.65) end,
       function(c,s,t) if t%4==0 then T.draw(c,g) end end,
       function(c,s) launched=c.trial:leap(target,22); landed=false; if not launched then T.fizzle(c) end end),
     T.wait(30,nil,function(c,s,t)

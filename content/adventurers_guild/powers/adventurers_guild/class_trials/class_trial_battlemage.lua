@@ -4,10 +4,10 @@
 
 local function cleave(c,s)
  local shape
- return {T.wait(30,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.1) end,
+ return {T.wait(30,function(c,s)  T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',1.1) end,
   function(c,s,t) if not shape or t<18 then shape=T.cone(c.trial:position(),c.trial.player:get_location(),4,80); c.trial:face(c.trial.player:get_location(),8) end
    if t%3==0 then T.draw(c,shape); S.blade(c,shape) end end,
-  function(c,s) c.trial:pose('swing'); if T.hit(c,shape,.85) then S.ward(c,s,'boss',1,60) end end),T.rest(56)}
+  function(c,s)  if T.hit(c,shape,.85) then S.ward(c,s,'boss',1,60) end end),T.rest(56)}
 end
 return T.encounter{
  init=function(c,s) S.init(c,s); s.guardHits=0; s.guardUntil=0 end,
@@ -22,7 +22,7 @@ return T.encounter{
  end,
  choose=function(c,s)
   if s.phasePending and T.ready(s,'blink') then s.phasePending=false; T.start(c,s,'blink',M.move(c,s,T.rotate(c.trial.player:get_location(),c.trial:position(),90,3)),M.cooldown)
-  elseif T.ready(s,'guard') then T.start(c,s,'guard',{T.wait(28,function(c,s) c.trial:pose('guard') end,function(c,s,t) if t%4==0 then T.eye(c,c.trial:position()) end end,function(c,s) s.guardHits=2; s.guardUntil=s.tick+80 end),T.rest(20)},400)
+  elseif T.ready(s,'guard') then T.start(c,s,'guard',{T.wait(28,function(c,s)  end,function(c,s,t) if t%4==0 then T.eye(c,c.trial:position()) end end,function(c,s) s.guardHits=2; s.guardUntil=s.tick+80 end),T.rest(20)},400)
   elseif T.ready(s,'cleave') then if not T.approach(c,s,3) then T.start(c,s,'cleave',cleave(c,s),320) end
   else S.basic(c,s) end
  end

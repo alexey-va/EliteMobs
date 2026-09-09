@@ -13,7 +13,7 @@ local function echo(c,s,recovery)
   end,{begin=function(c,s) p=T.copy(c.trial:position()) end,recovery=recovery or 50})
 end
 local function link(c,s)
- return {T.wait(32,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',1.3) end,
+ return {T.wait(32,function(c,s)  T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',1.3) end,
   function(c,s,t) if t%4==0 then for _,v in ipairs(C.living(c,s)) do T.tether(c,c.trial:position(),v.actor:get_location()) end end end,
   function(c,s) s.links={}; for _,v in ipairs(C.living(c,s)) do s.links[v.id]=true end; s.linkUntil=s.tick+120 end),T.rest(30)}
 end

@@ -4,14 +4,14 @@
 
 local function frenzy(c,s)
  local damage=function(c,s) return s.phase==2 and not s.dampened and .6 or .45 end
- local seq={T.wait(30,function(c,s) s.exposure=1.2; s.fury=3; c.trial:pose('draw'); T.sound(c,'ENTITY_PLAYER_BREATH',.7) end,
+ local seq={T.wait(30,function(c,s) s.exposure=1.2; s.fury=3; T.sound(c,'ENTITY_PLAYER_BREATH',.7) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(c.trial:position(),1.2),B.red) end end)}
  T.append(seq,B.cuts(c,s,{{ticks=30,angle=-20,damage=damage},{ticks=30,angle=20,damage=damage},{ticks=30,angle=-20,damage=damage}},
   {cap=1.2,exposure=1.2,recovery=60,result=function(c,s) s.fury=math.max(0,s.fury-1) end,finished=function(c,s) s.dampened=false end}))
  return seq
 end
 local function roar(c,s)
- return {T.wait(28,function(c,s) s.roaring=true; s.pressure=0; c.trial:pose('cast'); T.sound(c,'ENTITY_RAVAGER_ROAR',.7) end,
+ return {T.wait(28,function(c,s) s.roaring=true; s.pressure=0; T.sound(c,'ENTITY_RAVAGER_ROAR',.7) end,
   function(c,s,t) if t%4==0 then for i=1,3 do T.point(c,T.offset(c.trial:position(),i-2,2,0),B.red) end end end,
   function(c,s) s.roaring=false; c.trial:cleanse('boss',true,0) end),T.rest(30)}
 end

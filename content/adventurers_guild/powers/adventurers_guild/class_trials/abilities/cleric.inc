@@ -25,7 +25,7 @@ function C.heal(c,s,id,amount)
  return healed
 end
 function C.recover(c,s,ticks,exposure)
- s.channel=nil; c.trial:pose('idle')
+ s.channel=nil;
  if s.cast then T.interrupt(c,s,{T.rest(ticks,exposure)}) else T.start(c,s,'tending',{T.rest(ticks,exposure)},0) end
 end
 function C.shield(c,s,id,amount,duration,onEnd)
@@ -66,7 +66,7 @@ function C.channel(c,s,key,ticks,draw,finish,options)
  options=options or {}
  return {T.wait(ticks,function(c,s)
   s.channel={id=key,damage=0,recovery=options.interruptRecovery or 50,exposure=options.interruptExposure,feedback=options.feedback,cancel=options.cancel}
-  c.trial:pose('cast'); T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',1.4); if options.begin then options.begin(c,s) end
+  T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',1.4); if options.begin then options.begin(c,s) end
  end,function(c,s,t)
   if t==math.floor(ticks*.65) then T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',.9) end
   if t%4==0 and draw then draw(c,s,t) end
@@ -86,7 +86,7 @@ function C.focus(c,id,p,hits,name,material)
 end
 function C.cleanse(c,s,id,warn,protection)
  local actor
- return {T.wait(warn,function(c,s) actor=C.actor(c,id); c.trial:pose('cast'); T.sound(c,'BLOCK_BELL_USE',1.3) end,
+ return {T.wait(warn,function(c,s) actor=C.actor(c,id); T.sound(c,'BLOCK_BELL_USE',1.3) end,
   function(c,s,t) if actor and actor:is_alive() and t%4==0 then T.tether(c,c.trial:position(),actor:get_location()) end end,
   function(c,s) if C.actor(c,id) then c.trial:cleanse(id,false,protection) end end),T.rest(36)}
 end
@@ -94,7 +94,7 @@ function C.gather(c,s,warn,duration,protection,recovery)
  local destinations
  return {T.wait(warn,function(c,s)
   destinations={}; local p=c.trial:position(); for i,id in ipairs(s.ids) do destinations[id]=T.offset(p,(i-2)*2,0,2) end
-  c.trial:pose('cast'); T.sound(c,'BLOCK_BELL_USE',.9)
+  T.sound(c,'BLOCK_BELL_USE',.9)
  end,function(c,s,t) if t%4==0 then for _,v in ipairs(C.living(c,s)) do T.draw(c,T.lane(v.actor:get_location(),destinations[v.id],.6),T.gold) end end end,
   function(c,s) s.alliesPausedUntil=s.tick+duration+recovery; s.gatherUntil=s.tick+duration; s.gatherReduction=protection end),
  T.wait(duration,nil,function(c,s,t) if t%5==0 then for _,v in ipairs(C.living(c,s)) do c.trial:actor_step(v.id,destinations[v.id]); T.draw(c,T.circle(destinations[v.id],.6),T.gold) end end end),T.rest(recovery)}

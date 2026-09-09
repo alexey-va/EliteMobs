@@ -3,13 +3,13 @@
 -- @include abilities/berserker.inc
 
 local function roar(c,s)
- return {T.wait(40,function(c,s) s.inhaling=true; s.pressure=0; c.trial:pose('cast'); T.sound(c,'ENTITY_PLAYER_BREATH',.6) end,
+ return {T.wait(40,function(c,s) s.inhaling=true; s.pressure=0; T.sound(c,'ENTITY_PLAYER_BREATH',.6) end,
   function(c,s,t) if t%5==0 then T.draw(c,T.circle(c.trial:position(),1.5),B.red) end end,
   function(c,s) s.inhaling=false; s.roars=s.roars+1; s.guardUntil=s.tick+80; B.heal(c,s,'roarHealing',c.boss:get_maximum_health()*.02) end),T.rest(20),T.rest(30)}
 end
 local function lastBreath(c,s)
  s.inhaling=false; s.guardUntil=0; c.trial:say('One breath left. Watch what I do with it.'); T.sound(c,'ITEM_TOTEM_USE',.6)
- local seq={T.wait(40,function(c,s) c.trial:pose('idle'); c.trial:stop() end,
+ local seq={T.wait(40,function(c,s)  c.trial:stop() end,
   function(c,s,t) if t%10==9 then B.heal(c,s,'lastHealing',c.boss:get_maximum_health()*.02); T.draw(c,T.circle(c.trial:position(),1.5),T.gold) end end,
   function(c,s) T.sound(c,'ENTITY_PLAYER_BREATH',1.2) end),T.rest(40)}
  if s.cast then T.interrupt(c,s,seq) else T.start(c,s,'last_breath',seq,0) end

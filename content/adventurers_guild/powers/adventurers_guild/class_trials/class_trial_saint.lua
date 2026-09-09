@@ -4,7 +4,7 @@
 
 local function ground(c,s)
  local p,shape
- return {T.wait(32,function(c,s) p=T.offset(c.trial:position(),1,0,0); shape=T.circle(p,4); c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',1.4) end,
+ return {T.wait(32,function(c,s) p=T.offset(c.trial:position(),1,0,0); shape=T.circle(p,4); T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',1.4) end,
   function(c,s,t) if t%4==0 then T.draw(c,shape,T.gold) end end,
   function(c,s) c.trial:remove_actor('candle'); if C.focus(c,'candle',p,2,'&ePrayer Candle','CANDLE') then s.ground=shape; s.groundUntil=s.tick+120; s.nextPulse=s.tick+20; s.sanctuary=p end end),T.rest(40)}
 end

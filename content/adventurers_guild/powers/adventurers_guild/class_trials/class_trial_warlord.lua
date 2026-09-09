@@ -4,7 +4,7 @@
 
 local ids={'vanguard','rearguard'}
 local function shout(c,s)
- return {T.wait(28,function(c,s) c.trial:pose('cast'); T.sound(c,'ITEM_GOAT_HORN_SOUND_0',.8) end,
+ return {T.wait(28,function(c,s)  T.sound(c,'ITEM_GOAT_HORN_SOUND_0',.8) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(c.trial:position(),5),T.gold) end end,
   function(c,s)
    s.auraUntil=s.tick+100; s.aura=T.copy(c.trial:position())

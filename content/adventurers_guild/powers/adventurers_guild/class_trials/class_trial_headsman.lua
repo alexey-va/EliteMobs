@@ -4,11 +4,11 @@
 
 local function stroke(c,s)
  local lane
- return {T.wait(40,function(c,s) c.trial:pose('draw'); T.sound(c,'BLOCK_ANVIL_PLACE',.5) end,
+ return {T.wait(40,function(c,s)  T.sound(c,'BLOCK_ANVIL_PLACE',.5) end,
   function(c,s,t) if not lane or t<24 then local p=c.trial:position(); local target=T.rotate(p,c.trial.player:get_location(),0,6); lane=T.lane(p,target,2); c.trial:face(target,3) end; if t%4==0 then T.draw(c,lane) end end,
   function(c,s)
    local boosted=s.markUntil>s.tick and c.trial.player:get_health()<c.trial.player:get_maximum_health()*.35
-   c.trial:pose('swing'); T.sound(c,'ENTITY_GENERIC_EXPLODE',.5)
+   T.sound(c,'ENTITY_GENERIC_EXPLODE',.5)
    if not T.hit(c,lane,boosted and 1.4 or 1.1) then s.markUntil=0; c.trial:say('Across the blade. Exactly so.') end
   end),T.rest(70,1.25)}
 end

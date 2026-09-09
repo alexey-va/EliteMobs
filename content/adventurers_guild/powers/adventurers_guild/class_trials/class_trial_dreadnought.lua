@@ -3,7 +3,7 @@
 -- @include abilities/berserker.inc
 
 local function chain(c,s)
- local p; local budget={spent=0,cap=1.1}; local seq={T.wait(36,function(c,s) p=T.copy(c.trial:position()); c.trial:pose('draw'); T.sound(c,'BLOCK_NOTE_BLOCK_BASEDRUM',.5) end,
+ local p; local budget={spent=0,cap=1.1}; local seq={T.wait(36,function(c,s) p=T.copy(c.trial:position()); T.sound(c,'BLOCK_NOTE_BLOCK_BASEDRUM',.5) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,2,1)) end end)}
  for _,radius in ipairs({2,4,6}) do
   local shape

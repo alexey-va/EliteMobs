@@ -4,7 +4,7 @@
 
 local function beacon(c,s)
  local p,shape
- return {T.wait(32,function(c,s) p=T.copy(c.trial.player:get_location()); shape=T.circle(p,2.5); c.trial:pose('cast'); T.sound(c,'BLOCK_TRIPWIRE_ATTACH',.8) end,
+ return {T.wait(32,function(c,s) p=T.copy(c.trial.player:get_location()); shape=T.circle(p,2.5); T.sound(c,'BLOCK_TRIPWIRE_ATTACH',.8) end,
   function(c,s,t) if t%4==0 then T.draw(c,shape) end end,
   function(c,s) c.trial:remove_actor('snare'); if R.prop(c,s,'snare',p,1,'&eSnare Beacon','TRIPWIRE_HOOK') then s.snare=shape; s.snareUntil=s.tick+120; s.snareInside=false end end),T.rest(30)}
 end

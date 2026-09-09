@@ -3,7 +3,7 @@
 -- @include abilities/cleric.inc
 
 local function communion(c,s)
- return {T.wait(36,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',.8) end,
+ return {T.wait(36,function(c,s)  T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',.8) end,
   function(c,s,t) if t%4==0 then for _,v in ipairs(C.living(c,s)) do T.tether(c,c.trial:position(),v.actor:get_location()) end end end,
   function(c,s) s.links={}; for _,v in ipairs(C.living(c,s)) do s.links[v.id]={separated=0} end; s.communionUntil=s.tick+120; s.hadLinks=next(s.links)~=nil end),T.rest(30)}
 end

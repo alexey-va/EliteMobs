@@ -4,7 +4,7 @@
 
 local function kneel(c,s)
  local p,hit=false
- return {T.wait(32,function(c,s) p=T.copy(c.trial:position()); c.trial:pose('draw'); T.sound(c,'BLOCK_ANVIL_LAND',.5) end,
+ return {T.wait(32,function(c,s) p=T.copy(c.trial:position()); T.sound(c,'BLOCK_ANVIL_LAND',.5) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,5)) end end),
  T.wait(60,nil,function(c,s,t)
   for wave=0,2 do local age=t-wave*12
@@ -21,7 +21,7 @@ local function escape(c,s)
   p=T.copy(c.trial:position()); exit=T.rotate(p,c.trial.player:get_location(),s.phase==2 and 90 or -90,6); s.lastExit=exit
   arcs={}; local facing=T.rotate(p,exit,180,6)
   for _,r in ipairs({3,4,5,6}) do arcs[#arcs+1]=T.arc(p,facing,r,r-.45,360-math.deg(2*math.asin(math.min(1,1.5/r)))) end
-  c.trial:pose('cast'); T.sound(c,'ENTITY_RAVAGER_ROAR',.6)
+  T.sound(c,'ENTITY_RAVAGER_ROAR',.6)
  end,function(c,s,t)
   if t%4==0 then for _,arc in ipairs(arcs) do T.draw(c,arc) end; T.draw(c,T.lane(p,exit,3),T.gold) end
  end),T.wait(36,nil,function(c,s,t)

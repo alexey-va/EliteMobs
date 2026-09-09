@@ -4,9 +4,9 @@
 
 local function breaker(c,s)
  local shape
- return {T.wait(30,function(c,s) local p=c.trial:position(); local x,z=T.direction(p,c.trial.player:get_location()); shape=T.lane(p,T.offset(p,x*7,0,z*7),2); c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',.8) end,
+ return {T.wait(30,function(c,s) local p=c.trial:position(); local x,z=T.direction(p,c.trial.player:get_location()); shape=T.lane(p,T.offset(p,x*7,0,z*7),2); T.sound(c,'BLOCK_AMETHYST_BLOCK_RESONATE',.8) end,
   function(c,s,t) if t%3==0 then T.draw(c,shape); S.blade(c,shape) end end,
-  function(c,s) c.trial:pose('swing'); if T.hit(c,shape,.8) then T.weak(c,s,40,.15) end end),T.rest(56)}
+  function(c,s)  if T.hit(c,shape,.8) then T.weak(c,s,40,.15) end end),T.rest(56)}
 end
 return T.encounter{
  init=function(c,s) S.init(c,s); T.spawnAlly(c,s,'cadet',3,'IRON_SWORD',3) end,

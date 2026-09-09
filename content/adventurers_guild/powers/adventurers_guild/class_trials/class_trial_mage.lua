@@ -21,7 +21,7 @@ return T.encounter{
  passive=S.passive,damaged=S.damage,
  choose=function(c,s)
   if s.phasePending and T.ready(s,'blink') then s.phasePending=false; T.start(c,s,'blink',M.move(c,s),M.cooldown)
-  elseif T.ready(s,'echo') and s.echoUntil<=s.tick then T.start(c,s,'echo',{T.wait(28,function(c,s) c.trial:pose('cast') end,function(c,s,t) if t%4==0 then T.eye(c,c.trial:position()) end end,function(c,s) s.echoUntil=s.tick+120 end),T.rest(12)},440)
+  elseif T.ready(s,'echo') and s.echoUntil<=s.tick then T.start(c,s,'echo',{T.wait(28,function(c,s)  end,function(c,s,t) if t%4==0 then T.eye(c,c.trial:position()) end end,function(c,s) s.echoUntil=s.tick+120 end),T.rest(12)},440)
   elseif T.ready(s,'volley') then T.start(c,s,'volley',volley(c,s),280)
   else S.basic(c,s) end
  end

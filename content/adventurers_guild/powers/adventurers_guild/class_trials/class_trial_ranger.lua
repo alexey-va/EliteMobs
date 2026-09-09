@@ -7,7 +7,7 @@ local function volley(c,s,angles,group,cap)
   return T.aimShot(c,s,{angles=angles,damage=.45*multiplier,cap=cap or .45*multiplier,group=group,windup=26,lock=12,recovery=30})
 end
 local function mark(c,s)
- return {T.wait(24,function(c,s) c.trial:pose('cast'); T.sound(c,'ENTITY_PARROT_AMBIENT',1.6) end,
+ return {T.wait(24,function(c,s)  T.sound(c,'ENTITY_PARROT_AMBIENT',1.6) end,
    function(c,s,t) if t%4==0 then T.eye(c,c.trial.player:get_location()) end end,
    function(c,s) s.markUntil=s.tick+120; s.losLost=0; c.trial:say("Hunter's Mark. Leave me an empty lane.") end),T.rest(30)}
 end

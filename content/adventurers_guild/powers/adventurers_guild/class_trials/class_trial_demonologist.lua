@@ -5,7 +5,7 @@
 local function gate(c,s)
  local p; local opened=false
  return {T.wait(46,function(c,s)
-  s.charges=s.charges-1; p=T.offset(c.trial:position(),-3,0,3); c.trial:pose('cast'); T.sound(c,'BLOCK_RESPAWN_ANCHOR_CHARGE',.7)
+  s.charges=s.charges-1; p=T.offset(c.trial:position(),-3,0,3); T.sound(c,'BLOCK_RESPAWN_ANCHOR_CHARGE',.7)
   opened=S.prop(c,'gate_anchor',p,2,'&cNether Gate Anchor','CRYING_OBSIDIAN')~=nil
  end,function(c,s,t)
   if not opened or not c.trial:actor('gate_anchor') then c.trial:remove_actor('gate_anchor'); S.recover(c,s,60); return end
@@ -15,7 +15,7 @@ local function gate(c,s)
  end),T.rest(50)}
 end
 local function pact(c,s)
- return {T.wait(36,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_RESPAWN_ANCHOR_CHARGE',1.2) end,
+ return {T.wait(36,function(c,s)  T.sound(c,'BLOCK_RESPAWN_ANCHOR_CHARGE',1.2) end,
   function(c,s,t) local ally=c.trial:actor('servitor'); if ally and t%3==0 then T.tether(c,c.trial:position(),ally:get_location(),S.fire); T.eye(c,c.trial:position()) end end,
   function(c,s) if c.trial:actor('servitor') then s.pactUntil=s.tick+100; S.ward(c,s,'servitor',1,100) end end),T.rest(60)}
 end

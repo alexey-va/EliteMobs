@@ -8,12 +8,12 @@ local function removeFire(c,s,broken)
 end
 local function flashover(c,s)
  local location
- return {T.wait(30,function(c,s) location=T.copy(c.trial.player:get_location()); c.trial:pose('cast'); T.sound(c,'ENTITY_BLAZE_AMBIENT',.8) end,
+ return {T.wait(30,function(c,s) location=T.copy(c.trial.player:get_location()); T.sound(c,'ENTITY_BLAZE_AMBIENT',.8) end,
   function(c,s,t) if t%4==0 then for i=1,3 do local a=i*math.pi*2/3; T.point(c,T.offset(location,math.cos(a),.4,math.sin(a)),S.fire) end end end,
   function(c,s) local prop=S.prop(c,'brazier',location,2,'&6Ember Brazier','CAMPFIRE'); if prop then s.brazierUntil=s.tick+140 end end),T.rest(12)}
 end
 local function inferno(c,s)
- local shape; local steps={T.wait(36,function(c,s) local prop=c.trial:actor('brazier'); if prop then shape=T.circle(prop:get_location(),4) end; c.trial:pose('cast') end,
+ local shape; local steps={T.wait(36,function(c,s) local prop=c.trial:actor('brazier'); if prop then shape=T.circle(prop:get_location(),4) end;  end,
   function(c,s,t) if shape and t%4==0 then T.draw(c,shape,S.fire) end end,
   function(c,s) if shape and c.trial:actor('brazier') then s.fire={shape=shape,expires=s.tick+80,nextPulse=s.tick,budget={cap=1,spent=0}}; s.brazierUntil=s.tick+80 end end)}
  if s.phase==2 then T.append(steps,M.move(c,s)) end

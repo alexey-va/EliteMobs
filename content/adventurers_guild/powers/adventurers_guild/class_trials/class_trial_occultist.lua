@@ -15,7 +15,7 @@ return T.encounter{
  damaged=S.damage,
  choose=function(c,s)
   if s.phasePending and T.ready(s,'blink') then s.phasePending=false; T.start(c,s,'blink',M.move(c,s),M.cooldown)
-  elseif T.ready(s,'sight') then T.start(c,s,'sight',{T.wait(30,function(c,s) c.trial:pose('cast') end,function(c,s,t) if t%3==0 then T.eye(c,c.trial:position()) end end,function(c,s) s.sightUntil=s.tick+120 end),T.rest(12)},440)
+  elseif T.ready(s,'sight') then T.start(c,s,'sight',{T.wait(30,function(c,s)  end,function(c,s,t) if t%3==0 then T.eye(c,c.trial:position()) end end,function(c,s) s.sightUntil=s.tick+120 end),T.rest(12)},440)
   elseif T.ready(s,'lance') then T.start(c,s,'lance',lance(c,s),360)
   else S.basic(c,s) end
  end

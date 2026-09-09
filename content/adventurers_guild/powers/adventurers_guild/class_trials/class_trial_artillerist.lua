@@ -4,12 +4,12 @@
 
 local function cache(c,s)
  local p
- return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),2,0,0); c.trial:pose('cast'); T.sound(c,'BLOCK_BARREL_OPEN',.8) end,
+ return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),2,0,0); T.sound(c,'BLOCK_BARREL_OPEN',.8) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,.8),T.gold) end end,
   function(c,s) c.trial:remove_actor('cache'); if R.prop(c,s,'cache',p,2,'&eAmmunition Cache','BARREL') then s.cache=p; s.cacheUntil=s.tick+160 end end),T.rest(20)}
 end
 local function reload(c,s)
- return {T.wait(40,function(c,s) s.reloading=true; s.pressure=0; c.trial:crossbow(false); c.trial:pose('cast'); T.sound(c,'ITEM_CROSSBOW_LOADING_START',.7) end,
+ return {T.wait(40,function(c,s) s.reloading=true; s.pressure=0; T.sound(c,'ITEM_CROSSBOW_LOADING_START',.7) end,
   function(c,s,t)
    if not c.trial:actor('cache') or T.distance(c.trial:position(),s.cache)>3 then s.reloading=false; s.quickLoaded=false; T.interrupt(c,s,{T.rest(50,1.2)}); return end
    if t%8==0 then T.tether(c,c.trial:position(),s.cache,T.gold); T.sound(c,'ITEM_CROSSBOW_LOADING_MIDDLE',.7+t/50) end

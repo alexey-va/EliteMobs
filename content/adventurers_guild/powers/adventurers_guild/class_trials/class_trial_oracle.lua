@@ -3,7 +3,7 @@
 -- @include abilities/cleric.inc
 
 local function rescue(c,s)
- return {T.wait(36,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',1.4) end,
+ return {T.wait(36,function(c,s)  T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',1.4) end,
   function(c,s,t) local ally=c.trial:actor('attendant_1'); if ally and t%4==0 then T.eye(c,ally:get_location()); T.tether(c,c.trial:position(),ally:get_location()) end end,
   function(c,s) C.shield(c,s,'attendant_1',2*c.trial.matched_hit,100,function(c,s,reason)
    if reason=='broken' then C.heal(c,s,'attendant_1',c.trial.matched_hit); c.trial:say('You chose to break it. The opening is yours.') end
@@ -11,7 +11,7 @@ local function rescue(c,s)
   end) end),T.wait(100),T.rest(50)}
 end
 local function foresight(c,s)
- return {T.wait(30,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',1.2) end,
+ return {T.wait(30,function(c,s)  T.sound(c,'BLOCK_AMETHYST_BLOCK_CHIME',1.2) end,
   function(c,s,t) if t%4==0 then T.eye(c,c.trial:position()) end end,
   function(c,s) s.foresightUntil=s.tick+80 end),T.rest(30)}
 end

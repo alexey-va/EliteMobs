@@ -1,7 +1,7 @@
 extends: class_trial_base.yml
 isEnabled: true
 name: $bossLevel &6Tempest Archer Instructor
-level: '91'
+level: 90
 healthMultiplier: 13
 movementSpeedAttribute: 0.29
 disguise: player ranger setskin {"properties":[{"name":"textures","signature":"W+aEanlj0BflKuA55M1u4gbHusYMeugKvo0LwiOS3QjMNaUmdgmkSdazhBEoQRYzNKHqJqJvCuea56d9ZaoWd+ftLYz+L+iq7c1A9hZlm6dj52RCEAKX+X5OfXg8EvAH/c9w3b44RhZ9J3d4ZUC/g2RDg1QJ5m/D5kg+ZP6e/MWP9OKwVjpqreRIf5ey67qHEWKL/923m4G+PH7uzaPhIHRANogDEUnGS1mf1mvWt2ptGtogaixrJcPer7jwup3RVEFYe05AN2sQq2sj4HoeuY2ims5ISTGvAGv5ig9Ey4C8x9kTjBNVaRzfb6f8mHV1H/kEtgrGN3OM08gYWZw23M7QlYGH95USIHG3j1mr3K38BjyS+U23nBJw+KE1zRbZ55FJ/8C+/Gl+IvxECNw8Pzv8Fh8LNK1n4NgtQXSWDGvTmF3RTrS11RzsDKU7O4O+K/XauS+haBLpz99dWI19xxRT6la2x2eEnxctUqMHCH+hn2lUQswbfurBm+OszmPRs6qMoB4dwfXMID5gLbVx5y8dupGjVaZ61RB6n0wI5tKzauo0zRGTH4ZB5sCNk0qjrpKRiElooEFK0+ymzyMIW5hpeloms85d9SftfOgLP7/XI+7Za7mOJ0ILZKrhrjHpoUOPyry6m9Wczx6nsvP+lkrh6sMHVDyz6VcI9CfcY9A=","value":"ewogICJ0aW1lc3RhbXAiIDogMTY4NjE4MTc0ODY5MiwKICAicHJvZmlsZUlkIiA6ICIzY2YzYjgzNzhkYjc0ZDZlYmIxMDFjMDYzZmQ1MjVjNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJSeW9yaTE2IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2E1NmEzOTUxM2NhNGQ4MGFhNjJhNmU1MjFkY2NkY2MwNTA5NjE0MWM5ZDlhNmIzYTcyNjc3NjUwYmQxMjczNmYiCiAgICB9CiAgfQp9"}],"name":"Unknown","id":"5ab97c9a-090f-4492-92c5-e9423cbde89b"}
@@ -16,7 +16,7 @@ classTrial:
   actors:
     HUSK: class_trial_actor_ranger_partner.yml
   voice:
-    opening: Wind bends a flight. It does not make the whole sky dangerous.
-    halfway: Read the curves again. Their beginning has moved.
+    opening: Two crosswinds. Read the gap before you move.
+    halfway: Watch my footing. The second volley comes from a new angle.
     victory: You found the quiet air between the flights.
-    defeat: The arrows curved along the trails I showed you.
+    defeat: You dodged the first wind and forgot to read the second.

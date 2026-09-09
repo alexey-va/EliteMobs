@@ -8,7 +8,7 @@ local function secondWind(c,s)
  return {
   T.wait(60,function(c,s)
    s.breathing=true; s.breathInterrupted=false
-   c.trial:stop(); c.trial:pose('cast'); c.trial:say('Second Wind. A quick hit can stop mine.')
+   c.trial:stop(); c.trial:say('Second Wind. A quick hit can stop mine.')
    T.sound(c,'BLOCK_NOTE_BLOCK_CHIME',.8)
   end,function(c,s,t)
    if not s.breathInterrupted and t%5==0 then T.draw(c,T.circle(c.trial:position(),1),{particle='DUST',red=140,green=210,blue=100}) end

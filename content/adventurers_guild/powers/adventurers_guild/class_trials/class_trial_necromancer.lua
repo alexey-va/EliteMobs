@@ -4,7 +4,7 @@
 
 local function chill(c,s)
  local p
- return {T.wait(30,function(c,s) p=T.copy(c.trial.player:get_location()); c.trial:pose('cast'); T.sound(c,'BLOCK_SOUL_SAND_HIT',.6) end,
+ return {T.wait(30,function(c,s) p=T.copy(c.trial.player:get_location()); T.sound(c,'BLOCK_SOUL_SAND_HIT',.6) end,
   function(c,s,t) if t%3==0 then T.draw(c,T.circle(p,3),S.ice) end end,
   function(c,s) if S.prop(c,'grave_candle',p,1,'&bGrave Candle','SOUL_LANTERN') then s.chill={shape=T.circle(p,3),expires=s.tick+80} end end),T.rest(40)}
 end

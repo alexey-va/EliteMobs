@@ -8,7 +8,7 @@ local function anchor(c,s)
   local construct=c.trial:actor('construct'); if not construct then return end
   local p=construct:get_location(); local x,z=T.direction(p,c.trial.player:get_location()); destination=T.offset(p,x*4,0,z*4)
   line=T.lane(p,T.offset(p,x*8,0,z*8),2); stake=T.offset(destination,z*2,0,-x*2)
-  c.trial:pose('cast'); T.sound(c,'ENTITY_IRON_GOLEM_STEP',.6)
+  T.sound(c,'ENTITY_IRON_GOLEM_STEP',.6)
  end,function(c,s,t) if line and t%4==0 then T.draw(c,line); T.draw(c,T.circle(stake,.7),T.gold) end end),
  T.wait(20,nil,function(c,s,t)
   local construct=c.trial:actor('construct'); if not construct or not destination then return end
@@ -25,9 +25,9 @@ local function killer(c,s)
  return {T.wait(36,function(c,s)
   local construct=c.trial:actor('construct'); local p=c.trial:position()
   local target=construct and construct:get_location() or c.trial.player:get_location()
-  line=T.lane(p,T.rotate(p,target,0,10),1.4); c.boss:set_equipment('HAND','IRON_SPEAR',{}); c.trial:pose('draw'); T.sound(c,'BLOCK_CHAIN_PLACE',.7)
+  line=T.lane(p,T.rotate(p,target,0,10),1.4); c.boss:set_equipment('HAND','IRON_SPEAR',{}); T.sound(c,'BLOCK_CHAIN_PLACE',.7)
  end,function(c,s,t) if t%4==0 then T.draw(c,line) end end,
-  function(c,s) c.trial:pose('swing'); T.hit(c,line,.9); local construct=c.trial:actor('construct'); if construct then construct:set_velocity_vector({x=0,y=0,z=0}); T.draw(c,T.circle(construct:get_location(),1.2),T.gold) end end),T.rest(60)}
+  function(c,s)  T.hit(c,line,.9); local construct=c.trial:actor('construct'); if construct then construct:set_velocity_vector({x=0,y=0,z=0}); T.draw(c,T.circle(construct:get_location(),1.2),T.gold) end end),T.rest(60)}
 end
 return T.encounter{
  init=function(c,s) B.init(c,s); c.trial:spawn_actor('construct',T.offset(c.trial:position(),5,0,2),4,'&fTraining Construct','IRON_GOLEM'); s.anchorUntil=0 end,

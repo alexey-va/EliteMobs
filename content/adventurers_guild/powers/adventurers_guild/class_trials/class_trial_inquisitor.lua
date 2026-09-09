@@ -3,18 +3,17 @@
 -- @include abilities/paladin.inc
 
 local function expose(c,s)
- return {T.wait(24,function(c,s) c.trial:pose('cast'); T.sound(c,'BLOCK_ENCHANTMENT_TABLE_USE',.7) end,
+ return {T.wait(24,function(c,s)  T.sound(c,'BLOCK_ENCHANTMENT_TABLE_USE',.7) end,
   function(c,s,t) if t%4==0 then T.eye(c,c.trial.player:get_location()) end end,
   function(c,s) s.markUntil=s.tick+120 end),T.rest(20)}
 end
 local function sentence(c,s)
  local lane
- return {T.wait(36,function(c,s) c.trial:pose('draw'); T.sound(c,'BLOCK_ANVIL_PLACE',1.3) end,
+ return {T.wait(36,function(c,s)  T.sound(c,'BLOCK_ANVIL_PLACE',1.3) end,
   function(c,s,t)
    if not lane or t<22 then local p=c.trial:position(); local target=T.rotate(p,c.trial.player:get_location(),0,7); lane=T.lane(p,target,1.2); c.trial:face(target,5) end
    if t%4==0 then T.draw(c,lane) end
-  end,function(c,s)
-   c.trial:pose('swing'); T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP',.8)
+  end,function(c,s)  T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP',.8)
    local low=c.trial.player:get_health()<c.trial.player:get_maximum_health()*.35
    local damage=math.min(1.2,(low and 1.05 or .9)*T.damageScale(c))/T.damageScale(c)
    if not T.hit(c,lane,damage) then s.markUntil=0; c.trial:say('No opening. No sentence.') end

@@ -6,7 +6,7 @@ local function challenge(c,s)
  local sectors
  return {T.wait(30,function(c,s)
   local p=c.trial:position(); sectors={}; for _,angle in ipairs({-110,-55,0,55}) do sectors[#sectors+1]=T.cone(p,T.rotate(p,c.trial.player:get_location(),angle,5),5,55) end
-  c.trial:pose('cast'); T.sound(c,'ITEM_GOAT_HORN_SOUND_1',.8)
+  T.sound(c,'ITEM_GOAT_HORN_SOUND_1',.8)
  end,function(c,s,t) if t%4==0 then for _,shape in ipairs(sectors) do T.draw(c,shape) end end end,
   function(c,s) for _,shape in ipairs(sectors) do if T.contains(shape,c.trial.player:get_location()) then T.weak(c,s,20,.15); break end end end),T.rest(30)}
 end

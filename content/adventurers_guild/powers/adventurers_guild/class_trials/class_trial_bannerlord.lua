@@ -10,7 +10,7 @@ local function advance(c,s)
  T.wait(80,nil,function(c,s,t) if t%5==0 then T.draw(c,lane,T.gold) end; c.trial:step(destination,.12,true,true) end),T.rest(20)}
 end
 local function standard(c,s)
- return {T.wait(30,function(c,s) c.boss:set_equipment('OFF_HAND','WHITE_BANNER',{}); c.trial:pose('guard'); T.sound(c,'ITEM_ARMOR_EQUIP_LEATHER',.7) end,
+ return {T.wait(30,function(c,s) c.boss:set_equipment('OFF_HAND','WHITE_BANNER',{}); T.sound(c,'ITEM_ARMOR_EQUIP_LEATHER',.7) end,
   function(c,s,t) if t%4==0 then T.draw(c,T.circle(c.trial:position(),4),T.gold) end end,
   function(c,s) s.auraUntil=s.tick+160 end),T.rest(20)}
 end

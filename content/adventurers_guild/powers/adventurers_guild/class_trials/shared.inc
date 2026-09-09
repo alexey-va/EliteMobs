@@ -43,11 +43,11 @@ function T.fizzle(c) T.sound(c,'BLOCK_AMETHYST_BLOCK_HIT',.5); if c.trial:active
 function T.wait(ticks,begin,frame,finish) assert(ticks>=1); return {ticks=ticks,begin=begin,frame=frame,finish=finish} end
 function T.untilDone(ticks,begin,frame,finish,done) local step=T.wait(ticks,begin,frame,finish); step.done=done; return step end
 function T.rest(ticks,exposure)
-  return T.wait(ticks,function(c,s) c.trial:pose('idle'); c.trial:stop(); s.exposure=exposure or 1 end,nil,function(c,s) s.exposure=1 end)
+  return T.wait(ticks,function(c,s)  c.trial:stop(); s.exposure=exposure or 1 end,nil,function(c,s) s.exposure=1 end)
 end
 function T.warning(ticks,geometry,sound,pose)
   local g
-  return T.wait(ticks,function(c,s) g=geometry(c,s); c.trial:pose(pose or 'cast'); if sound then T.sound(c,sound) end end,
+  return T.wait(ticks,function(c,s) g=geometry(c,s); if sound then T.sound(c,sound) end end,
     function(c,s,elapsed) if elapsed%4==0 then T.draw(c,g) end end)
 end
 function T.shot(c,s,kind,target,speed,damage,group,cap)
@@ -63,13 +63,13 @@ function T.fan(c,s,target,angles,damage,group,cap)
   for _,degrees in ipairs(angles) do local a=math.rad(degrees); local dx=x*math.cos(a)-z*math.sin(a); local dz=x*math.sin(a)+z*math.cos(a)
     T.shot(c,s,'ARROW',T.offset(origin,dx*24,target.y-origin.y,dz*24),.9,damage,group,cap)
   end
-  T.sound(c,'ENTITY_ARROW_SHOOT',1); c.trial:pose('idle')
+  T.sound(c,'ENTITY_ARROW_SHOOT',1);
 end
 function T.aimShot(c,s,options)
   local target
   local group=options.group or ('shot_'..s.tick)
   return {
-    T.wait(options.windup or 26,function(c,s) target=T.offset(c.trial.player:get_location(),0,1,0); c.trial:pose((options.angles or options.kind=='ARROW') and 'draw' or 'cast'); T.sound(c,options.sound or ((options.angles or options.kind=='ARROW') and 'BLOCK_NOTE_BLOCK_HARP' or 'BLOCK_AMETHYST_BLOCK_CHIME'),.8) end,
+    T.wait(options.windup or 26,function(c,s) target=T.offset(c.trial.player:get_location(),0,1,0); T.sound(c,options.sound or ((options.angles or options.kind=='ARROW') and 'BLOCK_NOTE_BLOCK_HARP' or 'BLOCK_AMETHYST_BLOCK_CHIME'),.8) end,
       function(c,s,t)
         if t<(options.windup or 26)-(options.lock or 12) then target=T.offset(c.trial.player:get_location(),0,1,0); c.trial:face(target,5) end
         if t%4==0 then
@@ -90,12 +90,12 @@ end
 function T.melee(c,s,options)
   local g
   return {
-    T.wait(options.windup or 16,function(c,s) c.trial:pose('draw'); T.sound(c,'BLOCK_WOODEN_BUTTON_CLICK_ON',.8) end,
+    T.wait(options.windup or 16,function(c,s)  T.sound(c,'BLOCK_WOODEN_BUTTON_CLICK_ON',.8) end,
       function(c,s,t)
         if t<(options.windup or 16)-8 then c.trial:face(c.trial.player:get_location(),5*(s.turnRate or 1)) end
         if not g or t<(options.windup or 16)-8 then g=T.cone(c.boss:get_location(),c.trial.player:get_location(),options.radius or 3,options.angle or 70) end
         if t%4==0 then T.draw(c,g) end
-      end,function(c,s) c.trial:pose('swing'); T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP'); local hit=T.hit(c,g,options.damage or .45); if options.result then options.result(c,s,hit) end end),
+      end,function(c,s)  T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP'); local hit=T.hit(c,g,options.damage or .45); if options.result then options.result(c,s,hit) end end),
     T.rest(options.recovery or 30,options.exposure)
   }
 end
@@ -116,7 +116,7 @@ function T.advance(c,s)
     if step.finish then step.finish(c,s) end
     if s.cast~=cast or not c.trial:active() then return end
     cast.index=cast.index+1; cast.elapsed=0
-    if cast.index>#cast.steps then s.ready[cast.key]=s.tick+cast.cooldown; s.cast=nil; c.trial:pose('idle') end
+    if cast.index>#cast.steps then s.ready[cast.key]=s.tick+cast.cooldown; s.cast=nil;  end
   end
 end
 function T.encounter(spec)
@@ -125,7 +125,7 @@ function T.encounter(spec)
     on_game_tick=function(c)
       if not c.trial:active() then return end
       local s=c.state; s.tick=c.trial:tick()
-      if not s.initialized then s.initialized=true; s.ready={}; s.phase=1; s.exposure=1; s.nextChoice=40; c.boss:set_ai_enabled(false); spec.init(c,s) end
+      if not s.initialized then s.initialized=true; s.ready={}; s.phase=1; s.exposure=1; s.nextChoice=40; spec.init(c,s) end
       if spec.passive then spec.passive(c,s) end
       if not c.trial:active() then return end
       if s.cast then T.advance(c,s); return end
@@ -136,6 +136,11 @@ function T.encounter(spec)
     on_boss_damaged_by_player=function(c)
       local s=c.state; if not s.initialized then return end
       if c.trial:is_transfer() then if spec.transferred then spec.transferred(c,s) end; return end
+      -- Sanctuary protects occupants against ranged damage; leaving its marked ground ends protection.
+      if (s.sanctuaryUntil or 0)>s.tick and c.event.damage_cause=='PROJECTILE' then
+        local id=c.trial:damaged_actor(); local recipient=id=='boss' and c.boss or c.trial:actor(id)
+        if recipient and T.contains(s.sanctuary,recipient:get_location()) then c.event.multiply_damage_amount(.35) end
+      end
       if (s.playerWeakUntil or 0)>s.tick then c.event.multiply_damage_amount(1-(s.playerWeakness or .15)) end
       if c.trial:damaged_actor()=='boss' then c.event.multiply_damage_amount(s.exposure or 1) end
       if spec.damaged then spec.damaged(c,s) end

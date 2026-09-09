@@ -1,7 +1,7 @@
 extends: class_trial_base.yml
 isEnabled: true
 name: $bossLevel &6Pyromancer Instructor
-level: '91'
+level: 90
 healthMultiplier: 13
 movementSpeedAttribute: 0.24
 disguise: player pyromancer setskin {"id":"f9670902-d223-4f5e-b207-4fe196fca90d","name":"Unknown","properties":[{"value":"ewogICJ0aW1lc3RhbXAiIDogMTcyNjYwMjU5MjkwOCwKICAicHJvZmlsZUlkIiA6ICJjYmYxNGIxMGJhNWU0NzgwYjIyNmFiNmQzOTUxODk4YiIsCiAgInByb2ZpbGVOYW1lIiA6ICJFZ2d5QnV0dG9uMjQxMSIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS84MGMwNGE4MDkyYTYzMWRjNjdjMzExOTY0NDJkZTQzOWRhNWRiYzBjM2MxMDgyNjc4MWE1ZjU5MWQ0OGJmYzgyIgogICAgfQogIH0KfQ==","name":"textures","signature":"xCWm51ZHZctPpusNJ2JHaCku9XGuadtmLh4MEtV3x6hWzLzy5Si+xSl2/cqENiBuJjr5PS6Quf5XsyWPcJJAbUx57HP6m6rbmXh0wp2xG9koVlIwGEVGzOeoBhbPnUxlSQQJ8WvaT7SuS0mpdN1SK5gr/0vD8UbiTtBJ+vUc0kVD6Fc27BwDS38XMSbXQ+3mcc5ShQs876t/XUCVtUiC+pYF8TSRC4bFMMssTROjqUGgN7Cq0UoIyw3hj2Y4Uak5L/tL452jNpkdLqxTF0EuMO120EdkAD0HUJzWAQQ7SufQGLhbR4tsjCotd9cjoIshDJLOz5HO8CtelYxze97Xe/zJggPkYLR8I4NTy6bxbmWVX+l7WOnnfkQpfktkuu1hAkPT/k3aDcEZQtj11G/NzBr+Mk4T9niX29Wz+RAHsIXUBSqqR7Erj/i+k/a6xxhGmXnZ0hmD9xcEZBWfad0uYSxki+MbjFAu5pNaSQTrIEFzD+xnXrefIg2iOEuyPCClB21ZfJXqwRUFowx8vepL72nI88JQIX49G0N0WStyD6PSLx423uCBMjtRIk7ShbfAQQGsE5Sr8h49tg9KeGPltYOHmMJoxbnCWTBc7Q+GUCaJzXLCSCAq+uJk/dJoqNZEqmwy42ZkJyzWH8ns0lim7tURMVPqrmVUZcMeKD+EYBk="}]}
@@ -21,4 +21,3 @@ classTrial:
     halfway: You have learned to leave the heat. Now consider its source.
     victory: A fine answer. No wasted steps, and very little singeing.
     defeat: The brazier fed the flame. It was not merely decoration.
-  magicWeapon: STAFF

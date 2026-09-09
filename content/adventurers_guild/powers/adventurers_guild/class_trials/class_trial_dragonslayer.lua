@@ -16,20 +16,19 @@ local function mark(c,s)
 end
 local function piercer(c,s)
  s.bracing=true; s.braceTarget=giant(c,s)
- return R.draw(c,s,{warn=46,lock=18,damage=1.2,cap=1.2,speed=1.4,recovery=70,penetrate=s.braceTarget and {s.braceTarget} or {},
-  target=function(c,s) local actor=s.braceTarget and c.trial:actor(s.braceTarget); return actor and actor:get_eye_location() or T.offset(c.trial.player:get_location(),0,1,0) end,
+ return R.draw(c,s,{warn=46,lock=18,damage=s.braceTarget and 1.2 or .65,cap=1.2,speed=1.4,recovery=70,
   release=function(c,s) s.bracing=false end})
 end
 return T.encounter{
  init=function(c,s)
   R.init(c,s,true); local p=c.trial:position(); local x,z=T.direction(p,c.trial.player:get_location())
-  c.trial:spawn_actor(ids[1],T.offset(p,x*8,0,z*8),2,'&eArmored Training Effigy','IRON_GOLEM')
+  c.trial:spawn_actor(ids[1],T.offset(p,x*6+z*5,0,z*6-x*5),2,'&eArmored Training Effigy','IRON_GOLEM')
   c.trial:spawn_actor(ids[2],T.offset(p,x*9-z*5,0,z*9+x*5),2,'&eArmored Training Effigy','IRON_GOLEM')
  end,
  passive=function(c,s)
   R.passive(c,s)
   if s.markUntil>s.tick and s.marked then local actor=c.trial:actor(s.marked); if actor and s.tick%5==0 then T.draw(c,T.circle(actor:get_location(),1.1),T.gold) end end
-  if s.bracing and s.braceTarget and not c.trial:actor(s.braceTarget) then s.bracing=false; c.trial:crossbow(false); c.trial:say('You took away the support before the shot.'); T.interrupt(c,s,{T.rest(70,1.25)}) end
+  if s.bracing and s.braceTarget and not c.trial:actor(s.braceTarget) then s.bracing=false; c.trial:say('You took away the support before the shot.'); T.interrupt(c,s,{T.rest(70,1.25)}) end
  end,
  choose=function(c,s)
   if s.phasePending and T.ready(s,'step') then s.phasePending=false; T.start(c,s,'step',M.move(c,s),M.cooldown)
