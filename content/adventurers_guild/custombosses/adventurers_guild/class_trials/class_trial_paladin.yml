@@ -10,14 +10,10 @@ chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
 offHand: SHIELD
+powers:
+  - class_trial_paladin.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: paladin
-  title: The Oath Holds
-  power: class_trial_paladin.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: A shield buys time. Show me what you do with it.
-    halfway: Good. Now hold your nerve when the line moves.
-    victory: You found the opening without abandoning your ground. Take the oath.
-    defeat: You watched the shield and missed the rider. We can practice again.
+

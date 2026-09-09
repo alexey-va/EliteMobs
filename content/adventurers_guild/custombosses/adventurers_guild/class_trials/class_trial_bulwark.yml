@@ -10,14 +10,10 @@ chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
 offHand: SHIELD
+powers:
+  - class_trial_bulwark.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: bulwark
-  title: The Unbroken Line
-  power: class_trial_bulwark.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: This line will hold. You need not cross it head-on.
-    halfway: A new line. The same mistake will still cost you.
-    victory: You knew when strength was simply facing the wrong way.
-    defeat: My shield covered the front. The rest of me was still there.
+

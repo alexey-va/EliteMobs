@@ -9,14 +9,10 @@ mainHand: IRON_AXE
 chestplate: LEATHER_CHESTPLATE:783C32
 leggings: LEATHER_LEGGINGS:783C32
 boots: LEATHER_BOOTS:783C32
+powers:
+  - class_trial_berserker.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: berserker
-  title: Fury With a Purpose
-  power: class_trial_berserker.lua
-  actors:
-    HUSK: class_trial_actor_berserker_partner.yml
-  voice:
-    opening: Anyone can swing angry. Show me you can stop.
-    halfway: There! Keep that fire. Keep your head, too.
-    victory: You waited for the right swing. Now make it count out there.
-    defeat: You chased every opening, even the ones I hadn't given you yet.
+

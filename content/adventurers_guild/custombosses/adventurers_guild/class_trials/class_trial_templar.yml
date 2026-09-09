@@ -10,14 +10,10 @@ chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
 offHand: SHIELD
+powers:
+  - class_trial_templar.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: templar
-  title: Mercy in the Reckoning
-  power: class_trial_templar.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: A reckoning should leave someone better able to stand.
-    halfway: Watch my companion. The next blow is meant for more than you.
-    victory: You denied the strike without losing sight of its purpose.
-    defeat: The bell can be stopped. You need not wait for it to finish.
+

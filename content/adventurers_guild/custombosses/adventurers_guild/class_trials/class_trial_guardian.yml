@@ -10,14 +10,10 @@ chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
 offHand: SHIELD
+powers:
+  - class_trial_guardian.lua
+cullReinforcements: true
 classTrial:
   class: guardian
-  title: The Space Between
-  power: class_trial_guardian.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: The space between a blade and an ally belongs to you.
-    halfway: You found my charge. Can you draw us apart?
-    victory: You understood whom I was protecting, and why.
-    defeat: Watch the tether. It tells you where your effort goes.
+ai: true
+

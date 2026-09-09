@@ -10,14 +10,10 @@ chestplate: IRON_CHESTPLATE
 leggings: IRON_LEGGINGS
 boots: IRON_BOOTS
 offHand: SHIELD
+powers:
+  - class_trial_justicar.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: justicar
-  title: The Weight of a Blow
-  power: class_trial_justicar.lua
-  actors:
-    HUSK: class_trial_actor_paladin_partner.yml
-  voice:
-    opening: Every blow has weight. Watch where yours comes to rest.
-    halfway: You know the price. Now choose when to pay it.
-    victory: Force, tempered by judgment. That will serve you.
-    defeat: You filled the scales, then stood beneath them.
+

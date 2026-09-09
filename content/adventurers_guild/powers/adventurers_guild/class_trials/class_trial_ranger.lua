@@ -1,44 +1,86 @@
--- @include shared.inc
--- @include mobility/ranger.inc
--- @include abilities/ranger.inc
+-- @include mobility/windstep.inc
 
-local function volley(c,s,angles,group,cap)
-  local multiplier=(s.markUntil or 0)>s.tick and 1.1 or 1
-  return T.aimShot(c,s,{angles=angles,damage=.45*multiplier,cap=cap or .45*multiplier,group=group,windup=26,lock=12,recovery=30})
+-- Marked shots lock their aim before release. The second phase alternates two
+-- offset fans. Arrows retain normal terrain/entity collision and boss scaling.
+local function point(p,x,y,z)
+  return {x=p.x+x,y=p.y+y,z=p.z+z,world=p.world}
 end
-local function mark(c,s)
- return {T.wait(24,function(c,s)  T.sound(c,'ENTITY_PARROT_AMBIENT',1.6) end,
-   function(c,s,t) if t%4==0 then T.eye(c,c.trial.player:get_location()) end end,
-   function(c,s) s.markUntil=s.tick+120; s.losLost=0; c.trial:say("Hunter's Mark. Leave me an empty lane.") end),T.rest(30)}
+local function lanes(c,target,angles,fire)
+  local origin=c.boss:get_eye_location()
+  local x,z=target.x-origin.x,target.z-origin.z
+  local length=math.sqrt(x*x+z*z)
+  if length<.01 then return end
+  x,z=x/length,z/length
+  for _,degrees in ipairs(angles) do
+    local a=math.rad(degrees)
+    local dx,dz=x*math.cos(a)-z*math.sin(a),x*math.sin(a)+z*math.cos(a)
+    if fire then
+      c.boss:summon_projectile('ARROW',origin,point(origin,dx*length,target.y-origin.y,dz*length),.9,
+        {gravity=false,persistent=false,spawn_at_origin=true,duration=60})
+    else
+      for distance=1,18 do
+        c.world:spawn_particle_at_location(point(origin,dx*distance,-1.35,dz*distance),
+          {particle='DUST',red=240,green=185,blue=70,amount=1},1)
+      end
+    end
+  end
+  if fire then c.boss:play_sound_at_self('ENTITY_ARROW_SHOOT',.7,1) end
 end
-local function assessedVolley(c,s,angles,group,cap)
- local seq=volley(c,s,angles,group,cap)
- T.append(seq,{T.wait(30,nil,nil,function(c,s)
-   if (s.markUntil or 0)>s.tick and c.trial:group_damage(group)==0 then
-     s.markUntil=0
-     if not s.clearedFeedback then s.clearedFeedback=true; c.trial:say('There. Empty air.') end
-     s.nextChoice=math.max(s.nextChoice,s.tick+40)
-   end
- end)})
- return seq
-end
-return T.encounter{
- init=function(c,s) s.markUntil=0; s.losLost=0 end,
- passive=function(c,s)
-   if s.markUntil>s.tick then
-     if c.trial:line_of_sight() then s.losLost=0 else s.losLost=s.losLost+1 end
-     if s.losLost>=20 then s.markUntil=0; s.nextChoice=math.max(s.nextChoice,s.tick+40); if not s.clearedFeedback then s.clearedFeedback=true; c.trial:say('There. Empty air.') end end
-     if s.tick%10==0 then T.draw(c,T.circle(c.trial.player:get_location(),.65),T.gold) end
-   end
- end,
- choose=function(c,s)
-   if s.phasePending and T.ready(s,'windstep') then
-     s.phasePending=false; local group='double_fan_'..s.tick; local seq=M.move(c,s)
-     T.append(seq,volley(c,s,{-18,-6,10},group,.75)); T.append(seq,assessedVolley(c,s,{-10,6,18},group,.75))
-     T.append(seq,{T.wait(1,nil,nil,function(c,s) s.ready.volley=s.tick+200 end)}); T.start(c,s,'windstep',seq,M.cooldown)
-   elseif T.distance(c.trial:position(),c.trial.player:get_location())<6 and T.ready(s,'windstep') then T.start(c,s,'windstep',M.move(c,s),M.cooldown)
-   elseif T.ready(s,'volley') then T.start(c,s,'volley',assessedVolley(c,s,{-12,0,12},'fan_'..s.tick),200)
-   elseif T.ready(s,'mark') then T.start(c,s,'mark',mark(c,s),320)
-   else T.basic(c,s,'bow') end
- end
+return {
+  api_version=1,
+  on_game_tick=function(c)
+    local player=c.boss:get_target_player()
+    if not player or not player:is_alive() then return end
+    local s=c.state
+    s.tick=(s.tick or 0)+1
+    if not s.started then
+      s.started=true; s.nextShot=s.tick+60; s.nextStep=0; s.shots=0
+      player:send_message('&6Ranger Instructor: &fWatch the bow. Move when I commit, not when I look at you.')
+    end
+    if not s.secondPhase and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+      s.secondPhase=true
+      player:send_message("&6Ranger Instructor: &fYou've found the gap. Now watch the second lane.")
+    end
+    if s.lockAt and s.tick<s.lockAt then
+      s.aim=player:get_eye_location()
+      c.boss:face_direction_or_location(s.aim)
+    end
+    if s.fireAt then
+      if s.tick%4==0 then lanes(c,s.aim,s.angles,false) end
+      if s.tick>=s.fireAt then
+        lanes(c,s.aim,s.angles,true)
+        if s.secondPhase and not s.followup then
+          s.followup=true; s.angles={-10,6,18}; s.fireAt=s.tick+24
+        else
+          s.fireAt=nil; s.lockAt=nil; s.followup=nil; s.nextShot=s.tick+65
+        end
+      end
+      return
+    end
+    local p,q=c.boss:get_location(),player:get_location()
+    local distance=math.sqrt((p.x-q.x)^2+(p.z-q.z)^2)
+    if distance<6 and s.tick>=s.nextStep then
+      windstep(c,player,s.tick)
+      s.nextStep=s.tick+220; s.nextShot=math.max(s.nextShot,s.tick+25)
+    end
+    if s.tick<s.nextShot then return end
+    s.shots=s.shots+1; s.marked=s.shots%3==0
+    s.aim=player:get_eye_location(); s.lockAt=s.tick+16; s.fireAt=s.tick+32
+    s.angles=s.secondPhase and {-18,-6,10} or {-12,0,12}
+    c.boss:play_sound_at_self('BLOCK_NOTE_BLOCK_HARP',.65,.8)
+    if s.marked then
+      player:send_message("&6Ranger Instructor: &fHunter's Mark. Wait for the lane to settle, then move.")
+      s.fireAt=s.tick+44; s.lockAt=s.tick+24
+    end
+  end,
+  on_player_damaged_by_boss=function(c)
+    if c.event.projectile then
+      -- The normal damage event has already applied normalized boss scaling.
+      c.event.multiply_damage_amount(c.state.marked and .54 or .45)
+    end
+  end,
+  on_death=function(c)
+    c.boss:send_message('&6Ranger Instructor: &fYou read the shot before it left the string. Welcome to the trail.',24)
+  end
 }
+

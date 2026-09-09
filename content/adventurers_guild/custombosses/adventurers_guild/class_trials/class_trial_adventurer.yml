@@ -9,14 +9,10 @@ mainHand: WOODEN_SWORD
 chestplate: LEATHER_CHESTPLATE:947344
 leggings: LEATHER_LEGGINGS:947344
 boots: LEATHER_BOOTS:947344
+powers:
+  - class_trial_adventurer.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: adventurer
-  title: First Steps
-  power: class_trial_adventurer.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: Watch my blade. Step aside, then take your opening.
-    halfway: Good footing. Now watch what I do after I dodge.
-    victory: You kept your head and earned your place. Welcome, adventurer.
-    defeat: Everyone starts somewhere. Watch the marked ground and try again.
+

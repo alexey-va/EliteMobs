@@ -1,42 +1,64 @@
--- @include shared.inc
--- @include mobility/berserker.inc
--- @include abilities/berserker.inc
+-- @include ground_markers.inc
+-- @include mobility/leap_slam.inc
 
-local function cry(c,s)
-  local edge
-  return {
-    T.wait(24,function(c,s) edge=T.circle(c.trial:position(),4,3.2); T.sound(c,'ENTITY_RAVAGER_ROAR',1.4) end,
-      function(c,s,t) if t%4==0 then T.draw(c,edge) end end,
-      function(c,s) if T.contains(edge,c.trial.player:get_location()) then c.trial.player:apply_potion_effect('SLOWNESS',10,0) end end),
-    T.rest(30)
-  }
-end
-local function rampage(c,s)
-  local seq={T.wait(30,function(c,s) s.comboSpent=0;  end,
-    function(c,s,t) if t%10==0 then T.sound(c,'BLOCK_NOTE_BLOCK_BASEDRUM',.6+t/30) end end)}
-  for i=1,3 do
-    local side=i%2==1 and -25 or 25
-    local shape,advance
-    T.append(seq,{
-      T.wait(8,function(c,s) local p=c.trial:position(); local x,z=T.direction(p,c.trial.player:get_location()); advance=T.offset(p,x,0,z) end,
-        function(c,s) c.trial:step(advance,.18,true,true) end,function(c,s) c.trial:stop() end),
-      T.wait(18,function(c,s)
-        local p=c.trial:position(); local target=c.trial.player:get_location(); c.trial:face(target,10)
-        local x,z=T.direction(p,target); local a=math.rad(side)
-        shape=T.cone(p,T.offset(p,x*math.cos(a)-z*math.sin(a),0,x*math.sin(a)+z*math.cos(a)),3.5,85)
-      end,function(c,s,t) if t%4==0 then T.draw(c,shape) end end,
-      function(c,s)  local amount=math.min(.55,1.1-s.comboSpent); if amount>0 and T.hit(c,shape,amount) then s.comboSpent=s.comboSpent+amount end; T.sound(c,'ENTITY_PLAYER_ATTACK_SWEEP',.75) end)
-    })
+-- Rampage commits each of three swings separately. Dodge each tell; the long
+-- recovery is the opening. War Cry briefly slows its outer ring, not the center.
+return {
+  api_version=1,
+  on_game_tick=function(c)
+    local player=c.boss:get_target_player()
+    if not player or not player:is_alive() then return end
+    local s=c.state; s.tick=(s.tick or 0)+1
+    if not s.started then
+      s.started=true; s.nextRampage=70; s.nextCry=180; s.nextLeap=120
+      player:send_message('&6Berserker Instructor: &fThree swings. Keep your nerve until the last one.')
+    end
+    if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+      s.phaseTwo=true
+      player:send_message('&6Berserker Instructor: &fStill standing? Good. Watch where I land.')
+      s.nextLeap=s.tick
+    end
+    if s.swingAt then
+      if s.tick%4==0 then show_circle(c,s.swing,240,125,60) end
+      if s.tick>=s.swingAt then
+        c.script:damage(s.swing:full_target(),1,.45)
+        c.boss:play_sound_at_self('ENTITY_PLAYER_ATTACK_SWEEP',.6,.8)
+        s.swings=s.swings+1
+        if s.swings<3 then
+          s.swing=forward_cone(c,c.boss:get_location(),player:get_location(),3.5,1.8)
+          s.swingAt=s.tick+24
+          c.boss:face_direction_or_location(player:get_location())
+        else s.swingAt=nil; s.recoveryUntil=s.tick+50; s.nextRampage=s.tick+280 end
+      end
+      return
+    end
+    if s.cryAt then
+      if s.tick%4==0 then show_circle(c,s.cry,225,155,60) end
+      if s.tick>=s.cryAt then
+        for _,target in ipairs(s.cry:border_target():entities()) do target:apply_potion_effect('SLOWNESS',20,0) end
+        s.cryAt=nil; s.recoveryUntil=s.tick+30
+      end
+      return
+    end
+    if s.tick<(s.recoveryUntil or 0) then return end
+    local p,q=c.boss:get_location(),player:get_location()
+    if s.tick>=s.nextLeap and (p.x-q.x)^2+(p.z-q.z)^2>16 then
+      if leap_slam(c,player) then s.recoveryUntil=s.tick+100 end
+      s.nextLeap=s.tick+360
+    elseif s.tick>=s.nextRampage then
+      s.swings=0; s.swingAt=s.tick+30
+      s.swing=forward_cone(c,p,q,3.5,1.8)
+      c.boss:face_direction_or_location(q); c.boss:set_ai_enabled(false,128)
+      c.boss:play_sound_at_self('BLOCK_NOTE_BLOCK_BASEDRUM',.6,.6)
+    elseif s.tick>=s.nextCry then
+      s.cry=ground_circle(c,p,4); s.cryAt=s.tick+24; s.nextCry=s.tick+280
+      c.boss:set_ai_enabled(false,54); c.boss:play_sound_at_self('ENTITY_RAVAGER_ROAR',.6,1.4)
+    end
+  end,
+  on_boss_damaged_by_player=function(c)
+    if (c.state.recoveryUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.2) end
+  end,
+  on_death=function(c)
+    c.boss:send_message('&6Berserker Instructor: &fYou held your ground without standing still. That will do.',24)
   end
-  return T.append(seq,{T.rest(50,1.2)})
-end
-return T.encounter{
- init=function(c,s) s.comboSpent=0 end,
- choose=function(c,s)
-   if s.phasePending and T.ready(s,'rampage') then s.phasePending=false; local seq=cry(c,s); T.append(seq,rampage(c,s)); T.append(seq,{T.wait(1,nil,nil,function(c,s) s.ready.cry=s.tick+280 end)}); T.start(c,s,'rampage',seq,320)
-   elseif T.distance(c.trial:position(),c.trial.player:get_location())>5 and T.ready(s,'leap') then T.start(c,s,'leap',M.move(c,s),M.cooldown)
-   elseif T.ready(s,'rampage') then T.start(c,s,'rampage',rampage(c,s),320)
-   elseif T.ready(s,'cry') then T.start(c,s,'cry',cry(c,s),280)
-   else T.basic(c,s,'melee') end
- end
 }
