@@ -120,15 +120,20 @@ function panel(active){
 (async()=>{
  // Each 32x42 glyph contains the diamond and its F badge. Drawing them as
  // one overlay keeps the key above the dynamic XP strip, clear of the hotbar.
- // The diamond retains its 32x32 rim and 28 bottom-up fill rows.
+ // Crop at row 12, four pixels above the original midpoint. Preserve the
+ // glyph origin and remap the runtime's 29 progress frames onto 16 fill rows.
+ const diamondCut=12, fillTop=diamondCut+2, fillBottom=30;
  let diamonds='';
  for(let fill=0;fill<=28;fill++) {
   const ox=(fill%8)*32, oy=Math.floor(fill/8)*42;
-  for(let yy=0;yy<32;yy++) for(let xx=0;xx<32;xx++) {
+  const fillStart=fillBottom-Math.round(fill/28*(fillBottom-fillTop));
+  for(let yy=diamondCut;yy<32;yy++) for(let xx=0;xx<32;xx++) {
    const distance=Math.abs(xx-15.5)+Math.abs(yy-15.5);
    if(distance>16) continue;
    let color=distance>15?'#241a12':distance>14?(yy<16?'#edcc82':'#927044'):'#172128';
-   if(distance<=14 && yy>=30-fill) color=yy===30-fill?'#f5d476':'#916b24';
+   if(yy===diamondCut) color='#241a12';
+   else if(yy===diamondCut+1 && distance<=15) color='#edcc82';
+   else if(distance<=14 && yy>=fillStart) color=yy===fillStart?'#f5d476':'#916b24';
    diamonds+=rect(ox+xx,oy+yy,1,1,color);
   }
   // Flat, clipped-corner badge with one border row and tight letter padding.
@@ -160,7 +165,7 @@ function panel(active){
     bitmap('gray',54,-11,'\ue000'),bitmap('red',54,-11,'\ue001'),
     bitmap('text',7,-18,alphabet),
     bitmap('health',3,-28,'\ue110'),bitmap('resource',3,-28,'\ue111'),bitmap('xp',2,-37,'\ue112')];
-  providers.push(bitmap('class_level',16,-12,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
+  providers.push(bitmap('class_level',16,-14,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
   const diamond=bitmap('class_diamond',42,1,'');
   diamond.chars=Array.from({length:4},(_,row)=>Array.from({length:8},(_,col)=>{
    const index=row*8+col; return index<=28?String.fromCodePoint(0xe400+index):'\u0000';
