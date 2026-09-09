@@ -9,6 +9,8 @@ const abilityDirectory = path.join(__dirname, 'ability-art');
 const abilityManifest = JSON.parse(fs.readFileSync(path.join(abilityDirectory, 'manifest.json')));
 const abilityIcons = abilityManifest.map((entry,index) => ({...entry, glyph: 0xea00 + index}))
  .filter(entry => entry.texture);
+const classBadges = [...new Map(abilityManifest.map(e => [e.id.split('.')[0], e.className])).entries()]
+ .map(([id,name],index)=>({id,name,glyph:0xe600+index}));
 fs.mkdirSync(textures, {recursive:true}); fs.mkdirSync(fonts, {recursive:true});
 const glyphs = {
  '+':['00000','00100','00100','11111','00100','00100','00000'],
@@ -63,6 +65,9 @@ const smallGlyphs = {
  T:['111','010','010','010','010'], U:['101','101','101','101','111'],
  Y:['101','101','010','010','010'], '+':['000','010','111','010','000'],
  V:['101','101','101','101','010'],
+ J:['001','001','001','101','111'], K:['101','101','110','101','101'],
+ Q:['111','101','101','111','001'], W:['101','101','111','111','101'],
+ X:['101','101','010','101','101'], Z:['111','001','010','100','111'],
  P:['110','101','110','100','100'], D:['110','101','101','101','110'],
  ',':['000','000','000','010','100'],
 };
@@ -231,6 +236,16 @@ function panel(active){
 }
 (async()=>{
  fs.mkdirSync(path.join(textures, 'abilities'), {recursive:true});
+ fs.mkdirSync(path.join(textures, 'class_badges'), {recursive:true});
+ for(const badge of classBadges) {
+  const label=badge.name.toUpperCase(), width=label.length*4-1;
+  if(width>66) throw new Error(`Class badge label exceeds its frame: ${badge.name}`);
+  await sharp(Buffer.from(svg(74,9,frame(0,0,74,9,true)
+   +smallText(label,Math.floor((74-width)/2),2,'#fff0be')))).png()
+   .toFile(path.join(textures,'class_badges',badge.id+'.png'));
+ }
+ fs.writeFileSync(path.join(__dirname,'../../src/main/resources/combat-hud-class-badges.properties'),
+  '# Generated class badge glyphs\n'+classBadges.map(e=>`${e.id}=${e.glyph.toString(16)}`).join('\n')+'\n');
  // Stamp every exported ability with the same legible UI label, preserving source art.
  const placeholderLabel = await sharp(Buffer.from(placeholderStamp())).png().toBuffer();
  for (const entry of abilityIcons) {
@@ -297,12 +312,14 @@ function panel(active){
    return {type:'bitmap',file:`elitemobs:gui/combat_hud_probe/${file}.png`,height,ascent:ascent-y,chars:[chars]};
   };
   const chars=(base,length)=>Array.from({length},(_,i)=>String.fromCodePoint(base+i)).join('');
-  const providers=[{type:'space',advances:{'\ue100':1,'\ue101':-1}},
+  const providers=[{type:'space',advances:{'\ue100':1,'\ue101':-1,'\ue102':-0.5,'\ue103':0.5}},
     bitmap('gray',54,-11,'\ue000'),bitmap('red',54,-11,'\ue001'),
     bitmap('text',7,-18,alphabet),bitmap('f_badges',7,-33,chars(0xe520,8))];
   strips.forEach(([name,,height],i)=>providers.push(bitmap(name,height,name==='xp'?-37:-28,chars(0xe800+i*64,64))));
   providers.push(bitmap('class_level',16,-14,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
   providers.push(bitmap('resource_icons',15,-16,resourceTypes.map((_,i)=>String.fromCodePoint(0xe500+i)).join('')));
+  for (const badge of classBadges)
+   providers.push(bitmap(`class_badges/${badge.id}`,9,-9,String.fromCodePoint(badge.glyph)));
   for (const entry of abilityIcons)
    providers.push(bitmap(`abilities/${entry.id}`,13,-47,String.fromCodePoint(entry.glyph)));
   for(let frame=0;frame<4;frame++) {

@@ -22,3 +22,10 @@ Current comparison revision: all 155 textures were reduced directly from their r
 Every exported ability icon now carries a centered PLACE / HOLDER label. The generator applies the shared pixel lettering when exporting the pack, preserving the unmarked artwork and original sources. Card previews read the actual exported textures.
 
 Placeholder lettering now spans up to 29x22 texture pixels, with a one-pixel dark outline and 72% opacity. There is no background panel. The original images remain unmarked.
+
+Class badge and feedback layout:
+- The active form uses one of 75 generated badges. Badge bounds are x=4..77, y=-2..6 relative to the panel, leaving the heart at y=7 clear. Its glyph advances 75 pixels and is compensated like the other overlays.
+- The winning transient source is rendered above the panel using Minecraft's normal glyph shapes. Persistent HUD text and the redundant gesture-controls message stay out of this line.
+- Feedback overlays have zero net horizontal advance, including bold and half-pixel Unicode advances. Font definitions and metrics are derived together by prepare-feedback-font.py from the matching client jar and unifont assets. Vanilla bitmap and Unicode providers are used explicitly so the client's Force Unicode preference cannot change the measured widths. The feedback line stays at the native action-bar vertical position; normal calibration is x=0, y=0.
+- Default reading-based lifetimes double while the HUD probe is active, with a six-second minimum and a 30-second maximum. Explicit producer lifetimes and source priorities remain unchanged.
+- Build and generated asset validation passed. NBTest received the matching jar and pack, restarted without error lines, and its public pack matched all 75 badge images and 34 font definitions. Live client visual validation remains pending because native computer control is unavailable. The player was offline at the final enable attempt.
