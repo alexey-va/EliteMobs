@@ -1446,8 +1446,13 @@
     "slot": "signature",
     "name": "Prayer of Mending",
     "description": "Heal the three weakest nearby allies.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Priest's 'Prayer of Mending'. Actual gameplay effect: Heal the three weakest nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Priest's 'Prayer of Mending'. Actual gameplay effect: Heal the three weakest nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three ivory heart emblems arranged in an upward arc above two praying hands, joined by one flowing gold healing ribbon. Broad hands and hearts, no people.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/priest.signature.png",
+    "texture": "priest.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "priest.utility",
@@ -1456,8 +1461,13 @@
     "slot": "utility",
     "name": "Purify",
     "description": "Cleanse one ally.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Priest's 'Purify'. Actual gameplay effect: Cleanse one ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Priest's 'Purify'. Actual gameplay effect: Cleanse one ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One ivory hand gently sweeping a dark violet thorn from a glowing gold heart. Cleansing gesture, clean isolated closeup.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/priest.utility.png",
+    "texture": "priest.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "hierophant.signature",
@@ -1466,8 +1476,13 @@
     "slot": "signature",
     "name": "Benediction",
     "description": "Heal nearby allies heavily.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Hierophant's 'Benediction'. Actual gameplay effect: Heal nearby allies heavily. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Hierophant's 'Benediction'. Actual gameplay effect: Heal nearby allies heavily. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A large gold chalice overflowing with broad ivory light into three small hearts beneath. Sacred healing abundance, no text or runes.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/hierophant.signature.png",
+    "texture": "hierophant.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "hierophant.utility",
@@ -1476,8 +1491,13 @@
     "slot": "utility",
     "name": "Sacred Silence",
     "description": "Cleanse allies and interrupt nearby foes.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Hierophant's 'Sacred Silence'. Actual gameplay effect: Cleanse allies and interrupt nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Hierophant's 'Sacred Silence'. Actual gameplay effect: Cleanse allies and interrupt nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A bright ivory bell with a broad golden sound ring shattering two violet curse shards. Cleanse and silence motif, bell dominates.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/hierophant.utility.png",
+    "texture": "hierophant.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "saint.signature",
@@ -1486,8 +1506,13 @@
     "slot": "signature",
     "name": "Miracle",
     "description": "Massively heal a dying ally.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Saint's 'Miracle'. Actual gameplay effect: Massively heal a dying ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Saint's 'Miracle'. Actual gameplay effect: Massively heal a dying ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A cracked dim red heart being restored by a brilliant ivory star at its center, two gold wings cradle it. Near-death rescue, no figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/saint.signature.png",
+    "texture": "saint.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "saint.utility",
@@ -1496,8 +1521,13 @@
     "slot": "utility",
     "name": "Hallowed Ground",
     "description": "Steadily heal allies in an area.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Saint's 'Hallowed Ground'. Actual gameplay effect: Steadily heal allies in an area. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Saint's 'Hallowed Ground'. Actual gameplay effect: Steadily heal allies in an area. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A broad golden halo lies horizontally on consecrated ground, a single white lily grows from its luminous center. Low healing ground motif.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/saint.utility.png",
+    "texture": "saint.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "exorcist.signature",
@@ -1506,8 +1536,13 @@
     "slot": "signature",
     "name": "Smite and Succor",
     "description": "Hurt a foe and heal the weakest ally.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Exorcist's 'Smite and Succor'. Actual gameplay effect: Hurt a foe and heal the weakest ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Exorcist's 'Smite and Succor'. Actual gameplay effect: Hurt a foe and heal the weakest ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A bright gold mace head striking a dark violet curse orb, one thick ivory ribbon curves from the impact into a small warm heart. Damage turned to healing.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/exorcist.signature.png",
+    "texture": "exorcist.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "exorcist.utility",
@@ -1516,8 +1551,13 @@
     "slot": "utility",
     "name": "Banish",
     "description": "Knock foes away and weaken their damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Exorcist's 'Banish'. Actual gameplay effect: Knock foes away and weaken their damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Exorcist's 'Banish'. Actual gameplay effect: Knock foes away and weaken their damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An open ivory palm projects a broad gold force wedge pushing a dark horned spirit away. Palm dominates, two clear opposing silhouettes.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/exorcist.utility.png",
+    "texture": "exorcist.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "oracle.signature",
@@ -1526,8 +1566,13 @@
     "slot": "signature",
     "name": "Foreseen Rescue",
     "description": "Shield an ally, then heal when broken.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Oracle's 'Foreseen Rescue'. Actual gameplay effect: Shield an ally, then heal when broken. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Oracle's 'Foreseen Rescue'. Actual gameplay effect: Shield an ally, then heal when broken. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A golden hourglass enclosed in an ivory shield, the lower chamber contains a glowing heart and the upper a small crack of violet threat. Protective future healing.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/oracle.signature.png",
+    "texture": "oracle.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "oracle.utility",
@@ -1536,8 +1581,13 @@
     "slot": "utility",
     "name": "Foresight",
     "description": "Briefly reduce damage to one ally.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Oracle's 'Foresight'. Actual gameplay effect: Briefly reduce damage to one ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Oracle's 'Foresight'. Actual gameplay effect: Briefly reduce damage to one ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An open golden eye behind a translucent ivory shield, one dark arrow is softened as it touches the barrier. Eye and shield, no figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/oracle.utility.png",
+    "texture": "oracle.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "fateweaver.signature",
@@ -1546,8 +1596,13 @@
     "slot": "signature",
     "name": "Rewrite Fate",
     "description": "Block a fatal hit and heal that ally.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Fateweaver's 'Rewrite Fate'. Actual gameplay effect: Block a fatal hit and heal that ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Fateweaver's 'Rewrite Fate'. Actual gameplay effect: Block a fatal hit and heal that ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A shining ivory needle stitches a severed golden life-thread back together above a small restored heart. Thick thread, simple repair gesture.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/fateweaver.signature.png",
+    "texture": "fateweaver.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "fateweaver.utility",
@@ -1556,8 +1611,13 @@
     "slot": "utility",
     "name": "Prophecy",
     "description": "Auto-protect an ally from the next major threat.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Fateweaver's 'Prophecy'. Actual gameplay effect: Auto-protect an ally from the next major threat. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Fateweaver's 'Prophecy'. Actual gameplay effect: Auto-protect an ally from the next major threat. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A large gold eye sees one dark arrow before it reaches an ivory heart, a curved translucent barrier blooms in the arrow path. Side-on prophecy composition.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/fateweaver.utility.png",
+    "texture": "fateweaver.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "seraph.signature",
@@ -1566,8 +1626,13 @@
     "slot": "signature",
     "name": "Chain of Mercy",
     "description": "Chain healing through injured allies.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Seraph's 'Chain of Mercy'. Actual gameplay effect: Chain healing through injured allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Seraph's 'Chain of Mercy'. Actual gameplay effect: Chain healing through injured allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three radiant ivory hearts linked diagonally by thick gold chain links, one sweeping wing behind them. Healing chain, not iron restraint.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/seraph.signature.png",
+    "texture": "seraph.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "seraph.utility",
@@ -1576,8 +1641,13 @@
     "slot": "utility",
     "name": "Ascension",
     "description": "Shield and speed an ally; redirect some damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Seraph's 'Ascension'. Actual gameplay effect: Shield and speed an ally; redirect some damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Seraph's 'Ascension'. Actual gameplay effect: Shield and speed an ally; redirect some damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An ivory shield rises on two upswept gold wings with a bright upward trail and one small lavender tether below. Ascending protection.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/seraph.utility.png",
+    "texture": "seraph.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "shaman.signature",
@@ -1586,8 +1656,13 @@
     "slot": "signature",
     "name": "Life Current",
     "description": "Tether and heal an ally until too far away.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shaman's 'Life Current'. Actual gameplay effect: Tether and heal an ally until too far away. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shaman's 'Life Current'. Actual gameplay effect: Tether and heal an ally until too far away. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A broad turquoise spirit stream flows from an ivory hand into one gold heart, a thick luminous tether anchors both. Current dominates, no scenery.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/shaman.signature.png",
+    "texture": "shaman.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "shaman.utility",
@@ -1596,8 +1671,13 @@
     "slot": "utility",
     "name": "Spirit Totem",
     "description": "Repeatedly heal nearby allies.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shaman's 'Spirit Totem'. Actual gameplay effect: Repeatedly heal nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shaman's 'Spirit Totem'. Actual gameplay effect: Repeatedly heal nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A short carved wooden spirit totem with a calm ivory face and gold eyes, radiating two broad turquoise healing rings. Totem fills square.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/shaman.utility.png",
+    "texture": "shaman.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "lifewarden.signature",
@@ -1606,8 +1686,13 @@
     "slot": "signature",
     "name": "Renewing Bond",
     "description": "Tether one ally for steady healing.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lifewarden's 'Renewing Bond'. Actual gameplay effect: Tether one ally for steady healing. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lifewarden's 'Renewing Bond'. Actual gameplay effect: Tether one ally for steady healing. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Two gold hearts joined by a strong green vine with two broad ivory leaves. Living healing bond, no chain or people.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/lifewarden.signature.png",
+    "texture": "lifewarden.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "lifewarden.utility",
@@ -1616,8 +1701,13 @@
     "slot": "utility",
     "name": "Sheltering Seed",
     "description": "Delay a shield until heavy damage hits.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lifewarden's 'Sheltering Seed'. Actual gameplay effect: Delay a shield until heavy damage hits. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lifewarden's 'Sheltering Seed'. Actual gameplay effect: Delay a shield until heavy damage hits. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A large green seed suspended within two protective ivory leaves, a translucent golden shield outline waits behind it. Seed at center, delayed protection.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/lifewarden.utility.png",
+    "texture": "lifewarden.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "grovekeeper.signature",
@@ -1626,8 +1716,13 @@
     "slot": "signature",
     "name": "Verdant Bloom",
     "description": "Continuously heal allies in an area.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Grovekeeper's 'Verdant Bloom'. Actual gameplay effect: Continuously heal allies in an area. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Grovekeeper's 'Verdant Bloom'. Actual gameplay effect: Continuously heal allies in an area. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One enormous ivory-and-gold flower blooming with a luminous green healing core, three broad leaves around base. Bold flower silhouette.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/grovekeeper.signature.png",
+    "texture": "grovekeeper.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "grovekeeper.utility",
@@ -1636,8 +1731,13 @@
     "slot": "utility",
     "name": "Thorn Ward",
     "description": "Shield an area and damage nearby foes.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Grovekeeper's 'Thorn Ward'. Actual gameplay effect: Shield an area and damage nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Grovekeeper's 'Thorn Ward'. Actual gameplay effect: Shield an area and damage nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A thick ring of green thorn branches protects a glowing ivory heart, sharp gold thorns point outward. Defensive thorn wreath.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/grovekeeper.utility.png",
+    "texture": "grovekeeper.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "shepherd.signature",
@@ -1646,8 +1746,13 @@
     "slot": "signature",
     "name": "Guardian Chorus",
     "description": "Heal more for each nearby ally.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shepherd's 'Guardian Chorus'. Actual gameplay effect: Heal more for each nearby ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shepherd's 'Guardian Chorus'. Actual gameplay effect: Heal more for each nearby ally. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three golden singing bells arranged around a central ivory heart, broad sound ribbons converge to strengthen its glow. No letters or musical notation.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/shepherd.signature.png",
+    "texture": "shepherd.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "shepherd.utility",
@@ -1656,8 +1761,13 @@
     "slot": "utility",
     "name": "Gather",
     "description": "Grant allies speed and brief defense.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shepherd's 'Gather'. Actual gameplay effect: Grant allies speed and brief defense. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Shepherd's 'Gather'. Actual gameplay effect: Grant allies speed and brief defense. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An ivory shepherd crook draws three small golden shield emblems together on one flowing pale-green ribbon. Crook dominates, gathering allies.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/shepherd.utility.png",
+    "texture": "shepherd.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spiritcaller.signature",
@@ -1666,8 +1776,13 @@
     "slot": "signature",
     "name": "Ancestral Echo",
     "description": "Repeat part of your next true heal.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritcaller's 'Ancestral Echo'. Actual gameplay effect: Repeat part of your next true heal. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritcaller's 'Ancestral Echo'. Actual gameplay effect: Repeat part of your next true heal. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One translucent ivory ancestral hand mirrored by a second lavender spirit hand, both hold matching gold healing lights. Clear echo pair.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/spiritcaller.signature.png",
+    "texture": "spiritcaller.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spiritcaller.utility",
@@ -1676,8 +1791,13 @@
     "slot": "utility",
     "name": "Spirit Link",
     "description": "Heal, shield and share damage across allies.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritcaller's 'Spirit Link'. Actual gameplay effect: Heal, shield and share damage across allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritcaller's 'Spirit Link'. Actual gameplay effect: Heal, shield and share damage across allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three ivory soul flames joined by a thick circular gold tether around a shared small shield. Interconnected spirits, no full figures.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/spiritcaller.utility.png",
+    "texture": "spiritcaller.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "mistweaver.signature",
@@ -1686,8 +1806,13 @@
     "slot": "signature",
     "name": "Restorative Tide",
     "description": "Heal allies and harm nearby foes.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mistweaver's 'Restorative Tide'. Actual gameplay effect: Heal allies and harm nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mistweaver's 'Restorative Tide'. Actual gameplay effect: Heal allies and harm nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A curling turquoise tidal wave with an ivory glowing crest, carrying a gold heart while dissolving a small violet curse shape beneath. Healing tide dominates.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/mistweaver.signature.png",
+    "texture": "mistweaver.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "mistweaver.utility",
@@ -1696,8 +1821,13 @@
     "slot": "utility",
     "name": "Veilstep",
     "description": "Cleanse, speed and protect nearby allies.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mistweaver's 'Veilstep'. Actual gameplay effect: Cleanse, speed and protect nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mistweaver's 'Veilstep'. Actual gameplay effect: Cleanse, speed and protect nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A leather boot stepping through a pale turquoise mist veil, ivory shield shimmer around its toe and broken violet curse ribbon behind. Clean movement silhouette.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/mistweaver.utility.png",
+    "texture": "mistweaver.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "soulwarden.signature",
@@ -1706,8 +1836,13 @@
     "slot": "signature",
     "name": "Ancestral Intervention",
     "description": "Heal, shield and link allies.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Soulwarden's 'Ancestral Intervention'. Actual gameplay effect: Heal, shield and link allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Soulwarden's 'Ancestral Intervention'. Actual gameplay effect: Heal, shield and link allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A large calm ivory ancestral face emerging above two small gold shielded hearts, lavender spirit ribbons bind them. Guardian spirit dominates.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/soulwarden.signature.png",
+    "texture": "soulwarden.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "soulwarden.utility",
@@ -1716,8 +1851,13 @@
     "slot": "utility",
     "name": "Communion",
     "description": "Heal, shield and share ally damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Soulwarden's 'Communion'. Actual gameplay effect: Heal, shield and share ally damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Soulwarden's 'Communion'. Actual gameplay effect: Heal, shield and share ally damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: luminous ivory and pale gold, lavender shadows; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Two ivory hands cup three gold soul lights within one broad translucent lavender shield, thick golden tethers join the lights. Communion and shared protection.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/soulwarden.utility.png",
+    "texture": "soulwarden.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spellcaster.mobility",
