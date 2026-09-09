@@ -64,6 +64,12 @@ const smallGlyphs = {
 const rect=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
 const poly=(p,c)=>`<polygon points="${p}" fill="${c}"/>`;
 const svg=(w,h,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges">${body}</svg>`;
+function liquidColor(base,x,y,frame,surface=false) {
+ const wave=Math.sin((x-frame*4)*Math.PI/8+y*0.7);
+ const brightness=1+wave*0.12+(surface?0.12:-0.04);
+ return '#'+[1,3,5].map(i=>Math.max(0,Math.min(255,
+  Math.round(parseInt(base.slice(i,i+2),16)*brightness))).toString(16).padStart(2,'0')).join('');
+}
 function text(t,x,y,color,scale=1) {
  let s=''; for(const c of t.toUpperCase()) {
   if(glyphs[c]) glyphs[c].forEach((r,yy)=>[...r].forEach((v,xx)=>{if(v==='1')s+=rect(x+xx*scale,y+yy*scale,scale,scale,color)}));
@@ -161,6 +167,7 @@ function panel(active){
  // Crop at row 9 so the rim projects three pixels above the panel. Preserve
  // the glyph origin and remap the runtime's 29 progress frames onto 19 fill rows.
  const diamondCut=9, fillTop=diamondCut+2, fillBottom=30;
+ for(let frame=0;frame<4;frame++) {
  let diamonds='';
  for(let fill=0;fill<=28;fill++) {
   const ox=(fill%8)*32, oy=Math.floor(fill/8)*42;
@@ -171,7 +178,8 @@ function panel(active){
    let color=distance>15?'#241a12':distance>14?(yy<16?'#edcc82':'#927044'):'#172128';
    if(yy===diamondCut) color='#241a12';
    else if(yy===diamondCut+1 && distance<=15) color='#edcc82';
-   else if(distance<=14 && yy>=fillStart) color=yy===fillStart?'#f5d476':'#916b24';
+   else if(distance<=14 && yy>=fillStart)
+    color=liquidColor(yy===fillStart?'#d8b760':'#916b24',xx,yy,frame,yy===fillStart);
    diamonds+=rect(ox+xx,oy+yy,1,1,color);
   }
   // Flat, clipped-corner badge with one border row and tight letter padding.
@@ -182,7 +190,9 @@ function panel(active){
    if(v==='1') diamonds+=rect(ox+14+x,oy+35+y,1,1,'#505b5e');
   }));
  }
- await sharp(Buffer.from(svg(256,168,diamonds))).png().toFile(path.join(textures,'class_diamond.png'));
+ await sharp(Buffer.from(svg(256,168,diamonds))).png()
+  .toFile(path.join(textures,frame===0?'class_diamond.png':`class_diamond_${frame}.png`));
+ }
  await sharp(Buffer.from(svg(60,16,text('0123456789',0,0,'#ffffff')))).png().toFile(path.join(textures,'class_level.png'));
  for(const [name,active] of [['gray',false],['red',true]]){
   let body=panel(active);
@@ -192,24 +202,33 @@ function panel(active){
  }
  const alphabet='0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
  await sharp(Buffer.from(svg(alphabet.length*6,7,text(alphabet,0,0,'#ffffff')))).png().toFile(path.join(textures,'text.png'));
- for(const [name,color,h] of [['health','#ed3f57',3],['resource','#16cbe4',3],['xp','#74b941',2]])
-  await sharp(Buffer.from(svg(1,h,rect(0,0,1,h,color)))).png().toFile(path.join(textures,name+'.png'));
+ // Sixteen one-pixel columns form a repeating wave. Runtime shifts the
+ // selected columns by four pixels for each of the four animation frames.
+ for(const [name,color,h] of [['health','#ed3f57',3],['resource','#16cbe4',3],['xp','#74b941',2]]) {
+  let strip='';
+  for(let x=0;x<16;x++) for(let y=0;y<h;y++)
+   strip+=rect(x,y,1,1,liquidColor(color,x,y,0,y===0));
+  await sharp(Buffer.from(svg(16,h,strip))).png().toFile(path.join(textures,name+'.png'));
+ }
  for(let y=-16;y<=16;y++){
   const bitmap=(file,height,ascent,chars)=>{
    if(ascent-y>height) throw new Error(`Invalid ascent for ${file} at offset ${y}`);
    return {type:'bitmap',file:`elitemobs:gui/combat_hud_probe/${file}.png`,height,ascent:ascent-y,chars:[chars]};
   };
+  const chars=(base,length)=>Array.from({length},(_,i)=>String.fromCodePoint(base+i)).join('');
   const providers=[{type:'space',advances:{'\ue100':1,'\ue101':-1}},
     bitmap('gray',54,-11,'\ue000'),bitmap('red',54,-11,'\ue001'),
     bitmap('text',7,-18,alphabet),
-    bitmap('health',3,-28,'\ue110'),bitmap('resource',3,-28,'\ue111'),bitmap('xp',2,-37,'\ue112')];
+    bitmap('health',3,-28,chars(0xe600,16)),bitmap('resource',3,-28,chars(0xe620,16)),bitmap('xp',2,-37,chars(0xe640,16))];
   providers.push(bitmap('class_level',16,-14,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
   providers.push(bitmap('resource_icons',15,-16,resourceTypes.map((_,i)=>String.fromCodePoint(0xe500+i)).join('')));
-  const diamond=bitmap('class_diamond',42,1,'');
+  for(let frame=0;frame<4;frame++) {
+  const diamond=bitmap(frame===0?'class_diamond':`class_diamond_${frame}`,42,1,'');
   diamond.chars=Array.from({length:4},(_,row)=>Array.from({length:8},(_,col)=>{
-   const index=row*8+col; return index<=28?String.fromCodePoint(0xe400+index):'\u0000';
+   const index=row*8+col; return index<=28?String.fromCodePoint(0xe400+frame*32+index):'\u0000';
   }).join(''));
   providers.push(diamond);
+  }
   fs.writeFileSync(path.join(fonts,`combat_hud_concept_${y+16}.json`),JSON.stringify({providers},null,2)+'\n');
  }
  console.log('Generated live HUD concept textures and 33 offset fonts.');

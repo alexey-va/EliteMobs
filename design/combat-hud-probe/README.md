@@ -34,6 +34,14 @@ The 50x15 `resource_icons.png` atlas uses five 10x15 cells, each with an
 11-pixel advance. Both backgrounds leave the icon area empty; a missing
 resource snapshot shows no icon. The counter and bar retain their alignment.
 
+Health, energy, the XP strip and class XP use a four-frame liquid shimmer at
+five frames per second. Sixteen one-pixel strip glyphs provide a repeating
+brightness wave, shifted four columns per frame. Rendering clips that wave to
+the actual fill width, anchored to the trough even when the amount changes.
+Four diamond atlases animate only the filled interior; their empty area, rim
+and F badge are identical. Icons and numbers remain still. The existing
+action-bar compositor sends frame changes, with no additional scheduled task.
+
 ```
 /em hudprobe show magmaguy 0 0
 /em hudprobe show magmaguy 0 -2
@@ -133,7 +141,7 @@ the class band's XP baseline. At the current progression cap it stays full.
 The white number shows effective class level, including specialization levels.
 An absent or locked class hides the diamond. Instance-locked class selections
 take precedence over the profile's selection. The 29 fill states share a
-256x168 bitmap atlas; the level is a separate glyph layer above the fill.
+256x168 bitmap atlas per animation frame; the level is a separate glyph layer above the fill.
 Each atlas cell also contains a compact, flat gray F badge below the diamond.
 It overlays the center of the XP strip, leaving two empty rows before the
 hotbar at y=31. Clipped corners and a single border replace the keycap bevel.
