@@ -30,6 +30,9 @@ y moves down. Accepted ranges are x=-64..64 and y=-16..16. They apply identicall
 to both colors. A class must be active and its skill controls enabled; pressing
 F shows the three skill cards for the actual ability-selection window, then the hotbar again.
 The existing F,F, F+LMB and F+RMB bindings keep working.
+Signature and Utility show F + a mouse pictogram with the left or right button
+highlighted in amber. The inactive button stays gray; no LMB/RMB lettering is
+needed. Mobility retains F , F.
 
 The probe temporarily replaces EliteMobs' action-bar output for that player.
 Turning it off restores ordinary messages. Logout, plugin shutdown and restart
@@ -100,7 +103,8 @@ health card: icon on the right, trough at x=101, and fill within [102,165).
 Resource counters end at x=165, excluding their trailing spacing
 pixel. Resource fill grows leftward from that same right edge.
 Skill icons start at card x+3, y=35; labels at x+19, y=35;
-bindings at x+19, y=44. Skill frames end at row 52, reserving row 53 for the
+binding text at x+19, y=44. The 9x8 mouse icons start at x+33, y=42 and
+end before row 50, inside the card interior. Skill frames end at row 52, reserving row 53 for the
 outer panel and avoiding clipping when the framebuffer height is not an exact
 multiple of the GUI scale.
 

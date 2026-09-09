@@ -77,6 +77,21 @@ function smallText(t,x,y,color) {
   x+=4;
  } return s;
 }
+function mouseButton(button,x,y) {
+ const colors={o:'#899599',b:'#38444b',c:'#dce4e4',
+  L:button==='left'?'#ffc36b':'#4e5b62',R:button==='right'?'#ffc36b':'#4e5b62'};
+ const rows=['..ooooo..','.oLLcRRo.','oLLLcRRRo','oLLLcRRRo',
+  'ooooooooo','obbbbbbbo','.obbbbbo.','..ooooo..'];
+ let s='';
+ rows.forEach((row,yy)=>[...row].forEach((pixel,xx)=>{
+  if(pixel!=='.') s+=rect(x+xx,y+yy,1,1,colors[pixel]);
+ }));
+ return s;
+}
+function skillBinding(binding,x,y) {
+ if(binding==='double-f') return smallText('F , F',x,y+2,'#add9e4');
+ return smallText('F +',x,y+2,'#add9e4')+mouseButton(binding,x+14,y);
+}
 function frame(x,y,w,h,active=false){return rect(x,y,w,h,'#181611')+rect(x,y,w,1,active?'#f6d07b':'#9d8154')+rect(x,y,1,h,active?'#d9ae5b':'#79613e')+rect(x+1,y+1,w-2,h-2,'#4b3725')+rect(x+2,y+2,w-4,h-4,'#121b20')+rect(x+2,y+2,w-4,1,'#263237')+rect(x+1,y+h-2,w-2,1,'#2d241c');}
 function heart(x,y){return `<g transform="translate(${x} ${y})">`+poly('0,2 2,0 4,0 6,2 8,0 10,0 12,2 12,6 6,12 0,6','#681f28')+poly('1,2 2,1 4,1 6,3 8,1 10,1 11,2 11,5 6,10 1,5','#ec364c')+rect(2,2,2,3,'#ff8c95')+rect(8,2,2,1,'#ff6575')+`</g>`;}
 function crystal(x,y){return `<g transform="translate(${x} ${y})">`+poly('5,0 10,5 10,11 5,15 0,11 0,5','#074854')+poly('5,1 9,5 9,10 5,13 1,10 1,5','#12bed7')+poly('5,1 5,13 2,9 2,5','#78eeef')+poly('6,3 8,5 8,9 6,11','#0086b9')+rect(4,3,1,7,'#c0ffff')+`</g>`;}
@@ -93,8 +108,8 @@ function panel(active){
  for(const x of [24,101]) s+=rect(x,16,65,5,'#080c0f')+rect(x+1,17,63,3,x<90?'#471c26':'#073e4b');
  s+=rect(4,24,182,6,'#17191a')+rect(4,24,182,1,'#806944')+rect(5,26,180,2,'#183123')+rect(5,29,180,1,'#392d21');
  if(active){
-  const cards=[{name:'SIGNATURE',key:'F + LMB',icon:1},{name:'UTILITY',key:'F + RMB',icon:2},{name:'MOBILITY',key:'F , F',icon:0}];
-  cards.forEach((card,i)=>{const x=4+i*61;s+=frame(x,32,60,21,true)+icon(card.icon,x+3,35)+smallText(card.name,x+19,35,'#eee4cb')+smallText(card.key,x+19,44,'#add9e4');});
+  const cards=[{name:'SIGNATURE',binding:'left',icon:1},{name:'UTILITY',binding:'right',icon:2},{name:'MOBILITY',binding:'double-f',icon:0}];
+  cards.forEach((card,i)=>{const x=4+i*61;s+=frame(x,32,60,21,true)+icon(card.icon,x+3,35)+smallText(card.name,x+19,35,'#eee4cb')+skillBinding(card.binding,x+19,42);});
  } else {
   // The whole vanilla hotbar remains visible, including item counts and selected-slot border.
   s+=`<rect x="3" y="31" width="184" height="23" fill="black"/>`;
