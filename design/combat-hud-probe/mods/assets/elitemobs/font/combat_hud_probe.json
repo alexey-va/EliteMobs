@@ -1,0 +1,605 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "\ue100": 1,
+        "\ue101": -1
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 11,
+      "height": 60,
+      "chars": [
+        "\ue000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 11,
+      "height": 60,
+      "chars": [
+        "\ue001"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 10,
+      "height": 60,
+      "chars": [
+        "\ue002"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 10,
+      "height": 60,
+      "chars": [
+        "\ue003"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 9,
+      "height": 60,
+      "chars": [
+        "\ue004"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 9,
+      "height": 60,
+      "chars": [
+        "\ue005"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 8,
+      "height": 60,
+      "chars": [
+        "\ue006"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 8,
+      "height": 60,
+      "chars": [
+        "\ue007"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 7,
+      "height": 60,
+      "chars": [
+        "\ue008"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 7,
+      "height": 60,
+      "chars": [
+        "\ue009"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 6,
+      "height": 60,
+      "chars": [
+        "\ue00a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 6,
+      "height": 60,
+      "chars": [
+        "\ue00b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 5,
+      "height": 60,
+      "chars": [
+        "\ue00c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 5,
+      "height": 60,
+      "chars": [
+        "\ue00d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 4,
+      "height": 60,
+      "chars": [
+        "\ue00e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 4,
+      "height": 60,
+      "chars": [
+        "\ue00f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 3,
+      "height": 60,
+      "chars": [
+        "\ue010"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 3,
+      "height": 60,
+      "chars": [
+        "\ue011"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 2,
+      "height": 60,
+      "chars": [
+        "\ue012"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 2,
+      "height": 60,
+      "chars": [
+        "\ue013"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 1,
+      "height": 60,
+      "chars": [
+        "\ue014"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 1,
+      "height": 60,
+      "chars": [
+        "\ue015"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": 0,
+      "height": 60,
+      "chars": [
+        "\ue016"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": 0,
+      "height": 60,
+      "chars": [
+        "\ue017"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -1,
+      "height": 60,
+      "chars": [
+        "\ue018"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -1,
+      "height": 60,
+      "chars": [
+        "\ue019"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -2,
+      "height": 60,
+      "chars": [
+        "\ue01a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -2,
+      "height": 60,
+      "chars": [
+        "\ue01b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -3,
+      "height": 60,
+      "chars": [
+        "\ue01c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -3,
+      "height": 60,
+      "chars": [
+        "\ue01d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -4,
+      "height": 60,
+      "chars": [
+        "\ue01e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -4,
+      "height": 60,
+      "chars": [
+        "\ue01f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -5,
+      "height": 60,
+      "chars": [
+        "\ue020"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -5,
+      "height": 60,
+      "chars": [
+        "\ue021"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -6,
+      "height": 60,
+      "chars": [
+        "\ue022"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -6,
+      "height": 60,
+      "chars": [
+        "\ue023"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -7,
+      "height": 60,
+      "chars": [
+        "\ue024"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -7,
+      "height": 60,
+      "chars": [
+        "\ue025"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -8,
+      "height": 60,
+      "chars": [
+        "\ue026"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -8,
+      "height": 60,
+      "chars": [
+        "\ue027"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -9,
+      "height": 60,
+      "chars": [
+        "\ue028"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -9,
+      "height": 60,
+      "chars": [
+        "\ue029"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -10,
+      "height": 60,
+      "chars": [
+        "\ue02a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -10,
+      "height": 60,
+      "chars": [
+        "\ue02b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -11,
+      "height": 60,
+      "chars": [
+        "\ue02c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -11,
+      "height": 60,
+      "chars": [
+        "\ue02d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -12,
+      "height": 60,
+      "chars": [
+        "\ue02e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -12,
+      "height": 60,
+      "chars": [
+        "\ue02f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -13,
+      "height": 60,
+      "chars": [
+        "\ue030"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -13,
+      "height": 60,
+      "chars": [
+        "\ue031"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -14,
+      "height": 60,
+      "chars": [
+        "\ue032"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -14,
+      "height": 60,
+      "chars": [
+        "\ue033"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -15,
+      "height": 60,
+      "chars": [
+        "\ue034"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -15,
+      "height": 60,
+      "chars": [
+        "\ue035"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -16,
+      "height": 60,
+      "chars": [
+        "\ue036"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -16,
+      "height": 60,
+      "chars": [
+        "\ue037"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -17,
+      "height": 60,
+      "chars": [
+        "\ue038"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -17,
+      "height": 60,
+      "chars": [
+        "\ue039"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -18,
+      "height": 60,
+      "chars": [
+        "\ue03a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -18,
+      "height": 60,
+      "chars": [
+        "\ue03b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -19,
+      "height": 60,
+      "chars": [
+        "\ue03c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -19,
+      "height": 60,
+      "chars": [
+        "\ue03d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -20,
+      "height": 60,
+      "chars": [
+        "\ue03e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -20,
+      "height": 60,
+      "chars": [
+        "\ue03f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "ascent": -21,
+      "height": 60,
+      "chars": [
+        "\ue040"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "ascent": -21,
+      "height": 60,
+      "chars": [
+        "\ue041"
+      ]
+    }
+  ]
+}
