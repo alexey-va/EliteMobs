@@ -22,25 +22,31 @@ Fonts are `elitemobs:combat_hud_concept_0` through `_32`; the default font is un
 Resource icons are a separate dynamic glyph at x=171, y=5, in a 10x15 cell.
 The resource snapshot selects the root class's icon, including specializations:
 
-| Root class | Resource | Icon | Glyph |
-| --- | --- | --- | --- |
-| Paladin | Resolve | Gold shield | U+E500 |
-| Berserker | Fury | Red-orange flame | U+E501 |
-| Ranger | Focus | Green feather | U+E502 |
-| Cleric | Grace | Ivory sunburst | U+E503 |
-| Spellcaster | Mana | Blue crystal | U+E504 |
+| Root class | Resource | Icon | Icon glyph | Fill color |
+| --- | --- | --- | --- | --- |
+| Paladin | Resolve | Gold shield | U+E500 | Gold |
+| Berserker | Fury | Red-orange flame | U+E501 | Orange-red |
+| Ranger | Focus | Green feather | U+E502 | Green |
+| Cleric | Grace | Ivory sunburst | U+E503 | Ivory-gold |
+| Spellcaster | Mana | Blue crystal | U+E504 | Cyan-blue |
 
 The 50x15 `resource_icons.png` atlas uses five 10x15 cells, each with an
 11-pixel advance. Both backgrounds leave the icon area empty; a missing
 resource snapshot shows no icon. The counter and bar retain their alignment.
 
-Health, energy, the XP strip and class XP use a four-frame liquid shimmer at
-five frames per second. Sixteen one-pixel strip glyphs provide a repeating
-brightness wave, shifted four columns per frame. Rendering clips that wave to
-the actual fill width, anchored to the trough even when the amount changes.
-Four diamond atlases animate only the filled interior; their empty area, rim
-and F badge are identical. Icons and numbers remain still. The existing
-action-bar compositor sends frame changes, with no additional scheduled task.
+Health and energy use four distinct liquid poses at five frames per second:
+rolling highlights, pooling shadows and small bright pockets. Each pose uses
+sixteen one-pixel columns. Energy samples the texture in reverse so its motion
+mirrors health, and uses the current resource's palette. The XP strip and
+diamond have rising glints instead of sideways motion. All effects stay inside
+the current fill, anchored to the trough when amounts change. The diamond's
+rim and empty area remain still, as do icons and counters. The existing
+action-bar compositor sends frame changes without an additional scheduled task.
+
+Strip glyphs occupy U+E800 through U+E9BF in 64-character groups: health,
+Resolve, Fury, Focus, Grace, Mana, XP. Each group contains four sixteen-column
+poses. The separate F badge atlas uses U+E520 through U+E527: four neutral
+pulse frames, then four green active frames. Its 8x7 cells advance nine pixels.
 
 ```
 /em hudprobe show magmaguy 0 0
@@ -53,9 +59,11 @@ y moves down. Accepted ranges are x=-64..64 and y=-16..16. They apply identicall
 to both colors. A class must be active and its skill controls enabled; pressing
 F shows the three skill cards for the actual ability-selection window, then the hotbar again.
 The existing F,F, F+LMB and F+RMB bindings keep working.
-Signature and Utility show F + a mouse pictogram with the left or right button
+Signature and Utility show a green F badge + a mouse pictogram with the left or right button
 highlighted in amber. The inactive button stays gray; no LMB/RMB lettering is
-needed. Mobility retains F , F.
+needed. Mobility shows two green F badges separated by an arrow. All F badges
+in the skill cards are green while the selection layer is active; the central
+badge switches to the same green treatment for that window.
 
 The probe temporarily replaces EliteMobs' action-bar output for that player.
 Turning it off restores ordinary messages. Logout, plugin shutdown and restart
@@ -126,7 +134,7 @@ health card: icon on the right, trough at x=101, and fill within [102,165).
 Resource counters end at x=165, excluding their trailing spacing
 pixel. Resource fill grows leftward from that same right edge.
 Skill icons start at card x+3, y=35; labels at x+19, y=35;
-binding text at x+19, y=44. The 9x8 mouse icons start at x+33, y=42 and
+binding F badges at x+19, y=43. The 9x8 mouse icons start at x+35, y=42 and
 end before row 50, inside the card interior. Skill frames end at row 52, reserving row 53 for the
 outer panel and avoiding clipping when the framebuffer height is not an exact
 multiple of the GUI scale.
@@ -142,11 +150,10 @@ The white number shows effective class level, including specialization levels.
 An absent or locked class hides the diamond. Instance-locked class selections
 take precedence over the profile's selection. The 29 fill states share a
 256x168 bitmap atlas per animation frame; the level is a separate glyph layer above the fill.
-Each atlas cell also contains a compact, flat gray F badge below the diamond.
-It overlays the center of the XP strip, leaving two empty rows before the
-hotbar at y=31. Clipped corners and a single border replace the keycap bevel.
-The combined glyph is 32x42, so the key is rendered after the dynamic XP fill
-and cannot be painted over by it. It follows the diamond's class visibility.
+The compact F badge has a separate glyph below the diamond, rendered after
+the dynamic XP strip so it cannot be painted over. It leaves two empty rows
+before the hotbar at y=31 and follows the diamond's class visibility. It pulses
+in gray while idle and in green while the F selection window is active.
 
 The initial alignment revision was deployed and checked on NBTest on 2026-09-09.
 Native F2 capture at 3840x2071, GUI scale 8, placed the panel at framebuffer

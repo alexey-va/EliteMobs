@@ -64,11 +64,45 @@ const smallGlyphs = {
 const rect=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
 const poly=(p,c)=>`<polygon points="${p}" fill="${c}"/>`;
 const svg=(w,h,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges">${body}</svg>`;
-function liquidColor(base,x,y,frame,surface=false) {
- const wave=Math.sin((x-frame*4)*Math.PI/8+y*0.7);
- const brightness=1+wave*0.12+(surface?0.12:-0.04);
+function shade(base,brightness) {
  return '#'+[1,3,5].map(i=>Math.max(0,Math.min(255,
   Math.round(parseInt(base.slice(i,i+2),16)*brightness))).toString(16).padStart(2,'0')).join('');
+}
+// Four distinct liquid poses: a crest rolls down, pools, rebounds and breaks
+// into small bright pockets. These are not translated copies of one wave.
+const liquidPoses=[
+ ['1122221100000011','0011122100011100','0000111000112100'],
+ ['0011222110000111','0011232100112100','0001121100122100'],
+ ['0000111122221100','0012211100132210','0011100000011100'],
+ ['1111000011222310','1122110000111100','0012211000000100']
+];
+function stripColor(base,x,y,phase,xp=false) {
+ if(!xp) return shade(base,[0.72,0.94,1.12,1.38][Number(liquidPoses[phase][y][x])]);
+ // XP glints rise from the lower row, then fade, rather than running sideways.
+ const beat=(phase+Math.floor(x/4))%4;
+ const glint=x%4===2 && ((beat===0&&y===1)||(beat===1&&y===0));
+ return shade(base,glint?1.45:y===0?1.08:0.8);
+}
+function experienceColor(x,y,phase,fillStart) {
+ let color=y===fillStart?'#d8b760':shade('#967024',0.87+(30-y)*0.008);
+ // Staggered rising bubbles, clipped by the real fill and diamond silhouette.
+ for(const [bx,by] of [[7,17],[16,24],[24,15]]) {
+  const bubbleY=by+((6-phase*2)%8);
+  const distance=Math.abs(x-bx)+Math.abs(y-bubbleY);
+  if(distance===0) color='#f2d990';
+  else if(distance===1) color='#bd974e';
+ }
+ return color;
+}
+function keyBadge(x,y,active,phase=1) {
+ const body=active?['#38864f','#439b58','#52b366','#439b58'][phase]
+  :['#c6cecf','#dbe1df','#eef2ed','#dbe1df'][phase];
+ let s=rect(x+1,y,6,7,active?'#9beca3':'#f8faf9')
+  +rect(x,y+1,8,5,active?'#9beca3':'#f8faf9')+rect(x+1,y+1,6,5,body);
+ ['1111','1000','1110','1000','1000'].forEach((row,yy)=>[...row].forEach((v,xx)=>{
+  if(v==='1') s+=rect(x+2+xx,y+1+yy,1,1,active?'#f0fff2':'#435158');
+ }));
+ return s;
 }
 function text(t,x,y,color,scale=1) {
  let s=''; for(const c of t.toUpperCase()) {
@@ -95,8 +129,10 @@ function mouseButton(button,x,y) {
  return s;
 }
 function skillBinding(binding,x,y) {
- if(binding==='double-f') return smallText('F , F',x,y+2,'#add9e4');
- return smallText('F +',x,y+2,'#add9e4')+mouseButton(binding,x+14,y);
+ const first=keyBadge(x,y+1,true);
+ if(binding==='double-f') return first+poly(`${x+11},${y+2} ${x+14},${y+4} ${x+11},${y+6}`,'#add9e4')
+  +keyBadge(x+17,y+1,true);
+ return first+smallText('+',x+10,y+2,'#add9e4')+mouseButton(binding,x+16,y);
 }
 function frame(x,y,w,h,active=false){return rect(x,y,w,h,'#181611')+rect(x,y,w,1,active?'#f6d07b':'#9d8154')+rect(x,y,1,h,active?'#d9ae5b':'#79613e')+rect(x+1,y+1,w-2,h-2,'#4b3725')+rect(x+2,y+2,w-4,h-4,'#121b20')+rect(x+2,y+2,w-4,1,'#263237')+rect(x+1,y+h-2,w-2,1,'#2d241c');}
 function heart(x,y){return `<g transform="translate(${x} ${y})">`+poly('0,2 2,0 4,0 6,2 8,0 10,0 12,2 12,6 6,12 0,6','#681f28')+poly('1,2 2,1 4,1 6,3 8,1 10,1 11,2 11,5 6,10 1,5','#ec364c')+rect(2,2,2,3,'#ff8c95')+rect(8,2,2,1,'#ff6575')+`</g>`;}
@@ -147,7 +183,7 @@ function panel(active){
  for(let y=2;y<54;y+=3) for(let x=2;x<188;x+=13) s+=rect(x,y,5+((x*7+y)%7),1,(x+y)%2?'#62472d':'#352a20');
  s+=rect(0,0,190,1,active?'#ffe099':'#b08e5d')+rect(0,0,1,54,'#957244')+rect(189,0,1,54,'#171712');
  s+=frame(4,3,89,20,active)+frame(97,3,89,20,active)+heart(8,7);
- for(const x of [24,101]) s+=rect(x,16,65,5,'#080c0f')+rect(x+1,17,63,3,x<90?'#471c26':'#073e4b');
+ for(const x of [24,101]) s+=rect(x,16,65,5,'#080c0f')+rect(x+1,17,63,3,x<90?'#471c26':'#18272b');
  s+=rect(4,24,182,6,'#17191a')+rect(4,24,182,1,'#806944')+rect(5,26,180,2,'#183123')+rect(5,29,180,1,'#392d21');
  if(active){
   const cards=[{name:'SIGNATURE',binding:'left',icon:1},{name:'UTILITY',binding:'right',icon:2},{name:'MOBILITY',binding:'double-f',icon:0}];
@@ -162,8 +198,8 @@ function panel(active){
 (async()=>{
  await sharp(Buffer.from(svg(50,15,resourceTypes.map((type,i)=>resourceIcon(type,i*10,0)).join(''))))
   .png().toFile(path.join(textures,'resource_icons.png'));
- // Each 32x42 glyph contains the diamond and its F badge. Drawing them as
- // one overlay keeps the key above the dynamic XP strip, clear of the hotbar.
+ // Keep the diamond's existing 32x42 cells and origin; the animated F badge
+ // now has its own glyph so its active color does not duplicate every XP pose.
  // Crop at row 9 so the rim projects three pixels above the panel. Preserve
  // the glyph origin and remap the runtime's 29 progress frames onto 19 fill rows.
  const diamondCut=9, fillTop=diamondCut+2, fillBottom=30;
@@ -179,20 +215,15 @@ function panel(active){
    if(yy===diamondCut) color='#241a12';
    else if(yy===diamondCut+1 && distance<=15) color='#edcc82';
    else if(distance<=14 && yy>=fillStart)
-    color=liquidColor(yy===fillStart?'#d8b760':'#916b24',xx,yy,frame,yy===fillStart);
+    color=experienceColor(xx,yy,frame,fillStart);
    diamonds+=rect(ox+xx,oy+yy,1,1,color);
   }
-  // Flat, clipped-corner badge with one border row and tight letter padding.
-  diamonds+=rect(ox+13,oy+34,6,7,'#f8faf9')
-   +rect(ox+12,oy+35,8,5,'#f8faf9')
-   +rect(ox+13,oy+35,6,5,'#dce1e0');
-  ['1111','1000','1110','1000','1000'].forEach((row,y)=>[...row].forEach((v,x)=>{
-   if(v==='1') diamonds+=rect(ox+14+x,oy+35+y,1,1,'#505b5e');
-  }));
  }
  await sharp(Buffer.from(svg(256,168,diamonds))).png()
   .toFile(path.join(textures,frame===0?'class_diamond.png':`class_diamond_${frame}.png`));
  }
+ await sharp(Buffer.from(svg(64,7,Array.from({length:8},(_,i)=>keyBadge(i*8,0,i>=4,i%4)).join(''))))
+  .png().toFile(path.join(textures,'f_badges.png'));
  await sharp(Buffer.from(svg(60,16,text('0123456789',0,0,'#ffffff')))).png().toFile(path.join(textures,'class_level.png'));
  for(const [name,active] of [['gray',false],['red',true]]){
   let body=panel(active);
@@ -202,13 +233,17 @@ function panel(active){
  }
  const alphabet='0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
  await sharp(Buffer.from(svg(alphabet.length*6,7,text(alphabet,0,0,'#ffffff')))).png().toFile(path.join(textures,'text.png'));
- // Sixteen one-pixel columns form a repeating wave. Runtime shifts the
- // selected columns by four pixels for each of the four animation frames.
- for(const [name,color,h] of [['health','#ed3f57',3],['resource','#16cbe4',3],['xp','#74b941',2]]) {
+ // Four poses of sixteen one-pixel columns; runtime mirrors energy sampling.
+ const strips=[['health','#ed3f57',3],['resource_resolve','#dcad4b',3],
+  ['resource_fury','#ee6235',3],['resource_focus','#5bb765',3],
+  ['resource_grace','#e7d7a4',3],['resource','#16cbe4',3],['xp','#74b941',2]];
+ for(const pose of liquidPoses) for(const row of pose)
+  if(row.length!==16) throw new Error('Liquid pose must contain sixteen columns');
+ for(const [name,color,h] of strips) {
   let strip='';
-  for(let x=0;x<16;x++) for(let y=0;y<h;y++)
-   strip+=rect(x,y,1,1,liquidColor(color,x,y,0,y===0));
-  await sharp(Buffer.from(svg(16,h,strip))).png().toFile(path.join(textures,name+'.png'));
+  for(let phase=0;phase<4;phase++) for(let x=0;x<16;x++) for(let y=0;y<h;y++)
+   strip+=rect(phase*16+x,y,1,1,stripColor(color,x,y,phase,name==='xp'));
+  await sharp(Buffer.from(svg(64,h,strip))).png().toFile(path.join(textures,name+'.png'));
  }
  for(let y=-16;y<=16;y++){
   const bitmap=(file,height,ascent,chars)=>{
@@ -218,8 +253,8 @@ function panel(active){
   const chars=(base,length)=>Array.from({length},(_,i)=>String.fromCodePoint(base+i)).join('');
   const providers=[{type:'space',advances:{'\ue100':1,'\ue101':-1}},
     bitmap('gray',54,-11,'\ue000'),bitmap('red',54,-11,'\ue001'),
-    bitmap('text',7,-18,alphabet),
-    bitmap('health',3,-28,chars(0xe600,16)),bitmap('resource',3,-28,chars(0xe620,16)),bitmap('xp',2,-37,chars(0xe640,16))];
+    bitmap('text',7,-18,alphabet),bitmap('f_badges',7,-33,chars(0xe520,8))];
+  strips.forEach(([name,,height],i)=>providers.push(bitmap(name,height,name==='xp'?-37:-28,chars(0xe800+i*64,64))));
   providers.push(bitmap('class_level',16,-14,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
   providers.push(bitmap('resource_icons',15,-16,resourceTypes.map((_,i)=>String.fromCodePoint(0xe500+i)).join('')));
   for(let frame=0;frame<4;frame++) {
