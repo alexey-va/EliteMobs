@@ -184,7 +184,7 @@ function skillBinding(binding,x,y) {
 function frame(x,y,w,h,active=false){return rect(x,y,w,h,'#181611')+rect(x,y,w,1,active?'#f6d07b':'#9d8154')+rect(x,y,1,h,active?'#d9ae5b':'#79613e')+rect(x+1,y+1,w-2,h-2,'#4b3725')+rect(x+2,y+2,w-4,h-4,'#121b20')+rect(x+2,y+2,w-4,1,'#263237')+rect(x+1,y+h-2,w-2,1,'#2d241c');}
 function heart(x,y){return `<g transform="translate(${x} ${y})">`+poly('0,2 2,0 4,0 6,2 8,0 10,0 12,2 12,6 6,12 0,6','#681f28')+poly('1,2 2,1 4,1 6,3 8,1 10,1 11,2 11,5 6,10 1,5','#ec364c')+rect(2,2,2,3,'#ff8c95')+rect(8,2,2,1,'#ff6575')+`</g>`;}
 function crystal(x,y){return `<g transform="translate(${x} ${y})">`+poly('5,0 10,5 10,11 5,15 0,11 0,5','#074854')+poly('5,1 9,5 9,10 5,13 1,10 1,5','#12bed7')+poly('5,1 5,13 2,9 2,5','#78eeef')+poly('6,3 8,5 8,9 6,11','#0086b9')+rect(4,3,1,7,'#c0ffff')+`</g>`;}
-// Order is the explicit U+E500..E504 contract in CombatHudProbe.resourceIcon.
+// Order is the explicit U+E500..E504 contract in CombatHud.resourceIcon.
 const resourceTypes=['resolve','fury','focus','grace','mana'];
 function resourceIcon(type,x,y) {
  if(type==='mana') return crystal(x,y);

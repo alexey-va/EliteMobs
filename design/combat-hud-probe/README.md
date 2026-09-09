@@ -1,9 +1,15 @@
 # Combat HUD live concept
 
-Copy `mods` into `plugins/EliteMobs/resource_pack/`, then rebuild and send the
-ResourcePackManager pack. This is an opt-in Java-client calibration pack, kept
-separate from the exported defaults so the artist can replace its two textures.
-It is not automatically exported by the plugin jar.
+The HUD appears automatically while experimental combat is active in an
+EliteMobs-managed world. It follows the existing combat lifecycle for world
+changes, reconnects, reloads and disabling the mode. Outside that scope the
+ordinary action-bar messages resume. No manual HUD command or per-player
+activation state remains.
+
+Gradle includes the generated `mods` assets under `em_rsp_defaults` in the jar.
+The existing checksum-based resource-pack exporter installs them automatically;
+ResourcePackManager distributes the merged pack. Java clients need that pack
+to render the glyphs. This does not establish Bedrock rendering support.
 
 The wood/brass concept occupies exactly 190 by 54 GUI pixels. `gray.png` and
 `red.png` retain their calibration filenames, but now contain the normal and
@@ -16,7 +22,7 @@ rectangles in a separate `calibration` output folder.
 The probe renders real health, class-resource amount, and vanilla XP progress.
 Health/resource bars update from those same values. The skill cards select
 class-specific placeholder artwork. Armor, hunger and conditional vital rows
-are covered by this opt-in experiment; it is not a replacement production HUD.
+are covered by this experimental combat HUD.
 Fonts are `elitemobs:combat_hud_concept_0` through `_32`; the default font is untouched.
 
 Resource icons are a separate dynamic glyph at x=171, y=5, in a 10x15 cell.
@@ -48,15 +54,9 @@ Resolve, Fury, Focus, Grace, Mana, XP. Each group contains four sixteen-column
 poses. The separate F badge atlas uses U+E520 through U+E527: four neutral
 pulse frames, then four green active frames. Its 8x7 cells advance nine pixels.
 
-```
-/em hudprobe show magmaguy 0 0
-/em hudprobe show magmaguy 0 -2
-/em hudprobe off magmaguy
-```
-
-The coordinates are offsets in GUI pixels. Positive x moves right and positive
-y moves down. Accepted ranges are x=-64..64 and y=-16..16. They apply identically
-to both colors. A class must be active and its skill controls enabled; pressing
+The runtime uses the centered, zero-offset font variant. Other generated
+variants remain as art calibration assets. A class must be active and its
+skill controls enabled for the skill-selection window; pressing
 F shows the three skill cards for the actual ability-selection window, then the hotbar again.
 The existing F,F, F+LMB and F+RMB bindings keep working.
 Signature and Utility show a green F badge + a mouse pictogram with the left or right button
@@ -81,10 +81,10 @@ The existing class badge projects four pixels above the panel, two pixels
 higher than its previous position. Its baked lettering remains pending the
 choice of a localizable font positioning mechanism.
 
-The probe temporarily replaces EliteMobs' action-bar output for that player.
-Turning it off restores ordinary messages. Logout, plugin shutdown and restart
-discard the probe. It does not alter inventories, item packets, game mode, or
-key bindings. Other plugins can still write to the same action-bar channel.
+The HUD uses EliteMobs' existing action-bar compositor. Transient feedback
+appears above the panel and uses its extended reading time. It does not alter
+inventories, item packets, game mode, or key bindings. Other plugins can still
+write to the same action-bar channel.
 
 ## Geometry and acceptance
 
