@@ -8,7 +8,7 @@ local function steed_charge(c,player)
   if distance<.1 then return end
   local steed=c.world:spawn_custom_boss_at_location('class_trial_steed.yml',origin,
     {level=c.boss.level,add_as_reinforcement=true,silent=true})
-  if not steed then return end
+  assert(steed,'Summoned steed could not spawn')
   if not c.boss:set_mount(steed) then steed:remove_elite(); return end
   c.boss:play_sound_at_self('ENTITY_HORSE_AMBIENT',.6,.9)
   local elapsed,task=0,nil
