@@ -163,8 +163,8 @@ function placeholderStamp() {
 function mouseButton(button,x,y) {
  const colors={o:'#899599',b:'#38444b',c:'#dce4e4',
   L:button==='left'?'#ffc36b':'#4e5b62',R:button==='right'?'#ffc36b':'#4e5b62'};
- const rows=['..ooooo..','.oLLcRRo.','oLLLcRRRo','oLLLcRRRo',
-  'ooooooooo','obbbbbbbo','.obbbbbo.','..ooooo..'];
+ const rows=['...ooooo...','..oLLcRRo..','.oLLLcRRRo.','oLLLLcRRRRo','oLLLLcRRRRo',
+  'ooooooooooo','obbbbbbbbbo','obbbbbbbbbo','.obbbbbbbo.','..ooooooo..'];
  let s='';
  rows.forEach((row,yy)=>[...row].forEach((pixel,xx)=>{
   if(pixel!=='.') s+=rect(x+xx,y+yy,1,1,colors[pixel]);
@@ -172,10 +172,14 @@ function mouseButton(button,x,y) {
  return s;
 }
 function skillBinding(binding,x,y) {
- const first=keyBadge(x,y+1,true);
- if(binding==='double-f') return first+poly(`${x+11},${y+2} ${x+14},${y+4} ${x+11},${y+6}`,'#add9e4')
-  +keyBadge(x+17,y+1,true);
- return first+smallText('+',x+10,y+2,'#add9e4')+mouseButton(binding,x+16,y);
+ const badge=(bx,pressed)=>rect(bx+1,y,8,9,pressed?'#9beca3':'#f8faf9')
+  +rect(bx,y+1,10,7,pressed?'#9beca3':'#f8faf9')
+  +rect(bx+1,y+1,8,7,pressed?'#439b58':'#dbe1df')
+  +smallText('F',bx+3,y+2,pressed?'#f0fff2':'#435158');
+ const first=badge(x,true);
+ if(binding==='double-f') return first+poly(`${x+13},${y+2} ${x+16},${y+4} ${x+13},${y+6}`,'#add9e4')
+  +badge(x+20,false);
+ return first+smallText('+',x+13,y+2,'#add9e4')+mouseButton(binding,x+20,y);
 }
 function frame(x,y,w,h,active=false){return rect(x,y,w,h,'#181611')+rect(x,y,w,1,active?'#f6d07b':'#9d8154')+rect(x,y,1,h,active?'#d9ae5b':'#79613e')+rect(x+1,y+1,w-2,h-2,'#4b3725')+rect(x+2,y+2,w-4,h-4,'#121b20')+rect(x+2,y+2,w-4,1,'#263237')+rect(x+1,y+h-2,w-2,1,'#2d241c');}
 function heart(x,y){return `<g transform="translate(${x} ${y})">`+poly('0,2 2,0 4,0 6,2 8,0 10,0 12,2 12,6 6,12 0,6','#681f28')+poly('1,2 2,1 4,1 6,3 8,1 10,1 11,2 11,5 6,10 1,5','#ec364c')+rect(2,2,2,3,'#ff8c95')+rect(8,2,2,1,'#ff6575')+`</g>`;}
@@ -217,6 +221,12 @@ function resourceIcon(type,x,y) {
  return `<g transform="translate(${x} ${y})">${s}</g>`;
 }
 function iconSlot(x,y){return rect(x,y,15,15,'#080e13')+rect(x+1,y+1,13,13,'#203239');}
+const bindings=['left','right','double-f'];
+function skillCard(index,x,y,unaffordable=false) {
+ return frame(x,y,60,21,true)
+  +(unaffordable?rect(x+2,y+2,56,17,'#401e25')+rect(x+2,y+2,56,1,'#69333b'):'')
+  +iconSlot(x+2,y+3)+skillBinding(bindings[index],x+22,y+2);
+}
 function panel(active){
  let s=rect(0,0,190,54,'#211c17')+rect(1,1,188,52,'#503925');
  for(let y=2;y<54;y+=3) for(let x=2;x<188;x+=13) s+=rect(x,y,5+((x*7+y)%7),1,(x+y)%2?'#62472d':'#352a20');
@@ -225,8 +235,7 @@ function panel(active){
  for(const x of [24,101]) s+=rect(x,16,65,5,'#080c0f')+rect(x+1,17,63,3,x<90?'#471c26':'#18272b');
  s+=rect(4,24,182,6,'#17191a')+rect(4,24,182,1,'#806944')+rect(5,26,180,2,'#183123')+rect(5,29,180,1,'#392d21');
  if(active){
-  const cards=[{name:'SIGNATURE',binding:'left'},{name:'UTILITY',binding:'right'},{name:'MOBILITY',binding:'double-f'}];
-  cards.forEach((card,i)=>{const x=4+i*61;s+=frame(x,32,60,21,true)+iconSlot(x+2,35)+smallText(card.name,x+19,35,'#eee4cb')+skillBinding(card.binding,x+19,42);});
+  bindings.forEach((_,i)=>s+=skillCard(i,4+i*61,32));
  } else {
   // The whole vanilla hotbar remains visible, including item counts and selected-slot border.
   s+=`<rect x="3" y="31" width="184" height="23" fill="black"/>`;
@@ -235,6 +244,15 @@ function panel(active){
  return s;
 }
 (async()=>{
+ for(let i=0;i<3;i++) await sharp(Buffer.from(svg(60,21,skillCard(i,0,0,true))))
+  .png().toFile(path.join(textures,`skill_unaffordable_${i}.png`));
+ const numerals=['111101101101111','010110010010111','111001111100111','111001111001111',
+  '101101111001001','111100111001111','111100111101111','111001001001001','111101111101111','111101111001111'];
+ for(const [name,color] of [['ready','#8ee99b'],['unaffordable','#ff8c92']]) {
+  let pixels='';
+  numerals.forEach((rows,i)=>[...rows].forEach((bit,p)=>{if(bit==='1') pixels+=rect(i*3+p%3,Math.floor(p/3),1,1,color);}));
+  await sharp(Buffer.from(svg(30,5,pixels))).png().toFile(path.join(textures,`cost_${name}.png`));
+ }
  fs.mkdirSync(path.join(textures, 'abilities'), {recursive:true});
  fs.mkdirSync(path.join(textures, 'class_badges'), {recursive:true});
  for(const badge of classBadges) {
@@ -318,8 +336,11 @@ function panel(active){
   strips.forEach(([name,,height],i)=>providers.push(bitmap(name,height,name==='xp'?-37:-28,chars(0xe800+i*64,64))));
   providers.push(bitmap('class_level',16,-14,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
   providers.push(bitmap('resource_icons',15,-16,resourceTypes.map((_,i)=>String.fromCodePoint(0xe500+i)).join('')));
+  providers.push(bitmap('resource_icons',7,-55,chars(0xe540,5)));
+  providers.push(bitmap('cost_ready',5,-57,chars(0xe700,10)),bitmap('cost_unaffordable',5,-57,chars(0xe710,10)));
+  bindings.forEach((_,i)=>providers.push(bitmap(`skill_unaffordable_${i}`,21,-43,String.fromCodePoint(0xe680+i))));
   for (const badge of classBadges)
-   providers.push(bitmap(`class_badges/${badge.id}`,9,-9,String.fromCodePoint(badge.glyph)));
+   providers.push(bitmap(`class_badges/${badge.id}`,9,-7,String.fromCodePoint(badge.glyph)));
   for (const entry of abilityIcons)
    providers.push(bitmap(`abilities/${entry.id}`,13,-47,String.fromCodePoint(entry.glyph)));
   for(let frame=0;frame<4;frame++) {

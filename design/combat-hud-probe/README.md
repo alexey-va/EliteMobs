@@ -14,8 +14,8 @@ offset fonts with `sharp`. `generate-calibration.py` retains the old half-opacit
 rectangles in a separate `calibration` output folder.
 
 The probe renders real health, class-resource amount, and vanilla XP progress.
-Health/resource bars update from those same values. Skill labels/icons are a
-visual concept, not class-specific art. Armor, hunger and conditional vital rows
+Health/resource bars update from those same values. The skill cards select
+class-specific placeholder artwork. Armor, hunger and conditional vital rows
 are covered by this opt-in experiment; it is not a replacement production HUD.
 Fonts are `elitemobs:combat_hud_concept_0` through `_32`; the default font is untouched.
 
@@ -61,9 +61,25 @@ F shows the three skill cards for the actual ability-selection window, then the 
 The existing F,F, F+LMB and F+RMB bindings keep working.
 Signature and Utility show a green F badge + a mouse pictogram with the left or right button
 highlighted in amber. The inactive button stays gray; no LMB/RMB lettering is
-needed. Mobility shows two green F badges separated by an arrow. All F badges
-in the skill cards are green while the selection layer is active; the central
-badge switches to the same green treatment for that window.
+needed. Mobility shows a green F followed by a white F, separated by an arrow.
+Green indicates the first input has already been pressed; white is the next
+input. The central badge switches to green for the selection window.
+
+Cards appear in Signature, Utility, Mobility order, without printed slot names.
+Each 60x21 card has its 13x13 ability image at x+3,y+4, input graphics at
+x+22,y+2, and the resource icon and cost beneath them at y+12 and y+14.
+The cost uses the casting calculation, including passive modifiers, rounded
+up for display. Affordability uses the exact unrounded cost and the casting
+controller's tolerance. Green numerals mean enough energy; red numerals and
+a dark red card mean insufficient energy. This is an energy indicator, not
+a promise that targeting or other activation requirements will succeed.
+Unavailable cards replace only their own background before the icon and cost
+are drawn. Their glyphs are U+E680..E682; green/red cost digits use U+E700..E709
+and U+E710..E719. The five small resource icons use U+E540..E544.
+
+The existing class badge projects four pixels above the panel, two pixels
+higher than its previous position. Its baked lettering remains pending the
+choice of a localizable font positioning mechanism.
 
 The probe temporarily replaces EliteMobs' action-bar output for that player.
 Turning it off restores ordinary messages. Logout, plugin shutdown and restart
