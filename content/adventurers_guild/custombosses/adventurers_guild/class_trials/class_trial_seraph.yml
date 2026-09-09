@@ -9,14 +9,9 @@ mainHand: IRON_SPEAR
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_seraph.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: seraph
-  title: The Reach of Mercy
-  power: class_trial_seraph.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: Mercy travels from one person to the next. Watch what joins them.
-    halfway: I will begin from the other side. Follow the notes.
-    victory: You understood the distance between each act of care.
-    defeat: The middle thread was holding the whole chain together.

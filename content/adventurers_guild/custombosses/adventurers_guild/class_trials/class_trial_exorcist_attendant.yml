@@ -1,0 +1,9 @@
+extends: class_trial_cleric_acolyte.yml
+isEnabled: true
+name: '&fPenitent Attendant'
+healthMultiplier: 0.6
+damageMultiplier: 0.2
+mainHand: IRON_SWORD
+chestplate: CHAINMAIL_CHESTPLATE
+leggings: CHAINMAIL_LEGGINGS
+boots: CHAINMAIL_BOOTS

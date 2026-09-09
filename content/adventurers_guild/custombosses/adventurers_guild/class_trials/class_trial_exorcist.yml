@@ -9,14 +9,9 @@ mainHand: MACE
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_exorcist.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: exorcist
-  title: Mercy Beyond the Strike
-  power: class_trial_exorcist.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: This strike is meant to bring relief. You may deny it that purpose.
-    halfway: Watch where I return after making space.
-    victory: You saw the help behind the harm, and answered both.
-    defeat: Stepping outside the stroke would also have stopped the healing.

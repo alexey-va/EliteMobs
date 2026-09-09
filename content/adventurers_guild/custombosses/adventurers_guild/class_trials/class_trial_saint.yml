@@ -9,14 +9,9 @@ mainHand: TRIDENT
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_saint.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: saint
-  title: Hope Is Not Endless
-  power: class_trial_saint.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: Hope is precious. We must make room for it to work.
-    halfway: There is still someone to stand beside. Watch my approach.
-    victory: You respected the moment without being ruled by it. Well done.
-    defeat: The candle sustained the ground. You could have quieted it.

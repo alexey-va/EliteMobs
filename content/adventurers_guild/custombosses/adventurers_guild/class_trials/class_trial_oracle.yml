@@ -9,14 +9,9 @@ mainHand: TRIDENT
 chestplate: LEATHER_CHESTPLATE:EEE4CC
 leggings: LEATHER_LEGGINGS:EEE4CC
 boots: LEATHER_BOOTS:EEE4CC
+powers:
+  - class_trial_oracle.lua
+ai: true
+cullReinforcements: true
 classTrial:
   class: oracle
-  title: See the Rescue Coming
-  power: class_trial_oracle.lua
-  actors:
-    HUSK: class_trial_actor_cleric_partner.yml
-  voice:
-    opening: Seeing danger coming does not make every answer the right one.
-    halfway: You can see my preparation too. Choose what you want it to answer.
-    victory: You made the future less certain by choosing well in the present.
-    defeat: You did not have to break the ward before turning your attention to me.
