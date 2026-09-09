@@ -1,5 +1,10 @@
 # Cleric branch encounters
 
+> Historical design sketch. The current ordinary YAML/Lua implementation and
+> ownership contract are documented in [class-trial-runtime.md](class-trial-runtime.md).
+> Mechanics requiring private trial APIs were redesigned; this document is not
+> an implementation contract or evidence that those APIs exist.
+
 Designs under [the shared contract](class-trial-encounters.md), not implemented
 content. These remain solo duels: attendants are encounter-owned sparring
 partners on the trial boss's side. No unlocked healing ability is required to

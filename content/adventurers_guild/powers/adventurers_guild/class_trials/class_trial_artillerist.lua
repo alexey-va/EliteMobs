@@ -1,44 +1,76 @@
--- @include shared.inc
--- @include mobility/ranger.inc
--- @include abilities/ranger.inc
+-- @include ground_markers.inc
+-- @include mobility/windstep.inc
+-- @include abilities/arrow_lanes.inc
 
-local function cache(c,s)
- local p
- return {T.wait(36,function(c,s) p=T.offset(c.trial:position(),2,0,0); T.sound(c,'BLOCK_BARREL_OPEN',.8) end,
-  function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,.8),T.gold) end end,
-  function(c,s) c.trial:remove_actor('cache'); if R.prop(c,s,'cache',p,2,'&eAmmunition Cache','BARREL') then s.cache=p; s.cacheUntil=s.tick+160 end end),T.rest(20)}
-end
-local function reload(c,s)
- return {T.wait(40,function(c,s) s.reloading=true; s.pressure=0; T.sound(c,'ITEM_CROSSBOW_LOADING_START',.7) end,
-  function(c,s,t)
-   if not c.trial:actor('cache') or T.distance(c.trial:position(),s.cache)>3 then s.reloading=false; s.quickLoaded=false; T.interrupt(c,s,{T.rest(50,1.2)}); return end
-   if t%8==0 then T.tether(c,c.trial:position(),s.cache,T.gold); T.sound(c,'ITEM_CROSSBOW_LOADING_MIDDLE',.7+t/50) end
-  end,function(c,s) s.reloading=false; s.quickLoaded=true; T.sound(c,'ITEM_CROSSBOW_LOADING_END',1.3) end),T.rest(30)}
-end
-local function burst(c,s)
- local group=R.group(s,'repeater'); local seq={}; local recovery=s.quickLoaded and 40 or 60; s.quickLoaded=false
- for i=1,4 do T.append(seq,R.draw(c,s,{warn=i==1 and 32 or 13,lock=7,damage=.35,cap=1.05,group=group,turnLimit=i>1 and 35 or nil,releaseOnly=true,speed=1.1})) end
- T.append(seq,{R.flight(group,48),T.rest(recovery)})
- return seq
-end
-return T.encounter{
- init=function(c,s) R.init(c,s,true); s.cacheUntil=0 end,
- passive=function(c,s)
-  R.passive(c,s)
-  if s.cacheUntil>s.tick then
-   if not c.trial:actor('cache') then s.cacheUntil=0; s.quickLoaded=false; if s.reloading then s.reloading=false; c.trial:say('Supply cut. You bought yourself time.'); T.interrupt(c,s,{T.rest(50,1.2)}) end
-   elseif s.tick%8==0 then T.draw(c,T.circle(s.cache,.8),T.gold) end
-  elseif s.cache then c.trial:remove_actor('cache'); s.cache=nil; s.quickLoaded=false end
- end,
- damaged=function(c,s)
-  if c.trial:damaged_actor()=='boss' and s.reloading then s.pressure=s.pressure+c.event.damage_amount
-   if s.pressure>=2*c.trial.matched_hit then s.reloading=false; s.quickLoaded=false; c.trial:say('The mechanism can wait. You did not.'); T.interrupt(c,s,{T.rest(50,1.2)}) end
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextCache=40; s.nextBurst=170
+   player:send_message('&6Artillerist Instructor: &fFour bolts. That cache keeps them coming. You may wish to do something about it.')
+  end
+  if s.cache and (not s.cache:is_alive() or s.tick>=s.cacheUntil) then
+   if s.cache:is_alive() then s.cache:remove_elite() end
+   s.cache=nil; s.quickLoaded=false
+   if s.reloadAt then
+    s.reloadAt=nil; s.busyUntil=s.tick+50; s.exposedUntil=s.tick+50
+    player:send_message('&6Artillerist Instructor: &fSupply cut. You bought yourself time.')
+   end
+  end
+  if s.plantAt then
+   if s.tick%4==0 then show_circle(c,s.cacheZone,240,210,130) end
+   if s.tick>=s.plantAt then
+    s.plantAt=nil; s.cache=c.world:spawn_custom_boss_at_location('class_trial_ammunition_cache.yml',s.cachePosition,
+     {level=c.boss.level,add_as_reinforcement=true,silent=true})
+    assert(s.cache,'Artillerist cache could not spawn')
+    s.cacheUntil=s.tick+200; s.reloadAt=s.tick+40; s.pressure=0
+   end
+   return
+  end
+  if s.reloadAt then
+   if s.tick%8==0 then show_circle(c,s.cacheZone,240,210,130); c.boss:play_sound_at_self('ITEM_CROSSBOW_LOADING_MIDDLE',.5,1) end
+   if s.tick>=s.reloadAt then s.reloadAt=nil; s.quickLoaded=true; s.busyUntil=s.tick+30 end
+   return
+  end
+  if s.fireAt then
+   if s.tick<s.lockAt then s.aim=player:get_eye_location(); c.boss:face_direction_or_location(s.aim) end
+   if s.tick%4==0 then arrow_lanes(c,s.aim,{0},1.1,false) end
+   if s.tick>=s.fireAt then
+    arrow_lanes(c,s.aim,{0},1.1,true); s.bolt=s.bolt+1
+    if s.bolt>4 then s.fireAt=nil; s.busyUntil=s.tick+110; s.exposedUntil=s.tick+110
+    else s.aim=player:get_eye_location(); s.fireAt=s.tick+s.cadence; s.lockAt=s.tick+s.cadence-7 end
+   end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; windstep(c,player,s.tick); s.busyUntil=s.tick+30
+   player:send_message('&6Artillerist Instructor: &fCount them. The fourth is still part of the lesson.'); return
+  end
+  if s.tick>=s.nextCache and not s.cache then
+   s.nextCache=s.tick+520; local q=c.boss:get_location()
+   s.cachePosition={world=q.world,x=q.x+2,y=q.y,z=q.z}; s.cacheZone=ground_circle(c,s.cachePosition,.8)
+   s.plantAt=s.tick+36; c.boss:play_sound_at_self('BLOCK_BARREL_OPEN',.5,.8)
+  elseif s.tick>=s.nextBurst then
+   s.nextBurst=s.tick+320; s.bolt=1; s.cadence=s.quickLoaded and 13 or 18; s.quickLoaded=false
+   s.aim=player:get_eye_location(); s.fireAt=s.tick+34; s.lockAt=s.tick+24
+   c.boss:play_sound_at_self('ITEM_CROSSBOW_LOADING_START',.6,.7)
   end
  end,
- choose=function(c,s)
-  if s.phasePending and c.trial:actor('cache') and T.ready(s,'step') then s.phasePending=false; local seq=M.move(c,s,s.cache); T.append(seq,reload(c,s)); T.lockout(seq,'reload',520); T.start(c,s,'step',seq,M.cooldown)
-  elseif s.cacheUntil<=s.tick and T.ready(s,'cache') then local seq=cache(c,s); T.append(seq,reload(c,s)); T.start(c,s,'cache',seq,520)
-  elseif T.ready(s,'burst') then T.start(c,s,'burst',burst(c,s),320)
-  else R.basic(c,s) end
- end
+ on_player_damaged_by_boss=function(c) if c.event.projectile then c.event.multiply_damage_amount(.25) end end,
+ on_boss_damaged_by_player=function(c)
+  if c.event.is_damage_transfer then return end
+  local s=c.state
+  if s.reloadAt then
+   s.pressure=s.pressure+c.event.get_damage_amount()
+   if s.pressure>=c.boss:get_maximum_health()*.035 then
+    s.reloadAt=nil; s.quickLoaded=false; s.busyUntil=s.tick+50; s.exposedUntil=s.tick+50
+    c.boss:send_message('&6Artillerist Instructor: &fThe mechanism can wait. You did not.',24)
+   end
+  end
+  if (s.exposedUntil or 0)>(s.tick or 0) then c.event.multiply_damage_amount(1.2) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Artillerist Instructor: &fYou counted the bolts and broke the supply. Nicely done.',24) end
 }

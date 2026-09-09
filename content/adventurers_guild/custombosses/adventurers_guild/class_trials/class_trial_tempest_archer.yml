@@ -9,14 +9,8 @@ mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_tempest_archer.lua
+cullReinforcements: true
 classTrial:
   class: tempest_archer
-  title: The Returning Wind
-  power: class_trial_tempest_archer.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: Two crosswinds. Read the gap before you move.
-    halfway: Watch my footing. The second volley comes from a new angle.
-    victory: You found the quiet air between the flights.
-    defeat: You dodged the first wind and forgot to read the second.

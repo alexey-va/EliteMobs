@@ -9,14 +9,8 @@ mainHand: CROSSBOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_saboteur.lua
+cullReinforcements: true
 classTrial:
   class: saboteur
-  title: The Second Warning
-  power: class_trial_saboteur.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: A bolt can finish its flight before it finishes its work.
-    halfway: You noticed the fuse. Keep a way out before it starts.
-    victory: You answered both warnings. That is how you outlive a trap.
-    defeat: The impact was the first warning. The fuse was the second.

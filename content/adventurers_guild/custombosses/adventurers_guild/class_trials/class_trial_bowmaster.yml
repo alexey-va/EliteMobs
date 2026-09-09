@@ -9,14 +9,8 @@ mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_bowmaster.lua
+cullReinforcements: true
 classTrial:
   class: bowmaster
-  title: One Flight, One Line
-  power: class_trial_bowmaster.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: Each target steadies another arrow. Break my rhythm, or read the spread.
-    halfway: Fresh targets. Show me which lesson you kept.
-    victory: You narrowed the spread before choosing your opening.
-    defeat: Those paper targets were helping my aim. Try tearing one down.

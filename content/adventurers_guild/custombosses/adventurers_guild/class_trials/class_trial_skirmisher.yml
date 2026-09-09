@@ -9,14 +9,8 @@ mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_skirmisher.lua
+cullReinforcements: true
 classTrial:
   class: skirmisher
-  title: Across the Fan
-  power: class_trial_skirmisher.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: Do not follow the bow. Read where the feet are taking it.
-    halfway: Other side. Keep your crossing in mind.
-    victory: You crossed my route before my aim could cross yours.
-    defeat: You followed the fan instead of cutting across its path.

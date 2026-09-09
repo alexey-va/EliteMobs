@@ -1,54 +1,57 @@
--- @include shared.inc
--- @include mobility/ranger.inc
--- @include abilities/ranger.inc
+-- @include ground_markers.inc
+-- @include mobility/windstep.inc
+-- @include abilities/arrow_lanes.inc
+-- @include abilities/powder_charge.inc
 
-local function marker(c,s)
- local p
- return {T.wait(30,function(c,s) p=T.copy(c.trial.player:get_location()); T.sound(c,'BLOCK_ANVIL_PLACE',1.4) end,
-  function(c,s,t) if t%4==0 then T.draw(c,T.circle(p,1.5)) end end,
-  function(c,s) s.marker=p; s.markerUntil=s.tick+120; s.markerSpent=false end),T.rest(20)}
-end
-local function cluster(c,s)
- local impact; local charges={}; local budget={spent=0,cap=1.2}; local blastSpent=0
- local seq,group=R.draw(c,s,{warn=36,lock=14,damage=.25,cap=1.2,releaseOnly=true})
- T.append(seq,{R.flight(group,48,function(c,s,result) impact=result; budget.spent=c.trial:group_damage(group) end),
- T.wait(65,function(c,s)
-  if not impact then return end
-  local center=c.trial:ground(impact.location); if not center then return end
-  local facing=T.rotate(center,c.trial:position(),s.phase==2 and 60 or 0,4)
-  for i,angle in ipairs({0,120,240}) do
-   local id='charge_'..i; local p=T.rotate(center,facing,angle,4); c.trial:remove_actor(id)
-   if R.prop(c,s,id,p,1,'&ePowder Canister '..i,'TNT') then
-    local boosted=s.markerUntil>s.tick and not s.markerSpent and T.distance(p,s.marker)<=1.5
-    if boosted then s.markerSpent=true end
-    charges[#charges+1]={id=id,shape=T.circle(p,2),fuse=16+16*i,boosted=boosted,resolved=false}
-    c.trial:actor(id):play_sound_at_self('ENTITY_TNT_PRIMED',.5,boosted and 1.5 or 1)
-   end
+-- Cluster charges land on the committed marked ground. They have separate,
+-- staggered fuses and ordinary destructible bodies, rather than fake impacts.
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextMarker=40; s.nextCluster=140
+   player:send_message('&6Demolitionist Instructor: &fThe bolt is only the beginning. Count the fuses after it lands.')
   end
- end,function(c,s,t)
-  for _,charge in ipairs(charges) do if not charge.resolved then
-   local actor=c.trial:actor(charge.id)
-   if not actor then charge.resolved=true; T.sound(c,'BLOCK_FIRE_EXTINGUISH',1.4)
-   elseif t>=charge.fuse then
-    local amount=math.min(charge.boosted and .45 or .35,math.max(0,1-blastSpent),math.max(0,budget.cap-budget.spent))
-    actor:play_sound_at_self('ENTITY_GENERIC_EXPLODE',.6,1.2)
-    if amount>0 and T.budgetHit(c,s,charge.shape,amount,budget) then blastSpent=blastSpent+amount end
-    charge.resolved=true; c.trial:remove_actor(charge.id)
-   else
-    if t%4==0 then T.draw(c,charge.shape); T.point(c,T.offset(charge.shape.p,0,1+t/charge.fuse,0),charge.boosted and T.gold or T.amber) end
-    if t%16==0 then actor:play_sound_at_self('BLOCK_NOTE_BLOCK_HAT',.4,.8+t/charge.fuse) end
+  if (s.markerUntil or 0)>s.tick and not s.markerSpent and s.tick%5==0 then show_circle(c,s.marker,245,180,70) end
+  if s.markAt then
+   if s.tick%4==0 then show_circle(c,s.marker,245,180,70) end
+   if s.tick>=s.markAt then s.markAt=nil; s.markerUntil=s.tick+180; s.markerSpent=false; s.busyUntil=s.tick+20 end
+   return
+  end
+  if s.fireAt then
+   if s.tick<s.lockAt then s.aim=player:get_eye_location(); s.landing=player:get_location(); c.boss:face_direction_or_location(s.aim) end
+   if s.tick%4==0 then
+    arrow_lanes(c,s.aim,{0},.95,false); show_circle(c,ground_circle(c,s.landing,1.6),245,180,70)
    end
-  end end
- end,function(c,s) for _,charge in ipairs(charges) do c.trial:remove_actor(charge.id) end end),T.rest(70)})
- return seq
-end
-return T.encounter{
- init=function(c,s) R.init(c,s,true); s.markerUntil=0 end,
- passive=function(c,s) R.passive(c,s); if s.markerUntil>s.tick and not s.markerSpent and s.tick%5==0 then T.draw(c,T.circle(s.marker,1.5),T.amber) end end,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'step') then s.phasePending=false; T.start(c,s,'step',M.move(c,s),M.cooldown)
-  elseif T.ready(s,'marker') then T.start(c,s,'marker',marker(c,s),440)
-  elseif T.ready(s,'cluster') then T.start(c,s,'cluster',cluster(c,s),480)
-  else R.basic(c,s) end
- end
+   if s.tick>=s.fireAt then
+    arrow_lanes(c,s.aim,{0},.95,true); s.fireAt=nil; s.busyUntil=s.tick+150
+    local landing=s.landing
+    c.scheduler:run_later(20,function()
+     for i,offset in ipairs({{0,0},{-3.5,2.5},{3.5,2.5}}) do
+      local point={world=landing.world,x=landing.x+offset[1],y=landing.y,z=landing.z+offset[2]}
+      local boost=(s.markerUntil or 0)>s.tick and not s.markerSpent and s.marker:contains(point)
+      if boost then s.markerSpent=true end
+      powder_charge(c,point,16+16*i,boost and .45 or .35)
+     end
+    end)
+   end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; windstep(c,player,s.tick); s.busyUntil=s.tick+30
+   player:send_message('&6Demolitionist Instructor: &fPlenty of room between those canisters. Use it.'); return
+  end
+  if s.tick>=s.nextMarker then
+   s.nextMarker=s.tick+440; s.marker=ground_circle(c,player:get_location(),1.5); s.markAt=s.tick+32
+   c.boss:play_sound_at_self('BLOCK_ANVIL_PLACE',.5,1.4)
+  elseif s.tick>=s.nextCluster then
+   s.nextCluster=s.tick+480; s.fireAt=s.tick+40; s.lockAt=s.tick+24; s.aim=player:get_eye_location(); s.landing=player:get_location()
+   c.boss:play_sound_at_self('ITEM_CROSSBOW_LOADING_START',.6,.7)
+  end
+ end,
+ on_player_damaged_by_boss=function(c) if c.event.projectile then c.event.multiply_damage_amount(.2) end end,
+ on_death=function(c) c.boss:send_message('&6Demolitionist Instructor: &fYou left nothing burning. I appreciate a tidy finish.',24) end
 }

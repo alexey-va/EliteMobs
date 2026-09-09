@@ -9,14 +9,8 @@ mainHand: CROSSBOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_demolitionist.lua
+cullReinforcements: true
 classTrial:
   class: demolitionist
-  title: Spend the Fuse
-  power: class_trial_demolitionist.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: Three fuses. They do not ask for the same answer at once.
-    halfway: The pattern has turned. The order is still there to read.
-    victory: You gave each fuse exactly the attention it deserved.
-    defeat: The first blast was not a reason to run into the second.

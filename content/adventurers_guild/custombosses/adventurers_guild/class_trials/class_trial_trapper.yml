@@ -9,14 +9,8 @@ mainHand: CROSSBOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_trapper.lua
+cullReinforcements: true
 classTrial:
   class: trapper
-  title: Leave Yourself an Exit
-  power: class_trial_trapper.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: Before the first trap closes, know where your exit will be.
-    halfway: You found one route. I have drawn another.
-    victory: You kept an exit, and made one when you needed it.
-    defeat: The anchor was as much a target as I was.

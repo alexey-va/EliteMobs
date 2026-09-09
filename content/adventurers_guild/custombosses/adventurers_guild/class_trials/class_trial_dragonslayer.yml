@@ -9,14 +9,8 @@ mainHand: CROSSBOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_dragonslayer.lua
+cullReinforcements: true
 classTrial:
   class: dragonslayer
-  title: The Braced Heartpiercer
-  power: class_trial_dragonslayer.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: That effigy steadies my shot. Watch the brace before you charge.
-    halfway: Watch the brace. That much force needs a stable line.
-    victory: You understood the shot, and the support it needed.
-    defeat: Break the support while I brace, or step clear when the line settles.

@@ -62,6 +62,12 @@ fireball speed. Do not add unimplemented enchantment labels.
 
 ## Authored class-trial bosses
 
+> Historical checkpoint, superseded by the ordinary YAML/Lua conversion.
+> Private trial runtime and projectile/actor/dialogue adapters mentioned below
+> have been removed. See `class-trial-runtime.md` for current ownership and
+> `content/adventurers_guild/README.md` for the authoring contract. Older deployment
+> observations below refer only to their dated artifacts.
+
 - [x] Read and retain all 75 approved encounters in the linked design documents.
 - [x] Replace the generic player-ability conversion using existing Lua powers.
 - [x] Author shared mobility powers once for the classes that inherit them (syntax compiled; integration and gameplay pending).

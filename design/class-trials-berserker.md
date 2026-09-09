@@ -1,5 +1,10 @@
 # Berserker branch encounters
 
+> Historical design sketch. The current ordinary YAML/Lua implementation and
+> ownership contract are documented in [class-trial-runtime.md](class-trial-runtime.md).
+> Mechanics requiring private trial APIs were redesigned; this document is not
+> an implementation contract or evidence that those APIs exist.
+
 Designs governed by [the shared contract](class-trial-encounters.md), not runtime
 content. Damage is expressed in normalized hits. Each leap has a fixed landing
 marker and the root's recovery; it never automatically follows crowd control.

@@ -1,72 +1,70 @@
 # Adventurer's Guild class trials
 
-These are editable DLC source files owned by the Adventurer's Guild. They are not
-bundled in the plugin JAR and are not regenerated on startup. Merge `custombosses/`
-and `powers/` into the Guild package when preparing its next release. Local test
-servers use these folders under `plugins/EliteMobs/`.
+These editable files belong to the Adventurer's Guild. They are not bundled in
+EliteMobs or regenerated at startup. Package `custombosses/` and `powers/` with
+the Guild. Gribble belongs to the Guild too, even though he opens Goblin Kingdom.
 
-There are 76 instructor YAMLs under `custombosses/adventurers_guild/class_trials/`,
-plus shared boss and actor templates. The disabled `class_trial_base.yml` supplies
-shared defaults through normal boss inheritance. Each enabled instructor declares
-its own name, level, health, appearance, equipment, dialogue and class association.
-All ordinary custom-boss fields remain available. Disabling or removing an
-instructor disables its trial; there is no generated replacement.
-
-For example, edit `class_trial_ranger.yml`:
+The 76 instructors are ordinary custom bosses. Their names, equipment, stats,
+appearance and powers use the same YAML as other dungeon bosses. The disabled
+`class_trial_base.yml` supplies shared defaults through normal inheritance.
 
 ```yaml
 extends: class_trial_base.yml
 isEnabled: true
 name: $bossLevel &6Ranger Instructor
-level: '10'
+level: 10
 healthMultiplier: 10
 mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
+powers:
+- class_trial_ranger.lua
+cullReinforcements: true
 classTrial:
   class: ranger
-  power: class_trial_ranger.lua
-  voice:
-    opening: Watch the bow. Move when I commit, not when I look at you.
-    halfway: You've found the gap. Let's see you find the next one.
-    victory: You read the shot before it left the string. Welcome to the trail.
-    defeat: You tried to outrun the arrow. Make me aim at where you used to be.
 ```
 
-`classTrial.class` associates a boss with a class ID. Duplicate enabled associations,
-missing powers or invalid metadata make the affected trial unavailable and log a
-warning. Admission checks this before charging. Trial entry fees and class prerequisites
-remain progression rules, independent of editable encounter health and equipment.
+`classTrial.class` is only the association used by class enrollment. Exactly one
+enabled instructor must match that class ID, and its level must match the class
+admission level. Removing or disabling the instructor makes the trial unavailable.
+Entry fees, prerequisites, solo admission, arena reservation and class activation
+remain in the existing challenge runner.
 
-`classTrial.power` names a regular Lua power loaded from `powers/`. It is attached
-by the challenge runner with the known challenger and arena context. Do not also
-list that same power in `powers:` on the boss, since that would start it a second
-time without the trial context. Additional ordinary powers can use `powers:` normally.
+Put every power in the ordinary `powers:` list. The normal loader starts its Lua
+runtime, dispatches hooks and closes it when its owner is removed. There is no
+trial scripting context, separate timeline engine or runtime actor registry.
+Powers keep their own cooldowns, channel state and finite healing allowances in
+`c.state`, and use the normal owned `c.scheduler` for delayed work.
 
-`powers/adventurers_guild/class_trials/` holds all 76 Lua timelines. They use
-`-- @include shared.inc` and matching `mobility/` and `abilities/` fragments. Includes
-resolve relative to the source file and must stay within the entry power's directory.
-Cycles, excessive nesting and oversized expanded sources are rejected. `.inc` files
-are shared Lua source, not independently registered powers. Change a movement fragment
-once to update every instructor that includes it.
+Each `.lua` power has an enabled `.yml` sidecar with `powerType: UNIQUE`. This keeps
+instructor powers out of the random natural-elite power pool. Includes are small
+shared abilities or presentation helpers, such as Windstep or Judgment. They are
+relative `.inc` files, not separately registered powers or encounter definitions.
 
-Each Lua power has a same-name YAML sidecar with `isEnabled: true` and
-`powerType: UNIQUE`. The normal Lua loader reads that sidecar's enabled flag,
-classification, effect and cooldowns. Keep these powers UNIQUE so natural elites
-cannot randomly receive a trial timeline. Disabling the power disables its trial.
+Dialogue is authored directly at the relevant ordinary Lua hook or mechanic using
+normal player/boss messages. Opening and phase messages are guarded by power state.
+No separate dialogue configuration or dispatcher is required.
 
-`classTrial.actors` maps Lua actor names such as `WOLF` to normal custom-boss YAMLs.
-Each spawned actor receives the instructor's level. Lua can specify its display name
-and hit budget; the actor template's health multiplier scales that budget. The
-`trialActor.prop` option marks a stationary damageable prop. Prop YAMLs choose their
-own carrier and disguise. Changes never mutate the shared configuration object.
+Companions, mounts and destructible props are normal custom-boss YAML files.
+The power names that filename when spawning it, supplies the instructor's level,
+and sets `add_as_reinforcement=true`. Their health, damage, equipment and AI come
+from their YAML. Props do not use matched-hit budgets or a private prop schema.
+The instructor's `cullReinforcements: true` removes its surviving companions,
+mounts and tracked ordinary projectiles when the run ends. Timed expiry also
+limits projectiles during a fight; it does not replace parent cleanup.
 
-`classTrial.magicWeapon: WAND` or `STAFF` applies FMM weapon presentation at trial
-startup. Such trials require operational FMM magic support. Disguises use ordinary
-boss disguise fields; LibsDisguises is optional, with the configured base mob visible
-when it is absent. The current skins remain staff-editable placeholder presentation.
+Lua uses ordinary zones, native projectile collision, navigation and velocity.
+Damage-sharing powers use the normal reinforcement-damage hook and transfer
+operation. Transfers do not repeat offensive scaling or recursively share again;
+recipient Lua guards still apply. The supplied amount is the damage at that hook,
+not a promise about all later event handlers.
 
-Load changed files through the normal plugin lifecycle when a reload or restart is
-authorized. A running attempt keeps its selected content until cleanup. The arena's
-physical layout, reservation logic, unlock rules and rewards are unchanged here.
+Preparation rejects a missing instructor or inactive required Lua runtime before
+charging. A power failure or rejected mandatory summon during a run ends it and
+refunds the fee. All shipped references are checked statically; arbitrary later
+Lua summon dependencies are not inferred before admission. Inspect console errors
+when adding or disabling content. LibsDisguises is optional: the ordinary boss
+loader shows the configured base entity when it is absent. Missing custom models
+still require their normal model integration to be corrected.
 
-Gribble also belongs to Adventurer's Guild content, despite linking to Goblin Kingdom.
+Load changed files only through an authorized normal reload or restart. Source
+and syntax checks do not establish gameplay, visual or balance acceptance.

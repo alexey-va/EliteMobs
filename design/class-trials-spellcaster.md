@@ -1,5 +1,10 @@
 # Spellcaster branch encounters
 
+> Historical design sketch. The current ordinary YAML/Lua implementation and
+> ownership contract are documented in [class-trial-runtime.md](class-trial-runtime.md).
+> Mechanics requiring private trial APIs were redesigned; this document is not
+> an implementation contract or evidence that those APIs exist.
+
 Authored designs under [the shared contract](class-trial-encounters.md). They
 now have a bundled Lua v0 implementation that compiles. They have not been played or balance-approved. Wands/staffs below mean the canonical
 EliteMobs/FMM weapon representation; a decorative stick plus contact melee is

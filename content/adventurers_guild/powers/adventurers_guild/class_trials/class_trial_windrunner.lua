@@ -1,31 +1,40 @@
--- @include shared.inc
--- @include mobility/ranger.inc
--- @include abilities/ranger.inc
+-- @include mobility/windstep.inc
+-- @include mobility/strafe.inc
+-- @include abilities/arrow_lanes.inc
 
-local function route(c,s)
- local p,points; local progress=0; local group=R.group(s,'strafe')
- local function move(c,s)
-  progress=math.min(100,progress+1); local index=math.min(#points,1+math.floor(progress/5))
-  if T.distance(c.trial:position(),points[index])>.2 and not c.trial:step(points[index],.12,true,true) then
-   c.trial:clear_projectiles(group); T.fizzle(c); T.interrupt(c,s,{T.rest(60)}); s.ready.volley=s.tick+340; return
+return {
+ api_version=1,
+ on_game_tick=function(c)
+  local player=c.boss:get_target_player(); if not player or not player:is_alive() then return end
+  local s=c.state; s.tick=(s.tick or 0)+1
+  if not s.started then
+   s.started=true; s.nextTailwind=60
+   player:send_message('&6Windrunner Instructor: &fThree shots along the run. Each one gives you a fresh cue.')
   end
-  if s.tick%5==0 then for i=1,#points-1 do T.point(c,points[i],R.feather) end end
- end
- local seq={T.wait(28,function(c,s)
-  p=T.copy(c.trial:position()); points={}; local x,z=T.direction(p,c.trial.player:get_location()); local side=s.phase==2 and -1 or 1
-  for i=0,20 do local u=i/20; points[#points+1]=T.offset(p,-z*8*u*side-x*2*math.sin(math.pi*u),0,x*8*u*side-z*2*math.sin(math.pi*u)) end
-  s.routeEnd=points[#points]; T.sound(c,'ENTITY_BREEZE_SLIDE',1.2)
- end,function(c,s,t) if t%4==0 then for _,point in ipairs(points) do T.point(c,point,R.feather) end; for _,i in ipairs({5,10,15}) do T.draw(c,T.circle(points[i],.6),T.gold) end end end),T.wait(20,nil,move)}
- for i=1,3 do T.append(seq,R.draw(c,s,{warn=24,lock=10,damage=.4,cap=1,group=group,releaseOnly=true,frame=move})) end
- T.append(seq,{T.wait(8,nil,move),R.flight(group,48),T.rest(60)})
- T.lockout(seq,'volley',340)
- return seq
-end
-return T.encounter{
- init=function(c,s) R.init(c,s,false) end, passive=R.passive,
- choose=function(c,s)
-  if s.phasePending and T.ready(s,'step') then s.phasePending=false; T.start(c,s,'step',M.move(c,s,s.routeEnd,20),M.cooldown)
-  elseif T.ready(s,'tailwind') and T.ready(s,'volley') then T.start(c,s,'tailwind',route(c,s),440)
-  else R.basic(c,s) end
- end
+  if s.fireAt then
+   if s.tick<s.lockAt then s.aim=player:get_eye_location(); c.boss:face_direction_or_location(s.aim) end
+   if s.tick%4==0 then arrow_lanes(c,s.aim,{0},1,false) end
+   if s.tick>=s.fireAt then
+    arrow_lanes(c,s.aim,{0},1,true); s.shot=s.shot+1
+    if s.shot>3 then s.fireAt=nil; s.busyUntil=s.tick+120; s.exposedUntil=s.tick+120
+    else s.fireAt=s.tick+26; s.lockAt=s.tick+14; s.aim=player:get_eye_location() end
+   end
+   return
+  end
+  if s.tick<(s.busyUntil or 0) then return end
+  if not s.phaseTwo and c.boss:get_health()<=c.boss:get_maximum_health()*.5 then
+   s.phaseTwo=true; windstep(c,player,s.tick); s.busyUntil=s.tick+30
+   player:send_message('&6Windrunner Instructor: &fThe wind turns. The rhythm stays.'); return
+  end
+  if s.tick>=s.nextTailwind then
+   s.nextTailwind=s.tick+360; s.shot=1; s.fireAt=s.tick+36; s.lockAt=s.tick+24; s.aim=player:get_eye_location()
+   c.boss:play_sound_at_self('BLOCK_NOTE_BLOCK_FLUTE',.6,1.4)
+   c.scheduler:run_later(20,function() strafe(c,player,68) end)
+  end
+ end,
+ on_player_damaged_by_boss=function(c) if c.event.projectile then c.event.multiply_damage_amount(.32) end end,
+ on_boss_damaged_by_player=function(c)
+  if not c.event.is_damage_transfer and (c.state.exposedUntil or 0)>(c.state.tick or 0) then c.event.multiply_damage_amount(1.15) end
+ end,
+ on_death=function(c) c.boss:send_message('&6Windrunner Instructor: &fYou kept pace without chasing my footsteps. Well run.',24) end
 }

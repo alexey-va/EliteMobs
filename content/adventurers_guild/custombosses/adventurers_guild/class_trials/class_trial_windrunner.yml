@@ -9,14 +9,8 @@ mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_windrunner.lua
+cullReinforcements: true
 classTrial:
   class: windrunner
-  title: End of the Strafe
-  power: class_trial_windrunner.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: A swift path still has an end. Meet me there.
-    halfway: You found the end once. Read the new curve.
-    victory: You spent fewer steps to arrive at the better place.
-    defeat: Chasing every shot kept you behind every turn.

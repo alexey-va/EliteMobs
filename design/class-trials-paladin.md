@@ -1,5 +1,10 @@
 # Paladin branch encounters
 
+> Historical design sketch. The current ordinary YAML/Lua implementation and
+> ownership contract are documented in [class-trial-runtime.md](class-trial-runtime.md).
+> Mechanics requiring private trial APIs were redesigned; this document is not
+> an implementation contract or evidence that those APIs exist.
+
 Companion to [the encounter contract](class-trial-encounters.md). These are
 authored designs, not implemented fights. Timing and damage are starting values
 for playtesting. `CD` starts after recovery; `hit` means a normalized ordinary

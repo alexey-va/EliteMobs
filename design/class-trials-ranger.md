@@ -1,5 +1,10 @@
 # Ranger branch encounters
 
+> Historical design sketch. The current ordinary YAML/Lua implementation and
+> ownership contract are documented in [class-trial-runtime.md](class-trial-runtime.md).
+> Mechanics requiring private trial APIs were redesigned; this document is not
+> an implementation contract or evidence that those APIs exist.
+
 Authored designs under [the shared contract](class-trial-encounters.md). Nothing
 here establishes runtime implementation or balance verification.
 

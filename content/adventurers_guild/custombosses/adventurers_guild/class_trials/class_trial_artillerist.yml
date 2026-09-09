@@ -9,14 +9,8 @@ mainHand: CROSSBOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_artillerist.lua
+cullReinforcements: true
 classTrial:
   class: artillerist
-  title: Count the Mechanism
-  power: class_trial_artillerist.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: Count the mechanism. Four bolts, then work to do.
-    halfway: You have noticed the pause. Now notice what I use to shorten it.
-    victory: A fine machine is still only as ready as its supply.
-    defeat: You waited through the reload beside the thing that improved it.

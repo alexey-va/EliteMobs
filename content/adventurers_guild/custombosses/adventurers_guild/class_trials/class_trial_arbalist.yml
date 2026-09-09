@@ -9,14 +9,8 @@ mainHand: CROSSBOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_arbalist.lua
+cullReinforcements: true
 classTrial:
   class: arbalist
-  title: The Empty Crossbow
-  power: class_trial_arbalist.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: A loaded crossbow commands respect. An empty one asks for time.
-    halfway: Another position. You know what the reload costs me.
-    victory: You spent my reload better than I did.
-    defeat: Once the bolt passed, there was nothing left in the crossbow.

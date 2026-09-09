@@ -1,0 +1,7 @@
+extends: class_trial_actor_armor_stand.yml
+isEnabled: true
+name: '&ePowder Charge'
+healthMultiplier: 0.1
+damageMultiplier: 0
+helmet: TNT
+ai: false

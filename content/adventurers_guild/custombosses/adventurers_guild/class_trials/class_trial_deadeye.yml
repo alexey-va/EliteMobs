@@ -9,14 +9,8 @@ mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_deadeye.lua
+cullReinforcements: true
 classTrial:
   class: deadeye
-  title: One Perfect Shot
-  power: class_trial_deadeye.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: One shot. You will have more than one chance to read it.
-    halfway: I have changed the angle, not the promise.
-    victory: A perfect shot still needs someone standing in its path.
-    defeat: The last note of the draw meant the direction was fixed.

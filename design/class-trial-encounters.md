@@ -1,5 +1,10 @@
 # Class trial encounter redesign
 
+> Historical design sketch. The current ordinary YAML/Lua implementation and
+> ownership contract are documented in [class-trial-runtime.md](class-trial-runtime.md).
+> Mechanics requiring private trial APIs were redesigned; this document is not
+> an implementation contract or evidence that those APIs exist.
+
 Status: all 75 catalog forms (five roots and 70 branches) have an authored Lua
 v0 implementation. The rejected generic ClassTrialCombat conversion has been
 replaced by the canonical Lua power binding. Java and all 75 Lua scripts compile;

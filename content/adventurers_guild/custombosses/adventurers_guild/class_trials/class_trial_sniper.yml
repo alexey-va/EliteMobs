@@ -9,14 +9,8 @@ mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_sniper.lua
+cullReinforcements: true
 classTrial:
   class: sniper
-  title: Wait for the Commitment
-  power: class_trial_sniper.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: I will follow you until I commit. Learn which moment matters.
-    halfway: Another angle. The string will give you the same warning.
-    victory: You moved when the shot could no longer follow. Cleanly read.
-    defeat: You chose a direction before I chose mine.

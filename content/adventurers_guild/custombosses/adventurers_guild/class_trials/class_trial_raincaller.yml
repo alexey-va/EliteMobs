@@ -9,14 +9,8 @@ mainHand: BOW
 chestplate: LEATHER_CHESTPLATE:456549
 leggings: LEATHER_LEGGINGS:456549
 boots: LEATHER_BOOTS:456549
+powers:
+- class_trial_raincaller.lua
+cullReinforcements: true
 classTrial:
   class: raincaller
-  title: Walk the Dry Ground
-  power: class_trial_raincaller.lua
-  actors:
-    HUSK: class_trial_actor_ranger_partner.yml
-  voice:
-    opening: A storm does not cover every step. Find the dry ground.
-    halfway: The wind is turning. Watch where the next gap opens.
-    victory: You crossed the weather instead of racing it.
-    defeat: The feathers showed which lane would clear next.
