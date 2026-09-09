@@ -1911,8 +1911,13 @@
     "slot": "signature",
     "name": "Arcane Volley",
     "description": "Fire bolts through foes ahead.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mage's 'Arcane Volley'. Actual gameplay effect: Fire bolts through foes ahead. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mage's 'Arcane Volley'. Actual gameplay effect: Fire bolts through foes ahead. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three broad cyan arcane bolts flying parallel through two dark target silhouettes, bright violet trails form a clean forward wedge. Pure magic, no arrows.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/mage.signature.png",
+    "texture": "mage.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "mage.utility",
@@ -1921,8 +1926,13 @@
     "slot": "utility",
     "name": "Spell Echo",
     "description": "Briefly boost your damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mage's 'Spell Echo'. Actual gameplay effect: Briefly boost your damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Mage's 'Spell Echo'. Actual gameplay effect: Briefly boost your damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One luminous cyan spell orb reflected by a second slightly smaller violet orb, connected by a thick curved echo ribbon. Double spell motif, no people.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/mage.utility.png",
+    "texture": "mage.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "elementalist.signature",
@@ -1931,8 +1941,13 @@
     "slot": "signature",
     "name": "Elemental Convergence",
     "description": "Damage and disrupt a target area.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Elementalist's 'Elemental Convergence'. Actual gameplay effect: Damage and disrupt a target area. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Elementalist's 'Elemental Convergence'. Actual gameplay effect: Damage and disrupt a target area. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three large elemental masses collide at center: orange flame, blue ice crystal, violet lightning bolt. Bright white convergence core, no scenery.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/elementalist.signature.png",
+    "texture": "elementalist.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "elementalist.utility",
@@ -1941,8 +1956,13 @@
     "slot": "utility",
     "name": "Elemental Exposure",
     "description": "Reveal foes for more party damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Elementalist's 'Elemental Exposure'. Actual gameplay effect: Reveal foes for more party damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Elementalist's 'Elemental Exposure'. Actual gameplay effect: Reveal foes for more party damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A dark target silhouette split into three broad colored facets of fire, ice and lightning, enclosed by a vivid cyan eye-shaped marker. Target exposure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/elementalist.utility.png",
+    "texture": "elementalist.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "pyromancer.signature",
@@ -1951,8 +1971,13 @@
     "slot": "signature",
     "name": "Inferno",
     "description": "Burn an area with repeated heavy damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Pyromancer's 'Inferno'. Actual gameplay effect: Burn an area with repeated heavy damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Pyromancer's 'Inferno'. Actual gameplay effect: Burn an area with repeated heavy damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A single towering orange flame pillar rising from a broad burning ground ring, white-hot center and dark violet shadows. Sustained inferno, no fireball.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/pyromancer.signature.png",
+    "texture": "pyromancer.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "pyromancer.utility",
@@ -1961,8 +1986,13 @@
     "slot": "utility",
     "name": "Flashover",
     "description": "Mark foes to take more damage briefly.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Pyromancer's 'Flashover'. Actual gameplay effect: Mark foes to take more damage briefly. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Pyromancer's 'Flashover'. Actual gameplay effect: Mark foes to take more damage briefly. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A bright orange eye-shaped ember mark hovering over one charred armor plate with glowing cracks. Vulnerability to fire, no explosion.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/pyromancer.utility.png",
+    "texture": "pyromancer.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "cryomancer.signature",
@@ -1971,8 +2001,13 @@
     "slot": "signature",
     "name": "Whiteout",
     "description": "Repeatedly damage and slow foes in a storm.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Cryomancer's 'Whiteout'. Actual gameplay effect: Repeatedly damage and slow foes in a storm. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Cryomancer's 'Whiteout'. Actual gameplay effect: Repeatedly damage and slow foes in a storm. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three broad jagged ice shards swirling inside a white-and-cyan blizzard spiral, deep blue center. Strong cold vortex, minimal snowflakes.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/cryomancer.signature.png",
+    "texture": "cryomancer.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "cryomancer.utility",
@@ -1981,8 +2016,13 @@
     "slot": "utility",
     "name": "Ice Barrier",
     "description": "Cleanse and gain a strong shield.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Cryomancer's 'Ice Barrier'. Actual gameplay effect: Cleanse and gain a strong shield. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Cryomancer's 'Ice Barrier'. Actual gameplay effect: Cleanse and gain a strong shield. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A large faceted cyan ice shield breaking a violet chain around it, white frosted edges. Clean protective slab, no person.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/cryomancer.utility.png",
+    "texture": "cryomancer.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "battlemage.signature",
@@ -1991,8 +2031,13 @@
     "slot": "signature",
     "name": "Arcane Cleave",
     "description": "Sweep foes and strengthen your ward.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Battlemage's 'Arcane Cleave'. Actual gameplay effect: Sweep foes and strengthen your ward. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Battlemage's 'Arcane Cleave'. Actual gameplay effect: Sweep foes and strengthen your ward. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A broad crescent-shaped cyan magic cleave sweeps from a steel sword into a small violet shield. Dominant crescent slash, no figure.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/battlemage.signature.png",
+    "texture": "battlemage.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "battlemage.utility",
@@ -2001,8 +2046,13 @@
     "slot": "utility",
     "name": "Runic Guard",
     "description": "Reduce incoming damage with runes.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Battlemage's 'Runic Guard'. Actual gameplay effect: Reduce incoming damage with runes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Battlemage's 'Runic Guard'. Actual gameplay effect: Reduce incoming damage with runes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three thick violet geometric rune stones form a triangular guard around one cyan shield, one dark arrow deflects off it. No readable letters.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/battlemage.utility.png",
+    "texture": "battlemage.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spellblade.signature",
@@ -2011,8 +2061,13 @@
     "slot": "signature",
     "name": "Aether Blade",
     "description": "Cut through foes ahead with fast magic.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spellblade's 'Aether Blade'. Actual gameplay effect: Cut through foes ahead with fast magic. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spellblade's 'Aether Blade'. Actual gameplay effect: Cut through foes ahead with fast magic. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A long luminous cyan energy sword angled diagonally, its blade splitting into two close violet speed afterimages. Blade dominates, no person or ground.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/spellblade.signature.png",
+    "texture": "spellblade.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spellblade.utility",
@@ -2021,8 +2076,13 @@
     "slot": "utility",
     "name": "Warcasting",
     "description": "Briefly gain speed, power and a shield.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spellblade's 'Warcasting'. Actual gameplay effect: Briefly gain speed, power and a shield. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spellblade's 'Warcasting'. Actual gameplay effect: Briefly gain speed, power and a shield. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: An armored gauntlet grips a bright blue spell orb while a violet shield flare and short cyan forward streak wrap its wrist. Empowered combat casting.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/spellblade.utility.png",
+    "texture": "spellblade.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "arcane_knight.signature",
@@ -2031,8 +2091,13 @@
     "slot": "signature",
     "name": "Spellbreaker",
     "description": "Damage foes and weaken their attacks.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Arcane Knight's 'Spellbreaker'. Actual gameplay effect: Damage foes and weaken their attacks. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Arcane Knight's 'Spellbreaker'. Actual gameplay effect: Damage foes and weaken their attacks. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A silver sword cleaves a large violet spell orb in two, cyan disruptive shock flash at the cut. Broken spell, no text.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/arcane_knight.signature.png",
+    "texture": "arcane_knight.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "arcane_knight.utility",
@@ -2041,8 +2106,13 @@
     "slot": "utility",
     "name": "Aegis Pulse",
     "description": "Shield allies and reduce incoming damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Arcane Knight's 'Aegis Pulse'. Actual gameplay effect: Shield allies and reduce incoming damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Arcane Knight's 'Aegis Pulse'. Actual gameplay effect: Shield allies and reduce incoming damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One large cyan shield radiates two thick violet rings toward two smaller ally shields. Protective outward pulse, no people.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/arcane_knight.utility.png",
+    "texture": "arcane_knight.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "occultist.signature",
@@ -2051,8 +2121,13 @@
     "slot": "signature",
     "name": "Umbral Lance",
     "description": "Pierce and weaken one foe.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Occultist's 'Umbral Lance'. Actual gameplay effect: Pierce and weaken one foe. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Occultist's 'Umbral Lance'. Actual gameplay effect: Pierce and weaken one foe. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: One long dark violet lance with a sharp magenta point pierces a gray target sigil, trailing thick shadow smoke. Dark piercing magic, no arrow fletching.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/occultist.signature.png",
+    "texture": "occultist.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "occultist.utility",
@@ -2061,8 +2136,13 @@
     "slot": "utility",
     "name": "Occult Sight",
     "description": "Reveal foes for more party damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Occultist's 'Occult Sight'. Actual gameplay effect: Reveal foes for more party damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Occultist's 'Occult Sight'. Actual gameplay effect: Reveal foes for more party damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A huge violet occult eye opens in black smoke, its cyan iris casts three broad detection rays downward. Eye dominates, no letters or runes.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/occultist.utility.png",
+    "texture": "occultist.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "necromancer.signature",
@@ -2071,8 +2151,13 @@
     "slot": "signature",
     "name": "Soul Drain",
     "description": "Raise an undead servant from an Elite corpse.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Necromancer's 'Soul Drain'. Actual gameplay effect: Raise an undead servant from an Elite corpse. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Necromancer's 'Soul Drain'. Actual gameplay effect: Raise an undead servant from an Elite corpse. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A newly raised armored skeleton servant emerging from broken earth, skull and upper torso dominate, cyan soul flame in eye sockets and violet summoning glow. This is a summon ability, NOT a damage beam or draining heart.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/necromancer.signature.png",
+    "texture": "necromancer.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "necromancer.utility",
@@ -2081,8 +2166,13 @@
     "slot": "utility",
     "name": "Grave Chill",
     "description": "Slow and weaken nearby foes.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Necromancer's 'Grave Chill'. Actual gameplay effect: Slow and weaken nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Necromancer's 'Grave Chill'. Actual gameplay effect: Slow and weaken nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A skeletal hand coated in blue frost grips a dark boot from below, violet ground mist. Grave-born slow and weakness, no full person.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/necromancer.utility.png",
+    "texture": "necromancer.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "lich.signature",
@@ -2091,8 +2181,13 @@
     "slot": "signature",
     "name": "Death Coil",
     "description": "Raise an undead that drains and weakens foes.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lich's 'Death Coil'. Actual gameplay effect: Raise an undead that drains and weakens foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lich's 'Death Coil'. Actual gameplay effect: Raise an undead that drains and weakens foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A crowned undead servant skull with two bright cyan soul streams coiling around its shoulders and a violet necromantic aura. Summoned draining servant, no plain projectile.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/lich.signature.png",
+    "texture": "lich.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "lich.utility",
@@ -2101,8 +2196,13 @@
     "slot": "utility",
     "name": "Phylactery Ward",
     "description": "Block one fatal hit while warded.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lich's 'Phylactery Ward'. Actual gameplay effect: Block one fatal hit while warded. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Lich's 'Phylactery Ward'. Actual gameplay effect: Block one fatal hit while warded. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A heavy ornate violet phylactery vessel enclosing a bright cyan soul flame, a dark fatal arrow breaks against its shell. Vessel dominates, no skull or text.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/lich.utility.png",
+    "texture": "lich.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "plaguebringer.signature",
@@ -2111,8 +2211,13 @@
     "slot": "signature",
     "name": "Rotting Ground",
     "description": "Raise an undead servant that spreads rot.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Plaguebringer's 'Rotting Ground'. Actual gameplay effect: Raise an undead servant that spreads rot. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Plaguebringer's 'Rotting Ground'. Actual gameplay effect: Raise an undead servant that spreads rot. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A hooded undead servant head and shoulders emerging through sickly green rot, one bony hand raised, violet summoning light behind. Clear summoned undead, no poison potion.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/plaguebringer.signature.png",
+    "texture": "plaguebringer.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "plaguebringer.utility",
@@ -2121,8 +2226,13 @@
     "slot": "utility",
     "name": "Miasma",
     "description": "Slow and weaken nearby foes.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Plaguebringer's 'Miasma'. Actual gameplay effect: Slow and weaken nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Plaguebringer's 'Miasma'. Actual gameplay effect: Slow and weaken nearby foes. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A thick green miasma cloud curls around a violet skull-shaped void, a dark boot at bottom sinks into the fog. Toxic slow field, broad cloud.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/plaguebringer.utility.png",
+    "texture": "plaguebringer.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "summoner.signature",
@@ -2131,8 +2241,13 @@
     "slot": "signature",
     "name": "Arcane Servitor",
     "description": "Call an animal servant to defend you.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Summoner's 'Arcane Servitor'. Actual gameplay effect: Call an animal servant to defend you. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Summoner's 'Arcane Servitor'. Actual gameplay effect: Call an animal servant to defend you. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A spectral wolf head and shoulders emerge from a violet summoning ring, luminous cyan fur edges and calm protective posture. Animal servant dominates.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/summoner.signature.png",
+    "texture": "summoner.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "summoner.utility",
@@ -2141,8 +2256,13 @@
     "slot": "utility",
     "name": "Commanding Sigil",
     "description": "Empower and shield nearby allies.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Summoner's 'Commanding Sigil'. Actual gameplay effect: Empower and shield nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Summoner's 'Commanding Sigil'. Actual gameplay effect: Empower and shield nearby allies. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A broad violet geometric seal beneath one cyan shield and two small bright ally stars, thick upward magical light. Command and protection, no readable runes.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/summoner.utility.png",
+    "texture": "summoner.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "demonologist.signature",
@@ -2151,8 +2271,13 @@
     "slot": "signature",
     "name": "Abyssal Gate",
     "description": "Open a portal that calls a Nether servant.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Demonologist's 'Abyssal Gate'. Actual gameplay effect: Open a portal that calls a Nether servant. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Demonologist's 'Abyssal Gate'. Actual gameplay effect: Open a portal that calls a Nether servant. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A fiery horned Nether servant head emerges through a tall violet portal, molten orange eyes and cyan-edged portal rim. Summon dominates, no entire landscape.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/demonologist.signature.png",
+    "texture": "demonologist.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "demonologist.utility",
@@ -2161,8 +2286,13 @@
     "slot": "utility",
     "name": "Pact of Ruin",
     "description": "Trade defense for spell damage and a shield.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Demonologist's 'Pact of Ruin'. Actual gameplay effect: Trade defense for spell damage and a shield. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Demonologist's 'Pact of Ruin'. Actual gameplay effect: Trade defense for spell damage and a shield. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A dark clawed hand seals a glowing violet pact orb, orange power pours into a cracked cyan shield beneath. Power with defensive cost, no text.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/demonologist.utility.png",
+    "texture": "demonologist.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spiritbinder.signature",
@@ -2171,8 +2301,13 @@
     "slot": "signature",
     "name": "Guardian Eidolon",
     "description": "Call a protective Vex servant.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritbinder's 'Guardian Eidolon'. Actual gameplay effect: Call a protective Vex servant. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritbinder's 'Guardian Eidolon'. Actual gameplay effect: Call a protective Vex servant. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: A small pale-cyan winged Vex-like spirit holding an iron sword hovers before a violet protective halo. Large head, compact body, four clear wings, summoned guardian.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/spiritbinder.signature.png",
+    "texture": "spiritbinder.signature.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   },
   {
     "id": "spiritbinder.utility",
@@ -2181,7 +2316,12 @@
     "slot": "utility",
     "name": "Shared Essence",
     "description": "Shield allies and spread incoming damage.",
-    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritbinder's 'Shared Essence'. Actual gameplay effect: Shield allies and spread incoming damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.",
-    "textureSize": 64
+    "prompt": "Use case: stylized-concept. Create ONE square fantasy RPG ability icon for Spiritbinder's 'Shared Essence'. Actual gameplay effect: Shield allies and spread incoming damage. Depict that effect with one unmistakable dominant subject or symbol and at most one supporting effect. Choose the subject based on the actual gameplay effect, especially for summons. Art for an actual game HUD: will be downsampled to 64x64 and displayed at 13x13 GUI pixels. Polished hand-painted fantasy game spell icon with broad clean color masses, bold silhouette and thick dark separations. Close composition, subject occupies 85 percent of the square. Palette: electric blue and violet, cyan highlights; adapt accent colors to the actual ability element where needed. Opaque dark midnight-teal background, strong local contrast. Keep subject recognizable at tiny size; simplify aggressively, do not paint an entire battle scene. No text, letters, numbers, border, frame, watermark, fine ornamentation or small scattered particles. Square composition.\nSpecific composition: Three bright cyan soul crystals connected by thick violet tethers inside one shared translucent shield. Shared essence and divided harm, no people.",
+    "textureSize": 64,
+    "generation": "built-in ImageGen",
+    "status": "reviewed",
+    "source": "sources/spiritbinder.utility.png",
+    "texture": "spiritbinder.utility.png",
+    "review": "Inspected at 64x64 texture resolution and 13 GUI pixels at scales 1 and 4; distinct silhouette and readable in square HUD slot."
   }
 ]
