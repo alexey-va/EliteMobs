@@ -2,7 +2,7 @@
 
 EliteMobs owns boarding, destinations, instance policy and recovery. MagmaCore owns the sampled Catmull–Rom curve and native flying Mind controller. The carrier moves through native entity movement each tick; the player rides it. Player flight permissions are never changed. Teleports are used for disembarking and recovery.
 
-This requires the native Mind adapter (currently Minecraft 26.x). FMM is optional unless `customModel` is configured. Each passenger gets a separate temporary mount. A model's `fly` animation supplies the visible creature; its compact underlying carrier stays tracked by the client so the passenger remains attached.
+This requires the native Mind adapter (currently Minecraft 26.x). Each passenger gets a separate temporary mount defined by an ordinary `custombosses` YAML file. Equipment, disguise, custom model, powers and AI use the same implementation as other bosses. The route controls flight, passengers and recovery.
 
 ## Author a route
 
@@ -24,11 +24,10 @@ Leave generous room around corners: a spline can bend outside the polygon connec
 Save as `plugins/EliteMobs/transport_routes/harbor_to_keep.yml`. The filename is the unique route ID, including when files are organized into subdirectories. These coordinates illustrate the format; replace them with points in your map.
 
 ```yaml
+isEnabled: true
 name: "Keep flight"
 world: "primis"
-carrier: "minecraft:pig"
-customModel: "" # Set an installed FMM flying creature model ID here.
-flightAnimation: "fly"
+transportEntity: "transport_cannon_seat.yml" # An enabled ordinary customboss file.
 speed: 12.0 # Maximum blocks per second; turns can be slower.
 acceleration: 8.0 # Blocks per second squared, shared between turning and speed changes.
 countdownTicks: 60
@@ -43,7 +42,25 @@ waypoints:
 
 Speed and acceleration accept 1–32. Countdown accepts 0–200 ticks. Routes have 2–256 points, consecutive points 0.05–2048 blocks apart, and a maximum summed waypoint distance of 16,384 blocks. Terrain budgets usually impose a smaller practical limit.
 
-Use the default pig as the physical carrier under a custom creature. Other native carriers must fit the supported envelope: at most 1.3 blocks wide/deep and 1.4 blocks high. Boarding rejects larger bodies. Clearance reserves 1.3 blocks horizontally and 3.3 blocks vertically for carrier and rider; visible model wings may extend farther, so the artist/admin must allow room for those too. A missing FMM model rejects boarding.
+New editor routes reference `transport_cannon_seat.yml`, an ordinary generated boss file whose spawn script applies invisibility. To use a visible creature, create another ordinary customboss file and reference it instead. For example:
+
+```yaml
+isEnabled: true
+entityType: PIG
+name: "&6Guild Gryphon"
+level: 1
+ai: true
+customModel: guild_gryphon
+dropsEliteMobsLoot: false
+dropsVanillaLoot: false
+dropsRandomLoot: false
+dropsSkillXP: false
+powers: [] # Ordinary powers may supply animation or other presentation.
+```
+
+The configured entity needs `ai: true` and must not be frozen. Its physical body must fit the supported envelope: at most 1.3 blocks wide/deep and 1.4 blocks high. Boarding rejects larger bodies. Clearance reserves 1.3 blocks horizontally and 3.3 blocks vertically for mount and rider; visible model wings may extend farther, so the artist/admin must allow room for those too. Missing or disabled entity files, unavailable configured models, and missing LibsDisguises for an explicit disguise reject boarding. The journey temporarily makes the mount invulnerable and nonpersistent; it does not replace its equipment or power list.
+
+Routes support normal `isEnabled` and `extends` behavior. The editor preserves existing comments and unrecognized fields when saving. Obsolete `carrier`, route-level `customModel` and `flightAnimation` fields are rejected with an explanatory console error. Existing definitions are never converted automatically; author the entity file and update the route explicitly.
 
 ## NPC destinations
 
@@ -73,7 +90,7 @@ return {
 }
 ```
 
-Remove the old movement/flight-permission loop when migrating a prop to this call. Do not run both transport implementations on the same click. Cannon effects may stay in its script; movement, seating and recovery belong to EliteMobs. This implementation adds the entry point and does not automatically convert existing cannon scripts or replace Primis wormholes.
+When authoring a prop to use this call, remove its separate movement/flight-permission loop. Do not run both transport implementations on the same click. Cannon effects may stay in its script; movement, seating and recovery belong to EliteMobs. This implementation does not automatically convert existing cannon scripts or replace Primis wormholes.
 
 Java integrations on the server thread can call `TransportModule.startRoute(player, routeId)` through EliteMobs. The FMM bridge resolves this API through EliteMobs' current classloader so a plugin reload does not retain an old module.
 
@@ -89,4 +106,4 @@ Java integrations on the server thread can call `TransportModule.startRoute(play
 
 ## Verification boundary
 
-Compilation validates the Java/API integration. Real-client acceptance is still required for passenger smoothness, FMM animation alignment, tight bends, collision changes during flight, disconnect/reconnect, and match teardown. Test both the vanilla carrier and a modeled carrier before replacing a shipped dungeon's travel network.
+Compilation validates the Java/API integration. Real-client acceptance is still required for passenger smoothness, FMM passenger/animation alignment, tight bends, collision changes during flight, disconnect/reconnect, and match teardown. The cannon's ordinary spawn script applies invisibility after native body creation, so a brief visible spawn has not been ruled out. Test both the default invisible seat and a modeled mount before replacing a shipped dungeon's travel network.
