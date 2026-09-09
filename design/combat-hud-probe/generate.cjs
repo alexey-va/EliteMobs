@@ -186,7 +186,7 @@ function panel(active){
  for(const x of [24,101]) s+=rect(x,16,65,5,'#080c0f')+rect(x+1,17,63,3,x<90?'#471c26':'#18272b');
  s+=rect(4,24,182,6,'#17191a')+rect(4,24,182,1,'#806944')+rect(5,26,180,2,'#183123')+rect(5,29,180,1,'#392d21');
  if(active){
-  const cards=[{name:'SIGNATURE',binding:'left',icon:1},{name:'UTILITY',binding:'right',icon:2},{name:'MOBILITY',binding:'double-f',icon:0}];
+  const cards=[{name:'SIGNATURE',binding:'left'},{name:'UTILITY',binding:'right'},{name:'MOBILITY',binding:'double-f'}];
   cards.forEach((card,i)=>{const x=4+i*61;s+=frame(x,32,60,21,true)+iconSlot(x+2,35)+smallText(card.name,x+19,35,'#eee4cb')+skillBinding(card.binding,x+19,42);});
  } else {
   // The whole vanilla hotbar remains visible, including item counts and selected-slot border.

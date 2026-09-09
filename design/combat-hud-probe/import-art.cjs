@@ -15,8 +15,16 @@ if (!entry || !source) throw new Error('Expected known ability ID and generated 
     .flatten({background: '#081a20'}).png().toFile(path.join(directory, `${id}.png`));
   entry.generation = 'built-in ImageGen';
   entry.status = 'generated-awaiting-visual-review';
+  delete entry.review;
   entry.source = `sources/${id}.png`;
   entry.texture = `${id}.png`;
+  const directionsPath = path.join(directory, 'art-directions.json');
+  if (fs.existsSync(directionsPath)) {
+    const direction = JSON.parse(fs.readFileSync(directionsPath))[id];
+    if (direction) {
+      entry.prompt = entry.prompt.split('\nSpecific composition:')[0] + '\nSpecific composition: ' + direction;
+    }
+  }
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   console.log(`Imported ${id}: 64x64`);
 })();
