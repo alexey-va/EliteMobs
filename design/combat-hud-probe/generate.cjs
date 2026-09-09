@@ -103,19 +103,29 @@ function panel(active){
  return s;
 }
 (async()=>{
- // One 32x32 glyph per fill height, packed below the 256px atlas limit.
- // Two-pixel stepped brass rim; the interior has 28 rows filled bottom-up.
+ // Each 32x42 glyph contains the diamond and its F keycap. Drawing them as
+ // one overlay keeps the key above the dynamic XP strip, clear of the hotbar.
+ // The diamond retains its 32x32 rim and 28 bottom-up fill rows.
  let diamonds='';
  for(let fill=0;fill<=28;fill++) {
+  const ox=(fill%8)*32, oy=Math.floor(fill/8)*42;
   for(let yy=0;yy<32;yy++) for(let xx=0;xx<32;xx++) {
    const distance=Math.abs(xx-15.5)+Math.abs(yy-15.5);
    if(distance>16) continue;
    let color=distance>15?'#241a12':distance>14?(yy<16?'#edcc82':'#927044'):'#172128';
    if(distance<=14 && yy>=30-fill) color=yy===30-fill?'#f5d476':'#916b24';
-   diamonds+=rect((fill%8)*32+xx,Math.floor(fill/8)*32+yy,1,1,color);
+   diamonds+=rect(ox+xx,oy+yy,1,1,color);
   }
+  diamonds+=rect(ox+11,oy+33,10,1,'#f8faf9')
+   +rect(ox+10,oy+34,12,6,'#f8faf9')
+   +rect(ox+11,oy+34,10,6,'#dce1e0')
+   +rect(ox+10,oy+40,12,1,'#8b9495')
+   +rect(ox+11,oy+41,10,1,'#41494b');
+  ['1111','1000','1110','1000','1000'].forEach((row,y)=>[...row].forEach((v,x)=>{
+   if(v==='1') diamonds+=rect(ox+14+x,oy+35+y,1,1,'#505b5e');
+  }));
  }
- await sharp(Buffer.from(svg(256,128,diamonds))).png().toFile(path.join(textures,'class_diamond.png'));
+ await sharp(Buffer.from(svg(256,168,diamonds))).png().toFile(path.join(textures,'class_diamond.png'));
  await sharp(Buffer.from(svg(60,16,text('0123456789',0,0,'#ffffff')))).png().toFile(path.join(textures,'class_level.png'));
  for(const [name,active] of [['gray',false],['red',true]]){
   let body=panel(active);
@@ -137,7 +147,7 @@ function panel(active){
     bitmap('text',7,-18,alphabet),
     bitmap('health',3,-28,'\ue110'),bitmap('resource',3,-28,'\ue111'),bitmap('xp',2,-37,'\ue112')];
   providers.push(bitmap('class_level',16,-12,Array.from({length:10},(_,i)=>String.fromCodePoint(0xe300+i)).join('')));
-  const diamond=bitmap('class_diamond',32,1,'');
+  const diamond=bitmap('class_diamond',42,1,'');
   diamond.chars=Array.from({length:4},(_,row)=>Array.from({length:8},(_,col)=>{
    const index=row*8+col; return index<=28?String.fromCodePoint(0xe400+index):'\u0000';
   }).join(''));

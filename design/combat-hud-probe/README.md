@@ -86,6 +86,7 @@ the native hotbar position. The separate label alphabet is no longer shipped.
 | Resource icon | 171 | 5 | 10 | 15 |
 | Class XP diamond | 79 | -12 | 32 | 32 |
 | Class level | centered at 95 | 1 | 5 per digit, 1 spacing | 7 |
+| F keycap | 89 | 21 | 12 | 9 |
 | XP fill | 5 | 26 | up to 180 | 2 |
 | Native hotbar opening | 3 | 31 | 184 | 23 |
 | Signature card | 4 | 32 | 60 | 21 |
@@ -110,7 +111,11 @@ the class band's XP baseline. At the current progression cap it stays full.
 The white number shows effective class level, including specialization levels.
 An absent or locked class hides the diamond. Instance-locked class selections
 take precedence over the profile's selection. The 29 fill states share a
-256x128 bitmap atlas; the level is a separate glyph layer above the fill.
+256x168 bitmap atlas; the level is a separate glyph layer above the fill.
+Each atlas cell also contains a gray F keycap below the diamond. It overlays
+the center of the XP strip, leaving one empty row before the hotbar at y=31.
+The combined glyph is 32x42, so the key is rendered after the dynamic XP fill
+and cannot be painted over by it. It follows the diamond's class visibility.
 
 The initial alignment revision was deployed and checked on NBTest on 2026-09-09.
 Native F2 capture at 3840x2071, GUI scale 8, placed the panel at framebuffer
