@@ -1,0 +1,22 @@
+extends: class_trial_base.yml
+isEnabled: true
+name: $bossLevel &6Warmonger Instructor
+level: '91'
+healthMultiplier: 13
+movementSpeedAttribute: 0.24
+disguise: player berserker setskin {"properties":[{"name":"textures","signature":"BKotVLYFrSJHP4M2rqpc+AIRRrGDn67BUY6t8EBlkxmEW1jV1aQPAwFi6DhST8/WWC5GUmavmbgHcyMvyPsvwA6ImGhEx6MsOOqQ9rYPf9o6NJcLbIxOgV19tN/MwhjrPYhvxlbFxiDW2Jyljedo98txBs1mG1cBUQmJMstFmmEL08S4W2F4NX2vOzDlDWXCkMK3U84NkqrdUIPgHZMGPVzXAolAyTehBwnIhJG9Hey/Q1uP2dvGnmDjijI/Nq5JOsaCOJnmzuE8drKL9xg2EIxZ8/yGfuVaq21SaQ3x1DKYUDVdqiP+fbS2O/bhPjy7oIzADmu+tP+r51qNilHxy1n1grPQF5psZejw2GTn1+32HQtVrajMeqJjFTdcR7kE63QYx141ZrrM2YyjHLpbby7NQhL8wyONZuTejL1tyL8Mgm30jzPjMMFEASCibZYTUCsEViCM+eymuHvmIvRAGs09rotF6uzSfIhBR8dCIa7QTbdm2V7YOd7kmMliv9UAX5MrOTgTflMeC65xmf8OM4N8rI7zodhGoxlz+n8Qnokun1KtHp6iyhYakRmfcmUV0G31qKeEZxmbiN18xIUTJS/0a3z0r9L99XIOT+saOaGpVHdytJVjoMjjj+xWH4p/YldrfEHGF3YvBJ4ivJF4x07+JtG+vV+omweUZs2DVt4=","value":"ewogICJ0aW1lc3RhbXAiIDogMTY2NTAxNzE2NzQ3NywKICAicHJvZmlsZUlkIiA6ICJmMTA0NzMxZjljYTU0NmI0OTkzNjM4NTlkZWY5N2NjNiIsCiAgInByb2ZpbGVOYW1lIiA6ICJ6aWFkODciLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjAwODA2ZDhhMjFhM2JiMTZiYzY3YmE0MjI5ODA2NjA4ZGUyZWU2NTI5NTc3MjJmOTk0NGQzYmZiNWEzMjVhZCIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"}],"name":"Unknown","id":"eea1b118-f2b2-44be-b419-1c621553069d"}
+mainHand: IRON_AXE
+chestplate: LEATHER_CHESTPLATE:783C32
+leggings: LEATHER_LEGGINGS:783C32
+boots: LEATHER_BOOTS:783C32
+classTrial:
+  class: warmonger
+  title: Noise Is Not Direction
+  power: class_trial_warmonger.lua
+  actors:
+    HUSK: class_trial_actor_berserker_partner.yml
+  voice:
+    opening: A battlefield is loud. Noise does not get to choose your feet.
+    halfway: More noise. The opening is still there.
+    victory: You heard everything and obeyed only what mattered.
+    defeat: Watch the shoulders through the shouting.

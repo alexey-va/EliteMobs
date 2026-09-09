@@ -1,0 +1,26 @@
+isEnabled: false
+entityType: HUSK
+name: '&fSparring partner'
+level: dynamic
+bossType: BOSS
+healthMultiplier: 1.0
+damageMultiplier: 1.0
+normalizedCombat: true
+ai: false
+movementSpeedAttribute: 0.24
+followDistance: 70
+dropsEliteMobsLoot: false
+dropsVanillaLoot: false
+dropsRandomLoot: false
+dropsSkillXP: false
+classLoot: false
+uniqueLootList: []
+classTrial:
+  actors:
+    SKELETON: class_trial_actor_skeleton.yml
+    WOLF: class_trial_actor_wolf.yml
+    IRON_GOLEM: class_trial_actor_iron_golem.yml
+    WITHER_SKELETON: class_trial_actor_wither_skeleton.yml
+    BLAZE: class_trial_actor_blaze.yml
+    VEX: class_trial_actor_vex.yml
+    ARMOR_STAND: class_trial_actor_armor_stand.yml

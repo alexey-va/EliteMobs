@@ -1,0 +1,3 @@
+extends: class_trial_actor_base.yml
+isEnabled: true
+entityType: BLAZE

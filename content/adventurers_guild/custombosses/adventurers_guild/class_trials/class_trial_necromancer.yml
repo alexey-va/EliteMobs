@@ -1,0 +1,24 @@
+extends: class_trial_base.yml
+isEnabled: true
+name: $bossLevel &6Necromancer Instructor
+level: '61'
+healthMultiplier: 12
+movementSpeedAttribute: 0.24
+disguise: player necromancer setskin {"id":"e68c6d78-55a9-4380-acd4-66c79d74c152","properties":[{"signature":"CO1HEObkpsvC2baMAvVxJwWHcJZtK4E1bqzaeJZGQCLBidiZzrKP8xxbCVL/6LVY6cM+Ij5RaAWQn4EK+ZaVCLXZrEh1B5Iie1A7O55amnAGm+AZdPjEHsE/pKFNB3kEekzidu5rgm2QEqbi2hUhLGL6/ZqXIw6Eo0Sbrf5b/kAmp+RwNFVCmOMLCFN3fi164xmwNDrUp9IM4+MZWAozsAyQve/HkmehUPHNFBP4R2OmbNkvYviRbOFBS06p3RIL/1bnpIdWKsHzfmHfAT8fP/Tld5km7FTrFlhMuUuBovu6mKN3otVfQbJNE8/uTyDZlkhuAwUYehh1SE1OZaIJ99pcbNU7ULFlIofBLY2JOY9WCtnxi1doXE6wTD+IumJFcO9q2KoYtlOHQg8acoG0cTmoZkuW6hcnnv8NTQlyjyoEP9on9yDm9pdNCAFtSTIDYFMS7DF4b+fM1DhbQ7q9yVh5Z6cB/Y4+8ehvFhyWaRbDBP1764N4/g4UvFnnqIcEtZ9YDWECmSa8e9lcI3LEs45cp03NiPOMaiNBIjX0qlvrdYZrDCtfw3y7xGM+HYcfbcOCEz9Kx+6lwp9nZ3sfRRDQoWR94nL+o/aT7N95xqTTX0+eC4s6Yf0i+QkD/v3CufokallBoeTwFBKjrwahoEJ+8xLCzTs4iWXSm7HHqBY=","value":"ewogICJ0aW1lc3RhbXAiIDogMTY5MTg2OTgxMDg4NSwKICAicHJvZmlsZUlkIiA6ICJmNWYyNDcyZGVhNDY0ODJhYWUwNDllYjM2ODE5ODU0NiIsCiAgInByb2ZpbGVOYW1lIiA6ICJEZXRhaWxlcnMiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTI3YTVmODdjODYzYWFhMWNiMWE4Yjg2ZTc1OTAyODBhMGM3NzQ4YjNjZTA4NzA5NTVkOWY5MjUyZGE2NmRjNCIKICAgIH0KICB9Cn0=","name":"textures"}],"name":"Unknown"}
+mainHand: WOODEN_SPEAR
+chestplate: LEATHER_CHESTPLATE:33394A
+leggings: LEATHER_LEGGINGS:33394A
+boots: LEATHER_BOOTS:33394A
+offHand: BOOK
+classTrial:
+  class: necromancer
+  title: Deny the Body
+  power: class_trial_necromancer.lua
+  actors:
+    HUSK: class_trial_actor_necromancer_partner.yml
+  voice:
+    opening: I brought my own dead. You may try to keep them unemployed.
+    halfway: You noticed the bodies. There may be a useful mind in there yet.
+    victory: The dead were less useful than you were. An irritatingly good result.
+    defeat: You watched the corpse stand up. Next time, interrupt the invitation.
+  magicWeapon: STAFF
