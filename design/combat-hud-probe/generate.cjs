@@ -122,6 +122,39 @@ function smallText(t,x,y,color) {
   x+=4;
  } return s;
 }
+// Four-pixel-wide lettering fits HOLDER plus its outline inside a 32px icon.
+function placeholderStamp() {
+ const letters = {
+  P:['1110','1001','1001','1110','1000','1000','1000'],
+  L:['1000','1000','1000','1000','1000','1000','1111'],
+  A:['0110','1001','1001','1111','1001','1001','1001'],
+  C:['0111','1000','1000','1000','1000','1000','0111'],
+  E:['1111','1000','1000','1110','1000','1000','1111'],
+  H:['1001','1001','1001','1111','1001','1001','1001'],
+  O:['0110','1001','1001','1001','1001','1001','0110'],
+  D:['1110','1001','1001','1001','1001','1001','1110'],
+  R:['1110','1001','1001','1110','1010','1001','1001']
+ };
+ const ink = new Set();
+ for(const [word,y] of [['PLACE',5],['HOLDER',18]]) {
+  const x = Math.floor((32-(word.length*5-1))/2);
+  [...word].forEach((letter,i)=>{
+   for(let row=0;row<9;row++) [...letters[letter][Math.floor(row*7/9)]].forEach((v,col)=>{
+    if(v==='1') ink.add(`${x+i*5+col},${y+row}`);
+   });
+  });
+ }
+ const outline = new Set();
+ for(const point of ink) {
+  const [x,y]=point.split(',').map(Number);
+  for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++) {
+   const neighbor=`${x+dx},${y+dy}`;
+   if(!ink.has(neighbor)) outline.add(neighbor);
+  }
+ }
+ const pixels=(points,color)=>[...points].map(p=>{const [x,y]=p.split(',').map(Number);return rect(x,y,1,1,color);}).join('');
+ return svg(32,32,`<g opacity="0.72">${pixels(outline,'#090d12')}${pixels(ink,'#fff0ac')}</g>`);
+}
 function mouseButton(button,x,y) {
  const colors={o:'#899599',b:'#38444b',c:'#dce4e4',
   L:button==='left'?'#ffc36b':'#4e5b62',R:button==='right'?'#ffc36b':'#4e5b62'};
@@ -199,9 +232,7 @@ function panel(active){
 (async()=>{
  fs.mkdirSync(path.join(textures, 'abilities'), {recursive:true});
  // Stamp every exported ability with the same legible UI label, preserving source art.
- const placeholderLabel = await sharp(Buffer.from(svg(32,32,
-  rect(2,8,28,16,'#080e13') + smallText('PLACE',6,10,'#ffdf71')
-  + smallText('HOLDER',4,17,'#ffdf71')))).png().toBuffer();
+ const placeholderLabel = await sharp(Buffer.from(placeholderStamp())).png().toBuffer();
  for (const entry of abilityIcons) {
   const source = path.join(abilityDirectory, entry.texture);
   const metadata = await sharp(source).metadata();
