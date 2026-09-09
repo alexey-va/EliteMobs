@@ -14,7 +14,7 @@ const roots = ['paladin','berserker','ranger','cleric','spellcaster'];
    const source=path.join(directory,`${root}.${slot}.png`);
    layers.push({input:await sharp(source).resize(52,52,{kernel:'nearest'}).toBuffer(),left:(7+index*61)*4,top:top+16});
   }
-  layers.push({input:Buffer.from(`<svg width="760" height="18"><text x="4" y="14" font-size="14" fill="white">${root} | 64x64 textures in 13x13 GUI slots at scale 4</text></svg>`),left:0,top:row*114});
+  layers.push({input:Buffer.from(`<svg width="760" height="18"><text x="4" y="14" font-size="14" fill="white">${root} | 32x32 textures in 13x13 GUI slots at scale 4</text></svg>`),left:0,top:row*114});
  }
  fs.mkdirSync(path.join(directory,'previews'),{recursive:true});
  await sharp({create:{width:760,height:roots.length*114,channels:4,background:'#15181c'}}).composite(layers)

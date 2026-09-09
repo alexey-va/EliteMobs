@@ -11,13 +11,14 @@ if (!entry || !source) throw new Error('Expected known ability ID and generated 
   const original = path.join(directory, 'sources', `${id}.png`);
   fs.mkdirSync(path.dirname(original), {recursive: true});
   if (path.resolve(source) !== original) fs.copyFileSync(source, original);
-  await sharp(original).resize(64, 64, {fit: 'cover', kernel: 'lanczos3'})
+  await sharp(original).resize(32, 32, {fit: 'cover', kernel: 'lanczos3'})
     .flatten({background: '#081a20'}).png().toFile(path.join(directory, `${id}.png`));
   entry.generation = 'built-in ImageGen';
   entry.status = 'generated-awaiting-visual-review';
   delete entry.review;
   entry.source = `sources/${id}.png`;
   entry.texture = `${id}.png`;
+  entry.textureSize = 32;
   const directionsPath = path.join(directory, 'art-directions.json');
   if (fs.existsSync(directionsPath)) {
     const direction = JSON.parse(fs.readFileSync(directionsPath))[id];
@@ -26,5 +27,5 @@ if (!entry || !source) throw new Error('Expected known ability ID and generated 
     }
   }
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-  console.log(`Imported ${id}: 64x64`);
+  console.log(`Imported ${id}: 32x32`);
 })();

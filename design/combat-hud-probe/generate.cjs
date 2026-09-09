@@ -200,7 +200,7 @@ function panel(active){
  for (const entry of abilityIcons) {
   const source = path.join(abilityDirectory, entry.texture);
   const metadata = await sharp(source).metadata();
-  if (metadata.width !== 64 || metadata.height !== 64) throw new Error(`Ability must be 64x64: ${entry.id}`);
+  if (metadata.width !== 32 || metadata.height !== 32) throw new Error(`Ability must be 32x32: ${entry.id}`);
   fs.copyFileSync(source, path.join(textures, 'abilities', `${entry.id}.png`));
  }
  fs.writeFileSync(path.join(__dirname, '../../src/main/resources/combat-hud-ability-icons.properties'),
