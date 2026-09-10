@@ -1,84 +1,75 @@
-# Magic weapon enchantments
+# Shared enchantments and authored items
 
-EliteMobs uses FMM's capability-4 magic weapon API for these mechanics. Install
-the matching FreeMinecraftModels and EliteMobs tester builds together. FMM owns
-casting, flight, collision and damage application; EliteMobs reads its usual
-enchantment tags and supplies the per-cast modifiers.
+MagmaCore owns provider catalogs, versioned custom-enchantment storage,
+Minecraft-style tooltips, ordinary anvil transfer, Lua and owned action cleanup.
+FMM owns models, authored wand/staff items, casting and its sixteen definitions.
+EM owns its thirteen effects, combat attribution, enchanter economy and Soulbind.
+Install matching EM and FMM builds; each shades MagmaCore.
 
-| Enchantment | Weapon | I | II | III |
-|---|---|---|---|---|
-| Multicast | Wand | 2 bolts, 75% each | 2 bolts, 85% each | 3 bolts, 70% each |
-| Blast Radius | Staff | +15% radius | +30% radius | +45% radius |
-| Ignition | Staff | 2 seconds of fire | 3 seconds | 4 seconds |
+## Configs and enchanting
 
-Multicast's total potential output is 150%, 170% and 210% of one normal bolt.
-Each bolt selects a different eligible target when possible, ordered by the
-existing elite/mob/player priority and aim score. With fewer targets than bolts,
-targets are reused. Each bolt collides independently with terrain and entities.
-Multiple bolts hitting one target each resolve damage, with its previous
-invulnerability timer restored afterward. Wand knockback remains zero.
+Administrator-authored item configs supersede level and compatibility limits
+for native and custom enchantments. IDs must exist, levels must be positive,
+and providers must be available. The actual configured values are retained.
+Limits apply when enchanting. The ordinary anvil uses equal-level progression;
+EM retains additive progression and its economy. Neither uses the authored
+bypass. EM native/full-level overflow keeps its existing owner.
 
-Blast Radius increases radius, not direct-hit damage. The existing radial damage
-falloff and line-of-sight checks still apply. The explosion draws its actual
-outer radius. Ignition requires an accepted damage event and an uncancelled
-combust event. It refreshes fire duration instead of stacking it and never
-places fire blocks. Fire damage follows the server's normal burning behavior.
+Custom maxLevel is an enchanting cap, not a runtime ceiling. Lua receives the
+actual item level. Per-level parameter lists retain their final authored value
+above their final row; formulas can express further scaling. Equipment slots
+and hooks determine where effects run. Supplied scripts retain their explicit
+gameplay conditions, including Earthquake/Plasma Boots mutual exclusion.
+Administrators can change those definitions and scripts.
 
-Configure the usual enchantment files under `enchantments/`:
+## Content and ownership
 
-```yaml
-# multicast.yml
-isEnabled: true
-maxLevelV2: 3
-maxEnchantmentLevel: 3
-isEnabledForProcedurallyGeneratedItems: true
-damageMultiplier:
-  level1: 0.75
-  level2: 0.85
-  level3: 0.70
-generationChance: 0.35
-levelThreeChance: 0.01
-levelThreeMinimumItemLevel: 75
-```
+Provider files live in plugins/EliteMobs/enchantments/ and
+plugins/FreeMinecraftModels/enchantments/. Each YAML definition names one Lua
+file. Items use IDs such as elitemobs:hunter and freeminecraftmodels:multicast.
+FMM native declarations use minecraft:*; EM keeps its native declaration owner.
+Old custom IDs, Java effects and inventory readers are retired. No inventories
+are ported. Soulbind remains UUID/prestige ownership metadata.
 
-`blast_radius.yml` exposes `radiusIncreasePerLevel` and `generationChance`.
-`ignition.yml` exposes `baseFireTicks`, `fireTicksPerLevel` and `generationChance`.
-Effects have hard implementation limits of level III, twice the base radius,
-six blocks final radius and ten seconds of fire. Do not advertise higher levels
-by changing the configuration cap; upgrades beyond the implemented level fail.
+Defaults install only when the entire provider directory is absent. Existing
+installations need retired definitions removed and replacement YAML/Lua files
+supplied explicitly. Reload does not overwrite administrator files or recreate
+deleted defaults. Duplicate basenames use the shared first-file/warning policy.
 
-Ordinary procedural custom-enchantment rolls respect the global
-`customEnchantmentsChance`. Magic enchants begin at item level 10. Multicast II
-can roll from item level 35, and III additionally requires its rare roll and
-minimum item level. Blast Radius/Ignition can reach II at item level 30 and III
-at 65. Automatic class-loot profiles have their own explicit level/chance rules.
+EM retains multicast.yml, blast_radius.yml and ignition.yml host settings for
+procedural generation probabilities. These do not implement effects; FMM's
+provider files own effect values. Multicast defaults remain 2 missiles at 75%,
+2 at 85%, and 3 at 70%. Blast Radius and Ignition use their FMM Lua queries.
+Actual enchanted books replace Enchanted Source markers. Consumable roles use
+EM's consumable section, not fake enchantment levels.
 
-The normal enchanter accepts these built-in books:
+## Supplied EM effects
 
-- `enchanted_book_multicast.yml`
-- `enchanted_book_blast_radius.yml`
-- `enchanted_book_ignition.yml`
+Loud Strikes, Critical Strikes, Drilling, Ice Breaker, Summon Wolf, Summon
+Merchant, Flamethrower, Lightning, Hunter, Earthquake, Plasma Boots, Grappling
+Hook and Meteor Shower are provider YAML/Lua definitions.
 
-They use `ENCHANTED_SOURCE,1` and the usual custom-item path. Add them to an
-authored reward table like any existing enchantment book. For example:
+Hunter counts armor and both hands, adding 5% per level to the existing natural
+spawn calculation. Earthquake sums eligible armor; Plasma Boots reads boots.
+Both retain double-sneak within ten ticks and a two-minute cooldown. Their
+landing deadline is ten seconds. Plasma's eight projectiles per level use the
+canonical shared physical projectile engine.
 
-```yaml
-uniqueLootList:
-  - filename: enchanted_book_multicast.yml
-    chance: 0.02
-```
+Grappling Hook reads actually consumed arrows, waits up to ten seconds for a
+TARGET attachment, pulls for up to ten seconds, then supplies three seconds of
+owned slow falling. Invalid worlds, blocked/protected movement and lifecycle
+termination abort and restore owned state.
 
-For a fully authored wand, use `MULTICAST,1` in its `enchantments` list. For a
-staff, use `BLAST_RADIUS,1` and/or `IGNITION,1`. Explicit weapon identity is still
-required. `proceduralEnchantments: true` also rolls compatible magic enchants
-through scalable/fixed custom-item construction while retaining authored levels.
+Meteor Shower consumes one item on accepted main-hand right click. The storm
+lasts ten seconds with a two-second windup. Native fireballs have an owner and
+expiry. Native explosion events remain available to protections, including
+EM's explosion block flag. Secondary damage uses captured source facts and
+accepted normal damage events. Supplied hostile effects exclude players,
+allies, owned pets and protected targets.
 
-Punch is excluded from magic-item construction, generated loot and upgrades.
-Legacy Punch is removed when a magic weapon is used. Multicast books reject
-staves and ordinary weapons; Blast Radius and Ignition books reject wands and
-ordinary weapons. Unsupported upgrades return the ingredients without charging.
-Existing Power, Unbreaking, Mending and Vanishing remain generation-compatible.
+## Evidence
 
-Compilation and startup checks do not verify the visual presentation, collision,
-damage totals, protection integration or enchantment balance. Those remain in
-the manual acceptance checklist.
+Current verification is Java compilation, deployable packaging and Lua
+compilation. Runtime, visuals, economy and third-party protection acceptance
+are deferred by the user. No inventory migration, publication or production
+deployment is included in this checkpoint.
