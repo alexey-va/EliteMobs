@@ -1,10 +1,26 @@
-# Guild introduction and first class
+# Guild onboarding quests
 
 Casus offers `ag_welcome_quest_1.yml`, followed by
 `ag_adventurer_training.yml`. The latter requires the existing completion marker
 `elitequest.ag_welcome_quest_1.yml`. Both use the normal one-time quest lockout.
 The existing administrative quest bypass still bypasses prerequisite and lockout
 checks.
+
+After the class-training quest is turned in, Casus offers two independent
+introductions. Both require `elitequest.ag_adventurer_training.yml`; neither
+requires the other introduction. They use ordinary dialogue objectives and
+one-time quest lockouts, with no additional equipment or currency rewards.
+
+| Quest | Destination and turn-in NPC | Next story |
+| --- | --- | --- |
+| `ag_story_mode_introduction.yml` | Manager Wallitz, `story_dungeons_quest_giver.yml`, in the guild | His existing Story Mode dungeon quests. |
+| `ag_primis_introduction.yml` | Captain Squalus, `primis_captain.yml`, at the Primis beached ship | `primis_main_quest_1.yml`, Shipwrecked! |
+
+The Primis entry point was confirmed from the retained Primis v43 NPC and quest
+definitions: Squalus offers main quest 1 without a prerequisite; First Mate
+Iracundi offers main quest 2, which requires main quest 1. Neither DLC quest
+chain nor its NPC files is modified. The destination NPCs already support
+custom-quest hand-ins, as used by the existing Dux-to-Casus introduction.
 
 ## Guild NPC coverage
 
