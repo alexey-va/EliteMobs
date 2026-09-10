@@ -99,7 +99,7 @@ dependencies {
     compileOnly 'mysql:mysql-connector-java:8.0.33'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
-    testRuntimeOnly "org.spigotmc:spigot-api:26.2-R0.1-SNAPSHOT"
+    testImplementation "org.spigotmc:spigot-api:26.2-R0.1-SNAPSHOT"
     testRuntimeOnly group: 'org.xerial', name: 'sqlite-jdbc', version: '3.49.1.0'
     //LibsDisguises
     compileOnly group: 'com.comphenix.protocol', name: 'ProtocolLib', version: '4.7.0'

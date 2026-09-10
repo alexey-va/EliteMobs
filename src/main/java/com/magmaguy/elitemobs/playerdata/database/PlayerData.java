@@ -8,7 +8,6 @@ import com.magmaguy.elitemobs.quests.Quest;
 import com.magmaguy.elitemobs.quests.playercooldowns.PlayerQuestCooldowns;
 import com.magmaguy.elitemobs.skills.SkillType;
 import com.magmaguy.elitemobs.utils.ConfigurationLocation;
-import com.magmaguy.elitemobs.utils.ObjectSerializer;
 import com.magmaguy.magmacore.util.Logger;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +24,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import javax.annotation.Nullable;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -183,7 +181,7 @@ public class PlayerData {
     public static void updateQuestStatus(UUID uuid) {
         List<Quest> playerQuests = getQuests(uuid);
         try {
-            setDatabaseValue(uuid, "QuestStatus", ObjectSerializer.toString((ArrayList) playerQuests));
+            setDatabaseValue(uuid, "QuestStatus", PlayerDataJsonCodec.encodeQuests(playerQuests));
             if (playerDataHashMap.containsKey(uuid))
                 playerDataHashMap.get(uuid).quests = playerQuests;
         } catch (Exception ex) {
@@ -251,7 +249,7 @@ public class PlayerData {
     public static List<Quest> getQuests(UUID uuid) {
         try {
             if (!isInMemory(uuid))
-                return (List<Quest>) ObjectSerializer.fromString((String) getDatabaseBlob(uuid, "QuestStatus"));
+                return PlayerDataJsonCodec.decodeQuests(getDatabaseBlob(uuid, "QuestStatus"));
             if (playerDataHashMap.get(uuid) == null) return new ArrayList<>();
             return playerDataHashMap.get(uuid).quests == null ? new ArrayList<>() : playerDataHashMap.get(uuid).quests;
         } catch (Exception ex) {
@@ -273,7 +271,7 @@ public class PlayerData {
         List<Quest> questList = null;
         try {
             if (!isInMemory(uuid))
-                questList = (List<Quest>) ObjectSerializer.fromString((String) getDatabaseBlob(uuid, "QuestStatus"));
+                questList = PlayerDataJsonCodec.decodeQuests(getDatabaseBlob(uuid, "QuestStatus"));
             else
                 questList = playerDataHashMap.get(uuid).quests;
         } catch (Exception ex) {
@@ -288,7 +286,7 @@ public class PlayerData {
     public static void resetQuests(UUID uuid) {
         ArrayList<Quest> resetQuests = new ArrayList<>();
         try {
-            setDatabaseValue(uuid, "QuestStatus", ObjectSerializer.toString(resetQuests));
+            setDatabaseValue(uuid, "QuestStatus", PlayerDataJsonCodec.encodeQuests(resetQuests));
             if (playerDataHashMap.containsKey(uuid))
                 playerDataHashMap.get(uuid).quests = resetQuests;
         } catch (Exception ex) {
@@ -316,7 +314,7 @@ public class PlayerData {
     public static PlayerQuestCooldowns getPlayerQuestCooldowns(UUID uuid) {
         try {
             if (!isInMemory(uuid))
-                return (PlayerQuestCooldowns) ObjectSerializer.fromString((String) getDatabaseBlob(uuid, "PlayerQuestCooldowns"));
+                return PlayerDataJsonCodec.decodePlayerQuestCooldowns(getDatabaseBlob(uuid, "PlayerQuestCooldowns"));
             if (playerDataHashMap.get(uuid) == null) return PlayerQuestCooldowns.initializePlayer();
             return playerDataHashMap.get(uuid).playerQuestCooldowns == null ? PlayerQuestCooldowns.initializePlayer() : playerDataHashMap.get(uuid).playerQuestCooldowns;
         } catch (Exception ex) {
@@ -330,7 +328,7 @@ public class PlayerData {
 
     public static void updatePlayerQuestCooldowns(UUID uuid, PlayerQuestCooldowns playerQuestCooldowns) {
         try {
-            setDatabaseValue(uuid, "PlayerQuestCooldowns", ObjectSerializer.toString(playerQuestCooldowns));
+            setDatabaseValue(uuid, "PlayerQuestCooldowns", PlayerDataJsonCodec.encodePlayerQuestCooldowns(playerQuestCooldowns));
             if (playerDataHashMap.containsKey(uuid))
                 playerDataHashMap.get(uuid).playerQuestCooldowns = playerQuestCooldowns;
         } catch (Exception ex) {
@@ -343,7 +341,7 @@ public class PlayerData {
     public static DungeonBossLockout getDungeonBossLockout(UUID uuid) {
         try {
             if (!isInMemory(uuid))
-                return (DungeonBossLockout) ObjectSerializer.fromString((String) getDatabaseBlob(uuid, "DungeonBossLockouts"));
+                return PlayerDataJsonCodec.decodeDungeonBossLockout(getDatabaseBlob(uuid, "DungeonBossLockouts"));
             if (playerDataHashMap.get(uuid) == null) return new DungeonBossLockout();
             return playerDataHashMap.get(uuid).dungeonBossLockout == null ? new DungeonBossLockout() : playerDataHashMap.get(uuid).dungeonBossLockout;
         } catch (Exception ex) {
@@ -355,7 +353,7 @@ public class PlayerData {
         try {
             // Clean up expired lockouts before saving
             dungeonBossLockout.cleanupExpiredLockouts();
-            setDatabaseValue(uuid, "DungeonBossLockouts", ObjectSerializer.toString(dungeonBossLockout));
+            setDatabaseValue(uuid, "DungeonBossLockouts", PlayerDataJsonCodec.encodeDungeonBossLockout(dungeonBossLockout));
             if (playerDataHashMap.containsKey(uuid))
                 playerDataHashMap.get(uuid).dungeonBossLockout = dungeonBossLockout;
         } catch (Exception ex) {
@@ -368,7 +366,7 @@ public class PlayerData {
     public static com.magmaguy.elitemobs.quests.QuestLockout getQuestLockout(UUID uuid) {
         try {
             if (!isInMemory(uuid))
-                return (com.magmaguy.elitemobs.quests.QuestLockout) ObjectSerializer.fromString((String) getDatabaseBlob(uuid, "QuestLockouts"));
+                return PlayerDataJsonCodec.decodeQuestLockout(getDatabaseBlob(uuid, "QuestLockouts"));
             if (playerDataHashMap.get(uuid) == null) return new com.magmaguy.elitemobs.quests.QuestLockout();
             return playerDataHashMap.get(uuid).questLockout == null ? new com.magmaguy.elitemobs.quests.QuestLockout() : playerDataHashMap.get(uuid).questLockout;
         } catch (Exception ex) {
@@ -384,7 +382,7 @@ public class PlayerData {
         try {
             // Clean up expired lockouts before saving
             questLockout.cleanupExpiredLockouts();
-            setDatabaseValue(uuid, "QuestLockouts", ObjectSerializer.toString(questLockout));
+            setDatabaseValue(uuid, "QuestLockouts", PlayerDataJsonCodec.encodeQuestLockout(questLockout));
             if (playerDataHashMap.containsKey(uuid))
                 playerDataHashMap.get(uuid).questLockout = questLockout;
         } catch (Exception ex) {
@@ -406,9 +404,8 @@ public class PlayerData {
         PlayerDataRepository.enqueueUpdate(uuid, key, value);
     }
 
-    private static Object getDatabaseBlob(UUID uuid, String value) {
-        byte[] bytes = (byte[]) PlayerDataRepository.getBlob(uuid, value);
-        return bytes == null ? null : new String(bytes, StandardCharsets.UTF_8);
+    private static byte[] getDatabaseBlob(UUID uuid, String value) {
+        return (byte[]) PlayerDataRepository.getBlob(uuid, value);
     }
 
     public static int getScore(UUID uuid) {
@@ -793,6 +790,12 @@ public class PlayerData {
             Logger.info("Opened database successfully");
             GenerateDatabase.generate();
             PlayerDataRepository.migrateCurrencyToCents();
+            SerializedPlayerDataMigration.MigrationResult migration =
+                    SerializedPlayerDataMigration.migrate(PlayerData.getConnection());
+            if (migration.rows() > 0)
+                Logger.info("Migrated " + migration.values() + " legacy player-data values across " + migration.rows()
+                        + " rows to versioned JSON; original BLOBs are retained in "
+                        + SerializedPlayerDataMigration.BACKUP_TABLE + ".");
             // Legacy import owns one transaction and completes before any asynchronous player load
             // can observe or modify the migrated rows.
             new PortOldData();
@@ -829,29 +832,23 @@ public class PlayerData {
 
         if (resultSet.getBytes("QuestStatus") != null) {
             try {
-                quests = (List<Quest>) ObjectSerializer.fromString(new String(resultSet.getBytes("QuestStatus"), StandardCharsets.UTF_8));
+                quests = PlayerDataJsonCodec.decodeQuests(resultSet.getBytes("QuestStatus"));
             } catch (Exception ex) {
-                Logger.warn("Failed to deserialize quest data for player " + uuid + "! This player's quest data will be wiped to prevent future errors.");
-                try {
-                    resetQuests(uuid);
-                } catch (Exception ex2) {
-                    Logger.warn("Failed to reset quest data! Ironic.");
-                    ex2.printStackTrace();
-                }
+                Logger.warn("Failed to deserialize quest data for player " + uuid
+                        + "; the stored BLOB was retained for recovery.");
+                ex.printStackTrace();
+                quests = new ArrayList<>();
             }
         }
 
         if (resultSet.getBytes("PlayerQuestCooldowns") != null) {
             try {
-                playerQuestCooldowns = (PlayerQuestCooldowns) ObjectSerializer.fromString(new String(resultSet.getBytes("PlayerQuestCooldowns"), StandardCharsets.UTF_8));
+                playerQuestCooldowns = PlayerDataJsonCodec.decodePlayerQuestCooldowns(resultSet.getBytes("PlayerQuestCooldowns"));
             } catch (Exception exception) {
-                Logger.warn("Failed to get player quest cooldowns!  ! This player's quest cooldowns will be wiped to prevent future errors.");
-                try {
-                    resetPlayerQuestCooldowns(uuid);
-                } catch (Exception ex2) {
-                    Logger.warn("Failed to reset quest cooldowns! Ironic.");
-                    ex2.printStackTrace();
-                }
+                Logger.warn("Failed to deserialize quest cooldowns for player " + uuid
+                        + "; the stored BLOB was retained for recovery.");
+                exception.printStackTrace();
+                playerQuestCooldowns = PlayerQuestCooldowns.initializePlayer();
             }
         }
 
@@ -871,11 +868,13 @@ public class PlayerData {
 
         if (resultSet.getBytes("DungeonBossLockouts") != null) {
             try {
-                dungeonBossLockout = (DungeonBossLockout) ObjectSerializer.fromString(new String(resultSet.getBytes("DungeonBossLockouts"), StandardCharsets.UTF_8));
+                dungeonBossLockout = PlayerDataJsonCodec.decodeDungeonBossLockout(resultSet.getBytes("DungeonBossLockouts"));
                 // Clean up expired lockouts on load
                 dungeonBossLockout.cleanupExpiredLockouts();
             } catch (Exception exception) {
-                Logger.warn("Failed to get dungeon boss lockouts! This player's lockouts will be reset.");
+                Logger.warn("Failed to deserialize dungeon boss lockouts for player " + uuid
+                        + "; the stored BLOB was retained for recovery.");
+                exception.printStackTrace();
                 dungeonBossLockout = new DungeonBossLockout();
             }
         } else {
@@ -884,11 +883,13 @@ public class PlayerData {
 
         if (resultSet.getBytes("QuestLockouts") != null) {
             try {
-                questLockout = (com.magmaguy.elitemobs.quests.QuestLockout) ObjectSerializer.fromString(new String(resultSet.getBytes("QuestLockouts"), StandardCharsets.UTF_8));
+                questLockout = PlayerDataJsonCodec.decodeQuestLockout(resultSet.getBytes("QuestLockouts"));
                 // Clean up expired lockouts on load
                 questLockout.cleanupExpiredLockouts();
             } catch (Exception exception) {
-                Logger.warn("Failed to get quest lockouts! This player's lockouts will be reset.");
+                Logger.warn("Failed to deserialize quest lockouts for player " + uuid
+                        + "; the stored BLOB was retained for recovery.");
+                exception.printStackTrace();
                 questLockout = new com.magmaguy.elitemobs.quests.QuestLockout();
             }
         } else {
