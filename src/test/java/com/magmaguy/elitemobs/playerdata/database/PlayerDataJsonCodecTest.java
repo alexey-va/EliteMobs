@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,7 +67,7 @@ class PlayerDataJsonCodecTest {
                 .getQuestReward().getCustomLootTable().getEntries().getFirst());
         assertSame(decoded.getFirst(), decoded.getFirst().getQuestObjectives().getQuest());
 
-        byte[] legacy = ObjectSerializer.toString(new ArrayList<>(List.of(quest))).getBytes(StandardCharsets.UTF_8);
+        byte[] legacy = withMismatchedUid(ObjectSerializer.toString(new ArrayList<>(List.of(quest))), Quest.class);
         assertEquals(quest.getQuestID(), PlayerDataJsonCodec.decodeQuests(legacy).getFirst().getQuestID());
     }
 
@@ -87,6 +88,8 @@ class PlayerDataJsonCodecTest {
 
         byte[] legacy = ObjectSerializer.toString(dungeonLockout).getBytes(StandardCharsets.UTF_8);
         assertEquals(dungeonLockout.getLockouts(), PlayerDataJsonCodec.decodeDungeonBossLockout(legacy).getLockouts());
+        byte[] legacyCooldowns = withMismatchedUid(ObjectSerializer.toString(cooldowns), PlayerQuestCooldowns.class);
+        assertEquals(0, PlayerDataJsonCodec.decodePlayerQuestCooldowns(legacyCooldowns).getQuestCooldowns().size());
     }
 
     @Test
@@ -136,5 +139,22 @@ class PlayerDataJsonCodecTest {
     private static Player player(UUID playerId) {
         return (Player) Proxy.newProxyInstance(Player.class.getClassLoader(), new Class<?>[]{Player.class},
                 (proxy, method, args) -> method.getName().equals("getUniqueId") ? playerId : null);
+    }
+
+    private static byte[] withMismatchedUid(String serialized, Class<?> type) {
+        byte[] data = Base64.getDecoder().decode(serialized);
+        byte[] name = type.getName().getBytes(StandardCharsets.UTF_8);
+        for (int offset = 0; offset + name.length + 11 < data.length; offset++) {
+            if (data[offset] != 0x72 || data[offset + 1] != (byte) (name.length >>> 8)
+                    || data[offset + 2] != (byte) name.length) continue;
+            boolean matches = true;
+            for (int index = 0; index < name.length; index++)
+                if (data[offset + 3 + index] != name[index]) matches = false;
+            if (!matches) continue;
+            int uidStart = offset + 3 + name.length;
+            data[uidStart] ^= 1;
+            return Base64.getEncoder().encode(data);
+        }
+        throw new AssertionError("Class descriptor not found for " + type.getName());
     }
 }

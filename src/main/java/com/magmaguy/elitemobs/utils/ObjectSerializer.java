@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class ObjectSerializer {
@@ -18,11 +19,58 @@ public class ObjectSerializer {
     public static Object fromString(String s) throws IOException,
             ClassNotFoundException {
         byte[] data = Base64.getDecoder().decode(s);
+        repairLegacySerialVersionUIDs(data);
         ObjectInputStream ois = new ObjectInputStream(
                 new ByteArrayInputStream(data));
+        ois.setObjectInputFilter(ObjectSerializer::filterLegacyClass);
         Object o = ois.readObject();
         ois.close();
         return o;
+    }
+
+    /**
+     * Old EliteMobs releases did not declare serialVersionUID on quest classes, so harmless source
+     * changes made already-persisted rows unreadable. Rewrite only EliteMobs class descriptors to
+     * their current UID before the one-time JSON migration; the stream's original field schema is
+     * retained and Java's normal compatible-field mapping still applies.
+     */
+    private static void repairLegacySerialVersionUIDs(byte[] data) {
+        for (int offset = 0; offset + 12 < data.length; offset++) {
+            if (data[offset] != ObjectStreamConstants.TC_CLASSDESC) continue;
+            int nameLength = (Byte.toUnsignedInt(data[offset + 1]) << 8) | Byte.toUnsignedInt(data[offset + 2]);
+            int nameStart = offset + 3;
+            int uidStart = nameStart + nameLength;
+            if (nameLength < 1 || uidStart + Long.BYTES > data.length) continue;
+            String className = new String(data, nameStart, nameLength, StandardCharsets.UTF_8);
+            if (!className.startsWith("com.magmaguy.elitemobs.")) continue;
+            try {
+                Class<?> localClass = Class.forName(className, false, ObjectSerializer.class.getClassLoader());
+                ObjectStreamClass descriptor = ObjectStreamClass.lookup(localClass);
+                if (descriptor == null) continue;
+                long uid = descriptor.getSerialVersionUID();
+                for (int index = Long.BYTES - 1; index >= 0; index--) {
+                    data[uidStart + index] = (byte) uid;
+                    uid >>>= 8;
+                }
+                offset = uidStart + Long.BYTES - 1;
+            } catch (ClassNotFoundException ignored) {
+                // ObjectInputStream will report the unknown class with its normal actionable error.
+            }
+        }
+    }
+
+    private static ObjectInputFilter.Status filterLegacyClass(ObjectInputFilter.FilterInfo info) {
+        if (info.depth() > 100 || info.references() > 100_000 || info.streamBytes() > 16_777_216)
+            return ObjectInputFilter.Status.REJECTED;
+        Class<?> type = info.serialClass();
+        if (type == null) return ObjectInputFilter.Status.UNDECIDED;
+        while (type.isArray()) type = type.getComponentType();
+        if (type.isPrimitive()) return ObjectInputFilter.Status.ALLOWED;
+        String name = type.getName();
+        if (name.startsWith("com.magmaguy.elitemobs.") || name.startsWith("java.lang.")
+                || name.startsWith("java.util.") || name.startsWith("org.bukkit."))
+            return ObjectInputFilter.Status.ALLOWED;
+        return ObjectInputFilter.Status.REJECTED;
     }
 
     /**
