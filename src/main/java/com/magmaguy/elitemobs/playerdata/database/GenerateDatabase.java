@@ -18,19 +18,19 @@ public class GenerateDatabase {
                 "DisplayName TEXT, " +
                 "CurrencyV2 DOUBLE, " +
                 "CurrencyCents BIGINT, " +
-                "QuestStatus BLOB, " +
+                "QuestStatus MEDIUMBLOB, " +
                 "Score INT, " +
                 "Kills INT, " +
                 "HighestLevelKilled INT, " +
                 "Deaths INT, " +
                 "QuestsCompleted INT, " +
                 "DungeonsCompleted INT, " +
-                "PlayerQuestCooldowns BLOB, " +
+                "PlayerQuestCooldowns MEDIUMBLOB, " +
                 "BackTeleportLocation TEXT, " +
                 "UseBookMenus TINYINT(1), " +
                 "DismissEMStatusScreenMessage TINYINT(1), " +
-                "DungeonBossLockouts BLOB, " +
-                "QuestLockouts BLOB, " +
+                "DungeonBossLockouts MEDIUMBLOB, " +
+                "QuestLockouts MEDIUMBLOB, " +
                 "SkillXP_ARMOR BIGINT, " +
                 "SkillXP_SWORDS BIGINT, " +
                 "SkillXP_AXES BIGINT, " +
@@ -40,30 +40,32 @@ public class GenerateDatabase {
                 "SkillXP_HOES BIGINT, " +
                 "SkillXP_MACES BIGINT, " +
                 "SkillXP_SPEARS BIGINT, " +
-                "SkillBonusSelections BLOB, " +
+                "SkillBonusSelections MEDIUMBLOB, " +
                 "GamblingDebt DOUBLE, " +
                 "GamblingDebtCents BIGINT" +
                 ");";
         statement.executeUpdate(sql);
         statement.close();
 
+        DungeonRuntimeData.initializeSchema(PlayerData.getConnection());
+
         // Check and add missing columns if any
         addEntryIfEmpty("DisplayName", ColumnValues.TEXT);
         addEntryIfEmpty("CurrencyV2", ColumnValues.REAL);
         addEntryIfEmpty("CurrencyCents", ColumnValues.BIGINT);
-        addEntryIfEmpty("QuestStatus", ColumnValues.BLOB);
+        addEntryIfEmpty("QuestStatus", ColumnValues.MEDIUMBLOB);
         addEntryIfEmpty("Score", ColumnValues.INT);
         addEntryIfEmpty("Kills", ColumnValues.INT);
         addEntryIfEmpty("HighestLevelKilled", ColumnValues.INT);
         addEntryIfEmpty("Deaths", ColumnValues.INT);
         addEntryIfEmpty("QuestsCompleted", ColumnValues.INT);
         addEntryIfEmpty("DungeonsCompleted", ColumnValues.INT);
-        addEntryIfEmpty("PlayerQuestCooldowns", ColumnValues.BLOB);
+        addEntryIfEmpty("PlayerQuestCooldowns", ColumnValues.MEDIUMBLOB);
         addEntryIfEmpty("BackTeleportLocation", ColumnValues.TEXT);
         addEntryIfEmpty("UseBookMenus", ColumnValues.BOOLEAN);
         addEntryIfEmpty("DismissEMStatusScreenMessage", ColumnValues.BOOLEAN);
-        addEntryIfEmpty("DungeonBossLockouts", ColumnValues.BLOB);
-        addEntryIfEmpty("QuestLockouts", ColumnValues.BLOB);
+        addEntryIfEmpty("DungeonBossLockouts", ColumnValues.MEDIUMBLOB);
+        addEntryIfEmpty("QuestLockouts", ColumnValues.MEDIUMBLOB);
 
         // Skill XP columns
         addEntryIfEmpty("SkillXP_ARMOR", ColumnValues.BIGINT);
@@ -77,11 +79,33 @@ public class GenerateDatabase {
         addEntryIfEmpty("SkillXP_SPEARS", ColumnValues.BIGINT);
 
         // Skill bonus selections (JSON)
-        addEntryIfEmpty("SkillBonusSelections", ColumnValues.BLOB);
+        addEntryIfEmpty("SkillBonusSelections", ColumnValues.MEDIUMBLOB);
 
         // Gambling debt
         addEntryIfEmpty("GamblingDebt", ColumnValues.REAL);
         addEntryIfEmpty("GamblingDebtCents", ColumnValues.BIGINT);
+
+        widenSerializedColumnsForMySQL();
+    }
+
+    private static void widenSerializedColumnsForMySQL() {
+        try {
+            String product = PlayerData.getConnection().getMetaData().getDatabaseProductName().toLowerCase();
+            if (!product.contains("mysql") && !product.contains("mariadb")) return;
+            for (String column : new String[]{"QuestStatus", "PlayerQuestCooldowns", "DungeonBossLockouts",
+                    "QuestLockouts", "SkillBonusSelections"}) {
+                try (ResultSet resultSet = PlayerData.getConnection().getMetaData().getColumns(
+                        null, null, PlayerData.getPLAYER_DATA_TABLE_NAME(), column)) {
+                    if (!resultSet.next() || "MEDIUMBLOB".equalsIgnoreCase(resultSet.getString("TYPE_NAME"))) continue;
+                }
+                try (Statement statement = PlayerData.getConnection().createStatement()) {
+                    statement.executeUpdate("ALTER TABLE " + PlayerData.getPLAYER_DATA_TABLE_NAME()
+                            + " MODIFY COLUMN " + column + " MEDIUMBLOB");
+                }
+            }
+        } catch (Exception exception) {
+            throw new IllegalStateException("Failed to migrate serialized player-data columns to MEDIUMBLOB", exception);
+        }
     }
 
     private static void addEntryIfEmpty(String columnName, ColumnValues columnValues) {
@@ -114,7 +138,7 @@ public class GenerateDatabase {
     }
 
     private enum ColumnValues {
-        BLOB,
+        MEDIUMBLOB,
         INT,
         BIGINT,
         TEXT,

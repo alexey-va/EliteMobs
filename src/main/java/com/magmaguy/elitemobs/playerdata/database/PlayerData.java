@@ -807,6 +807,7 @@ public class PlayerData {
     }
 
     public static void closeConnection() {
+        DungeonRuntimeData.shutdown();
         synchronized (PlayerDataRepository.monitor()) {
             playerDataHashMap.clear();
             loadingPlayers.clear();
