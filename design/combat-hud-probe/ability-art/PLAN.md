@@ -11,7 +11,7 @@
 - [x] Verify the reloaded resource pack is served with all 155 icons. Public pack byte checks passed for 155 textures and 33 font files; startup log had no error or exception lines.
 - [ ] Inspect the icons in a live Minecraft client when computer control is available.
 
-Sources are retained locally under sources/. Final 32x32 textures and the prompt manifest are versioned. Initial root artwork generated before the size correction retains its original prompt; its full-resolution source was downsampled to 32x32. The HUD footprint remains 190x54 GUI pixels. Each icon occupies a 13x13 GUI-pixel square inside a 15x15 frame.
+Final 32x32 textures and the prompt manifest are versioned. The ignored sources/ and previews/ directories are disposable import and review outputs; they are not required to build the plugin or regenerate the HUD from the final textures. The manifest's source paths record import provenance and do not imply that the original images remain on disk. Initial root artwork generated before the size correction retains its original prompt; its full-resolution source was downsampled to 32x32. The HUD footprint remains 190x54 GUI pixels. Each icon occupies a 13x13 GUI-pixel square inside a 15x15 frame.
 
 All 155 unique built-in abilities have artwork: 150 Signature/Utility abilities and five shared root Mobility abilities. The immutable Java glyph map is generated alongside the font providers. Effective class lineage uses the same snapshot as skill activation, including instance-locked classes.
 
