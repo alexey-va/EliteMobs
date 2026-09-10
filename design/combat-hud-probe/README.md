@@ -15,18 +15,20 @@ The wood/brass concept occupies exactly 190 by 54 GUI pixels. `gray.png` and
 `red.png` retain their calibration filenames, but now contain the normal and
 F-active artwork. The images are 190x54 with a font height of 54. A single bitmap glyph must fit Minecraft's 256x256 font atlas. The normal
 hotbar aperture is transparent; the skill cards are opaque and cover item pixels.
-`node generate.cjs` regenerates artwork, fill strips, text atlas, and the 33
-offset fonts with `sharp`. `generate-calibration.py` retains the old half-opacity
+`node generate.cjs` regenerates artwork, fill strips, the numeric text atlas, and the
+runtime font with `sharp`. `generate-calibration.py` retains the old half-opacity
 rectangles in a separate `calibration` output folder.
 
 The probe renders real health, class-resource amount, and vanilla XP progress.
 Health/resource bars update from those same values. The skill cards select
 three shared placeholder images by ability slot across all classes. Signature,
 utility and mobility currently reuse the corresponding Paladin artwork. The
-generator retains the other source artwork and glyph providers for later art work.
+generator retains the other source artwork for authoring but exports only the three
+shared icons. It removes obsolete ability textures and calibration font variants
+from its generated output so they cannot be repackaged on the next build.
 Armor, hunger and conditional vital rows
 are covered by this experimental combat HUD.
-Fonts are `elitemobs:combat_hud_concept_0` through `_32`; the default font is untouched.
+The runtime font is `elitemobs:combat_hud_concept_16`; the default font is untouched.
 
 Resource icons are a separate dynamic glyph at x=171, y=5, in a 10x15 cell.
 The resource snapshot selects the root class's icon, including specializations:
@@ -58,8 +60,7 @@ Resolve, Fury, Focus, Grace, Mana, XP, Stamina. Each group contains four sixteen
 poses. The separate F badge atlas uses U+E520 through U+E527: four neutral
 pulse frames, then four green active frames. Its 8x7 cells advance nine pixels.
 
-The runtime uses the centered, zero-offset font variant. Other generated
-variants remain as art calibration assets. A class must be active and its
+The runtime uses the centered, zero-offset font variant. A class must be active and its
 skill controls enabled for the skill-selection window; pressing
 F shows the three skill cards for the actual ability-selection window, then the hotbar again.
 The existing F,F, F+LMB and F+RMB bindings keep working.

@@ -10,13 +10,25 @@ const abilityManifest = JSON.parse(fs.readFileSync(path.join(abilityDirectory, '
 const abilityIcons = abilityManifest.map((entry,index) => ({...entry, glyph: 0xea00 + index}))
  .filter(entry => entry.texture);
 // Reuse the Paladin artwork for the three shared slots until replacement art is chosen.
-// Retain the other artwork and glyph providers for later art work.
+// Keep unused source artwork for authoring, but export only the runtime slots.
 const sharedAbilityIcons = ['signature', 'utility', 'mobility'].map(slot => {
  const entry = abilityIcons.find(entry => entry.id === `paladin.${slot}`);
  if (!entry) throw new Error(`Missing shared HUD artwork for ${slot}`);
  return entry;
 });
 fs.mkdirSync(textures, {recursive:true}); fs.mkdirSync(fonts, {recursive:true});
+const abilityTextures = path.join(textures, 'abilities');
+fs.mkdirSync(abilityTextures, {recursive:true});
+const sharedTextureNames = new Set(sharedAbilityIcons.map(entry => `${entry.id}.png`));
+for (const name of fs.readdirSync(abilityTextures)) {
+ if (name.endsWith('.png') && !sharedTextureNames.has(name))
+  fs.unlinkSync(path.join(abilityTextures, name));
+}
+for (const name of fs.readdirSync(fonts)) {
+ if (name === 'combat_hud_probe.json'
+     || (/^combat_hud_concept_\d+\.json$/.test(name) && name !== 'combat_hud_concept_16.json'))
+  fs.unlinkSync(path.join(fonts, name));
+}
 const glyphs = {
  '+':['00000','00100','00100','11111','00100','00100','00000'],
  ',':['00000','00000','00000','00000','00110','00100','01000'],
@@ -271,9 +283,9 @@ function panel(active){
  for(const [name,left,width] of [['left',0,3],['middle',3,1],['right',71,3]])
   await sharp(badgeFrame).extract({left,top:0,width,height:14}).png()
    .toFile(path.join(textures,`class_badge_${name}.png`));
- // Stamp every exported ability with the same legible UI label, preserving source art.
+ // Stamp the three shared runtime icons, preserving source art.
  const placeholderLabel = await sharp(Buffer.from(placeholderStamp())).png().toBuffer();
- for (const entry of abilityIcons) {
+ for (const entry of sharedAbilityIcons) {
   const source = path.join(abilityDirectory, entry.texture);
   const metadata = await sharp(source).metadata();
   if (metadata.width !== 32 || metadata.height !== 32) throw new Error(`Ability must be 32x32: ${entry.id}`);
@@ -316,7 +328,7 @@ function panel(active){
   if(!active)body=`<defs><mask id="m">${rect(0,0,190,54,'white')}${rect(3,31,184,23,'black')}</mask></defs><g mask="url(#m)">${body}</g>`;
   await sharp(Buffer.from(svg(190,54,body))).png().toFile(path.join(textures,name+'.png'));
  }
- const alphabet='0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ const alphabet='0123456789/KM';
  await sharp(Buffer.from(svg(alphabet.length*6,7,text(alphabet,0,0,'#ffffff')))).png().toFile(path.join(textures,'text.png'));
  // Four poses of sixteen one-pixel columns; runtime mirrors energy sampling.
  const strips=[['health','#ed3f57',3],['resource_resolve','#dcad4b',3],
@@ -330,7 +342,8 @@ function panel(active){
    strip+=rect(phase*16+x,y,1,1,stripColor(color,x,y,phase,name==='xp'));
   await sharp(Buffer.from(svg(64,h,strip))).png().toFile(path.join(textures,name+'.png'));
  }
- for(let y=-16;y<=16;y++){
+ {
+  const y = 0;
   const bitmap=(file,height,ascent,chars)=>{
    if(ascent-y>height) throw new Error(`Invalid ascent for ${file} at offset ${y}`);
    return {type:'bitmap',file:`elitemobs:gui/combat_hud_probe/${file}.png`,height,ascent:ascent-y,chars:[chars]};
@@ -347,7 +360,7 @@ function panel(active){
   bindings.forEach((_,i)=>providers.push(bitmap(`skill_unaffordable_${i}`,21,-43,String.fromCodePoint(0xe680+i))));
   ['left','middle','right'].forEach((name,i)=>providers.push(
    bitmap(`class_badge_${name}`,14,-4,String.fromCodePoint(0xe600+i))));
-  for (const entry of abilityIcons)
+  for (const entry of sharedAbilityIcons)
    providers.push(bitmap(`abilities/${entry.id}`,13,-47,String.fromCodePoint(entry.glyph)));
   for(let frame=0;frame<4;frame++) {
   const diamond=bitmap(frame===0?'class_diamond':`class_diamond_${frame}`,42,1,'');
@@ -358,5 +371,5 @@ function panel(active){
   }
   fs.writeFileSync(path.join(fonts,`combat_hud_concept_${y+16}.json`),JSON.stringify({providers},null,2)+'\n');
  }
- console.log('Generated live HUD concept textures and 33 offset fonts.');
+ console.log('Generated live HUD textures, three shared icons and the runtime font.');
 })();
