@@ -1,51 +1,71 @@
 # Automatic class loot
 
-`classLoot: true` adds a separate baseline equipment roll to a custom mob's death.
-It works even when `dropsEliteMobsLoot: false` or the authored loot table is empty.
-Existing custom items and unique loot remain available alongside it. New loaded
-custom-mob configurations default to coverage enabled; explicit `classLoot: false`
-settings are preserved. Summoned reinforcements, mounts and anti-exploit kills
-are excluded. A recipient must contribute at least 10% of the mob's maximum HP,
-be a real tracked player, and not be locked out of the dungeon reward.
+Author equipment as ordinary YAML files under `customitems`, using
+`itemType: CLASS_LOOT`. Bosses reference those files through `uniqueLootList`.
+The item loader owns names, lore, materials, models, permissions and item identity.
+The class-loot profiles own generated difficulty/rank stats. There are no loot
+templates in `custombosses`, and no boss-side `classLootItems` format.
 
-Configure each item's name and lore once in the boss YAML:
+For example, `customitems/goblins/borrowed_forever.yml`:
+
+```yaml
+isEnabled: true
+itemType: CLASS_LOOT
+material: DIAMOND_SWORD
+name: "&aBorrowed Forever"
+lore:
+- "&7Goblin signed receipt."
+- "&7Receipt says MINE."
+```
+
+The boss uses the existing item-reference format:
 
 ```yaml
 classLoot: true
 classLootRank: BOSS
 classLootDifficulty: AUTO
-classLootItems:
-  SWORDS:
-    name: "&bWinter's Edge"
-    lore:
-      - "&7Its edge has never known a whetstone."
-      - "&7Each winter leaves it sharper."
-  AXES:
-    name: "&bGlacier Splitter"
-    lore:
-      - "&7The haft bears the names of seven miners."
-      - "&7None returned for it."
-  WANDS:
-    name: "&bFrostwhisper"
-    lore:
-      - "&7Hold it to your ear."
-      - "&7The blizzard is still inside."
-  DPS_CHESTPLATES:
-    name: "&bIcebreaker's Hauberk"
-    lore:
-      - "&7The smith sharpened every link."
-      - "&7Putting it on requires practice."
-  TANK_CHESTPLATES:
-    name: "&bGlacier Guard"
-    lore:
-      - "&7The last avalanche left a dent."
-      - "&7The next will have to try harder."
-  SHIELDS:
-    name: "&bWinter's Door"
-    lore:
-      - "&7Taken from a cabin buried in snow."
-      - "&7It still keeps the cold outside."
+uniqueLootList:
+- filename: borrowed_forever.yml
+  chance: 1.0
 ```
+
+Only `CLASS_LOOT` entries participate in the single class-selection roll. The
+rank profile controls the initial reward chance; a selected entry's `chance`
+then remains a probability, never a weight. Its `amount` controls the selected
+item's quantity. Permission and difficulty filters apply before selection.
+Multiple items in one family share that family's selection probability equally.
+`CUSTOM`, `UNIQUE`, `DROPPABLE`, currency and command entries keep their existing
+independent behavior. Class items do not enter ordinary random drops or shops.
+The existing getloot commands and explicit chest/quest references can generate
+them; without a boss context they use the configured default difficulty and TRASH
+rank. Profiles supply generated enchantments; explicit item enchantments override
+matching generated values, and authored potion effects are retained alongside
+profile effects. CLASS_LOOT always scales to the requested reward level.
+
+Weapons infer their family from `material`. Magic items use the existing
+`weaponType: STAVES` or `weaponType: WANDS`, with the appropriate material and
+optional `fmmItemModel`. Armor must declare its role, for example:
+
+```yaml
+isEnabled: true
+itemType: CLASS_LOOT
+material: DIAMOND_CHESTPLATE
+classLootFamily: TANK_CHESTPLATES
+name: "&bGlacier Guard"
+lore:
+- "&7The last avalanche left a dent."
+```
+
+Invalid/mismatched families, missing identity fields, and unavailable materials
+disable that item with its filename in the warning. `lore: []` is valid. Omitted
+families are absent from selection; no placeholder item is synthesized.
+Real boss inheritance remains available for behavior, including ordinary inherited
+loot lists. Keep item filenames unique across installed content.
+
+Class rewards require `classLoot: true`, the global enable switch, and at least
+one eligible referenced class item. They work with `dropsEliteMobsLoot: false`.
+Reinforcements, mounts, anti-exploit kills and locked-out players are excluded.
+Recipients must be tracked real players contributing at least 10% of maximum HP.
 
 The active instanced dungeon supplies the difficulty ID. Numeric IDs 0/1/2,
 Normal/Hard/Mythic and Easy/Medium/Hard are supported, ignoring case, surrounding
@@ -71,21 +91,17 @@ otherwise TRASH. An explicit TRASH/MINIBOSS/BOSS override avoids ambiguity in ol
 content. Name/filename classifications in the corpus are evidence inferences;
 runtime rank does not guess from filenames.
 
-Supported item keys are SWORDS, AXES, BOWS, CROSSBOWS, TRIDENTS, HOES (scythes),
+Supported families are SWORDS, AXES, BOWS, CROSSBOWS, TRIDENTS, HOES (scythes),
 MACES, SPEARS, STAVES, WANDS, DPS_HELMETS, DPS_CHESTPLATES, DPS_LEGGINGS, DPS_BOOTS,
 TANK_HELMETS, TANK_CHESTPLATES, TANK_LEGGINGS, TANK_BOOTS and SHIELDS.
 The default selection favors the active class: 80% relevant equipment and 20%
 off-class equipment. Within the chosen bucket, categories have configurable weights
 (WEAPONS 50, ARMOR 45, SHIELDS 5), then available families in that category are
 equally likely. Adding a family does not change its category's share of that bucket.
-This is one item per successful roll, not a full set. An omitted item still
-participates with `&6$boss's $weapon` and
-empty lore. `$boss`, `$weapon`, `$item` and `$difficulty` work in each item's name and lore.
-`lore: []` explicitly means no authored lore and does not warn. Missing, blank or
-invalid names, missing/invalid lore and unknown family keys produce a dedicated
-`[ClassLoot presentation]` console warning with the boss filename and field paths
-when that enabled boss configuration loads. Inherited presentation counts as authored.
-Warnings do not disable drops or insert placeholder text into authored YAML.
+This is one selected item per successful roll, with quantity from the selected
+entry's `amount`, which defaults to one. `$boss`, `$weapon`, `$item` and
+`$difficulty` work in each custom item's name and lore. Authored names and lore
+use the normal custom-item translation path.
 
 Default drop chances are 5% for trash, 25% for minibosses and 100% for bosses,
 per eligible contributor. These are editable v0 economy choices, not frequencies
@@ -244,7 +260,7 @@ Protection as its primary, with defensive secondary enchantments. Shields use
 Protection through the existing offhand defense calculation. Helmet and boot
 profiles can include their supported slot enchantments. These are separate items,
 not a new full-set bonus or new skill types. Armor uses diamond materials; shields
-use SHIELD. Each slot has its own name and lore under `classLootItems`.
+use SHIELD. Each slot has its own ordinary custom-item file, name and lore.
 
 Profiles optionally accept `potionEffects` using the existing item syntax, for
 example `potionEffects: ["STRENGTH,0,SELF,ONHIT"]`. Amplifiers are zero-based. These
@@ -288,10 +304,11 @@ magic service. Experimental Combat world settings do not gate item availability.
 `dropProcedurallyGeneratedItems` controls ordinary procedural drops; class coverage
 has its own global `enabled` switch and per-mob `classLoot` switch. Procedural names
 come from `staffNames` / `wandNames` in `StaticItemNames.yml`; class item names and
-lore remain per mob and per item.
+lore remain in `customitems`.
 
-Legacy `classLootNames` and shared `classLootLore` migrate into individual entries.
-Existing per-item fields, including empty lore, take precedence. The migration
-preserves source text, removes the obsolete fields and uses the normal translated
-configuration lifecycle. Translation keys follow paths such as
-`classLootItems.SWORDS.lore`. Existing explicit classLoot opt-outs are not overridden.
+The rejected boss-template formats have been removed, including their automatic
+conversion code. Apply the converted DLC patches with the matching runtime.
+When upgrading a September 9 staff-review installation, remove exactly the old
+template filenames listed in each replacement patch before loading the content.
+Translation keys are the ordinary item `name` and `lore` keys. Explicit
+`classLoot: false` exclusions are preserved in the converted content.
