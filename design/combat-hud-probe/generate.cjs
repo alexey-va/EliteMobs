@@ -314,7 +314,6 @@ function panel(active){
  for(const [name,active] of [['gray',false],['red',true]]){
   let body=panel(active);
   if(!active)body=`<defs><mask id="m">${rect(0,0,190,54,'white')}${rect(3,31,184,23,'black')}</mask></defs><g mask="url(#m)">${body}</g>`;
-  fs.writeFileSync(path.join(__dirname,`${name}.svg`),svg(190,54,body));
   await sharp(Buffer.from(svg(190,54,body))).png().toFile(path.join(textures,name+'.png'));
  }
  const alphabet='0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
