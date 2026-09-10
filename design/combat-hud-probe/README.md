@@ -21,7 +21,10 @@ rectangles in a separate `calibration` output folder.
 
 The probe renders real health, class-resource amount, and vanilla XP progress.
 Health/resource bars update from those same values. The skill cards select
-class-specific placeholder artwork. Armor, hunger and conditional vital rows
+three shared placeholder images by ability slot across all classes. Signature,
+utility and mobility currently reuse the corresponding Paladin artwork. The
+generator retains the other source artwork and glyph providers for later art work.
+Armor, hunger and conditional vital rows
 are covered by this experimental combat HUD.
 Fonts are `elitemobs:combat_hud_concept_0` through `_32`; the default font is untouched.
 
