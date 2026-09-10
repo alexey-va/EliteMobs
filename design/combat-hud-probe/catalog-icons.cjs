@@ -1,7 +1,7 @@
 // Export the authored ability catalog for artwork production, preserving stable IDs.
 const fs = require('fs');
 const path = require('path');
-const source = fs.readFileSync(path.join(__dirname, '../../src/main/java/com/magmaguy/elitemobs/experimentalcombat/content/BuiltInClassDefinitions.java'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../../src/main/java/com/magmaguy/elitemobs/advancedcombat/content/BuiltInClassDefinitions.java'), 'utf8');
 const target = path.join(__dirname, 'ability-art');
 fs.mkdirSync(target, {recursive: true});
 const entries = [];
