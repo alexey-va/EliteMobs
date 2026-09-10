@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /** Versioned JSON codec for the four structured player-data BLOB columns. */
 final class PlayerDataJsonCodec {
@@ -82,6 +83,7 @@ final class PlayerDataJsonCodec {
     }
 
     static List<Quest> decodeQuests(byte[] bytes) throws Exception {
+        if (bytes == null) return new ArrayList<>();
         if (!isJson(bytes)) return castLegacyList(decodeLegacy(bytes));
         JsonArray data = payload(bytes, "quest-list").getAsJsonArray();
         List<Quest> quests = new ArrayList<>();
@@ -91,30 +93,52 @@ final class PlayerDataJsonCodec {
     }
 
     static byte[] encodePlayerQuestCooldowns(PlayerQuestCooldowns cooldowns) {
-        return envelope("quest-cooldowns", RAW_GSON.toJsonTree(cooldowns, COOLDOWNS_TYPE));
+        return envelope("quest-cooldowns", RAW_GSON.toJsonTree(Objects.requireNonNull(cooldowns), COOLDOWNS_TYPE));
     }
 
     static PlayerQuestCooldowns decodePlayerQuestCooldowns(byte[] bytes) throws Exception {
-        if (!isJson(bytes)) return (PlayerQuestCooldowns) decodeLegacy(bytes);
-        return RAW_GSON.fromJson(payload(bytes, "quest-cooldowns"), COOLDOWNS_TYPE);
+        if (bytes == null) return new PlayerQuestCooldowns();
+        if (!isJson(bytes)) return Objects.requireNonNull((PlayerQuestCooldowns) decodeLegacy(bytes));
+        JsonObject data = requireObject(payload(bytes, "quest-cooldowns"));
+        JsonArray cooldowns = required(data, "questCooldowns").getAsJsonArray();
+        for (JsonElement element : cooldowns) {
+            JsonObject cooldown = requireObject(element);
+            required(cooldown, "permission").getAsString();
+            required(cooldown, "permanent").getAsBoolean();
+            exactLong(required(cooldown, "targetUnixTime"));
+        }
+        return RAW_GSON.fromJson(data, COOLDOWNS_TYPE);
     }
 
     static byte[] encodeDungeonBossLockout(DungeonBossLockout lockout) {
-        return envelope("dungeon-boss-lockouts", RAW_GSON.toJsonTree(lockout));
+        return envelope("dungeon-boss-lockouts", RAW_GSON.toJsonTree(Objects.requireNonNull(lockout)));
     }
 
     static DungeonBossLockout decodeDungeonBossLockout(byte[] bytes) throws Exception {
-        if (!isJson(bytes)) return (DungeonBossLockout) decodeLegacy(bytes);
-        return RAW_GSON.fromJson(payload(bytes, "dungeon-boss-lockouts"), DungeonBossLockout.class);
+        if (bytes == null) return new DungeonBossLockout();
+        if (!isJson(bytes)) return Objects.requireNonNull((DungeonBossLockout) decodeLegacy(bytes));
+        DungeonBossLockout lockout = new DungeonBossLockout();
+        lockout.getLockouts().putAll(decodeLockouts(payload(bytes, "dungeon-boss-lockouts")));
+        return lockout;
     }
 
     static byte[] encodeQuestLockout(QuestLockout lockout) {
-        return envelope("quest-lockouts", RAW_GSON.toJsonTree(lockout));
+        return envelope("quest-lockouts", RAW_GSON.toJsonTree(Objects.requireNonNull(lockout)));
     }
 
     static QuestLockout decodeQuestLockout(byte[] bytes) throws Exception {
-        if (!isJson(bytes)) return (QuestLockout) decodeLegacy(bytes);
-        return RAW_GSON.fromJson(payload(bytes, "quest-lockouts"), QuestLockout.class);
+        if (bytes == null) return new QuestLockout();
+        if (!isJson(bytes)) return Objects.requireNonNull((QuestLockout) decodeLegacy(bytes));
+        QuestLockout lockout = new QuestLockout();
+        lockout.getLockouts().putAll(decodeLockouts(payload(bytes, "quest-lockouts")));
+        return lockout;
+    }
+
+    private static Map<String, Long> decodeLockouts(JsonElement payload) {
+        JsonObject values = requireObject(required(requireObject(payload), "lockouts"));
+        Map<String, Long> lockouts = new LinkedHashMap<>();
+        values.entrySet().forEach(entry -> lockouts.put(entry.getKey(), exactLong(entry.getValue())));
+        return lockouts;
     }
 
     static boolean isJson(byte[] bytes) {
@@ -136,14 +160,35 @@ final class PlayerDataJsonCodec {
     }
 
     private static JsonElement payload(byte[] bytes, String expectedType) {
-        JsonObject envelope = JsonParser.parseString(new String(bytes, StandardCharsets.UTF_8)).getAsJsonObject();
-        if (!FORMAT.equals(envelope.get("format").getAsString()))
+        JsonObject envelope = requireObject(JsonParser.parseString(new String(bytes, StandardCharsets.UTF_8)));
+        if (!FORMAT.equals(required(envelope, "format").getAsString()))
             throw new JsonParseException("Unknown player-data JSON format");
-        if (envelope.get("version").getAsInt() != VERSION)
+        if (exactLong(required(envelope, "version")) != VERSION)
             throw new JsonParseException("Unsupported player-data JSON version " + envelope.get("version"));
-        if (!expectedType.equals(envelope.get("type").getAsString()))
+        if (!expectedType.equals(required(envelope, "type").getAsString()))
             throw new JsonParseException("Expected " + expectedType + " player data");
-        return envelope.get("data");
+        return required(envelope, "data");
+    }
+
+    private static JsonObject requireObject(JsonElement element) {
+        if (element == null || !element.isJsonObject()) throw new JsonParseException("Expected player-data object");
+        return element.getAsJsonObject();
+    }
+
+    private static JsonElement required(JsonObject object, String field) {
+        JsonElement value = object.get(field);
+        if (value == null || value.isJsonNull()) throw new JsonParseException("Missing player-data field " + field);
+        return value;
+    }
+
+    private static long exactLong(JsonElement value) {
+        if (value == null || !value.isJsonPrimitive() || !value.getAsJsonPrimitive().isNumber())
+            throw new JsonParseException("Expected integer player-data value");
+        try {
+            return value.getAsBigDecimal().longValueExact();
+        } catch (ArithmeticException exception) {
+            throw new JsonParseException("Player-data integer is fractional or out of range", exception);
+        }
     }
 
     private static Object decodeLegacy(byte[] bytes) throws Exception {
@@ -176,10 +221,17 @@ final class PlayerDataJsonCodec {
 
         @Override
         public Quest deserialize(JsonElement json, Type type, JsonDeserializationContext context) {
-            JsonObject wrapper = json.getAsJsonObject();
-            Class<? extends Quest> concrete = TYPES.get(wrapper.get("type").getAsString());
+            JsonObject wrapper = requireObject(json);
+            Class<? extends Quest> concrete = TYPES.get(required(wrapper, "type").getAsString());
             if (concrete == null) throw new JsonParseException("Unknown quest type");
-            Quest quest = QUEST_GSON.fromJson(wrapper.get("value"), concrete);
+            JsonObject value = requireObject(required(wrapper, "value"));
+            required(value, "questID");
+            required(value, "playerUUID");
+            required(value, "accepted");
+            exactLong(required(value, "questLevel"));
+            JsonObject objectives = requireObject(required(value, "questObjectives"));
+            required(objectives, "objectives").getAsJsonArray();
+            Quest quest = QUEST_GSON.fromJson(value, concrete);
             restoreQuestReference(quest);
             return quest;
         }
@@ -235,10 +287,16 @@ final class PlayerDataJsonCodec {
 
         @Override
         public T deserialize(JsonElement json, Type type, JsonDeserializationContext context) {
-            JsonObject wrapper = json.getAsJsonObject();
-            Class<? extends T> concrete = types.get(wrapper.get("type").getAsString());
+            JsonObject wrapper = requireObject(json);
+            Class<? extends T> concrete = types.get(required(wrapper, "type").getAsString());
             if (concrete == null) throw new JsonParseException("Unknown polymorphic player-data type");
-            return gson.fromJson(wrapper.get("value"), concrete);
+            JsonObject value = requireObject(required(wrapper, "value"));
+            if (Objective.class.isAssignableFrom(concrete)) {
+                required(value, "objectiveCompleted");
+                exactLong(required(value, "currentAmount"));
+                exactLong(required(value, "targetAmount"));
+            }
+            return gson.fromJson(value, concrete);
         }
     }
 

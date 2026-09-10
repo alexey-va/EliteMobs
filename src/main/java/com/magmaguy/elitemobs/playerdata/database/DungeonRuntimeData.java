@@ -2,7 +2,7 @@ package com.magmaguy.elitemobs.playerdata.database;
 
 import com.magmaguy.elitemobs.MetadataHandler;
 import com.magmaguy.elitemobs.config.DatabaseConfig;
-import com.magmaguy.magmacore.util.Logger;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 
 import java.nio.charset.StandardCharsets;
@@ -22,6 +22,8 @@ import java.util.UUID;
 /** Stores dungeon state that changes during gameplay without rewriting content YAML files. */
 public final class DungeonRuntimeData {
 
+    private static final Logger LOGGER = Logger.getLogger("EliteMobs");
+
     static final String REGIONAL_BOSS_TABLE = "RegionalBossCooldowns";
     static final String TREASURE_CHEST_TABLE = "TreasureChestCooldowns";
     static final String TREASURE_CHEST_PLAYER_TABLE = "TreasureChestPlayerCooldowns";
@@ -32,6 +34,7 @@ public final class DungeonRuntimeData {
     private static final Map<String, Map<UUID, Long>> treasureChestPlayerCooldowns = new HashMap<>();
     private static boolean drainScheduled;
     private static boolean draining;
+    private static int consecutiveWriteFailures;
     private static volatile boolean available;
 
     private DungeonRuntimeData() {
@@ -66,7 +69,7 @@ public final class DungeonRuntimeData {
                                 .computeIfAbsent(resultSet.getString("ConfigFile"), ignored -> new HashMap<>())
                                 .put(UUID.fromString(resultSet.getString("PlayerUUID")), resultSet.getLong("RestockAt"));
                     } catch (IllegalArgumentException ignored) {
-                        Logger.warn("Ignored invalid player UUID in " + TREASURE_CHEST_PLAYER_TABLE + ".");
+                        LOGGER.warning("Ignored invalid player UUID in " + TREASURE_CHEST_PLAYER_TABLE + ".");
                     }
                 }
                 }
@@ -91,23 +94,36 @@ public final class DungeonRuntimeData {
                 statement.executeUpdate("ALTER TABLE " + table
                         + " ADD COLUMN ServerId VARCHAR(64) NOT NULL DEFAULT '" + namespace + "' FIRST,"
                         + " DROP PRIMARY KEY, ADD PRIMARY KEY (ServerId, ConfigFile, " + identityName + ")");
+            } catch (SQLException exception) {
+                if (!columnExists(connection, table, "ServerId")) throw exception;
             }
             return;
         }
 
         String legacyTable = table + "_LegacyRuntimeMigration";
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("ALTER TABLE " + table + " RENAME TO " + legacyTable);
-        }
-        createRuntimeTable(connection, table, identityColumn, valueColumn);
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO " + table
-                + " (ServerId, ConfigFile, " + identityName + ", " + valueColumn + ")"
-                + " SELECT ?, ConfigFile, " + identityName + ", " + valueColumn + " FROM " + legacyTable)) {
-            statement.setString(1, runtimeNamespace());
-            statement.executeUpdate();
-        }
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("DROP TABLE " + legacyTable);
+        boolean oldAutoCommit = connection.getAutoCommit();
+        if (!oldAutoCommit) throw new SQLException("Runtime schema migration requires its own transaction");
+        connection.setAutoCommit(false);
+        try {
+            try (Statement statement = connection.createStatement()) {
+                statement.executeUpdate("ALTER TABLE " + table + " RENAME TO " + legacyTable);
+            }
+            createRuntimeTable(connection, table, identityColumn, valueColumn);
+            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO " + table
+                    + " (ServerId, ConfigFile, " + identityName + ", " + valueColumn + ")"
+                    + " SELECT ?, ConfigFile, " + identityName + ", " + valueColumn + " FROM " + legacyTable)) {
+                statement.setString(1, runtimeNamespace());
+                statement.executeUpdate();
+            }
+            try (Statement statement = connection.createStatement()) {
+                statement.executeUpdate("DROP TABLE " + legacyTable);
+            }
+            connection.commit();
+        } catch (SQLException exception) {
+            connection.rollback();
+            throw exception;
+        } finally {
+            connection.setAutoCommit(oldAutoCommit);
         }
     }
 
@@ -115,20 +131,20 @@ public final class DungeonRuntimeData {
                                            String valueColumn) throws SQLException {
         String identityName = identityColumn.substring(0, identityColumn.indexOf(' '));
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("CREATE TABLE " + table + " (ServerId VARCHAR(64) NOT NULL, "
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + table + " (ServerId VARCHAR(64) NOT NULL, "
                     + "ConfigFile VARCHAR(255) NOT NULL, " + identityColumn + ", " + valueColumn + " BIGINT NOT NULL, "
                     + "PRIMARY KEY (ServerId, ConfigFile, " + identityName + "))");
         }
     }
 
     private static boolean tableExists(Connection connection, String table) throws SQLException {
-        try (ResultSet resultSet = connection.getMetaData().getTables(null, null, table, new String[]{"TABLE"})) {
+        try (ResultSet resultSet = connection.getMetaData().getTables(connection.getCatalog(), null, table, new String[]{"TABLE"})) {
             return resultSet.next();
         }
     }
 
     private static boolean columnExists(Connection connection, String table, String column) throws SQLException {
-        try (ResultSet resultSet = connection.getMetaData().getColumns(null, null, table, column)) {
+        try (ResultSet resultSet = connection.getMetaData().getColumns(connection.getCatalog(), null, table, column)) {
             return resultSet.next();
         }
     }
@@ -149,7 +165,7 @@ public final class DungeonRuntimeData {
         if (!available) return legacyValues;
         List<String> stored = cachedPlayerCooldowns(configFile);
         if (!stored.isEmpty() || legacyValues == null || legacyValues.isEmpty()) return stored;
-        synchronized (PlayerDataRepository.monitor()) {
+        synchronized (PlayerDataRepository.connectionMonitor()) {
             try {
                 Connection connection = PlayerDataRepository.connection();
                 boolean oldAutoCommit = connection.getAutoCommit();
@@ -161,7 +177,7 @@ public final class DungeonRuntimeData {
                         try {
                             upsertPlayerCooldown(connection, configFile, UUID.fromString(split[0]), Long.parseLong(split[1]));
                         } catch (IllegalArgumentException ignored) {
-                            Logger.warn("Ignored invalid legacy treasure chest cooldown in " + configFile + ": " + legacyValue);
+                            LOGGER.warning("Ignored invalid legacy treasure chest cooldown in " + configFile + ": " + legacyValue);
                         }
                     }
                     connection.commit();
@@ -187,7 +203,7 @@ public final class DungeonRuntimeData {
                 return cachedPlayerCooldowns(configFile);
             } catch (Exception exception) {
                 available = false;
-                Logger.warn("Failed to load treasure chest player cooldowns for " + configFile + ".");
+                LOGGER.warning("Failed to load treasure chest player cooldowns for " + configFile + ".");
                 exception.printStackTrace();
                 return legacyValues;
             }
@@ -284,12 +300,15 @@ public final class DungeonRuntimeData {
                         QUEUE_MONITOR.wait();
                     } catch (InterruptedException exception) {
                         Thread.currentThread().interrupt();
-                        Logger.warn("Interrupted while flushing dungeon runtime state.");
+                        LOGGER.warning("Interrupted while flushing dungeon runtime state.");
                         return;
                     }
                 if (pendingWrites.isEmpty()) return;
             }
-            drainWrites();
+            if (!drainWrites()) {
+                LOGGER.warning("Dungeon runtime shutdown flush failed; pending changes could not be persisted.");
+                return;
+            }
         }
     }
 
@@ -303,7 +322,7 @@ public final class DungeonRuntimeData {
             if (stored != null) return stored;
         }
         if (legacyValue <= 0) return legacyValue;
-        synchronized (PlayerDataRepository.monitor()) {
+        synchronized (PlayerDataRepository.connectionMonitor()) {
             try {
                 Connection connection = PlayerDataRepository.connection();
                 upsertCooldown(connection, table, valueColumn, configFile, location, legacyValue);
@@ -313,7 +332,7 @@ public final class DungeonRuntimeData {
                 return legacyValue;
             } catch (Exception exception) {
                 available = false;
-                Logger.warn("Failed to load dungeon runtime cooldown for " + configFile + ".");
+                LOGGER.warning("Failed to load dungeon runtime cooldown for " + configFile + ".");
                 exception.printStackTrace();
                 return legacyValue;
             }
@@ -336,29 +355,30 @@ public final class DungeonRuntimeData {
         return true;
     }
 
-    private static void drainWrites() {
-        List<RuntimeWrite> writes;
+    static boolean drainWrites() {
+        Map<String, RuntimeWrite> writes;
+        boolean committed = false;
         synchronized (QUEUE_MONITOR) {
-            if (draining) return;
-            writes = new ArrayList<>(pendingWrites.values());
-            pendingWrites.clear();
+            if (draining) return true;
+            writes = new LinkedHashMap<>(pendingWrites);
             if (writes.isEmpty()) {
                 drainScheduled = false;
-                return;
+                return true;
             }
             draining = true;
         }
         try {
-            synchronized (PlayerDataRepository.monitor()) {
+            synchronized (PlayerDataRepository.connectionMonitor()) {
                 Connection connection = null;
                 boolean oldAutoCommit = true;
                 try {
                     connection = PlayerDataRepository.connection();
                     oldAutoCommit = connection.getAutoCommit();
                     connection.setAutoCommit(false);
-                    for (RuntimeWrite write : writes)
+                    for (RuntimeWrite write : writes.values())
                         write.operation().execute(connection);
                     connection.commit();
+                    committed = true;
                 } catch (Exception exception) {
                     if (connection != null)
                         try {
@@ -366,15 +386,19 @@ public final class DungeonRuntimeData {
                         } catch (SQLException rollbackException) {
                             exception.addSuppressed(rollbackException);
                         }
-                    Logger.warn("Failed to save a batch of " + writes.size() + " dungeon runtime changes; first entry: "
-                            + writes.getFirst().description() + ".");
-                    exception.printStackTrace();
+                    consecutiveWriteFailures++;
+                    if (consecutiveWriteFailures == 1 || consecutiveWriteFailures % 10 == 0) {
+                        LOGGER.warning("Failed to save " + writes.size() + " dungeon runtime changes (attempt "
+                                + consecutiveWriteFailures + "); retained for retry. First entry: "
+                                + writes.values().iterator().next().description() + ".");
+                        exception.printStackTrace();
+                    }
                 } finally {
                     if (connection != null)
                         try {
                             connection.setAutoCommit(oldAutoCommit);
                         } catch (SQLException exception) {
-                            Logger.warn("Failed to restore database auto-commit after saving dungeon runtime state.");
+                            LOGGER.warning("Failed to restore database auto-commit after saving dungeon runtime state.");
                             exception.printStackTrace();
                         }
                 }
@@ -382,14 +406,24 @@ public final class DungeonRuntimeData {
         } finally {
             boolean scheduleNext;
             synchronized (QUEUE_MONITOR) {
+                if (committed) {
+                    // A newer value may have arrived while JDBC was busy. Only acknowledge the
+                    // exact writes in this transaction; failed batches stay queued in order.
+                    writes.forEach((key, write) -> pendingWrites.remove(key, write));
+                    if (consecutiveWriteFailures > 0)
+                        LOGGER.info("Dungeon runtime persistence recovered after " + consecutiveWriteFailures + " failed attempts.");
+                    consecutiveWriteFailures = 0;
+                }
                 draining = false;
                 scheduleNext = available && !pendingWrites.isEmpty();
                 if (!scheduleNext) drainScheduled = false;
                 QUEUE_MONITOR.notifyAll();
             }
             if (scheduleNext)
-                Bukkit.getScheduler().runTaskLaterAsynchronously(MetadataHandler.PLUGIN, DungeonRuntimeData::drainWrites, 20L);
+                Bukkit.getScheduler().runTaskLaterAsynchronously(MetadataHandler.PLUGIN, DungeonRuntimeData::drainWrites,
+                        Math.min(1200L, 20L << Math.min(consecutiveWriteFailures, 6)));
         }
+        return committed;
     }
 
     static Long readCooldown(Connection connection, String table, String valueColumn,
@@ -407,21 +441,15 @@ public final class DungeonRuntimeData {
 
     static void upsertCooldown(Connection connection, String table, String valueColumn,
                                String configFile, String location, long value) throws SQLException {
-        try (PreparedStatement update = connection.prepareStatement("UPDATE " + table + " SET " + valueColumn
-                + " = ? WHERE ServerId = ? AND ConfigFile = ? AND LocationKey = ?")) {
-            update.setLong(1, value);
-            update.setString(2, runtimeNamespace());
-            update.setString(3, configFile);
-            update.setString(4, locationKey(location));
-            if (update.executeUpdate() > 0) return;
-        }
-        try (PreparedStatement insert = connection.prepareStatement("INSERT INTO " + table
-                + " (ServerId, ConfigFile, LocationKey, " + valueColumn + ") VALUES (?, ?, ?, ?)")) {
-            insert.setString(1, runtimeNamespace());
-            insert.setString(2, configFile);
-            insert.setString(3, locationKey(location));
-            insert.setLong(4, value);
-            insert.executeUpdate();
+        String sql = "INSERT INTO " + table + " (ServerId, ConfigFile, LocationKey, " + valueColumn + ") VALUES (?, ?, ?, ?)"
+                + upsertClause(connection, "LocationKey", valueColumn);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, runtimeNamespace());
+            statement.setString(2, configFile);
+            statement.setString(3, locationKey(location));
+            statement.setLong(4, value);
+            statement.setLong(5, value);
+            statement.executeUpdate();
         }
     }
 
@@ -473,22 +501,24 @@ public final class DungeonRuntimeData {
     }
 
     static void upsertPlayerCooldown(Connection connection, String configFile, UUID playerId, long restockAt) throws SQLException {
-        try (PreparedStatement update = connection.prepareStatement("UPDATE " + TREASURE_CHEST_PLAYER_TABLE
-                + " SET RestockAt = ? WHERE ServerId = ? AND ConfigFile = ? AND PlayerUUID = ?")) {
-            update.setLong(1, restockAt);
-            update.setString(2, runtimeNamespace());
-            update.setString(3, configFile);
-            update.setString(4, playerId.toString());
-            if (update.executeUpdate() > 0) return;
+        String sql = "INSERT INTO " + TREASURE_CHEST_PLAYER_TABLE
+                + " (ServerId, ConfigFile, PlayerUUID, RestockAt) VALUES (?, ?, ?, ?)"
+                + upsertClause(connection, "PlayerUUID", "RestockAt");
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, runtimeNamespace());
+            statement.setString(2, configFile);
+            statement.setString(3, playerId.toString());
+            statement.setLong(4, restockAt);
+            statement.setLong(5, restockAt);
+            statement.executeUpdate();
         }
-        try (PreparedStatement insert = connection.prepareStatement("INSERT INTO " + TREASURE_CHEST_PLAYER_TABLE
-                + " (ServerId, ConfigFile, PlayerUUID, RestockAt) VALUES (?, ?, ?, ?)")) {
-            insert.setString(1, runtimeNamespace());
-            insert.setString(2, configFile);
-            insert.setString(3, playerId.toString());
-            insert.setLong(4, restockAt);
-            insert.executeUpdate();
-        }
+    }
+
+    private static String upsertClause(Connection connection, String identity, String value) throws SQLException {
+        String product = connection.getMetaData().getDatabaseProductName().toLowerCase(java.util.Locale.ROOT);
+        return (product.contains("mysql") || product.contains("mariadb"))
+                ? " ON DUPLICATE KEY UPDATE " + value + " = ?"
+                : " ON CONFLICT (ServerId, ConfigFile, " + identity + ") DO UPDATE SET " + value + " = ?";
     }
 
     private static String locationKey(String location) {
@@ -510,10 +540,10 @@ public final class DungeonRuntimeData {
     }
 
     @FunctionalInterface
-    private interface SqlOperation {
+    interface SqlOperation {
         void execute(Connection connection) throws Exception;
     }
 
-    private record RuntimeWrite(String description, SqlOperation operation) {
+    record RuntimeWrite(String description, SqlOperation operation) {
     }
 }

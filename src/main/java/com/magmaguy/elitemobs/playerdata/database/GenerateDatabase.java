@@ -95,8 +95,10 @@ public class GenerateDatabase {
             for (String column : new String[]{"QuestStatus", "PlayerQuestCooldowns", "DungeonBossLockouts",
                     "QuestLockouts", "SkillBonusSelections"}) {
                 try (ResultSet resultSet = PlayerData.getConnection().getMetaData().getColumns(
-                        null, null, PlayerData.getPLAYER_DATA_TABLE_NAME(), column)) {
-                    if (!resultSet.next() || "MEDIUMBLOB".equalsIgnoreCase(resultSet.getString("TYPE_NAME"))) continue;
+                        PlayerData.getConnection().getCatalog(), null, PlayerData.getPLAYER_DATA_TABLE_NAME(), column)) {
+                    if (!resultSet.next()) continue;
+                    String type = resultSet.getString("TYPE_NAME");
+                    if (!"BLOB".equalsIgnoreCase(type) && !"TINYBLOB".equalsIgnoreCase(type)) continue;
                 }
                 try (Statement statement = PlayerData.getConnection().createStatement()) {
                     statement.executeUpdate("ALTER TABLE " + PlayerData.getPLAYER_DATA_TABLE_NAME()
@@ -111,7 +113,7 @@ public class GenerateDatabase {
     private static void addEntryIfEmpty(String columnName, ColumnValues columnValues) {
         try {
             DatabaseMetaData metaData = PlayerData.getConnection().getMetaData();
-            ResultSet resultSet = metaData.getColumns(null, null, PlayerData.getPLAYER_DATA_TABLE_NAME(), columnName);
+            ResultSet resultSet = metaData.getColumns(PlayerData.getConnection().getCatalog(), null, PlayerData.getPLAYER_DATA_TABLE_NAME(), columnName);
             if (resultSet.next()) {
                 //Logger.message("Database already had " + columnName);
             } else {

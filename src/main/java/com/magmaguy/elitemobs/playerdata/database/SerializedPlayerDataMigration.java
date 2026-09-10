@@ -1,18 +1,27 @@
 package com.magmaguy.elitemobs.playerdata.database;
 
-import com.magmaguy.magmacore.util.Logger;
+import java.util.logging.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.nio.ByteBuffer;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HexFormat;
 import java.util.List;
+import java.util.Set;
 
 /** Converts legacy Java-serialized player state to versioned JSON without discarding the source bytes. */
 final class SerializedPlayerDataMigration {
 
-    static final String BACKUP_TABLE = "PlayerDataSerializedLegacy";
+    private static final Logger LOGGER = Logger.getLogger("EliteMobs");
+
+    // The original PlayerDataSerializedLegacy table remains untouched. Its UUID-only primary key
+    // cannot retain a second legacy value written by an older server during a rolling upgrade.
+    static final String BACKUP_TABLE = "PlayerDataSerializedSnapshots";
     private static final int BATCH_SIZE = 100;
     private static final List<ColumnCodec> COLUMNS = List.of(
             new ColumnCodec("QuestStatus", bytes -> PlayerDataJsonCodec.encodeQuests(PlayerDataJsonCodec.decodeQuests(bytes))),
@@ -24,6 +33,7 @@ final class SerializedPlayerDataMigration {
     }
 
     static MigrationResult migrate(Connection connection) throws Exception {
+        if (!connection.getAutoCommit()) throw new IllegalStateException("Player-data migration requires its own transaction");
         initializeSchema(connection);
         int rowsMigrated = 0;
         int valuesMigrated = 0;
@@ -39,15 +49,15 @@ final class SerializedPlayerDataMigration {
                     MigratedRow migrated = convert(row);
                     if (migrated != null) migratedRows.add(migrated);
                 } catch (Exception exception) {
-                    Logger.warn("Could not migrate legacy serialized player data for UUID " + row.playerId()
+                    LOGGER.warning("Could not migrate legacy serialized player data for UUID " + row.playerId()
                             + "; the original BLOBs were left unchanged.");
                     exception.printStackTrace();
                 }
             }
             if (migratedRows.isEmpty()) continue;
-            int[] result = writeBatch(connection, migratedRows);
-            rowsMigrated += migratedRows.size();
-            for (int changed : result) valuesMigrated += changed;
+            MigrationResult result = writeBatch(connection, migratedRows);
+            rowsMigrated += result.rows();
+            valuesMigrated += result.values();
         }
         return new MigrationResult(rowsMigrated, valuesMigrated);
     }
@@ -55,9 +65,10 @@ final class SerializedPlayerDataMigration {
     private static void initializeSchema(Connection connection) throws Exception {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + BACKUP_TABLE + " ("
-                    + "PlayerUUID VARCHAR(36) PRIMARY KEY NOT NULL, "
+                    + "PlayerUUID VARCHAR(36) NOT NULL, SnapshotHash CHAR(64) NOT NULL, "
                     + "QuestStatus MEDIUMBLOB, PlayerQuestCooldowns MEDIUMBLOB, "
-                    + "DungeonBossLockouts MEDIUMBLOB, QuestLockouts MEDIUMBLOB, MigratedAt BIGINT NOT NULL)");
+                    + "DungeonBossLockouts MEDIUMBLOB, QuestLockouts MEDIUMBLOB, MigratedAt BIGINT NOT NULL, "
+                    + "PRIMARY KEY (PlayerUUID, SnapshotHash))" + (isMySQL(connection) ? " ENGINE=InnoDB" : ""));
         }
     }
 
@@ -90,12 +101,12 @@ final class SerializedPlayerDataMigration {
         return hasLegacy ? new MigratedRow(row.playerId(), original, converted) : null;
     }
 
-    private static int[] writeBatch(Connection connection, List<MigratedRow> rows) throws Exception {
-        boolean mysql = connection.getMetaData().getDatabaseProductName().toLowerCase().contains("mysql")
-                || connection.getMetaData().getDatabaseProductName().toLowerCase().contains("mariadb");
-        String backupSql = (mysql ? "INSERT IGNORE" : "INSERT OR IGNORE") + " INTO " + BACKUP_TABLE
-                + " (PlayerUUID, QuestStatus, PlayerQuestCooldowns, DungeonBossLockouts, QuestLockouts, MigratedAt)"
-                + " VALUES (?, ?, ?, ?, ?, ?)";
+    private static MigrationResult writeBatch(Connection connection, List<MigratedRow> rows) throws Exception {
+        String backupSql = "INSERT INTO " + BACKUP_TABLE
+                + " (PlayerUUID, QuestStatus, PlayerQuestCooldowns, DungeonBossLockouts, QuestLockouts, MigratedAt, SnapshotHash)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)"
+                + (isMySQL(connection) ? " ON DUPLICATE KEY UPDATE SnapshotHash = SnapshotHash"
+                : " ON CONFLICT (PlayerUUID, SnapshotHash) DO NOTHING");
         boolean oldAutoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
         try (PreparedStatement backup = connection.prepareStatement(backupSql)) {
@@ -109,6 +120,7 @@ final class SerializedPlayerDataMigration {
                     for (int index = 0; index < row.original().length; index++)
                         backup.setBytes(index + 2, row.original()[index]);
                     backup.setLong(6, System.currentTimeMillis());
+                    backup.setString(7, snapshotHash(row.original()));
                     backup.addBatch();
 
                     for (int index = 0; index < row.converted().length; index++) {
@@ -121,11 +133,23 @@ final class SerializedPlayerDataMigration {
                     }
                 }
                 backup.executeBatch();
-                List<Integer> changed = new ArrayList<>();
-                for (PreparedStatement update : updates)
-                    for (int count : update.executeBatch()) changed.add(Math.max(count, 0));
+                Set<String> changedRows = new HashSet<>();
+                int changedValues = 0;
+                for (int index = 0; index < updates.size(); index++) {
+                    int[] counts = updates.get(index).executeBatch();
+                    int position = 0;
+                    for (MigratedRow row : rows) {
+                        if (row.converted()[index] == null) continue;
+                        int count = counts[position++];
+                        if (count == Statement.EXECUTE_FAILED) throw new java.sql.SQLException("Player-data migration batch failed");
+                        if (count > 0 || count == Statement.SUCCESS_NO_INFO) {
+                            changedValues++;
+                            changedRows.add(row.playerId());
+                        }
+                    }
+                }
                 connection.commit();
-                return changed.stream().mapToInt(Integer::intValue).toArray();
+                return new MigrationResult(changedRows.size(), changedValues);
             } finally {
                 for (PreparedStatement update : updates) update.close();
             }
@@ -135,6 +159,20 @@ final class SerializedPlayerDataMigration {
         } finally {
             connection.setAutoCommit(oldAutoCommit);
         }
+    }
+
+    private static boolean isMySQL(Connection connection) throws Exception {
+        String product = connection.getMetaData().getDatabaseProductName().toLowerCase(java.util.Locale.ROOT);
+        return product.contains("mysql") || product.contains("mariadb");
+    }
+
+    private static String snapshotHash(byte[][] values) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        for (byte[] value : values) {
+            digest.update(ByteBuffer.allocate(Integer.BYTES).putInt(value == null ? -1 : value.length).array());
+            if (value != null) digest.update(value);
+        }
+        return HexFormat.of().formatHex(digest.digest());
     }
 
     private record PlayerRow(String playerId, byte[] questStatus, byte[] playerQuestCooldowns,

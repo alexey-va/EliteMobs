@@ -68,7 +68,7 @@ public class PlayerData {
     private List<Quest> quests = new ArrayList<>();
     @Getter
     @Setter
-    private PlayerQuestCooldowns playerQuestCooldowns = null;
+    private PlayerQuestCooldowns playerQuestCooldowns = new PlayerQuestCooldowns();
     @Getter
     @Setter
     private Location backTeleportLocation;
@@ -168,8 +168,8 @@ public class PlayerData {
                         PlayerDataRepository.readPlayer(uuid, resultSet -> readExistingData(uuid, resultSet));
                     }
                 } catch (Exception e) {
-                    Logger.warn("Something went wrong while generating a new player entry. This is bad! Tell the dev.");
-                    Logger.warn(e.getClass().getName() + ": " + e.getMessage());
+                    Logger.warn("Failed to load player data for " + uuid + "; the session was not published and stored data was retained.");
+                    e.printStackTrace();
                     playerDataHashMap.remove(uuid, PlayerData.this);
                     synchronized (PlayerDataRepository.monitor()) {
                         loadingPlayers.remove(uuid);
@@ -254,39 +254,26 @@ public class PlayerData {
     }
 
     public static List<Quest> getQuests(UUID uuid) {
-        try {
-            if (!isInMemory(uuid))
-                return PlayerDataJsonCodec.decodeQuests(getDatabaseBlob(uuid, "QuestStatus"));
-            if (playerDataHashMap.get(uuid) == null) return new ArrayList<>();
-            return playerDataHashMap.get(uuid).quests == null ? new ArrayList<>() : playerDataHashMap.get(uuid).quests;
-        } catch (Exception ex) {
-            return new ArrayList<>();
-        }
+        PlayerData player = playerDataHashMap.get(uuid);
+        return player == null
+                ? readStructuredValue(uuid, "QuestStatus", getDatabaseBlob(uuid, "QuestStatus"), PlayerDataJsonCodec::decodeQuests)
+                : player.quests;
     }
 
     public static Quest getQuest(UUID uuid, String questID) {
+        UUID questUUID;
         try {
-            UUID questUUID = UUID.fromString(questID);
-            return getQuest(uuid, questUUID);
-        } catch (Exception ex) {
+            questUUID = UUID.fromString(questID);
+        } catch (IllegalArgumentException ex) {
             Logger.warn("Failed to convert quest ID from command into a valid UUID format!");
             return null;
         }
+        return getQuest(uuid, questUUID);
     }
 
     public static Quest getQuest(UUID uuid, UUID questUUID) {
-        List<Quest> questList = null;
-        try {
-            if (!isInMemory(uuid))
-                questList = PlayerDataJsonCodec.decodeQuests(getDatabaseBlob(uuid, "QuestStatus"));
-            else
-                questList = playerDataHashMap.get(uuid).quests;
-        } catch (Exception ex) {
-            return null;
-        }
-        for (Quest iteratedQuest : questList)
-            if (iteratedQuest.getQuestID().equals(questUUID))
-                return iteratedQuest;
+        for (Quest quest : getQuests(uuid))
+            if (quest.getQuestID().equals(questUUID)) return quest;
         return null;
     }
 
@@ -317,16 +304,11 @@ public class PlayerData {
         updateQuestStatus(uuid);
     }
 
-    @Nullable
     public static PlayerQuestCooldowns getPlayerQuestCooldowns(UUID uuid) {
-        try {
-            if (!isInMemory(uuid))
-                return PlayerDataJsonCodec.decodePlayerQuestCooldowns(getDatabaseBlob(uuid, "PlayerQuestCooldowns"));
-            if (playerDataHashMap.get(uuid) == null) return PlayerQuestCooldowns.initializePlayer();
-            return playerDataHashMap.get(uuid).playerQuestCooldowns == null ? PlayerQuestCooldowns.initializePlayer() : playerDataHashMap.get(uuid).playerQuestCooldowns;
-        } catch (Exception ex) {
-            return null;
-        }
+        PlayerData player = playerDataHashMap.get(uuid);
+        return player == null
+                ? readStructuredValue(uuid, "PlayerQuestCooldowns", getDatabaseBlob(uuid, "PlayerQuestCooldowns"), PlayerDataJsonCodec::decodePlayerQuestCooldowns)
+                : player.playerQuestCooldowns;
     }
 
     public static void resetPlayerQuestCooldowns(UUID uuid) {
@@ -344,16 +326,11 @@ public class PlayerData {
         }
     }
 
-    @Nullable
     public static DungeonBossLockout getDungeonBossLockout(UUID uuid) {
-        try {
-            if (!isInMemory(uuid))
-                return PlayerDataJsonCodec.decodeDungeonBossLockout(getDatabaseBlob(uuid, "DungeonBossLockouts"));
-            if (playerDataHashMap.get(uuid) == null) return new DungeonBossLockout();
-            return playerDataHashMap.get(uuid).dungeonBossLockout == null ? new DungeonBossLockout() : playerDataHashMap.get(uuid).dungeonBossLockout;
-        } catch (Exception ex) {
-            return new DungeonBossLockout();
-        }
+        PlayerData player = playerDataHashMap.get(uuid);
+        return player == null
+                ? readStructuredValue(uuid, "DungeonBossLockouts", getDatabaseBlob(uuid, "DungeonBossLockouts"), PlayerDataJsonCodec::decodeDungeonBossLockout)
+                : player.dungeonBossLockout;
     }
 
     public static void updateDungeonBossLockout(UUID uuid, DungeonBossLockout dungeonBossLockout) {
@@ -369,16 +346,11 @@ public class PlayerData {
         }
     }
 
-    @Nullable
     public static com.magmaguy.elitemobs.quests.QuestLockout getQuestLockout(UUID uuid) {
-        try {
-            if (!isInMemory(uuid))
-                return PlayerDataJsonCodec.decodeQuestLockout(getDatabaseBlob(uuid, "QuestLockouts"));
-            if (playerDataHashMap.get(uuid) == null) return new com.magmaguy.elitemobs.quests.QuestLockout();
-            return playerDataHashMap.get(uuid).questLockout == null ? new com.magmaguy.elitemobs.quests.QuestLockout() : playerDataHashMap.get(uuid).questLockout;
-        } catch (Exception ex) {
-            return new com.magmaguy.elitemobs.quests.QuestLockout();
-        }
+        PlayerData player = playerDataHashMap.get(uuid);
+        return player == null
+                ? readStructuredValue(uuid, "QuestLockouts", getDatabaseBlob(uuid, "QuestLockouts"), PlayerDataJsonCodec::decodeQuestLockout)
+                : player.questLockout;
     }
 
     public static void resetQuestLockouts(UUID uuid) {
@@ -409,6 +381,20 @@ public class PlayerData {
             }
         }
         PlayerDataRepository.enqueueUpdate(uuid, key, value);
+    }
+
+    private static <T> T readStructuredValue(UUID player, String column, byte[] bytes, StructuredDecoder<T> decoder) {
+        try {
+            return decoder.decode(bytes);
+        } catch (Exception exception) {
+            throw new IllegalStateException("Cannot read " + column + " for player " + player
+                    + "; original data retained, dependent operations are unavailable", exception);
+        }
+    }
+
+    @FunctionalInterface
+    private interface StructuredDecoder<T> {
+        T decode(byte[] bytes) throws Exception;
     }
 
     private static byte[] getDatabaseBlob(UUID uuid, String value) {
@@ -837,27 +823,11 @@ public class PlayerData {
         dungeonsCompleted = resultSet.getInt("DungeonsCompleted");
         backTeleportLocation = ConfigurationLocation.serialize(resultSet.getString("BackTeleportLocation"));
 
-        if (resultSet.getBytes("QuestStatus") != null) {
-            try {
-                quests = PlayerDataJsonCodec.decodeQuests(resultSet.getBytes("QuestStatus"));
-            } catch (Exception ex) {
-                Logger.warn("Failed to deserialize quest data for player " + uuid
-                        + "; the stored BLOB was retained for recovery.");
-                ex.printStackTrace();
-                quests = new ArrayList<>();
-            }
-        }
-
-        if (resultSet.getBytes("PlayerQuestCooldowns") != null) {
-            try {
-                playerQuestCooldowns = PlayerDataJsonCodec.decodePlayerQuestCooldowns(resultSet.getBytes("PlayerQuestCooldowns"));
-            } catch (Exception exception) {
-                Logger.warn("Failed to deserialize quest cooldowns for player " + uuid
-                        + "; the stored BLOB was retained for recovery.");
-                exception.printStackTrace();
-                playerQuestCooldowns = PlayerQuestCooldowns.initializePlayer();
-            }
-        }
+        // An unreadable non-null value aborts hydration. Publishing empty replacement state would
+        // let the next quest/cooldown update silently overwrite the player's original data.
+        quests = readStructuredValue(uuid, "QuestStatus", resultSet.getBytes("QuestStatus"), PlayerDataJsonCodec::decodeQuests);
+        playerQuestCooldowns = readStructuredValue(uuid, "PlayerQuestCooldowns", resultSet.getBytes("PlayerQuestCooldowns"),
+                PlayerDataJsonCodec::decodePlayerQuestCooldowns);
 
         if (resultSet.getObject("UseBookMenus") != null) {
             useBookMenus = resultSet.getBoolean("UseBookMenus");
@@ -873,35 +843,12 @@ public class PlayerData {
             setDatabaseValue(uuid, "DismissEMStatusScreenMessage", false);
         }
 
-        if (resultSet.getBytes("DungeonBossLockouts") != null) {
-            try {
-                dungeonBossLockout = PlayerDataJsonCodec.decodeDungeonBossLockout(resultSet.getBytes("DungeonBossLockouts"));
-                // Clean up expired lockouts on load
-                dungeonBossLockout.cleanupExpiredLockouts();
-            } catch (Exception exception) {
-                Logger.warn("Failed to deserialize dungeon boss lockouts for player " + uuid
-                        + "; the stored BLOB was retained for recovery.");
-                exception.printStackTrace();
-                dungeonBossLockout = new DungeonBossLockout();
-            }
-        } else {
-            dungeonBossLockout = new DungeonBossLockout();
-        }
-
-        if (resultSet.getBytes("QuestLockouts") != null) {
-            try {
-                questLockout = PlayerDataJsonCodec.decodeQuestLockout(resultSet.getBytes("QuestLockouts"));
-                // Clean up expired lockouts on load
-                questLockout.cleanupExpiredLockouts();
-            } catch (Exception exception) {
-                Logger.warn("Failed to deserialize quest lockouts for player " + uuid
-                        + "; the stored BLOB was retained for recovery.");
-                exception.printStackTrace();
-                questLockout = new com.magmaguy.elitemobs.quests.QuestLockout();
-            }
-        } else {
-            questLockout = new com.magmaguy.elitemobs.quests.QuestLockout();
-        }
+        dungeonBossLockout = readStructuredValue(uuid, "DungeonBossLockouts", resultSet.getBytes("DungeonBossLockouts"),
+                PlayerDataJsonCodec::decodeDungeonBossLockout);
+        dungeonBossLockout.cleanupExpiredLockouts();
+        questLockout = readStructuredValue(uuid, "QuestLockouts", resultSet.getBytes("QuestLockouts"),
+                PlayerDataJsonCodec::decodeQuestLockout);
+        questLockout.cleanupExpiredLockouts();
 
         // Read skill XP values
         skillXP_ARMOR = resultSet.getLong("SkillXP_ARMOR");

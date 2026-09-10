@@ -69,6 +69,24 @@ class PlayerDataJsonCodecTest {
 
         byte[] legacy = withMismatchedUid(ObjectSerializer.toString(new ArrayList<>(List.of(quest))), Quest.class);
         assertEquals(quest.getQuestID(), PlayerDataJsonCodec.decodeQuests(legacy).getFirst().getQuestID());
+
+        // Historical versions can also have removed fields. Preserve the stream's own layout,
+        // so an obsolete field is skipped without shifting the subsequent values or references.
+        byte[] oldLayout = Base64.getDecoder().decode(legacy);
+        byte[] fieldName = "questName".getBytes(StandardCharsets.UTF_8);
+        int nameOffset = -1;
+        for (int i = 0; i <= oldLayout.length - fieldName.length; i++) {
+            if (java.util.Arrays.equals(oldLayout, i, i + fieldName.length, fieldName, 0, fieldName.length)) {
+                nameOffset = i;
+                break;
+            }
+        }
+        assertTrue(nameOffset >= 0);
+        System.arraycopy("extraName".getBytes(StandardCharsets.UTF_8), 0, oldLayout, nameOffset, fieldName.length);
+        Quest oldQuest = PlayerDataJsonCodec.decodeQuests(Base64.getEncoder().encode(oldLayout)).getFirst();
+        assertEquals(17, oldQuest.getQuestLevel());
+        assertEquals(quest.getQuestID(), oldQuest.getQuestID());
+        assertSame(oldQuest, oldQuest.getQuestObjectives().getQuest());
     }
 
     @Test

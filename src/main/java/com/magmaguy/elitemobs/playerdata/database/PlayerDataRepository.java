@@ -38,11 +38,15 @@ final class PlayerDataRepository {
         return PLAYER_STATE_MONITOR;
     }
 
+    static Object connectionMonitor() {
+        return MONITOR;
+    }
+
     static Connection connection() throws Exception {
         synchronized (MONITOR) {
-            File databaseFile = new File(MetadataHandler.PLUGIN.getDataFolder(), "data/" + PlayerData.getDATABASE_NAME());
             if (connection == null || connection.isClosed()) {
                 if (!DatabaseConfig.isUseMySQL()) {
+                    File databaseFile = new File(MetadataHandler.PLUGIN.getDataFolder(), "data/" + PlayerData.getDATABASE_NAME());
                     Class.forName("org.sqlite.JDBC");
                     connection = DriverManager.getConnection("jdbc:sqlite:" + databaseFile);
                 } else {
@@ -112,7 +116,18 @@ final class PlayerDataRepository {
     }
 
     static Object getBlob(UUID playerId, String column) {
-        return query(playerId, column, ResultSet::getBytes, null, "blob");
+        validateColumn(column);
+        synchronized (MONITOR) {
+            String sql = "SELECT " + column + " FROM " + PlayerData.getPLAYER_DATA_TABLE_NAME() + " WHERE PlayerUUID = ?";
+            try (PreparedStatement statement = connection().prepareStatement(sql)) {
+                statement.setString(1, playerId.toString());
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return resultSet.next() ? resultSet.getBytes(column) : null;
+                }
+            } catch (Exception exception) {
+                throw new IllegalStateException("Cannot read " + column + " for player " + playerId, exception);
+            }
+        }
     }
 
     static Boolean getBoolean(UUID playerId, String column) {
