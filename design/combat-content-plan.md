@@ -31,7 +31,7 @@ Complete the procedural magic-loot change, compile, commit, deploy through the
 MagmaDeck CLI and inspect startup. Record the installed artifact and backup.
 Keep the user's background Autotester untouched. Individual generation settings
 default to true and FMM readiness is checked when selecting/constructing loot.
-World-specific Experimental Combat activation does not determine whether a
+World-specific [Alpha] Advanced Combat System activation does not determine whether a
 staff or wand functions.
 
 This checkpoint is implemented in `afd4a54eb`; the checklist records deployment.

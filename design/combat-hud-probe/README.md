@@ -1,6 +1,6 @@
 # Combat HUD live concept
 
-The HUD appears automatically while experimental combat is active in an
+The HUD appears automatically while [Alpha] Advanced Combat System is active in an
 EliteMobs-managed world. It follows the existing combat lifecycle for world
 changes, reconnects, reloads and disabling the mode. Outside that scope the
 ordinary action-bar messages resume. No manual HUD command or per-player
@@ -27,7 +27,7 @@ generator retains the other source artwork for authoring but exports only the th
 shared icons. It removes obsolete ability textures and calibration font variants
 from its generated output so they cannot be repackaged on the next build.
 Armor, hunger and conditional vital rows
-are covered by this experimental combat HUD.
+are covered by this [Alpha] Advanced Combat System HUD.
 The runtime font is `elitemobs:combat_hud_concept_16`; the default font is untouched.
 
 Resource icons are a separate dynamic glyph at x=171, y=5, in a 10x15 cell.

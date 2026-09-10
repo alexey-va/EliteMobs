@@ -300,7 +300,7 @@ validWeapons:
 
 These switches control ordinary procedural drops, shops and class loot. Operational
 compatible FMM is also required. Selection excludes a missing, disabled or reloading
-magic service. Experimental Combat world settings do not gate item availability.
+magic service. [Alpha] Advanced Combat System world settings do not gate item availability.
 `dropProcedurallyGeneratedItems` controls ordinary procedural drops; class coverage
 has its own global `enabled` switch and per-mob `classLoot` switch. Procedural names
 come from `staffNames` / `wandNames` in `StaticItemNames.yml`; class item names and
