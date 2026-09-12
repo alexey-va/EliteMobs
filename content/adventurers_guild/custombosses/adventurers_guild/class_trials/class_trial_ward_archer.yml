@@ -1,0 +1,7 @@
+extends: class_trial_actor_ranger_partner.yml
+isEnabled: true
+name: '&fWard Archer'
+healthMultiplier: 0.3
+damageMultiplier: 0.2
+ai: false
+mainHand: BOW

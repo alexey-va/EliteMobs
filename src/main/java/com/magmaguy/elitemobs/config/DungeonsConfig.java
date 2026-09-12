@@ -1,5 +1,7 @@
 package com.magmaguy.elitemobs.config;
 
+import com.magmaguy.magmacore.nightbreak.NightbreakChatStyle;
+
 import com.magmaguy.magmacore.config.ConfigurationFile;
 import lombok.Getter;
 
@@ -29,6 +31,16 @@ public class DungeonsConfig extends ConfigurationFile {
     private static double poisonDamageMultiplier;
     @Getter
     private static double witherDamageMultiplier;
+    @Getter
+    private static boolean enableDungeonFoodRegeneration;
+    @Getter
+    private static int dungeonFoodRegenerationCombatTimeoutSeconds;
+    @Getter
+    private static int dungeonFoodRegenerationIntervalSeconds;
+    @Getter
+    private static String dungeonFoodRegenerationCombatStartMessage;
+    @Getter
+    private static String dungeonFoodRegenerationCombatEndMessage;
     @Getter
     private static String dynamicDungeonLevelSelectionMenuTitle;
     @Getter
@@ -147,6 +159,14 @@ public class DungeonsConfig extends ConfigurationFile {
     private static String contentPartialLine3;
     @Getter
     private static String contentPartialLine4;
+    @Getter
+    private static String bundledContentPartialLine1;
+    @Getter
+    private static String bundledContentPartialLine2;
+    @Getter
+    private static String bundledContentPartialLine3;
+    @Getter
+    private static String contentToggleInProgressMessage;
     @Getter
     private static String contentNotDownloadedLine1;
     @Getter
@@ -328,6 +348,7 @@ public class DungeonsConfig extends ConfigurationFile {
 
     @Override
     public void initializeValues() {
+        NightbreakChatStyle.migrateSeparators(fileConfiguration, "contentDownloadSeparator", "skillMigrationSeparator");
 
         dungeonJoinAsPlayerText = ConfigurationEngine.setString(
                 List.of("Sets the text for joining a dungeon as a player! Placeholders:", "$dungeonName - the name of the dungeon"),
@@ -381,6 +402,21 @@ public class DungeonsConfig extends ConfigurationFile {
                 List.of("Sets the damage multiplier for fire damage in dungeons",
                         "This is important for balance as by default the damage is a bit too high for the dungeons as we design them"),
                 fileConfiguration, "poisonDamageMultiplier", 0.5);
+        enableDungeonFoodRegeneration = ConfigurationEngine.setBoolean(
+                List.of("Whether players regenerate food while out of combat in EliteMobs dungeons."),
+                fileConfiguration, "enableDungeonFoodRegeneration", true);
+        dungeonFoodRegenerationCombatTimeoutSeconds = Math.max(1, ConfigurationEngine.setInt(
+                List.of("Seconds without dealing or receiving enemy damage before a player leaves combat."),
+                fileConfiguration, "dungeonFoodRegenerationCombatTimeoutSeconds", 20));
+        dungeonFoodRegenerationIntervalSeconds = Math.max(1, ConfigurationEngine.setInt(
+                List.of("Seconds between level-I saturation pulses while an eligible player is out of combat."),
+                fileConfiguration, "dungeonFoodRegenerationIntervalSeconds", 5));
+        dungeonFoodRegenerationCombatStartMessage = ConfigurationEngine.setString(
+                List.of("Action bar message shown when dungeon combat starts."),
+                file, fileConfiguration, "dungeonFoodRegenerationCombatStartMessage", "&cCombat start", true);
+        dungeonFoodRegenerationCombatEndMessage = ConfigurationEngine.setString(
+                List.of("Action bar message shown when dungeon combat ends."),
+                file, fileConfiguration, "dungeonFoodRegenerationCombatEndMessage", "&aCombat end", true);
         dynamicDungeonLevelSelectionMenuTitle = ConfigurationEngine.setString(
                 List.of("Sets the title for the dynamic dungeon level selection menu"),
                 file, fileConfiguration, "dynamicDungeonLevelSelectionMenuTitle", "&8Select Dungeon Level", true);
@@ -414,10 +450,11 @@ public class DungeonsConfig extends ConfigurationFile {
                 file, fileConfiguration, "dynamicDungeonDifficultySelectionSelectedLevel", "&7Selected Level: &e$level", true);
         dungeonLockoutTitle = ConfigurationEngine.setString(
                 List.of("Title shown on screen during dungeon boss lockout.",
-                        "Leave empty for subtitle only."),
+                        "Leave empty to show only the HUD notification and chat message."),
                 file, fileConfiguration, "dungeonLockoutTitle", "", true);
         dungeonLockoutSubtitle = ConfigurationEngine.setString(
-                List.of("Sets the subtitle shown when a player kills a boss they are locked out from"),
+                List.of("Sets the HUD notification when a player kills a boss they are locked out from.",
+                        "The legacy key name is retained; this text is not shown as an on-screen subtitle."),
                 file, fileConfiguration, "dungeonLockoutSubtitle", "&cLockout!", true);
         dungeonLockoutChatMessage = ConfigurationEngine.setString(
                 List.of("Sets the chat message shown when a player kills a boss they are locked out from",
@@ -572,6 +609,18 @@ public class DungeonsConfig extends ConfigurationFile {
         contentPartialLine4 = ConfigurationEngine.setString(
                 List.of("Sets the fourth line of the tooltip for partially installed content."),
                 file, fileConfiguration, "contentPartialLine4", "Click to download!", true);
+        bundledContentPartialLine1 = ConfigurationEngine.setString(
+                List.of("Sets the first line of the tooltip for partially installed content that ships inside the plugin jar (default items, events)."),
+                file, fileConfiguration, "bundledContentPartialLine1", "Content partially installed!", true);
+        bundledContentPartialLine2 = ConfigurationEngine.setString(
+                List.of("Sets the second line of the tooltip for partially installed content that ships inside the plugin jar."),
+                file, fileConfiguration, "bundledContentPartialLine2", "Some of this plugin-bundled content is disabled.", true);
+        bundledContentPartialLine3 = ConfigurationEngine.setString(
+                List.of("Sets the third line of the tooltip for partially installed content that ships inside the plugin jar."),
+                file, fileConfiguration, "bundledContentPartialLine3", "Click to enable all of it!", true);
+        contentToggleInProgressMessage = ConfigurationEngine.setString(
+                List.of("Message shown when a content install/uninstall is clicked while a previous one is still saving."),
+                file, fileConfiguration, "contentToggleInProgressMessage", "&cStill applying a previous content change! Wait for the reload to finish, then try again.", true);
         contentNotDownloadedLine1 = ConfigurationEngine.setString(
                 List.of("Sets the first line of the tooltip for content that has not been downloaded."),
                 file, fileConfiguration, "contentNotDownloadedLine1", "Content is not downloaded!", true);
@@ -610,7 +659,7 @@ public class DungeonsConfig extends ConfigurationFile {
                 file, fileConfiguration, "contentDownloadLegacyMessage", "&4Download this at &9$link &4!", true);
         contentDownloadSeparator = ConfigurationEngine.setString(
                 List.of("Sets the separator line used in download messages."),
-                file, fileConfiguration, "contentDownloadSeparator", "<g:#8B0000:#CC4400:#DAA520>▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</g>", true);
+                file, fileConfiguration, "contentDownloadSeparator", NightbreakChatStyle.separator(), true);
         contentNightbreakPromptLine1 = ConfigurationEngine.setString(
                 List.of("Sets the first line of the account token prompt."),
                 file, fileConfiguration, "contentNightbreakPromptLine1", "&eThis content can be downloaded automatically after connecting this server.", true);
@@ -697,7 +746,7 @@ public class DungeonsConfig extends ConfigurationFile {
         // SkillSystemMigration messages
         skillMigrationSeparator = ConfigurationEngine.setString(
                 List.of("Sets the separator line used in the skill migration notification."),
-                file, fileConfiguration, "skillMigrationSeparator", "<g:#8B0000:#CC4400:#DAA520>▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</g>", true);
+                file, fileConfiguration, "skillMigrationSeparator", NightbreakChatStyle.separator(), true);
         skillMigrationTitle = ConfigurationEngine.setString(
                 List.of("Sets the title of the skill migration notification."),
                 file, fileConfiguration, "skillMigrationTitle", "<g:#7B2FBE:#A855F7>&lSKILL SYSTEM ACTIVATED</g>", true);

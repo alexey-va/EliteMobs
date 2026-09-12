@@ -1,0 +1,7 @@
+extends: class_trial_actor_armor_stand.yml
+isEnabled: true
+name: '&dPrepared Remains'
+healthMultiplier: 0.15
+damageMultiplier: 0
+helmet: SKELETON_SKULL
+ai: false

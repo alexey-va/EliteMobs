@@ -19,6 +19,7 @@ public class CustomBossDeath implements Listener {
 
     private static void doLoot(CustomBossEntity customBossEntity) {
         if (customBossEntity.isTriggeredAntiExploit()) return;
+        com.magmaguy.elitemobs.items.ClassLootCoverage.dropLoot(customBossEntity);
         if (customBossEntity.customBossesConfigFields.getUniqueLootList() == null ||
                 customBossEntity.customBossesConfigFields.getUniqueLootList().isEmpty()) return;
 
@@ -32,6 +33,12 @@ public class CustomBossDeath implements Listener {
             // Skip loot for locked out players
             if (lockedOutPlayers.contains(player)) continue;
             dropLoot(player, customBossEntity);
+        }
+        for (Player player : com.magmaguy.elitemobs.parties.PartyManager.expandSharedCreditParticipants(
+                customBossEntity.getDamagers().keySet(), customBossEntity)) {
+            if (lockedOutPlayers.contains(player) || customBossEntity.getDamagers().containsKey(player)) continue;
+            customBossEntity.customBossesConfigFields.getCustomLootTable().bossDrop(player,
+                    customBossEntity.getLevel(), customBossEntity.getLocation(), customBossEntity, true);
         }
     }
 

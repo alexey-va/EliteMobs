@@ -9,6 +9,7 @@ import com.magmaguy.elitemobs.api.WorldUninstanceEvent;
 import com.magmaguy.elitemobs.api.internal.RemovalReason;
 import com.magmaguy.elitemobs.config.DungeonsConfig;
 import com.magmaguy.elitemobs.config.PartyConfig;
+import com.magmaguy.elitemobs.config.custombosses.CustomBossesConfigFields;
 import com.magmaguy.elitemobs.config.contentpackages.ContentPackagesConfig;
 import com.magmaguy.elitemobs.config.contentpackages.ContentPackagesConfigFields;
 import com.magmaguy.elitemobs.dungeons.EliteMobsWorld;
@@ -45,6 +46,11 @@ import java.util.*;
 import java.util.function.BooleanSupplier;
 
 public class DungeonInstance extends MatchInstance {
+    @Override
+    protected Location participantExitLocation(Player player) {
+        return previousLocationOrExit(player);
+    }
+
     @Getter
     private static final Set<DungeonInstance> dungeonInstances = new HashSet<>();
 
@@ -74,6 +80,15 @@ public class DungeonInstance extends MatchInstance {
     private BukkitTask initializeEntitiesTask = null;
     private BukkitTask destroyMatchTask = null;
     private BukkitTask removeInstanceTask = null;
+
+    /** Creates a one-life encounter mob owned and cleaned up by this dungeon. */
+    public InstancedBossEntity createEncounterBoss(CustomBossesConfigFields fields, Location location) {
+        if (instanceRemovalScheduled || instancedBossEntitiesRemoved || world == null
+                || location == null || !world.equals(location.getWorld())) return null;
+        InstancedBossEntity boss = new InstancedBossEntity(fields, location.clone(), this);
+        instancedBossEntities.add(boss);
+        return boss;
+    }
 
     public DungeonInstance(ContentPackagesConfigFields contentPackagesConfigFields,
                            Location lobbyLocation,
@@ -584,6 +599,17 @@ public class DungeonInstance extends MatchInstance {
         return instanceRemovalScheduled;
     }
 
+    /**
+     * A dungeon instance is also dead once its world removal is scheduled or its
+     * world reference is gone; both can precede the registry evictions the base
+     * check keys on, and the browser holds these objects for the whole 30–90
+     * second deletion window.
+     */
+    @Override
+    public boolean isDefunct() {
+        return super.isDefunct() || instanceRemovalScheduled || world == null;
+    }
+
     protected static void cleanupUnloadedWorldFolder(String instancedWorldName) {
         WorldFolderResolver.deleteAllLayouts(instancedWorldName);
         Logger.info("Cleaned up unloaded instanced dungeon world folder " + instancedWorldName);
@@ -609,6 +635,14 @@ public class DungeonInstance extends MatchInstance {
         PersistentObjectHandler.removeForWorld(worldUUID);
     }
 
+    public String getResolvedDifficultyID() {
+        return contentPackagesConfigFields.getDifficultyResolver().resolveSelected(difficultyID);
+    }
+
+    public boolean matchesDifficulty(List<String> filter, String source) {
+        return contentPackagesConfigFields.getDifficultyResolver().matches(filter, difficultyID, source);
+    }
+
     private void setDifficulty(String difficultyName) {
         if (difficultyName == null) return;
         if (contentPackagesConfigFields.getDifficulties() == null ||
@@ -621,7 +655,7 @@ public class DungeonInstance extends MatchInstance {
                 break;
             }
         if (difficulty == null) {
-            Logger.warn("Failed to set difficulty " + difficulty + " for instanced dungeon " + contentPackagesConfigFields.getFilename());
+            Logger.warn("Failed to set difficulty " + difficultyName + " for instanced dungeon " + contentPackagesConfigFields.getFilename());
             return;
         }
 
@@ -825,14 +859,25 @@ public class DungeonInstance extends MatchInstance {
             Location fallbackLocation = getFallbackLocation(worldToDelete);
             for (Player player : new HashSet<>(worldToDelete.getPlayers())) {
                 Logger.warn(" - Player still in world: " + player.getName());
-                Location destination = getSafeExitLocation(player, worldToDelete, fallbackLocation);
-                if (destination == null) {
-                    Logger.warn("Could not find a safe destination for " + player.getName() + " while deleting " + worldToDelete.getName() + ".");
-                    continue;
+                // Per-player isolation: this loop runs BEFORE the deletion try-block,
+                // so an escaping exception used to abort the remaining evacuations AND
+                // the retry chain — the world was then never deleted and its ghost
+                // browser entry outlived the grace window until a restart.
+                try {
+                    Location destination = getSafeExitLocation(player, worldToDelete, fallbackLocation);
+                    if (destination == null) {
+                        Logger.warn("Could not find a safe destination for " + player.getName() + " while deleting " + worldToDelete.getName() + ".");
+                        continue;
+                    }
+                    if (player.getGameMode() == org.bukkit.GameMode.SPECTATOR)
+                        player.setSpectatorTarget(null);
+                    MatchInstance.MatchInstanceEvents.teleportBypass = true;
+                    player.teleport(destination);
+                } catch (Exception exception) {
+                    Logger.warn("Failed to evacuate " + player.getName() + " from "
+                            + worldToDelete.getName() + ": " + exception.getMessage());
+                    exception.printStackTrace();
                 }
-                player.setSpectatorTarget(null);
-                MatchInstance.MatchInstanceEvents.teleportBypass = true;
-                player.teleport(destination);
             }
         }
 
@@ -858,7 +903,12 @@ public class DungeonInstance extends MatchInstance {
 
         private void retryDeletion(String worldName) {
             if (attempt >= MAX_DELETE_ATTEMPTS) {
-                Logger.warn("Could not safely delete instanced dungeon world " + worldName + " after " + attempt + " attempts. Leaving it loaded to avoid save errors.");
+                String worldState = world == null ? "world reference already null" :
+                        world.getPlayers().size() + " players, " + world.getEntities().size() + " entities, "
+                                + world.getLoadedChunks().length + " loaded chunks still present";
+                Logger.warn("Could not safely delete instanced dungeon world " + worldName + " after " + attempt
+                        + " attempts (" + worldState + "). Leaving it loaded to avoid save errors - it will occupy"
+                        + " memory until the next restart.");
                 callRemovalEvent();
                 cleanupWorldScopedState(world);
                 cleanupInstanceReferences();

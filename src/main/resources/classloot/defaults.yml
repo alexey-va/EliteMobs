@@ -1,0 +1,3107 @@
+# Authored ceilings derived from design/loot-analysis; native levels use the configured budget roll.
+enabled: true
+defaultDifficulty: NORMAL
+difficultyIds:
+  '0': NORMAL
+  '1': HARD
+  '2': MYTHIC
+enchantmentBudgetFraction: 0.5
+minimumPrimaryLevel: 1
+dropChance:
+  TRASH: 0.05
+  MINIBOSS: 0.25
+  BOSS: 1.0
+profiles:
+  NORMAL:
+    TRASH:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          SWEEPING_EDGE:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          FLAME:
+            level: 1
+            chance: 0.3
+          INFINITY:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          PIERCING:
+            level: 1
+            chance: 0.5
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.35
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          MENDING:
+            level: 1
+            chance: 1.0
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          BLAST_RADIUS:
+            level: 1
+            chance: 0.1
+          IGNITION:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          MULTICAST:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.35
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          SMITE:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.35
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          SMITE:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.35
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          SMITE:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 2
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.35
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          SMITE:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 2
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+    MINIBOSS:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.3
+          SWEEPING_EDGE:
+            level: 1
+            chance: 0.15
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.55
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.6
+          FLAME:
+            level: 1
+            chance: 0.5
+          PUNCH:
+            level: 3
+            chance: 0.35
+          INFINITY:
+            level: 1
+            chance: 0.35
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.65
+          QUICK_CHARGE:
+            level: 2
+            chance: 0.65
+          MULTISHOT:
+            level: 1
+            chance: 0.65
+          PIERCING:
+            level: 2
+            chance: 0.9
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.45
+          IMPALING:
+            level: 4
+            chance: 0.55
+          LOYALTY:
+            level: 3
+            chance: 0.85
+          CHANNELING:
+            level: 1
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.6
+          BLAST_RADIUS:
+            level: 1
+            chance: 0.25
+          IGNITION:
+            level: 1
+            chance: 0.25
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.6
+          MULTICAST:
+            level: 1
+            chance: 0.25
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.5
+          UNBREAKING:
+            level: 1
+            chance: 0.55
+          SMITE:
+            level: 3
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 2
+            chance: 0.35
+          RESPIRATION:
+            level: 1
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.5
+          UNBREAKING:
+            level: 1
+            chance: 0.55
+          SMITE:
+            level: 3
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 2
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.5
+          UNBREAKING:
+            level: 1
+            chance: 0.55
+          SMITE:
+            level: 3
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 2
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          PROTECTION:
+            level: 1
+            chance: 0.5
+          UNBREAKING:
+            level: 1
+            chance: 0.65
+          SMITE:
+            level: 3
+            chance: 0.65
+          BANE_OF_ARTHROPODS:
+            level: 2
+            chance: 0.35
+          FEATHER_FALLING:
+            level: 4
+            chance: 0.25
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 2
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 2
+            chance: 0.55
+          RESPIRATION:
+            level: 1
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 2
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.6
+          THORNS:
+            level: 3
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 2
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 2
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 2
+            chance: 0.55
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 2
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 2
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 2
+            chance: 0.55
+          FEATHER_FALLING:
+            level: 4
+            chance: 0.25
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+        rareEnchantments: {}
+        potionEffects: []
+    BOSS:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.7
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          KNOCKBACK:
+            level: 2
+            chance: 0.25
+          LOOTING:
+            level: 3
+            chance: 0.1
+          SWEEPING_EDGE:
+            level: 1
+            chance: 0.25
+          MENDING:
+            level: 1
+            chance: 0.05
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.7
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          LOOTING:
+            level: 3
+            chance: 0.1
+          MENDING:
+            level: 1
+            chance: 0.05
+          CRITICAL_STRIKES:
+            level: 2
+            chance: 0.1
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.8
+          FLAME:
+            level: 1
+            chance: 0.5
+          PUNCH:
+            level: 2
+            chance: 0.35
+          INFINITY:
+            level: 1
+            chance: 0.4
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.75
+          QUICK_CHARGE:
+            level: 2
+            chance: 0.9
+          MULTISHOT:
+            level: 1
+            chance: 0.1
+          PIERCING:
+            level: 3
+            chance: 1.0
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.7
+          IMPALING:
+            level: 4
+            chance: 0.5
+          LOYALTY:
+            level: 2
+            chance: 1.0
+          CHANNELING:
+            level: 1
+            chance: 0.25
+          MENDING:
+            level: 1
+            chance: 0.5
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 1.0
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          MENDING:
+            level: 1
+            chance: 0.3
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.9
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.8
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.8
+          MENDING:
+            level: 1
+            chance: 0.1
+          BLAST_RADIUS:
+            level: 1
+            chance: 0.4
+          IGNITION:
+            level: 1
+            chance: 0.4
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.8
+          MENDING:
+            level: 1
+            chance: 0.1
+          MULTICAST:
+            level: 1
+            chance: 0.4
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.6
+          SMITE:
+            level: 4
+            chance: 0.7
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 2
+            chance: 0.9
+          UNBREAKING:
+            level: 3
+            chance: 0.6
+          SMITE:
+            level: 4
+            chance: 0.8
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.7
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 2
+            chance: 0.9
+          UNBREAKING:
+            level: 3
+            chance: 0.7
+          SMITE:
+            level: 4
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.6
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.85
+          UNBREAKING:
+            level: 3
+            chance: 0.6
+          SMITE:
+            level: 4
+            chance: 0.5
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.4
+          FEATHER_FALLING:
+            level: 4
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.6
+          FIRE_PROTECTION:
+            level: 4
+            chance: 0.5
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.6
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.85
+          THORNS:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.6
+          FIRE_PROTECTION:
+            level: 4
+            chance: 0.55
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.6
+          THORNS:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.6
+          FIRE_PROTECTION:
+            level: 4
+            chance: 0.55
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.45
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.55
+          THORNS:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.65
+          FIRE_PROTECTION:
+            level: 3
+            chance: 0.65
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.65
+          THORNS:
+            level: 1
+            chance: 0.1
+          FEATHER_FALLING:
+            level: 5
+            chance: 0.55
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.9
+        rareEnchantments: {}
+        potionEffects: []
+  HARD:
+    TRASH:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          SWEEPING_EDGE:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          FLAME:
+            level: 1
+            chance: 0.3
+          INFINITY:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          PIERCING:
+            level: 2
+            chance: 0.5
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.35
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+          MENDING:
+            level: 1
+            chance: 1.0
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.35
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          BLAST_RADIUS:
+            level: 2
+            chance: 0.1
+          IGNITION:
+            level: 2
+            chance: 0.1
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+          MULTICAST:
+            level: 2
+            chance: 0.1
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          PROTECTION:
+            level: 2
+            chance: 0.55
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          SMITE:
+            level: 3
+            chance: 0.4
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          PROTECTION:
+            level: 2
+            chance: 0.55
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          SMITE:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          PROTECTION:
+            level: 2
+            chance: 0.55
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          SMITE:
+            level: 3
+            chance: 0.4
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          PROTECTION:
+            level: 2
+            chance: 0.65
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          SMITE:
+            level: 3
+            chance: 0.4
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 1
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+    MINIBOSS:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.45
+          SWEEPING_EDGE:
+            level: 1
+            chance: 0.2
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.75
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          FLAME:
+            level: 1
+            chance: 0.5
+          PUNCH:
+            level: 3
+            chance: 0.2
+          INFINITY:
+            level: 1
+            chance: 0.3
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.85
+          QUICK_CHARGE:
+            level: 3
+            chance: 0.65
+          MULTISHOT:
+            level: 1
+            chance: 0.65
+          PIERCING:
+            level: 3
+            chance: 0.85
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.45
+          IMPALING:
+            level: 5
+            chance: 0.6
+          LOYALTY:
+            level: 3
+            chance: 1.0
+          CHANNELING:
+            level: 1
+            chance: 0.4
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 1
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          BLAST_RADIUS:
+            level: 2
+            chance: 0.25
+          IGNITION:
+            level: 2
+            chance: 0.25
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          MULTICAST:
+            level: 2
+            chance: 0.25
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.65
+          UNBREAKING:
+            level: 2
+            chance: 0.55
+          SMITE:
+            level: 4
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 3
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 2
+            chance: 0.55
+          SMITE:
+            level: 4
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 3
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 2
+            chance: 0.55
+          SMITE:
+            level: 4
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 3
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 2
+            chance: 0.65
+          SMITE:
+            level: 4
+            chance: 0.65
+          BANE_OF_ARTHROPODS:
+            level: 3
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 3
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.55
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 3
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.6
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 3
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 3
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.55
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.25
+          FIRE_PROTECTION:
+            level: 3
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 3
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 3
+            chance: 0.55
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+    BOSS:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.7
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          KNOCKBACK:
+            level: 2
+            chance: 0.35
+          LOOTING:
+            level: 5
+            chance: 0.15
+          SWEEPING_EDGE:
+            level: 2
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.05
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.8
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          LOOTING:
+            level: 5
+            chance: 0.15
+          MENDING:
+            level: 1
+            chance: 0.05
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.9
+          FLAME:
+            level: 1
+            chance: 0.55
+          PUNCH:
+            level: 2
+            chance: 0.5
+          INFINITY:
+            level: 1
+            chance: 0.4
+          MENDING:
+            level: 1
+            chance: 0.15
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.85
+          QUICK_CHARGE:
+            level: 3
+            chance: 0.9
+          MULTISHOT:
+            level: 1
+            chance: 0.35
+          PIERCING:
+            level: 4
+            chance: 1.0
+          MENDING:
+            level: 1
+            chance: 0.15
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.7
+          IMPALING:
+            level: 6
+            chance: 0.5
+          LOYALTY:
+            level: 3
+            chance: 1.0
+          CHANNELING:
+            level: 1
+            chance: 0.25
+          MENDING:
+            level: 1
+            chance: 0.5
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 6
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 1.0
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.3
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 6
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.9
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.15
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 6
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.8
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.15
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.9
+          MENDING:
+            level: 1
+            chance: 0.15
+          BLAST_RADIUS:
+            level: 2
+            chance: 0.4
+          IGNITION:
+            level: 2
+            chance: 0.4
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.9
+          MENDING:
+            level: 1
+            chance: 0.15
+          MULTICAST:
+            level: 2
+            chance: 0.4
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.7
+          SMITE:
+            level: 5
+            chance: 0.7
+          BANE_OF_ARTHROPODS:
+            level: 5
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.9
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          SMITE:
+            level: 6
+            chance: 0.8
+          BANE_OF_ARTHROPODS:
+            level: 5
+            chance: 0.7
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.9
+          UNBREAKING:
+            level: 4
+            chance: 0.7
+          SMITE:
+            level: 6
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 5
+            chance: 0.6
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          PROTECTION:
+            level: 4
+            chance: 0.85
+          UNBREAKING:
+            level: 4
+            chance: 0.65
+          SMITE:
+            level: 6
+            chance: 0.5
+          BANE_OF_ARTHROPODS:
+            level: 5
+            chance: 0.4
+          FEATHER_FALLING:
+            level: 5
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.5
+          BLAST_PROTECTION:
+            level: 6
+            chance: 0.6
+          PROJECTILE_PROTECTION:
+            level: 5
+            chance: 0.85
+          THORNS:
+            level: 2
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.7
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.55
+          BLAST_PROTECTION:
+            level: 5
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 5
+            chance: 0.6
+          THORNS:
+            level: 2
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 6
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.55
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.55
+          THORNS:
+            level: 2
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.65
+          FIRE_PROTECTION:
+            level: 4
+            chance: 0.65
+          BLAST_PROTECTION:
+            level: 5
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 5
+            chance: 0.65
+          THORNS:
+            level: 2
+            chance: 0.15
+          FEATHER_FALLING:
+            level: 6
+            chance: 0.55
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.9
+        rareEnchantments: {}
+        potionEffects: []
+  MYTHIC:
+    TRASH:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.4
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.25
+          SWEEPING_EDGE:
+            level: 2
+            chance: 0.25
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.4
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.25
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.55
+          FLAME:
+            level: 1
+            chance: 0.35
+          INFINITY:
+            level: 1
+            chance: 0.2
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.55
+          PIERCING:
+            level: 3
+            chance: 0.5
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.4
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.4
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.25
+          MENDING:
+            level: 1
+            chance: 1.0
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.4
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.25
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.4
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.25
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.55
+          BLAST_RADIUS:
+            level: 3
+            chance: 0.1
+          IGNITION:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.55
+          MULTICAST:
+            level: 2
+            chance: 0.1
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 3
+            chance: 0.2
+          SMITE:
+            level: 5
+            chance: 0.2
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 3
+            chance: 0.2
+          SMITE:
+            level: 5
+            chance: 0.2
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 3
+            chance: 0.2
+          SMITE:
+            level: 5
+            chance: 0.2
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 5
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.65
+          UNBREAKING:
+            level: 3
+            chance: 0.2
+          SMITE:
+            level: 5
+            chance: 0.2
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 3
+            chance: 0.15
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 2
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+    MINIBOSS:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.45
+          SWEEPING_EDGE:
+            level: 2
+            chance: 0.2
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.7
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          FLAME:
+            level: 1
+            chance: 0.5
+          PUNCH:
+            level: 4
+            chance: 0.2
+          INFINITY:
+            level: 1
+            chance: 0.3
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.85
+          QUICK_CHARGE:
+            level: 3
+            chance: 0.65
+          MULTISHOT:
+            level: 1
+            chance: 0.65
+          PIERCING:
+            level: 4
+            chance: 0.85
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.45
+          IMPALING:
+            level: 6
+            chance: 0.6
+          LOYALTY:
+            level: 3
+            chance: 1.0
+          CHANNELING:
+            level: 1
+            chance: 0.4
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.45
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.45
+          MENDING:
+            level: 1
+            chance: 0.1
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          BLAST_RADIUS:
+            level: 3
+            chance: 0.25
+          IGNITION:
+            level: 3
+            chance: 0.25
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.6
+          MULTICAST:
+            level: 2
+            chance: 0.25
+        rareEnchantments: {}
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.65
+          UNBREAKING:
+            level: 3
+            chance: 0.55
+          SMITE:
+            level: 5
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 3
+            chance: 0.55
+          SMITE:
+            level: 5
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 7
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 3
+            chance: 0.55
+          SMITE:
+            level: 5
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 6
+            chance: 1.0
+          PROTECTION:
+            level: 3
+            chance: 0.55
+          UNBREAKING:
+            level: 3
+            chance: 0.65
+          SMITE:
+            level: 6
+            chance: 0.65
+          BANE_OF_ARTHROPODS:
+            level: 4
+            chance: 0.35
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.2
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 6
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.2
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 4
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.2
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 6
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.2
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.2
+          BLAST_PROTECTION:
+            level: 4
+            chance: 0.25
+          PROJECTILE_PROTECTION:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+    BOSS:
+      SWORDS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 9
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.65
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          KNOCKBACK:
+            level: 3
+            chance: 0.3
+          LOOTING:
+            level: 5
+            chance: 0.05
+          SWEEPING_EDGE:
+            level: 3
+            chance: 0.35
+          MENDING:
+            level: 1
+            chance: 0.05
+        rareEnchantments: {}
+      AXES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 6
+            chance: 1.0
+          UNBREAKING:
+            level: 6
+            chance: 0.8
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          LOOTING:
+            level: 5
+            chance: 0.05
+          MENDING:
+            level: 1
+            chance: 0.05
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.1
+        rareEnchantments: {}
+      BOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.9
+          FLAME:
+            level: 1
+            chance: 0.55
+          PUNCH:
+            level: 2
+            chance: 0.75
+          INFINITY:
+            level: 1
+            chance: 0.5
+          MENDING:
+            level: 1
+            chance: 0.15
+        rareEnchantments: {}
+      CROSSBOWS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.85
+          QUICK_CHARGE:
+            level: 3
+            chance: 0.9
+          MULTISHOT:
+            level: 1
+            chance: 0.4
+          PIERCING:
+            level: 4
+            chance: 1.0
+          MENDING:
+            level: 1
+            chance: 0.15
+        rareEnchantments: {}
+      TRIDENTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 9
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.65
+          IMPALING:
+            level: 7
+            chance: 0.5
+          LOYALTY:
+            level: 3
+            chance: 1.0
+          CHANNELING:
+            level: 1
+            chance: 0.25
+          MENDING:
+            level: 1
+            chance: 0.5
+        rareEnchantments: {}
+      HOES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 8
+            chance: 1.0
+          UNBREAKING:
+            level: 6
+            chance: 1.0
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.3
+        rareEnchantments: {}
+      MACES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 8
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.9
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.35
+          MENDING:
+            level: 1
+            chance: 0.15
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.05
+        rareEnchantments: {}
+      SPEARS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 8
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.8
+          FIRE_ASPECT:
+            level: 2
+            chance: 0.3
+          MENDING:
+            level: 1
+            chance: 0.15
+          CRITICAL_STRIKES:
+            level: 3
+            chance: 0.05
+        rareEnchantments: {}
+      STAVES:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.9
+          MENDING:
+            level: 1
+            chance: 0.15
+          BLAST_RADIUS:
+            level: 3
+            chance: 0.4
+          IGNITION:
+            level: 3
+            chance: 0.4
+        rareEnchantments: {}
+      WANDS:
+        primaryEnchantment: POWER
+        enchantments:
+          POWER:
+            level: 7
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.9
+          MENDING:
+            level: 1
+            chance: 0.15
+          MULTICAST:
+            level: 2
+            chance: 0.4
+        rareEnchantments:
+          MULTICAST:
+            level: 3
+            chance: 0.01
+      DPS_HELMETS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 10
+            chance: 1.0
+          PROTECTION:
+            level: 5
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.7
+          SMITE:
+            level: 7
+            chance: 0.7
+          BANE_OF_ARTHROPODS:
+            level: 6
+            chance: 0.5
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_CHESTPLATES:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 10
+            chance: 1.0
+          PROTECTION:
+            level: 5
+            chance: 0.9
+          UNBREAKING:
+            level: 6
+            chance: 0.6
+          SMITE:
+            level: 8
+            chance: 0.8
+          BANE_OF_ARTHROPODS:
+            level: 6
+            chance: 0.7
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_LEGGINGS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 10
+            chance: 1.0
+          PROTECTION:
+            level: 4
+            chance: 0.9
+          UNBREAKING:
+            level: 5
+            chance: 0.7
+          SMITE:
+            level: 7
+            chance: 0.6
+          BANE_OF_ARTHROPODS:
+            level: 6
+            chance: 0.6
+        rareEnchantments: {}
+        potionEffects: []
+      DPS_BOOTS:
+        primaryEnchantment: SHARPNESS
+        enchantments:
+          SHARPNESS:
+            level: 10
+            chance: 1.0
+          PROTECTION:
+            level: 5
+            chance: 0.85
+          UNBREAKING:
+            level: 5
+            chance: 0.65
+          SMITE:
+            level: 8
+            chance: 0.5
+          BANE_OF_ARTHROPODS:
+            level: 6
+            chance: 0.4
+          FEATHER_FALLING:
+            level: 6
+            chance: 0.3
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_HELMETS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 9
+            chance: 1.0
+          UNBREAKING:
+            level: 6
+            chance: 0.6
+          FIRE_PROTECTION:
+            level: 6
+            chance: 0.5
+          BLAST_PROTECTION:
+            level: 7
+            chance: 0.6
+          PROJECTILE_PROTECTION:
+            level: 6
+            chance: 0.85
+          THORNS:
+            level: 3
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_CHESTPLATES:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 10
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.7
+          FIRE_PROTECTION:
+            level: 6
+            chance: 0.55
+          BLAST_PROTECTION:
+            level: 6
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 6
+            chance: 0.6
+          THORNS:
+            level: 3
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_LEGGINGS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 8
+            chance: 1.0
+          UNBREAKING:
+            level: 5
+            chance: 0.6
+          FIRE_PROTECTION:
+            level: 6
+            chance: 0.55
+          BLAST_PROTECTION:
+            level: 5
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 6
+            chance: 0.55
+          THORNS:
+            level: 3
+            chance: 0.15
+        rareEnchantments: {}
+        potionEffects: []
+      TANK_BOOTS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 10
+            chance: 1.0
+          UNBREAKING:
+            level: 4
+            chance: 0.65
+          FIRE_PROTECTION:
+            level: 5
+            chance: 0.65
+          BLAST_PROTECTION:
+            level: 6
+            chance: 0.55
+          PROJECTILE_PROTECTION:
+            level: 8
+            chance: 0.65
+          THORNS:
+            level: 3
+            chance: 0.15
+          FEATHER_FALLING:
+            level: 7
+            chance: 0.55
+        rareEnchantments: {}
+        potionEffects: []
+      SHIELDS:
+        primaryEnchantment: PROTECTION
+        enchantments:
+          PROTECTION:
+            level: 10
+            chance: 1.0
+          UNBREAKING:
+            level: 8
+            chance: 0.9
+        rareEnchantments: {}
+        potionEffects: []

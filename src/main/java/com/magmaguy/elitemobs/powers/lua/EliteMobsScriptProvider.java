@@ -36,6 +36,7 @@ public class EliteMobsScriptProvider implements ScriptProvider {
             case "on_zone_leave" -> ScriptHook.ON_ZONE_LEAVE;
             case "on_boss_damaged" -> ScriptableBoss.ON_DAMAGED;
             case "on_boss_damaged_by_player" -> ScriptableBoss.ON_DAMAGED_BY_PLAYER;
+            case "on_reinforcement_damaged_by_player" -> ScriptableBoss.ON_REINFORCEMENT_DAMAGED_BY_PLAYER;
             case "on_boss_damaged_by_elite" -> ScriptableBoss.ON_DAMAGED_BY_ELITE;
             case "on_player_damaged_by_boss" -> ScriptableBoss.ON_PLAYER_DAMAGED;
             case "on_enter_combat" -> ScriptableBoss.ON_ENTER_COMBAT;
@@ -44,6 +45,7 @@ public class EliteMobsScriptProvider implements ScriptProvider {
             case "on_boss_target_changed" -> ScriptableBoss.ON_TARGET;
             case "on_death" -> ScriptableBoss.ON_DEATH;
             case "on_phase_switch" -> ScriptableBoss.ON_PHASE_SWITCH;
+            case "on_mind_action" -> ScriptableBoss.ON_MIND_ACTION;
             default -> null;
         };
     }

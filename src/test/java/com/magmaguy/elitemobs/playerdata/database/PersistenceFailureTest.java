@@ -85,10 +85,10 @@ class PersistenceFailureTest {
         queue.put("first", new DungeonRuntimeData.RuntimeWrite("lock probe", connection -> entered.countDown()));
         try (var executor = Executors.newFixedThreadPool(2)) {
             java.util.concurrent.Future<Boolean> drain;
-            synchronized (PlayerDataRepository.connectionMonitor()) {
+            synchronized (PlayerDataRepository.jdbcMonitor()) {
                 drain = executor.submit(DungeonRuntimeData::drainWrites);
                 assertFalse(entered.await(150, TimeUnit.MILLISECONDS), "runtime SQL bypassed the connection lock");
-                executor.submit(() -> { synchronized (PlayerDataRepository.monitor()) { } }).get(1, TimeUnit.SECONDS);
+                executor.submit(() -> { synchronized (PlayerDataRepository.stateMonitor()) { } }).get(1, TimeUnit.SECONDS);
             }
             assertTrue(drain.get(2, TimeUnit.SECONDS));
             assertEquals(0, entered.getCount());

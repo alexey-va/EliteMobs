@@ -165,7 +165,7 @@ public final class DungeonRuntimeData {
         if (!available) return legacyValues;
         List<String> stored = cachedPlayerCooldowns(configFile);
         if (!stored.isEmpty() || legacyValues == null || legacyValues.isEmpty()) return stored;
-        synchronized (PlayerDataRepository.connectionMonitor()) {
+        synchronized (PlayerDataRepository.jdbcMonitor()) {
             try {
                 Connection connection = PlayerDataRepository.connection();
                 boolean oldAutoCommit = connection.getAutoCommit();
@@ -322,7 +322,7 @@ public final class DungeonRuntimeData {
             if (stored != null) return stored;
         }
         if (legacyValue <= 0) return legacyValue;
-        synchronized (PlayerDataRepository.connectionMonitor()) {
+        synchronized (PlayerDataRepository.jdbcMonitor()) {
             try {
                 Connection connection = PlayerDataRepository.connection();
                 upsertCooldown(connection, table, valueColumn, configFile, location, legacyValue);
@@ -368,7 +368,7 @@ public final class DungeonRuntimeData {
             draining = true;
         }
         try {
-            synchronized (PlayerDataRepository.connectionMonitor()) {
+            synchronized (PlayerDataRepository.jdbcMonitor()) {
                 Connection connection = null;
                 boolean oldAutoCommit = true;
                 try {

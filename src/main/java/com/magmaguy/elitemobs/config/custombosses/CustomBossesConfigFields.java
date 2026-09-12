@@ -1,13 +1,16 @@
 package com.magmaguy.elitemobs.config.custombosses;
 
+
 import com.magmaguy.elitemobs.config.ConfigurationEngine;
 import com.magmaguy.elitemobs.config.CustomConfigFields;
 import com.magmaguy.elitemobs.config.MobCombatSettingsConfig;
 import com.magmaguy.elitemobs.items.customloottable.CustomLootTable;
 import com.magmaguy.elitemobs.mobconstructor.BossType;
 import com.magmaguy.elitemobs.mobconstructor.mobdata.aggressivemobs.EliteMobProperties;
+import com.magmaguy.elitemobs.pathfinding.patrol.PatrolRoute;
 import com.magmaguy.elitemobs.powers.scripts.caching.EliteScriptBlueprint;
 import com.magmaguy.elitemobs.powers.scripts.loading.ScriptValueNormalizer;
+import com.magmaguy.elitemobs.skills.SkillType;
 import com.magmaguy.elitemobs.thirdparty.custommodels.CustomModel;
 import com.magmaguy.magmacore.util.ChatColorConverter;
 import com.magmaguy.magmacore.util.Logger;
@@ -29,6 +32,9 @@ public class CustomBossesConfigFields extends CustomConfigFields {
     @Getter
     @Setter
     private EntityType entityType = EntityType.ZOMBIE;
+    @Getter
+    @Setter
+    private String behavior;
     @Setter
     private String name = "Default Name";
     @Setter
@@ -223,7 +229,15 @@ public class CustomBossesConfigFields extends CustomConfigFields {
     @Getter
     private String onKillMessage;
     @Getter
+    @Setter
     private BossType bossType = BossType.NORMAL;
+    @Getter
+    @Setter
+    private boolean classLoot;
+    @Getter
+    private String classLootDifficulty = "AUTO";
+    @Getter
+    private String classLootRank = "AUTO";
     @Getter
     private double scale = 1D;
     @Getter
@@ -238,6 +252,8 @@ public class CustomBossesConfigFields extends CustomConfigFields {
     @Getter
     @Setter
     private List<String> spawnLocations = new ArrayList<>();
+    @Getter
+    private PatrolRoute patrolRoute;
 
     /**
      * Creates a new default pre-made Custom Boss. The boss is further customized through a builder pattern.
@@ -291,8 +307,8 @@ public class CustomBossesConfigFields extends CustomConfigFields {
 
     public void runtimeSetLeashRadius(double leashRadius) {
         this.leashRadius = leashRadius;
-        this.fileConfiguration.set("leashRadius", leashRadius);
-        ConfigurationEngine.fileSaverCustomValues(fileConfiguration, file);
+        this.getWritableFileConfiguration().set("leashRadius", leashRadius);
+        ConfigurationEngine.fileSaverCustomValues(getWritableFileConfiguration(), file);
     }
 
     public double getDamageModifier(Material material) {
@@ -314,9 +330,9 @@ public class CustomBossesConfigFields extends CustomConfigFields {
 
     public void setOnSpawnBlockStates(List<String> onSpawnBlockStates) {
         this.onSpawnBlockStates = onSpawnBlockStates;
-        fileConfiguration.set("onSpawnBlockStates", onSpawnBlockStates);
+        getWritableFileConfiguration().set("onSpawnBlockStates", onSpawnBlockStates);
         try {
-            fileConfiguration.save(file);
+            getWritableFileConfiguration().save(file);
         } catch (Exception ex) {
             Logger.warn("Failed to save on spawn block states!", true);
         }
@@ -324,9 +340,9 @@ public class CustomBossesConfigFields extends CustomConfigFields {
 
     public void setOnRemoveBlockStates(List<String> onRemoveBlockStates) {
         this.onRemoveBlockStates = onRemoveBlockStates;
-        fileConfiguration.set("onRemoveBlockStates", onRemoveBlockStates);
+        getWritableFileConfiguration().set("onRemoveBlockStates", onRemoveBlockStates);
         try {
-            fileConfiguration.save(file);
+            getWritableFileConfiguration().save(file);
         } catch (Exception ex) {
             Logger.warn("Failed to save on remove block states!", true);
         }
@@ -335,12 +351,16 @@ public class CustomBossesConfigFields extends CustomConfigFields {
     @Override
     public void processConfigFields() {
         this.isEnabled = processBoolean("isEnabled", isEnabled, true, true);
-        this.entityType = processEnum("entityType", entityType, EntityType.ZOMBIE, EntityType.class, true);
-        if (entityType == null) entityType = EntityType.ZOMBIE;
+        boolean configuredEntityType = configHas("entityType");
+        this.entityType = processEnum("entityType", entityType,
+                configuredEntityType ? null : EntityType.ZOMBIE, EntityType.class, true);
+        if (entityType == null && !configuredEntityType) entityType = EntityType.ZOMBIE;
         if (EliteMobProperties.getPluginData(entityType) == null) {
-            Logger.warn("Failed to get plugin data for entity type " + entityType.toString() + " in file " + filename + " ! Defaulting to zombie.");
-            entityType = EntityType.ZOMBIE;
+            Logger.warn("Disabling custom boss " + filename + ": entityType " + entityType + " is not a spawnable creature.");
+            isEnabled = false;
+            return;
         }
+        this.behavior = processString("behavior", behavior, null, false);
         this.instanced = processBoolean("instanced", instanced, false, false);
         this.name = translatable(filename, "name", processString("name", name, "Default Name", true));
         //Levels are strings because "dynamic" is a valid value
@@ -440,10 +460,28 @@ public class CustomBossesConfigFields extends CustomConfigFields {
             Logger.warn("Boss type for boss " + filename + " is not a valid boss type!");
         }
 
+        classLoot = processBoolean("classLoot", bossType != BossType.REINFORCEMENT, false, false);
+        classLootDifficulty = processString("classLootDifficulty", "AUTO", "AUTO", false).toUpperCase(Locale.ROOT);
+        classLootRank = processString("classLootRank", "AUTO", "AUTO", false).toUpperCase(Locale.ROOT);
+        if (!Set.of("AUTO", "NORMAL", "HARD", "MYTHIC").contains(classLootDifficulty)) {
+            Logger.warn("Invalid classLootDifficulty in " + filename + "; using AUTO.");
+            classLootDifficulty = "AUTO";
+        }
+        if (!Set.of("AUTO", "TRASH", "MINIBOSS", "BOSS").contains(classLootRank)) {
+            Logger.warn("Invalid classLootRank in " + filename + "; using AUTO.");
+            classLootRank = "AUTO";
+        }
+
         this.scale = processDouble("scale", scale, 1, false);
         this.silent = processBoolean("silent", silent, false, false);
         this.ai = processBoolean("ai", ai, true, false);
         this.alwaysShowName = processBoolean("alwaysShowName", alwaysShowName, false, false);
+        try {
+            this.patrolRoute = PatrolRoute.parse(fileConfiguration);
+        } catch (IllegalArgumentException exception) {
+            this.patrolRoute = null;
+            Logger.warn("Invalid patrol in " + filename + ": " + exception.getMessage());
+        }
     }
 
     public boolean isCustomModelExists() {
@@ -527,9 +565,20 @@ public class CustomBossesConfigFields extends CustomConfigFields {
 
     public void saveFile() {
         try {
-            fileConfiguration.save(file);
+            getWritableFileConfiguration().save(file);
         } catch (Exception ex) {
             Logger.warn("Failed to save boss file " + filename + "!");
+        }
+    }
+
+    public boolean reloadPatrolRoute() {
+        try {
+            patrolRoute = PatrolRoute.parse(getWritableFileConfiguration());
+            return patrolRoute != null;
+        } catch (IllegalArgumentException exception) {
+            patrolRoute = null;
+            Logger.warn("Invalid patrol in " + filename + ": " + exception.getMessage());
+            return false;
         }
     }
 

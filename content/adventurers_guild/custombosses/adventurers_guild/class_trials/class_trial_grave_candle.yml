@@ -1,0 +1,7 @@
+extends: class_trial_actor_armor_stand.yml
+isEnabled: true
+name: '&dGrave Candle'
+healthMultiplier: 0.1
+damageMultiplier: 0
+helmet: SOUL_LANTERN
+ai: false

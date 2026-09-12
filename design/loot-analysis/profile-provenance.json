@@ -1,0 +1,3672 @@
+[
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "TRASH",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "AXES",
+    "positiveSamples": 8,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "AXES",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 2,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "PUNCH",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "QUICK_CHARGE",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MULTISHOT",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 7,
+    "level": 2,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "IMPALING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 4,
+    "level": 4,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "LOYALTY",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 6,
+    "level": 3,
+    "chance": 0.85
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "CHANNELING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 2,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "MINIBOSS",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 2,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 19,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 3,
+    "chance": 0.7
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "KNOCKBACK",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "LOOTING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "AXES",
+    "positiveSamples": 8,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "AXES",
+    "positiveSamples": 7,
+    "level": 3,
+    "chance": 0.7
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "LOOTING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "AXES",
+    "positiveSamples": 1,
+    "level": 2,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 17,
+    "level": 3,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 10,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "PUNCH",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 8,
+    "level": 1,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 15,
+    "level": 3,
+    "chance": 0.75
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "QUICK_CHARGE",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 18,
+    "level": 2,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MULTISHOT",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 20,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 19,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 3,
+    "chance": 0.7
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "IMPALING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 4,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "LOYALTY",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 4,
+    "level": 2,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "CHANNELING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "MENDING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "HOES",
+    "positiveSamples": 9,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 13,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "MACES",
+    "positiveSamples": 21,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "MACES",
+    "positiveSamples": 19,
+    "level": 3,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "MENDING",
+    "sourceFamily": "MACES",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 19,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 18,
+    "level": 3,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 17,
+    "level": 3,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 17,
+    "level": 3,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "NORMAL",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 15,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 15,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 1,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 15,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 15,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 15,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 15,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "TRASH",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "AXES",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "AXES",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 0.75
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "PUNCH",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 5,
+    "level": 4,
+    "chance": 0.85
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "QUICK_CHARGE",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MULTISHOT",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.85
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "IMPALING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 3,
+    "level": 5,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "LOYALTY",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "CHANNELING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "MINIBOSS",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 20,
+    "level": 7,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 4,
+    "chance": 0.7
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "KNOCKBACK",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 7,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "LOOTING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 5,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "AXES",
+    "positiveSamples": 8,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "AXES",
+    "positiveSamples": 8,
+    "level": 4,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "LOOTING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 5,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 19,
+    "level": 4,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 12,
+    "level": 1,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "PUNCH",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 11,
+    "level": 2,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 8,
+    "level": 1,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 17,
+    "level": 4,
+    "chance": 0.85
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "QUICK_CHARGE",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 18,
+    "level": 3,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MULTISHOT",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 7,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 20,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 20,
+    "level": 7,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 14,
+    "level": 4,
+    "chance": 0.7
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "IMPALING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 6,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "LOYALTY",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "CHANNELING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "MENDING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "HOES",
+    "positiveSamples": 9,
+    "level": 6,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 13,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "MACES",
+    "positiveSamples": 21,
+    "level": 6,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "MACES",
+    "positiveSamples": 19,
+    "level": 4,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "MENDING",
+    "sourceFamily": "MACES",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 19,
+    "level": 6,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 18,
+    "level": 4,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 19,
+    "level": 4,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 5,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 19,
+    "level": 4,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "HARD",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 2,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 2,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 2,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 1,
+    "level": 3,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 2,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 2,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 13,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 3,
+    "level": 2,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "TRASH",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 4,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 2,
+    "level": 2,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SWORDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "AXES",
+    "positiveSamples": 5,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "AXES",
+    "positiveSamples": 5,
+    "level": 5,
+    "chance": 0.7
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "AXES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 5,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "PUNCH",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 2,
+    "level": 4,
+    "chance": 0.2
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 5,
+    "level": 5,
+    "chance": 0.85
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "QUICK_CHARGE",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MULTISHOT",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 5,
+    "level": 4,
+    "chance": 0.85
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 4,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "IMPALING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 3,
+    "level": 6,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "LOYALTY",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "CHANNELING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "TRIDENTS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 4,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 4,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "MACES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 9,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 4,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 4,
+    "level": 2,
+    "chance": 0.45
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "SPEARS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 7,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "MINIBOSS",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 6,
+    "level": 4,
+    "chance": 0.6
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 18,
+    "level": 9,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 12,
+    "level": 5,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "KNOCKBACK",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 3,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "LOOTING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 5,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "SWEEPING_EDGE",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 6,
+    "level": 3,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SWORDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "AXES",
+    "positiveSamples": 8,
+    "level": 6,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "AXES",
+    "positiveSamples": 8,
+    "level": 6,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "LOOTING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 5,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "MENDING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "AXES",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "AXES",
+    "positiveSamples": 1,
+    "level": 3,
+    "chance": 0.1
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 7,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 19,
+    "level": 5,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "FLAME",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 12,
+    "level": 1,
+    "chance": 0.55
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "PUNCH",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 16,
+    "level": 2,
+    "chance": 0.75
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "INFINITY",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 11,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "BOWS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 7,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 17,
+    "level": 5,
+    "chance": 0.85
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "QUICK_CHARGE",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 18,
+    "level": 3,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MULTISHOT",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 8,
+    "level": 1,
+    "chance": 0.4
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "PIERCING",
+    "sourceFamily": "CROSSBOWS",
+    "positiveSamples": 20,
+    "level": 4,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "CROSSBOWS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 18,
+    "level": 9,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 12,
+    "level": 5,
+    "chance": 0.65
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "IMPALING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 7,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "LOYALTY",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 4,
+    "level": 3,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "CHANNELING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 1,
+    "level": 1,
+    "chance": 0.25
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "TRIDENTS",
+    "enchantment": "MENDING",
+    "sourceFamily": "TRIDENTS",
+    "positiveSamples": 2,
+    "level": 1,
+    "chance": 0.5
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "HOES",
+    "positiveSamples": 9,
+    "level": 8,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 13,
+    "level": 6,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "HOES",
+    "enchantment": "MENDING",
+    "sourceFamily": "HOES",
+    "positiveSamples": 4,
+    "level": 1,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "MACES",
+    "positiveSamples": 21,
+    "level": 8,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "MACES",
+    "positiveSamples": 19,
+    "level": 5,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "MACES",
+    "positiveSamples": 7,
+    "level": 2,
+    "chance": 0.35
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "MENDING",
+    "sourceFamily": "MACES",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "MACES",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "MACES",
+    "positiveSamples": 1,
+    "level": 3,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "SHARPNESS",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 19,
+    "level": 8,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 18,
+    "level": 5,
+    "chance": 0.8
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "FIRE_ASPECT",
+    "sourceFamily": "SWORDS",
+    "positiveSamples": 5,
+    "level": 2,
+    "chance": 0.3
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "MENDING",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "SPEARS",
+    "enchantment": "CRITICAL_STRIKES",
+    "sourceFamily": "SPEARS",
+    "positiveSamples": 1,
+    "level": 3,
+    "chance": 0.05
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 7,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 19,
+    "level": 5,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "STAVES",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "POWER",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 21,
+    "level": 7,
+    "chance": 1.0
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "UNBREAKING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 19,
+    "level": 5,
+    "chance": 0.9
+  },
+  {
+    "difficulty": "MYTHIC",
+    "rank": "BOSS",
+    "family": "WANDS",
+    "enchantment": "MENDING",
+    "sourceFamily": "BOWS",
+    "positiveSamples": 3,
+    "level": 1,
+    "chance": 0.15
+  }
+]

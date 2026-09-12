@@ -1,0 +1,9 @@
+extends: class_trial_cleric_acolyte.yml
+isEnabled: true
+name: '&fWingbound Attendant'
+healthMultiplier: 0.4
+damageMultiplier: 0.12
+mainHand: IRON_SWORD
+chestplate: LEATHER_CHESTPLATE:F5EDD5
+leggings: LEATHER_LEGGINGS:F5EDD5
+boots: LEATHER_BOOTS:F5EDD5

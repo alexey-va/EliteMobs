@@ -1,5 +1,7 @@
 package com.magmaguy.elitemobs.testing;
 
+import com.magmaguy.elitemobs.advancedcombat.analysis.ActiveAbilityBalanceAnalyzer;
+import com.magmaguy.elitemobs.advancedcombat.analysis.ActiveAbilityBalanceReport;
 import com.magmaguy.elitemobs.skills.SkillType;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +36,8 @@ public class TestReport {
     private final List<SkillTestResult> results = new ArrayList<>();
     private final Map<SkillType, List<SkillTestResult>> resultsByType = new HashMap<>();
     private final List<SkillTestResult> skippedResults = new ArrayList<>();
+    private final ActiveAbilityBalanceReport activeAbilityBalance =
+            ActiveAbilityBalanceAnalyzer.analyzeBuiltIns();
 
     // Summary stats
     private int totalTests = 0;
@@ -198,6 +202,19 @@ public class TestReport {
             }
         }
 
+        List<ActiveAbilityBalanceReport.Row> activeOutliers = activeAbilityBalance.outliers();
+        lines.add("&6=== ACTIVE ABILITY BALANCE ===");
+        lines.add(String.format("&7%d abilities modeled across level bands; &e%d efficiency outliers.",
+                activeAbilityBalance.rows().size(), activeOutliers.size()));
+        activeOutliers.stream().limit(6).forEach(row -> lines.add(String.format(
+                "  %s &f%s &7%.2f/100 resource",
+                switch (row.outlier()) {
+                    case HIGH -> "&cHIGH";
+                    case LOW -> "&9LOW";
+                    case MIXED -> "&eMIXED";
+                    case NONE -> "&7NONE";
+                }, row.abilityId(), row.resourceEfficiency())));
+
         lines.add("");
 
         // Overall status
@@ -236,6 +253,13 @@ public class TestReport {
 
             lines.add("");
         }
+
+        lines.add("&6&lActive Ability Efficiency Outliers");
+        if (activeAbilityBalance.outliers().isEmpty()) lines.add("&aNone detected.");
+        else for (ActiveAbilityBalanceReport.Row row : activeAbilityBalance.outliers())
+            lines.add(String.format("  &7[%s] &f%s &7Lv.%d cost %.0f, efficiency %.2f",
+                    row.outlier(), row.abilityId(), row.evaluationLevel(),
+                    row.resourceCost(), row.resourceEfficiency()));
 
         return lines;
     }
@@ -354,6 +378,13 @@ public class TestReport {
                 sb.append("\n");
             }
         }
+
+        sb.append("\nACTIVE ABILITY BALANCE\n");
+        sb.append("======================\n\n");
+        for (String line : activeAbilityBalance.graphLines()) sb.append(line).append('\n');
+        sb.append("\nACTIVE ABILITY DATA (CSV)\n");
+        sb.append("=========================\n");
+        sb.append(activeAbilityBalance.csv());
 
         return sb.toString();
     }

@@ -31,11 +31,8 @@ public class PlayerItem {
     public int damageArthropodsLevel = 0;
     public int damageUndeadLevel = 0;
     public int thornsLevel = 0;
-    private double plasmaBootsLevel = 0;
     private double critChance = 0;
     private double hunterChance = 0;
-    private double lightningChance = 0;
-    private double earthquakeLevel = 0;
     private double eliteDamageReduction = 0;
     private double protectionProjectile = 0;
     private double eliteDamage = 0;
@@ -65,16 +62,16 @@ public class PlayerItem {
         boolean itemIsEmpty = itemStack == null || itemStack.getType().isAir() || itemStack.getAmount() <= 0;
         boolean cachedItemIsEmpty = this.itemStack == null || this.itemStack.getType().isAir();
 
-        // Case where both the live and cached slots are empty.
-        if (itemIsEmpty && cachedItemIsEmpty)
-            return false;
-
-        // Case where the slot became empty.
+        // Case where the slot is empty. The broken-item branch below empties the cache
+        // while the live slot still holds the broken item, so unequipping must be
+        // detected on the live slot alone — consulting the cache first swallowed the
+        // transition and left the broken-item boss bar up forever.
         if (itemIsEmpty) {
             if (displayingAsBroken) {
                 BossBarUtil.HideBrokenItemBossBar(equipmentSlot, player);
                 displayingAsBroken = false;
             }
+            if (cachedItemIsEmpty) return false;
             return fillNullItem();
         }
 
@@ -125,7 +122,7 @@ public class PlayerItem {
 
         //case when the item changed during runtime to another valid ItemStack
         if (equipmentSlot.equals(EquipmentSlot.MAINHAND)) {
-            this.itemTier = (int) Math.round(EliteItemManager.getWeaponLevel(itemStack));
+            this.itemTier = rawWeaponTier(itemStack);
             this.eliteDamage = EliteItemManager.getEliteDamageFromEliteAttributes(itemStack);
         } else
             this.itemTier = (int) Math.round(EliteItemManager.getArmorLevel(itemStack));
@@ -148,13 +145,12 @@ public class PlayerItem {
         this.blastProtection = ItemTagger.getEnchantment(itemStack.getItemMeta(), Enchantment.BLAST_PROTECTION.getKey());
         this.damageArthropodsLevel = ItemTagger.getEnchantment(itemStack.getItemMeta(), Enchantment.BANE_OF_ARTHROPODS.getKey());
         this.damageUndeadLevel = ItemTagger.getEnchantment(itemStack.getItemMeta(), Enchantment.SMITE.getKey());
-        this.critChance = ItemTagger.getEnchantment(itemStack.getItemMeta(), new NamespacedKey(MetadataHandler.PLUGIN, CriticalStrikesEnchantment.key)) / 10D;
-        this.lightningChance = Math.pow(ItemTagger.getEnchantment(itemStack.getItemMeta(), new NamespacedKey(MetadataHandler.PLUGIN, LightningEnchantment.key)), 2) / 1000D;
-        this.plasmaBootsLevel = ItemTagger.getEnchantment(itemStack.getItemMeta(), new NamespacedKey(MetadataHandler.PLUGIN, PlasmaBootsEnchantment.key));
-        this.hunterChance = ItemTagger.getEnchantment(itemStack.getItemMeta(), new NamespacedKey(MetadataHandler.PLUGIN, HunterEnchantment.key)) * EnchantmentsConfig.getEnchantment("hunter.yml").getFileConfiguration().getDouble("hunterSpawnBonus");
-        this.earthquakeLevel = ItemTagger.getEnchantment(itemStack.getItemMeta(), new NamespacedKey(MetadataHandler.PLUGIN, EarthquakeEnchantment.key));
+        this.critChance = com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.contribution(itemStack,
+                com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.CRITICAL_CHANCE, player.getUniqueId(), sharedSlot());
+        this.hunterChance = com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.contribution(itemStack,
+                com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.HUNTER_BONUS, player.getUniqueId(), sharedSlot());
         this.thornsLevel = ItemTagger.getEnchantment(itemStack.getItemMeta(), Enchantment.THORNS.getKey());
-        this.loudStrikesBonus = ItemTagger.getEnchantment(itemStack.getItemMeta(), new NamespacedKey(MetadataHandler.PLUGIN, LoudStrikesEnchantment.key)) / 3d;
+        this.loudStrikesBonus = readLoudStrikesBonus(itemStack, sharedSlot(), player.getUniqueId());
         eliteEnchantmentDamage = EliteItemManager.getEliteDamageFromEnchantments(itemStack);
 
         this.itemStack = itemStack.clone();
@@ -162,6 +158,17 @@ public class PlayerItem {
 
         return true;
 
+    }
+
+    private static int rawWeaponTier(ItemStack item) {
+        return (int) Math.round(EliteItemManager.getWeaponLevel(item));
+    }
+
+    /** Detached launch-time level after the caller has checked equipment eligibility. */
+    public static int readWeaponTier(Player player, ItemStack item) {
+        int tier = rawWeaponTier(item);
+        int sync = PlayerData.getMatchInstance(player) instanceof DungeonInstance dungeon ? dungeon.getLevelSync() : 0;
+        return sync > 0 ? Math.min(tier, sync) : tier;
     }
 
     private boolean fillNullItem() {
@@ -172,11 +179,8 @@ public class PlayerItem {
         damageArthropodsLevel = 0;
         damageUndeadLevel = 0;
         thornsLevel = 0;
-        plasmaBootsLevel = 0;
         critChance = 0;
         hunterChance = 0;
-        lightningChance = 0;
-        earthquakeLevel = 0;
         eliteDamageReduction = 0;
         protectionProjectile = 0;
         eliteDamage = 0;
@@ -247,24 +251,27 @@ public class PlayerItem {
         return this.hunterChance;
     }
 
-    public double getLightningChance(ItemStack itemStack, boolean update) {
-        if (update) fullUpdate(itemStack);
-        return this.lightningChance;
-    }
-
-    public double getPlasmaBootsLevel(ItemStack itemStack, boolean update) {
-        if (update) fullUpdate(itemStack);
-        return this.plasmaBootsLevel;
-    }
-
-    public double getEarthquakeLevel(ItemStack itemStack, boolean update) {
-        if (update) fullUpdate(itemStack);
-        return this.earthquakeLevel;
-    }
-
     public double getLoudStrikesBonus(ItemStack itemStack, boolean update) {
         if (update) fullUpdate(itemStack);
         return this.loudStrikesBonus;
+    }
+
+    /** The same per-item contribution is used for active gear and captured attack equipment. */
+    public static double readLoudStrikesBonus(ItemStack item,
+            com.magmaguy.magmacore.enchantments.EnchantmentDefinition.Slot slot, java.util.UUID actor) {
+        if (item == null || item.getType().isAir() || !item.hasItemMeta() || EliteItemManager.isOnLastDamage(item)) return 0;
+        return com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.contribution(item,
+                com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.THREAT_BONUS, actor, slot);
+    }
+
+    private com.magmaguy.magmacore.enchantments.EnchantmentDefinition.Slot sharedSlot() {
+        return com.magmaguy.magmacore.enchantments.EnchantmentDefinition.Slot.valueOf(switch (equipmentSlot) {
+            case HELMET -> "HEAD";
+            case CHESTPLATE -> "CHEST";
+            case LEGGINGS -> "LEGS";
+            case BOOTS -> "FEET";
+            default -> equipmentSlot.name();
+        });
     }
 
     public enum EquipmentSlot {
@@ -278,7 +285,7 @@ public class PlayerItem {
 
     private record ItemRuntimeContext(GearRestrictionHandler.RestrictionContext restrictionContext,
                                       boolean soulbindEnabled,
-                                      int dungeonLevelSync) {
+                                      int dungeonLevelSync, long enchantmentRevision) {
 
         private static ItemRuntimeContext capture(Player player, ItemStack itemStack) {
             int dungeonLevelSync = PlayerData.getMatchInstance(player) instanceof DungeonInstance dungeonInstance
@@ -287,7 +294,7 @@ public class PlayerItem {
             return new ItemRuntimeContext(
                     GearRestrictionHandler.getRestrictionContext(player, itemStack),
                     EnchantmentsConfig.getEnchantment(SoulbindEnchantment.key + ".yml").isEnabled(),
-                    dungeonLevelSync);
+                    dungeonLevelSync, com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.revision());
         }
     }
 

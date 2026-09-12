@@ -1,0 +1,8 @@
+extends: class_trial_actor_armor_stand.yml
+isEnabled: true
+name: '&eWounded Training Effigy'
+healthMultiplier: 0.1
+damageMultiplier: 0
+helmet: HAY_BLOCK
+chestplate: LEATHER_CHESTPLATE
+ai: false

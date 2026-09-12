@@ -1,0 +1,9 @@
+extends: class_trial_actor_base.yml
+isEnabled: true
+entityType: HUSK
+disguise: ARMOR_STAND
+name: '&bSpirit Totem'
+healthMultiplier: 0.2
+damageMultiplier: 0
+ai: false
+helmet: JUNGLE_LOG

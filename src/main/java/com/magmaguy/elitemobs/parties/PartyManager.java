@@ -1,6 +1,9 @@
 package com.magmaguy.elitemobs.parties;
 
 import com.magmaguy.elitemobs.config.PartyConfig;
+import com.magmaguy.elitemobs.api.PlayerJoinDungeonEvent;
+import com.magmaguy.elitemobs.api.InstancedDungeonRemoveEvent;
+import com.magmaguy.elitemobs.instanced.dungeons.DungeonInstance;
 import com.magmaguy.elitemobs.instanced.MatchInstance;
 import com.magmaguy.elitemobs.items.customloottable.SharedLootTable;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
@@ -11,6 +14,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -34,6 +38,7 @@ public final class PartyManager implements Listener {
     private static final Map<UUID, Party> parties = new HashMap<>();
     private static final Map<UUID, UUID> partyByPlayer = new HashMap<>();
     private static final Map<UUID, PendingInvite> pendingInvites = new HashMap<>();
+    private static final Map<UUID, UUID> dungeonParties = new HashMap<>();
 
     public static void initialize() {
         shutdown();
@@ -51,6 +56,7 @@ public final class PartyManager implements Listener {
         parties.clear();
         partyByPlayer.clear();
         pendingInvites.clear();
+        dungeonParties.clear();
         onlineMembers.forEach(PartySidebar::clearPlayer);
         PartySidebar.shutdown();
     }
@@ -114,68 +120,78 @@ public final class PartyManager implements Listener {
     }
 
     public static void create(Player creator) {
-        if (!requireEnabled(creator)) return;
+        create(creator, true);
+    }
+
+    /** Main-thread integration entry point. False suppresses operation messages and prompts. */
+    public static PartyOperationResult create(Player creator, boolean notify) {
+        PartyOperationResult validation = validateActor(creator);
+        if (!validation.isSuccess()) return finish(creator, validation, notify, "");
         invalidatePendingInvite(creator.getUniqueId());
         if (isInParty(creator.getUniqueId())) {
-            send(creator, PartyConfig.getAlreadyInPartyMessage());
-            return;
+            return finish(creator, PartyOperationResult.ALREADY_IN_PARTY, notify, "");
         }
         Party party = new Party(creator.getUniqueId());
         parties.put(party.getId(), party);
         partyByPlayer.put(creator.getUniqueId(), party.getId());
-        send(creator, PartyConfig.getPartyCreatedMessage());
+        if (notify) send(creator, PartyConfig.getPartyCreatedMessage());
         PartySidebar.refresh(creator);
+        return PartyOperationResult.SUCCESS;
     }
 
     public static void invite(Player inviter, String targetName) {
-        if (!requireEnabled(inviter)) return;
+        invite(inviter, targetName, true);
+    }
+
+    /** Uses the ordinary invitation rules, including automatic creation of the inviter's party. */
+    public static PartyOperationResult invite(Player inviter, String targetName, boolean notify) {
+        PartyOperationResult validation = validateActor(inviter);
+        if (!validation.isSuccess()) return finish(inviter, validation, notify, "");
+        java.util.Objects.requireNonNull(targetName, "targetName");
         Player target = Bukkit.getPlayerExact(targetName);
         if (target == null || !target.isOnline()) {
-            send(inviter, PartyConfig.getPlayerUnavailableMessage());
-            return;
+            return finish(inviter, PartyOperationResult.PLAYER_UNAVAILABLE, notify, targetName);
         }
         if (target.getUniqueId().equals(inviter.getUniqueId())) {
-            send(inviter, PartyConfig.getSelfInviteMessage());
-            return;
+            return finish(inviter, PartyOperationResult.SELF_INVITE, notify, targetName);
         }
         if (isInParty(target.getUniqueId())) {
-            send(inviter, PartyConfig.getPlayerAlreadyInPartyMessage());
-            return;
+            return finish(inviter, PartyOperationResult.TARGET_ALREADY_IN_PARTY, notify, targetName);
         }
         if (!target.hasPermission("elitemobs.party")) {
-            send(inviter, PartyConfig.getPlayerCannotUsePartiesMessage().replace("$player", target.getName()));
-            return;
+            return finish(inviter, PartyOperationResult.TARGET_NO_PERMISSION, notify, target.getName());
         }
         if (hasActivePendingInvite(target.getUniqueId())) {
-            send(inviter, PartyConfig.getInviteAlreadyPendingMessage().replace("$player", target.getName()));
-            return;
+            return finish(inviter, PartyOperationResult.INVITE_ALREADY_PENDING, notify, target.getName());
         }
 
         Party party = getParty(inviter.getUniqueId());
         if (party == null) {
-            create(inviter);
+            PartyOperationResult created = create(inviter, notify);
+            if (!created.isSuccess()) return created;
             party = getParty(inviter.getUniqueId());
-            if (party == null) return;
         }
         if (party.isFull()) {
-            send(inviter, PartyConfig.getPartyFullMessage());
-            return;
+            return finish(inviter, PartyOperationResult.PARTY_FULL, notify, targetName);
         }
 
         pendingInvites.put(target.getUniqueId(), new PendingInvite(
                 party.getId(),
                 inviter.getUniqueId(),
                 System.nanoTime() + PartyConfig.getInviteTimeoutSeconds() * 1_000_000_000L));
-        send(inviter, PartyConfig.getInviteSentMessage().replace("$player", target.getName()));
-        target.spigot().sendMessage(
-                SpigotMessage.simpleMessage(format(PartyConfig.getInviteReceivedMessage()
-                        .replace("$player", inviter.getName()))),
-                SpigotMessage.commandHoverMessage(
-                        format(PartyConfig.getInviteAcceptButton()),
-                        format(PartyConfig.getInviteAcceptHover()),
-                        "/em party accept"));
-        if (PartyInventoryMenu.usesInventoryFallback(target))
-            PartyInventoryMenu.openInvitePrompt(target, inviter);
+        if (notify) {
+            send(inviter, PartyConfig.getInviteSentMessage().replace("$player", target.getName()));
+            target.spigot().sendMessage(
+                    SpigotMessage.simpleMessage(format(PartyConfig.getInviteReceivedMessage()
+                            .replace("$player", inviter.getName()))),
+                    SpigotMessage.commandHoverMessage(
+                            format(PartyConfig.getInviteAcceptButton()),
+                            format(PartyConfig.getInviteAcceptHover()),
+                            "/em party accept"));
+            if (PartyInventoryMenu.usesInventoryFallback(target))
+                PartyInventoryMenu.openInvitePrompt(target, inviter);
+        }
+        return PartyOperationResult.SUCCESS;
     }
 
     static void ignoreInvite(Player player) {
@@ -201,47 +217,104 @@ public final class PartyManager implements Listener {
     }
 
     public static void accept(Player player) {
-        if (!requireEnabled(player)) return;
+        accept(player, true);
+    }
+
+    /** Accepts the current invite; roster changes still invalidate native ready checks. */
+    public static PartyOperationResult accept(Player player, boolean notify) {
+        PartyOperationResult validation = validateActor(player);
+        if (!validation.isSuccess()) return finish(player, validation, notify, "");
         if (isInParty(player.getUniqueId())) {
             invalidatePendingInvite(player.getUniqueId());
-            send(player, PartyConfig.getAlreadyInPartyMessage());
-            return;
+            return finish(player, PartyOperationResult.ALREADY_IN_PARTY, notify, "");
         }
 
         PendingInvite invite = invalidatePendingInvite(player.getUniqueId());
         if (invite == null) {
-            send(player, PartyConfig.getNoPendingInviteMessage());
-            return;
+            return finish(player, PartyOperationResult.NO_PENDING_INVITE, notify, "");
         }
         if (invite.expiresAtNanos() <= System.nanoTime()) {
-            send(player, PartyConfig.getInviteExpiredMessage());
-            return;
+            return finish(player, PartyOperationResult.INVITE_EXPIRED, notify, "");
         }
         Party party = parties.get(invite.partyId());
         Player inviter = Bukkit.getPlayer(invite.inviterId());
         Party inviterParty = getParty(invite.inviterId());
         if (party == null || inviter == null || !inviter.isOnline()
                 || inviterParty == null || !inviterParty.getId().equals(party.getId())) {
-            send(player, PartyConfig.getInviteExpiredMessage());
-            return;
+            return finish(player, PartyOperationResult.INVITE_EXPIRED, notify, "");
         }
         if (!party.addMember(player.getUniqueId())) {
             if (party.isFull()) invalidatePendingInvites(inviteEntry -> inviteEntry.partyId().equals(party.getId()));
-            send(player, PartyConfig.getPartyFullMessage());
-            return;
+            return finish(player, PartyOperationResult.PARTY_FULL, notify, "");
         }
 
         if (party.isFull()) invalidatePendingInvites(inviteEntry -> inviteEntry.partyId().equals(party.getId()));
 
         PartyDungeonReadyCheckManager.cancelForRosterChange(party);
         partyByPlayer.put(player.getUniqueId(), party.getId());
-        send(player, PartyConfig.getJoinedPartyMessage());
-        broadcast(party, PartyConfig.getMemberJoinedMessage().replace("$player", player.getName()), player.getUniqueId());
+        if (notify) {
+            send(player, PartyConfig.getJoinedPartyMessage());
+            broadcast(party, PartyConfig.getMemberJoinedMessage().replace("$player", player.getName()), player.getUniqueId());
+        }
         refresh(party);
+        return PartyOperationResult.SUCCESS;
     }
 
     public static void leave(Player player) {
-        leave(player.getUniqueId(), true);
+        leave(player, true);
+    }
+
+    /** Leaving remains possible if parties are disabled or the player's permission was revoked. */
+    public static PartyOperationResult leave(Player player, boolean notify) {
+        requirePrimaryThread();
+        java.util.Objects.requireNonNull(player, "player");
+        boolean wasInParty = isInParty(player.getUniqueId());
+        leave(player.getUniqueId(), notify, notify);
+        return wasInParty ? PartyOperationResult.SUCCESS : PartyOperationResult.NOT_IN_PARTY;
+    }
+
+    /** Post-admission only: cancelled or rejected entry attempts never change party membership. */
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onDungeonJoin(PlayerJoinDungeonEvent event) {
+        if (!PartyConfig.isEnabled()) return;
+        DungeonInstance dungeon = event.getDungeonInstance();
+        // Visitors in spectator mode are not members of the dungeon's combat party.
+        List<Player> roster = dungeon.getParticipants().stream()
+                .filter(member -> !dungeon.isSpectator(member) && member.isOnline())
+                .sorted(Comparator.comparing(Player::getName, String.CASE_INSENSITIVE_ORDER))
+                .toList();
+        // Solo admission leaves party membership alone; group the dungeon when a second player joins.
+        if (roster.size() < 2) return;
+        Set<UUID> rosterIds = new HashSet<>();
+        roster.forEach(member -> rosterIds.add(member.getUniqueId()));
+        Party party = parties.get(dungeonParties.get(dungeon.getRuntimeId()));
+        if (party != null && !rosterIds.containsAll(party.getMembers())) party = null;
+        if (party == null) {
+            // Retain a preformed party if all its members were admitted to this dungeon.
+            party = getParty(roster.get(0).getUniqueId());
+            if (party == null || !rosterIds.containsAll(party.getMembers())) {
+                Player leader = roster.get(0);
+                leave(leader.getUniqueId(), false);
+                party = new Party(leader.getUniqueId());
+                parties.put(party.getId(), party);
+                partyByPlayer.put(leader.getUniqueId(), party.getId());
+            }
+            dungeonParties.put(dungeon.getRuntimeId(), party.getId());
+        }
+        for (Player member : roster) {
+            if (getParty(member.getUniqueId()) == party) continue;
+            leave(member.getUniqueId(), false);
+            party.addAdmittedDungeonMember(member.getUniqueId());
+            partyByPlayer.put(member.getUniqueId(), party.getId());
+            send(member, PartyConfig.getJoinedPartyMessage());
+        }
+        refresh(party);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onDungeonRemoved(InstancedDungeonRemoveEvent event) {
+        // The party itself remains session-scoped so the group can choose another dungeon.
+        dungeonParties.remove(event.getDungeonInstance().getRuntimeId());
     }
 
     public static List<Player> getNearbyMembers(Player partyMember, Location location) {
@@ -297,6 +370,10 @@ public final class PartyManager implements Listener {
     }
 
     private static void leave(UUID playerId, boolean notifyPlayer) {
+        leave(playerId, notifyPlayer, true);
+    }
+
+    private static void leave(UUID playerId, boolean notifyPlayer, boolean notifyParty) {
         invalidatePendingInvite(playerId);
         invalidatePendingInvites(invite -> invite.inviterId().equals(playerId));
         Party party = getParty(playerId);
@@ -326,17 +403,49 @@ public final class PartyManager implements Listener {
             return;
         }
 
-        broadcast(party, PartyConfig.getMemberLeftMessage().replace("$player", playerName), null);
-        if (oldLeader.equals(playerId) && party.getLeader() != null)
-            broadcast(party, PartyConfig.getLeaderChangedMessage()
-                    .replace("$player", playerName(party.getLeader())), null);
+        if (notifyParty) {
+            broadcast(party, PartyConfig.getMemberLeftMessage().replace("$player", playerName), null);
+            if (oldLeader.equals(playerId) && party.getLeader() != null)
+                broadcast(party, PartyConfig.getLeaderChangedMessage()
+                        .replace("$player", playerName(party.getLeader())), null);
+        }
         refresh(party);
     }
 
-    private static boolean requireEnabled(Player player) {
-        if (PartyConfig.isEnabled()) return true;
-        send(player, PartyConfig.getDisabledMessage());
-        return false;
+    private static void requirePrimaryThread() {
+        if (!Bukkit.isPrimaryThread())
+            throw new IllegalStateException("Party operations must run on the server thread");
+    }
+
+    private static PartyOperationResult validateActor(Player player) {
+        requirePrimaryThread();
+        java.util.Objects.requireNonNull(player, "player");
+        if (!PartyConfig.isEnabled()) return PartyOperationResult.DISABLED;
+        if (!player.isOnline()) return PartyOperationResult.PLAYER_UNAVAILABLE;
+        if (!player.hasPermission("elitemobs.party")) return PartyOperationResult.NO_PERMISSION;
+        return PartyOperationResult.SUCCESS;
+    }
+
+    private static PartyOperationResult finish(Player player, PartyOperationResult result, boolean notify, String target) {
+        if (notify) {
+            String message = switch (result) {
+                case DISABLED -> PartyConfig.getDisabledMessage();
+                case NO_PERMISSION -> PartyConfig.getInventoryNoPermissionMessage();
+                case PLAYER_UNAVAILABLE -> PartyConfig.getPlayerUnavailableMessage();
+                case ALREADY_IN_PARTY -> PartyConfig.getAlreadyInPartyMessage();
+                case SELF_INVITE -> PartyConfig.getSelfInviteMessage();
+                case TARGET_ALREADY_IN_PARTY -> PartyConfig.getPlayerAlreadyInPartyMessage();
+                case TARGET_NO_PERMISSION -> PartyConfig.getPlayerCannotUsePartiesMessage();
+                case INVITE_ALREADY_PENDING -> PartyConfig.getInviteAlreadyPendingMessage();
+                case PARTY_FULL -> PartyConfig.getPartyFullMessage();
+                case NO_PENDING_INVITE -> PartyConfig.getNoPendingInviteMessage();
+                case INVITE_EXPIRED -> PartyConfig.getInviteExpiredMessage();
+                case NOT_IN_PARTY -> PartyConfig.getNotInPartyMessage();
+                case SUCCESS -> throw new IllegalArgumentException("Success feedback belongs to its operation");
+            };
+            send(player, (message == null ? "" : message).replace("$player", target));
+        }
+        return result;
     }
 
     private static void refresh(Party party) {

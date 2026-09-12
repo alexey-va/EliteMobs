@@ -86,6 +86,7 @@ public class InstancePlayerManager {
         // anything changed during the batch preflight instead of admitting only part of a party.
         if (!authorization.getAsBoolean()
                 || !canAdmitPlayers(playersToAdd, matchInstance, true)) return false;
+        if (!matchInstance.reserveAdmission()) return false;
 
         LinkedHashMap<UUID, Location> previousLocations = new LinkedHashMap<>();
         for (Player player : playersToAdd)
@@ -105,6 +106,7 @@ public class InstancePlayerManager {
         } catch (RuntimeException exception) {
             entryTasks.forEach(BukkitTask::cancel);
             rollbackRegistrations(playersToAdd, matchInstance);
+            matchInstance.abortAdmission();
             Logger.warn("Failed to schedule an instance-entry batch: " + exception.getMessage());
             return false;
         }
@@ -116,8 +118,11 @@ public class InstancePlayerManager {
     private static boolean canAdmitPlayers(List<Player> playersToAdd,
                                            MatchInstance matchInstance,
                                            boolean sendFeedback) {
-        //Right now new players can't join ongoing instances
-        if (!matchInstance.state.equals(MatchInstance.InstancedRegionState.WAITING)) {
+        //New players can only join instances still accepting them: WAITING *and* alive.
+        //destroyMatch() resets dead dungeon instances to WAITING while their world
+        //awaits deletion, so the bare state check used to admit players into worlds
+        //already scheduled for removal. Ongoing instances are also refused here.
+        if (!matchInstance.isAcceptingNewPlayers()) {
             if (sendFeedback) playersToAdd.get(0).sendMessage(ArenasConfig.getArenasOngoingMessage());
             return false;
         }
@@ -228,15 +233,10 @@ public class InstancePlayerManager {
         if (matchInstance.players.isEmpty() && matchInstance.getDeathLocationByPlayer(player) != null)
             matchInstance.getDeathLocationByPlayer(player).clear(false);
 
-        //Teleport the player out
-        if (player.isOnline()) {
+        // A successful explicit exit already moved the player to their chosen destination.
+        if (player.isOnline() && matchInstance.isInRegion(player.getLocation())) {
             MatchInstance.MatchInstanceEvents.teleportBypass = true;
-            if (matchInstance instanceof DungeonInstance) {
-                Location location = matchInstance.previousPlayerLocations.get(player);
-                if (location != null) player.teleport(location);
-                else player.teleport(matchInstance.exitLocation);
-            } else
-                player.teleport(matchInstance.exitLocation);
+            player.teleport(matchInstance.participantExitLocation(player));
         }
 
         //End the match if there are no players left because they all died
@@ -252,6 +252,11 @@ public class InstancePlayerManager {
 
     public static void playerDeath(MatchInstance matchInstance, Player player) {
         if (!matchInstance.players.contains(player)) return;
+        // Lethal damage is cancelled, so Bukkit's normal death effect cleanup never runs.
+        for (var effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
+        player.setFireTicks(0);
+        player.setFreezeTicks(0);
+        player.setFallDistance(0);
         AlternativeDurabilityLoss.doDurabilityLoss(player);
         AttributeManager.setAttribute(player, "generic_max_health", AttributeManager.getAttributeBaseValue(player, "generic_max_health"));
         matchInstance.players.remove(player);
@@ -302,7 +307,10 @@ public class InstancePlayerManager {
     }
 
     public static void addSpectator(MatchInstance matchInstance, Player player, boolean wasPlayer) {
+        if (!matchInstance.isAcceptingSpectator(player, wasPlayer)) return;
         if (!wasPlayer && !fireJoinEvent(matchInstance, player)) return;
+        if (!matchInstance.isAcceptingSpectator(player, wasPlayer)
+                || !matchInstance.reserveAdmission()) return;
 
         if (!wasPlayer) matchInstance.previousPlayerLocations.put(player, player.getLocation());
         matchInstance.participants.add(player);
@@ -329,13 +337,10 @@ public class InstancePlayerManager {
         if (wasParticipant && !matchInstance.participants.contains(player))
             fireLeaveEvents(matchInstance, player);
         player.setGameMode(GameMode.SURVIVAL);
-        MatchInstance.MatchInstanceEvents.teleportBypass = true;
-        if (matchInstance instanceof DungeonInstance) {
-            Location location = matchInstance.previousPlayerLocations.get(player);
-            if (location != null) player.teleport(location);
-            else player.teleport(matchInstance.exitLocation);
-        } else
-            player.teleport(matchInstance.exitLocation);
+        if (matchInstance.isInRegion(player.getLocation())) {
+            MatchInstance.MatchInstanceEvents.teleportBypass = true;
+            player.teleport(matchInstance.participantExitLocation(player));
+        }
         PlayerData.setMatchInstance(player, null);
         matchInstance.playerLives.remove(player);
         if (matchInstance.getDeathLocationByPlayer(player) != null)

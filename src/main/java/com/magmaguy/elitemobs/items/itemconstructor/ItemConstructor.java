@@ -8,6 +8,8 @@ import com.magmaguy.elitemobs.items.ItemTagger;
 import com.magmaguy.elitemobs.items.customenchantments.SoulbindEnchantment;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffectContainer;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
+import com.magmaguy.elitemobs.skills.SkillType;
+import com.magmaguy.elitemobs.skills.WeaponIdentityResolver;
 import com.magmaguy.elitemobs.utils.CustomModelAdder;
 import com.magmaguy.magmacore.util.ChatColorConverter;
 import com.magmaguy.magmacore.util.ItemStackGenerator;
@@ -40,7 +42,13 @@ public class ItemConstructor {
                                           String equipmentModelID,
                                           boolean soulbound,
                                           String filename,
-                                          String scriptedItem) {
+                                          String scriptedItem,
+                                          SkillType weaponType,
+                                          String fmmItemModel) {
+        if (weaponType == SkillType.STAVES || weaponType == SkillType.WANDS) {
+            enchantments = new HashMap<>(enchantments);
+            enchantments.remove(Enchantment.PUNCH);
+        }
         /*
         Construct initial item
          */
@@ -78,8 +86,9 @@ public class ItemConstructor {
 
         itemStack.setItemMeta(itemMeta);
 
-        // Apply custom models — skip if scriptedItem is set (FMM provides the model)
-        if (scriptedItem == null || scriptedItem.isEmpty()) {
+        // Apply ordinary models only when neither FMM path owns presentation.
+        if ((scriptedItem == null || scriptedItem.isEmpty())
+                && (fmmItemModel == null || fmmItemModel.isEmpty())) {
             if ((customModelID != null && !customModelID.isEmpty()) || (equipmentModelID != null && !equipmentModelID.isEmpty())) {
                 //Config defines at least one model - use config values (may be null for the other)
                 String effectiveCustomModelID = (customModelID != null && !customModelID.isEmpty())
@@ -100,11 +109,25 @@ public class ItemConstructor {
 
         //Register filename of the custom item into the persistent metadata
         Objects.requireNonNull(itemMeta).getPersistentDataContainer().set(new NamespacedKey(MetadataHandler.PLUGIN, filename), PersistentDataType.STRING, filename);
+        ItemTagger.registerCustomItemId(itemMeta, filename);
         itemStack.setItemMeta(itemMeta);
+
+        // FMM assigns its sole authored identity. Other model IDs remain presentation-only.
+        if (fmmItemModel != null && !fmmItemModel.isEmpty())
+            applyFmmItemData(itemStack, fmmItemModel, filename);
+        if (weaponType != null && WeaponIdentityResolver.progressionSkill(itemStack) != weaponType) {
+            com.magmaguy.magmacore.util.Logger.warn("Custom item " + filename + " requires an available FMM authored weapon matching " + weaponType + ".");
+            return null;
+        }
 
         // Apply FMM scripted item data if configured and FMM is installed
         if (scriptedItem != null && !scriptedItem.isEmpty()
                 && org.bukkit.Bukkit.getPluginManager().getPlugin("FreeMinecraftModels") != null) {
+            if (WeaponIdentityResolver.isMagicWeapon(itemStack)) {
+                com.magmaguy.magmacore.util.Logger.warn("Custom item " + filename
+                        + " cannot combine an authored FMM weapon with the old scriptedItem path.");
+                return null;
+            }
             try {
                 boolean applied = com.magmaguy.freeminecraftmodels.api.ScriptedItemAPI
                         .applyScriptedItemData(itemStack, scriptedItem);
@@ -118,7 +141,27 @@ public class ItemConstructor {
             }
         }
 
+        com.magmaguy.elitemobs.items.ItemDurability.prepareMagicWeapon(itemStack);
         return commonFeatures(itemStack, eliteEntity, player, enchantments, customEnchantments, showItemWorth, soulbound);
+    }
+
+    private static void applyFmmItemData(ItemStack itemStack, String fmmItemModel, String filename) {
+        if (!org.bukkit.Bukkit.getPluginManager().isPluginEnabled("FreeMinecraftModels")) return;
+        boolean magicWeapon = false;
+        boolean applied = false;
+        try {
+            magicWeapon = com.magmaguy.freeminecraftmodels.api.magic.MagicWeaponAPI.isWeapon(fmmItemModel);
+            applied = magicWeapon
+                    ? com.magmaguy.freeminecraftmodels.api.magic.MagicWeaponAPI.applyWeaponData(itemStack, fmmItemModel)
+                    : com.magmaguy.freeminecraftmodels.api.ModelItemAPI.applyDisplayModel(itemStack, fmmItemModel);
+        } catch (LinkageError incompatibleFmm) {
+            // The integration emits the actionable compatibility warning. Never stamp an old identity.
+        }
+        if (!applied && !magicWeapon) {
+            com.magmaguy.magmacore.util.Logger.warn("FMM presentation model '"
+                    + fmmItemModel + "' was not found for custom item " + filename
+                    + "; its vanilla material will be used.");
+        }
     }
 
     /**
@@ -133,89 +176,35 @@ public class ItemConstructor {
      * @return The constructed ItemStack, or null if material is invalid
      */
     public static ItemStack constructItemWithMaterial(Material material, int level, Player player, boolean showItemWorth) {
-        if (material == null) return null;
-
-        // Construct initial item
-        ItemStack itemStack = ItemStackGenerator.generateItemStack(material);
-
-        // Set the item level
-        EliteItemManager.setEliteLevel(itemStack, level);
-
-        // Get meta
-        ItemMeta itemMeta = itemStack.getItemMeta();
-
-        // Generate item enchantments based on level
-        HashMap<Enchantment, Integer> enchantmentMap = EnchantmentGenerator.generateEnchantments(level, material, itemMeta);
-
-        // Generate custom enchantments based on level
-        HashMap<String, Integer> customEnchantmentMap = EnchantmentGenerator.generateCustomEnchantments(level, material);
-
-        // Generate item name
-        itemMeta.setDisplayName(NameGenerator.generateName(material));
-
-        // Colorize with MMO colors
-        itemStack.setItemMeta(itemMeta);
-        ItemQualityColorizer.dropQualityColorizer(itemStack);
-
-        // Apply level-based custom skins
-        EliteItemSkins.applyLevelBasedSkin(itemStack, level);
-
-        return commonFeatures(itemStack, null, player, enchantmentMap, customEnchantmentMap, showItemWorth, true);
+        return material == null ? null : constructProceduralItem(
+                ProceduralItemType.vanilla(material), level, null, player, showItemWorth);
     }
 
-    /*
-    For procedurally generated items
-     */
     public static ItemStack constructItem(double itemTier, EliteEntity killedMob, Player player, boolean showItemWorth) {
+        return constructProceduralItem(MaterialGenerator.generateItemType(itemTier), itemTier,
+                killedMob, player, showItemWorth);
+    }
 
-        /*
-        Generate material
-         */
-        Material itemMaterial = MaterialGenerator.generateMaterial(itemTier);
-        if (itemMaterial == null) return null;
-        /*
-        Construct initial item
-         */
-        ItemStack itemStack = ItemStackGenerator.generateItemStack(itemMaterial);
-        /*
-        Set the item level
-         */
-        EliteItemManager.setEliteLevel(itemStack, (int) Math.round(itemTier));
-        /*
-        Get meta
-         */
+    public static ItemStack constructProceduralItem(ProceduralItemType type, double itemTier,
+                                                   EliteEntity killedMob, Player player, boolean showItemWorth) {
+        if (type == null || !type.isAvailable()) return null;
+        int level = (int) Math.round(itemTier);
+        ItemStack itemStack = ItemStackGenerator.generateItemStack(type.material());
+        EliteItemManager.setEliteLevel(itemStack, level);
         ItemMeta itemMeta = itemStack.getItemMeta();
-
-         /*
-        Generate item enchantments
-        Note: This only gets a list of enchantments to be applied later at the lore stage
-         */
-        HashMap<Enchantment, Integer> enchantmentMap = EnchantmentGenerator.generateEnchantments(itemTier, itemMaterial, itemMeta);
-
-        /*
-        Generate custom enchantments
-        Note: This only gets a list of enchantments to be applied later at the lore stage
-         */
-        HashMap<String, Integer> customEnchantmentMap = EnchantmentGenerator.generateCustomEnchantments(itemTier, itemMaterial);
-
-        /*
-        Generate item name
-         */
-        itemMeta.setDisplayName(NameGenerator.generateName(itemMaterial));
-
-        /*
-        Colorize with MMO colors
-         */
+        HashMap<Enchantment, Integer> enchantmentMap = EnchantmentGenerator.generateEnchantments(
+                itemTier, type.material(), type.magicSkill(), itemMeta);
+        HashMap<String, Integer> customEnchantmentMap = type.magicSkill() == null
+                ? EnchantmentGenerator.generateCustomEnchantments(itemTier, type.material())
+                : com.magmaguy.elitemobs.items.itemconstructor.MagicEnchantmentGeneration.generate(itemTier, type.magicSkill());
+        itemMeta.setDisplayName(NameGenerator.generateName(type));
         itemStack.setItemMeta(itemMeta);
+
+        if (type.magicSkill() == null) EliteItemSkins.applyLevelBasedSkin(itemStack, level);
+        else if (!type.applyMagicData(itemStack)) return null;
         ItemQualityColorizer.dropQualityColorizer(itemStack);
 
-        /*
-        Apply level-based custom skins for procedurally generated items
-         */
-        EliteItemSkins.applyLevelBasedSkin(itemStack, (int) Math.round(itemTier));
-
         return commonFeatures(itemStack, killedMob, player, enchantmentMap, customEnchantmentMap, showItemWorth, true);
-
     }
 
     private static ItemStack commonFeatures(ItemStack itemStack,
@@ -240,13 +229,16 @@ public class ItemConstructor {
         /*
         Register item source for lore redraw
          */
-        ItemTagger.registerItemSource(eliteEntity, itemMeta);
+        if (com.magmaguy.elitemobs.items.LootItemPolicy.keepsMobProvenance(itemStack))
+            ItemTagger.registerItemSource(eliteEntity, itemMeta);
 
         //Tag the item
         ItemTagger.registerEnchantments(itemMeta, enchantments);
-        ItemTagger.registerCustomEnchantments(itemMeta, customEnchantments);
-
         itemStack.setItemMeta(itemMeta);
+        if (!customEnchantments.isEmpty()) {
+            var items = com.magmaguy.elitemobs.items.upgradesystem.EliteEnchantmentItems.ITEMS;
+            itemStack = items.previewAuthoredCustom(itemStack, customEnchantments).apply(itemStack);
+        }
 
         /*
         Add soulbind if applicable

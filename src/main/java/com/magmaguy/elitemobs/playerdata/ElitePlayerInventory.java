@@ -3,6 +3,7 @@ package com.magmaguy.elitemobs.playerdata;
 import com.magmaguy.elitemobs.config.MobCombatSettingsConfig;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffect;
 import com.magmaguy.elitemobs.skills.CombatLevelCalculator;
+import com.magmaguy.elitemobs.utils.BossBarUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -189,31 +190,14 @@ public class ElitePlayerInventory {
         return Math.min(cap, critChance);
     }
 
-    public double getLightningChance(boolean update) {
-        double lightningChance = mainhand.getLightningChance(player.getInventory().getItemInMainHand(), update);
-        return lightningChance;
-    }
-
     public double getHunterChance(boolean update) {
         double hunterChance = helmet.getHunterChance(player.getInventory().getHelmet(), update) +
                 chestplate.getHunterChance(player.getInventory().getChestplate(), update) +
                 leggings.getHunterChance(player.getInventory().getLeggings(), update) +
-                boots.getHunterChance(player.getInventory().getBoots(), update);
+                boots.getHunterChance(player.getInventory().getBoots(), update) +
+                mainhand.getHunterChance(player.getInventory().getItemInMainHand(), update) +
+                offhand.getHunterChance(player.getInventory().getItemInOffHand(), update);
         return hunterChance;
-    }
-
-    public double getPlasmaBootsLevel(boolean update) {
-        double plasmaBootsLevel = boots.getPlasmaBootsLevel(player.getInventory().getBoots(), update);
-        return plasmaBootsLevel;
-    }
-
-    public double getEarthquakeLevel(boolean update) {
-        //todo: should earthquake really apply for things other than the boots?
-        double earthquakeLevel = helmet.getEarthquakeLevel(player.getInventory().getHelmet(), update) +
-                chestplate.getEarthquakeLevel(player.getInventory().getChestplate(), update) +
-                leggings.getEarthquakeLevel(player.getInventory().getLeggings(), update) +
-                boots.getEarthquakeLevel(player.getInventory().getBoots(), update);
-        return earthquakeLevel;
     }
 
     /**
@@ -263,6 +247,10 @@ public class ElitePlayerInventory {
         @EventHandler
         public void onPlayerLogout(PlayerQuitEvent event) {
             playerInventories.remove(event.getPlayer().getUniqueId());
+            // The per-slot broken-item bars live in BossBarUtil, keyed by UUID; without
+            // this they leak across relogs and their stale entries block the bar from
+            // ever being shown again for that slot.
+            BossBarUtil.clearPlayer(event.getPlayer().getUniqueId());
         }
     }
 }

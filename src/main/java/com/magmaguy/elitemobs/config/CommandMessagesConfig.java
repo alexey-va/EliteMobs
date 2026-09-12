@@ -1,5 +1,7 @@
 package com.magmaguy.elitemobs.config;
 
+import com.magmaguy.magmacore.nightbreak.NightbreakChatStyle;
+
 import com.magmaguy.magmacore.config.ConfigurationFile;
 import lombok.Getter;
 
@@ -40,6 +42,14 @@ public class CommandMessagesConfig extends ConfigurationFile {
     private static String dungeonLockoutPlayerNotValidMessage;
     @Getter
     private static String dungeonLockoutResetSuccessMessage;
+
+    // Unbind commands
+    @Getter
+    private static String unbindForceSuccessMessage;
+    @Getter
+    private static String unbindForceNotSoulboundMessage;
+    @Getter
+    private static String unbindForceAllMessage;
 
     // Quest commands
     @Getter
@@ -511,6 +521,7 @@ public class CommandMessagesConfig extends ConfigurationFile {
 
     @Override
     public void initializeValues() {
+        NightbreakChatStyle.migrateSeparators(fileConfiguration, "statsSeparator", "lootVoteSeparator");
         // Currency commands
         payNiceTryMessage = ConfigurationEngine.setString(
                 List.of("Sets the message sent when a player tries to pay a negative amount"),
@@ -559,6 +570,18 @@ public class CommandMessagesConfig extends ConfigurationFile {
         dungeonLockoutResetSuccessMessage = ConfigurationEngine.setString(
                 List.of("Sets the message sent when a player's dungeon boss lockouts are reset", "$player - the target player name", "$amount - the number of lockouts cleared"),
                 file, fileConfiguration, "dungeonLockoutResetSuccessMessage", "[EliteMobs] Cleared $amount dungeon boss lockout(s) for player $player", true);
+
+        // Unbind commands. These are sent through the prefixing message path, so the
+        // defaults deliberately carry no [EliteMobs] prefix of their own.
+        unbindForceSuccessMessage = ConfigurationEngine.setString(
+                List.of("Sets the message sent when /em unbind force unbinds the held item"),
+                file, fileConfiguration, "unbindForceSuccessMessage", "Unbound the held item.", true);
+        unbindForceNotSoulboundMessage = ConfigurationEngine.setString(
+                List.of("Sets the message sent when /em unbind force finds the held item is not soulbound"),
+                file, fileConfiguration, "unbindForceNotSoulboundMessage", "The held item is not soulbound.", true);
+        unbindForceAllMessage = ConfigurationEngine.setString(
+                List.of("Sets the message sent when /em unbind force all sweeps the inventory", "$amount - the number of items unbound"),
+                file, fileConfiguration, "unbindForceAllMessage", "Unbound $amount soulbound item(s) in your inventory.", true);
 
         // Quest commands
         questPlayerNotValidMessage = ConfigurationEngine.setString(
@@ -1000,7 +1023,7 @@ public class CommandMessagesConfig extends ConfigurationFile {
                 file, fileConfiguration, "trackedNpcCountMessage", "Tracked NPC count: ", true);
         statsSeparator = ConfigurationEngine.setString(
                 List.of("Sets the separator line for the stats command."),
-                file, fileConfiguration, "statsSeparator", "<g:#8B0000:#CC4400:#DAA520>▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</g>", true);
+                file, fileConfiguration, "statsSeparator", NightbreakChatStyle.separator(), true);
         statsVersionHeader = ConfigurationEngine.setString(
                 List.of("Sets the version header for the stats command.",
                         "$version is the placeholder for the plugin version."),
@@ -1040,11 +1063,11 @@ public class CommandMessagesConfig extends ConfigurationFile {
         // SharedLootTable messages
         lootVoteSeparator = ConfigurationEngine.setString(
                 List.of("Sets the separator line for loot votes"),
-                file, fileConfiguration, "lootVoteSeparator", "<g:#8B0000:#CC4400:#DAA520>▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</g>", true);
+                file, fileConfiguration, "lootVoteSeparator", NightbreakChatStyle.separator(), true);
         lootVoteMessage = ConfigurationEngine.setString(
                 List.of("Sets the loot vote message prefix, before the clickable /em loot command.",
                         "$count - the number of items to vote on, used in the suffix."),
-                file, fileConfiguration, "lootVoteMessage", "&8[EliteMobs] &6Loot vote! Click ", true);
+                file, fileConfiguration, "lootVoteMessage", "&8[EliteMobs] &6Shared loot awaiting a roll. Click ", true);
         lootVoteMessageSuffix = ConfigurationEngine.setString(
                 List.of("Sets the loot vote message suffix, after the clickable /em loot command.",
                         "$count - the number of items to vote on"),
@@ -1237,7 +1260,7 @@ public class CommandMessagesConfig extends ConfigurationFile {
                 List.of("Sets the message shown when a player wins a shared loot item.",
                         "$player is the placeholder for the winning player's display name.",
                         "$item is the placeholder for the item's display name."),
-                file, fileConfiguration, "lootWinnerMessage", "$player &areceived $item !", true);
+                file, fileConfiguration, "lootWinnerMessage", "$player &awon $item!", true);
 
         // QuestCommand messages
         questInvalidIdMessage = ConfigurationEngine.setString(

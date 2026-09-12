@@ -7,12 +7,15 @@ import lombok.Getter;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class EnchantmentsConfig extends CustomConfig {
 
     @Getter
     private static HashMap<String, EnchantmentsConfigFields> enchantments = new HashMap();
+    private static final Set<String> missingEnchantmentWarnings = new HashSet<>();
 
     public EnchantmentsConfig() {
         super("enchantments", "com.magmaguy.elitemobs.config.enchantments.premade", EnchantmentsConfigFields.class);
@@ -21,14 +24,18 @@ public class EnchantmentsConfig extends CustomConfig {
             enchantments.put(key, (EnchantmentsConfigFields) super.getCustomConfigFieldsHashMap().get(key));
     }
 
+    @Override protected boolean ownsFilename(String filename) {
+        String stem = filename.toLowerCase(Locale.ROOT).replaceFirst("\\.ya?ml$", "");
+        return com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.HOST_SETTINGS.contains(stem)
+                || Enchantment.getByKey(org.bukkit.NamespacedKey.minecraft(stem)) != null;
+    }
+
     public static EnchantmentsConfigFields getEnchantment(String string) {
         String newString = LegacyValueConverter.parseEnchantment(string.replace(".yml", "")) + ".yml";
         newString = newString.toLowerCase(Locale.ROOT);
         EnchantmentsConfigFields test = enchantments.get(newString);
-        if (test == null) {
+        if (test == null && missingEnchantmentWarnings.add(newString))
             Logger.warn("Failed to find enchant file " + newString);
-            new Exception().printStackTrace();
-        }
         return enchantments.get(newString);
     }
 

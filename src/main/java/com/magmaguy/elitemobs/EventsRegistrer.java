@@ -6,9 +6,16 @@ import com.magmaguy.elitemobs.combatsystem.EliteMobDamagedByEliteMobHandler;
 import com.magmaguy.elitemobs.combatsystem.EliteMobGenericDamagedHandler;
 import com.magmaguy.elitemobs.combatsystem.antiexploit.*;
 import com.magmaguy.elitemobs.combatsystem.combattag.CombatTag;
+import com.magmaguy.elitemobs.combatsystem.combattag.DungeonCombatRuntime;
 import com.magmaguy.elitemobs.combatsystem.displays.BossHealthDisplay;
 import com.magmaguy.elitemobs.commands.admin.RemoveCommand;
 import com.magmaguy.elitemobs.config.*;
+import com.magmaguy.elitemobs.advancedcombat.AdvancedCombatRuntime;
+import com.magmaguy.elitemobs.advancedcombat.AdvancedCombatModule;
+import com.magmaguy.elitemobs.advancedcombat.AdvancedCombatSuggestion;
+import com.magmaguy.elitemobs.advancedcombat.AdvancedCombatStateRecovery;
+import com.magmaguy.elitemobs.advancedcombat.menu.ClassSelectionMenu;
+import com.magmaguy.elitemobs.presentation.actionbar.ActionBarCompositor;
 import com.magmaguy.elitemobs.config.enchantments.EnchantmentsConfig;
 import com.magmaguy.elitemobs.config.powers.PowersConfig;
 import com.magmaguy.elitemobs.dungeons.DungeonBossLockoutHandler;
@@ -58,6 +65,7 @@ import com.magmaguy.elitemobs.quests.QuestTracking;
 import com.magmaguy.elitemobs.quests.dialogue.QuestDialogueBossBarManager;
 import com.magmaguy.elitemobs.quests.menus.QuestInventoryMenu;
 import com.magmaguy.elitemobs.quests.objectives.ArenaObjective;
+import com.magmaguy.elitemobs.quests.objectives.ClassUnlockObjective;
 import com.magmaguy.elitemobs.quests.objectives.CustomFetchObjective;
 import com.magmaguy.elitemobs.quests.objectives.DialogObjective;
 import com.magmaguy.elitemobs.quests.objectives.KillObjective;
@@ -94,6 +102,7 @@ public class EventsRegistrer {
         plugin = MetadataHandler.PLUGIN;
 
         register(new FirstTimeSetup());
+        register(new AdvancedCombatSuggestion());
 
         register(new Navigation());
 
@@ -109,6 +118,7 @@ public class EventsRegistrer {
         register(new SkillSystemMigration.MigrationEvents());
         register(new CombatLevelDisplay());
         register(new SkillBonusEventHandler());
+        register(new AdvancedCombatStateRecovery());
         register(new SkillBonusMenu.SkillBonusMenuEvents());
         register(new PlayerQuestCooldownsLogout());
 
@@ -177,12 +187,10 @@ public class EventsRegistrer {
         registerPower(new TrackingFireballSupport.Events(), "tracking_fireball.yml");
 
         //boss powers
-        register(new PlasmaBootsEnchantment.PlasmaBootsEnchantmentEvents());
         if (EnchantmentsConfig.getEnchantment(SoulbindEnchantment.key + ".yml").isEnabled())
             register(new SoulbindEnchantment.SoulbindEnchantmentEvents());
         register(new CustomSummonPower.CustomSummonPowerEvent());
         register(new CombatEnterScanPower.MajorCombatEnterScanningPowerEvents());
-        register(new LightningEnchantment.LightningEnchantmentEvents());
         registerPower(new BonusCoins.BonusCoinsEvents(), "bonus_coins.yml");
 
         //special powers
@@ -234,6 +242,9 @@ public class EventsRegistrer {
         //player status menu
         register(new StatusInventorySafety());
         register(new CoverPage.CoverPageEvents());
+        if (AdvancedCombatSystemConfig.isEnabled()) {
+            register(ClassSelectionMenu.listener());
+        }
         register(new StatsPage.StatsPageEvents());
         register(new SkillsPage.SkillsPageEvents());
         register(new GearPage.GearPageEvents());
@@ -302,22 +313,13 @@ public class EventsRegistrer {
         register(new BossBarOrderManager.BossBarOrderManagerEvents());
 
         //Initialize items from custom events
-        register(new FlamethrowerEnchantment.FlamethrowerEnchantmentEvents());
-        register(new SummonMerchantEnchantment.SummonMerchantEvents());
-        register(new SummonWolfEnchantment.SummonWolfEnchantmentEvent());
-        register(new MeteorShowerEnchantment.MeteorShowerEvents());
-        register(new DrillingEnchantment.DrillingEnchantmentEvents());
-        register(new IceBreakerEnchantment.IceBreakerEnchantmentEvent());
-        register(new GrapplingHookEnchantment.GrapplingHookEnchantmentEvents());
-        register(new EarthquakeEnchantment.EarthquakeEnchantmentEvents());
-        //register(new UnbindEnchantment.UnbindEvents());
 
         //register quests
         register(new KillObjective.KillObjectiveEvents());
         register(new CustomFetchObjective.CustomFetchObjectiveEvents());
-        register(new DialogObjective.DialogObjectiveEvents());
         register(new ArenaObjective.ArenaObjectiveEvents());
         register(new QuestAcceptEvent.QuestAcceptEventHandler());
+        register(new ClassUnlockObjective.Events());
         register(new QuestCompleteEvent.QuestCompleteEventHandler());
         register(new QuestLeaveEvent.QuestLeaveEventHandler());
         register(new QuestProgressionEvent.QuestProgressionEventHandler());
@@ -325,6 +327,7 @@ public class EventsRegistrer {
         register(new CustomQuest.CustomQuestEvents());
         register(new QuestDialogueBossBarManager.QuestDialogueBossBarEvents());
         register(new QuestInventoryMenu.QuestInventoryMenuEvents());
+        register(new com.magmaguy.elitemobs.quests.menus.QuestScreenSession());
         register(new ArenaCompleteEvent.ArenaCompleteEventHandler());
 
         //Songs
@@ -387,6 +390,27 @@ public class EventsRegistrer {
     private static void registerPower(Listener listener, String config) {
         if (PowersConfig.getPower(config).isEnabled())
             register(listener);
+    }
+
+    /** Registers task-owning listeners only after the initialization pipeline succeeds. */
+    public static void registerPostInitializationEvents() {
+        ActionBarCompositor.initialize();
+        for (org.bukkit.entity.Player player : Bukkit.getOnlinePlayers())
+            AdvancedCombatStateRecovery.reconcile(player);
+        if (!DungeonsConfig.isEnableDungeonFoodRegeneration() && !AdvancedCombatSystemConfig.isEnabled()) return;
+
+        DungeonCombatRuntime dungeonCombatRuntime = new DungeonCombatRuntime();
+        CombatLevelDisplay.setCombatState(dungeonCombatRuntime);
+        register(dungeonCombatRuntime);
+        dungeonCombatRuntime.start();
+
+        if (AdvancedCombatSystemConfig.isEnabled()) {
+            AdvancedCombatRuntime advancedCombatRuntime =
+                    new AdvancedCombatRuntime(dungeonCombatRuntime);
+            register(advancedCombatRuntime);
+            advancedCombatRuntime.start();
+            AdvancedCombatModule.initialize(dungeonCombatRuntime);
+        }
     }
 
     private static void register(Listener listener) {

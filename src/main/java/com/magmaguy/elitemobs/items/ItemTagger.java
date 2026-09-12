@@ -4,7 +4,6 @@ import com.magmaguy.elitemobs.MetadataHandler;
 import com.magmaguy.elitemobs.config.ItemSettingsConfig;
 import com.magmaguy.elitemobs.config.enchantments.EnchantmentsConfig;
 import com.magmaguy.elitemobs.config.enchantments.EnchantmentsConfigFields;
-import com.magmaguy.elitemobs.items.customenchantments.CustomEnchantment;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffect;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffectContainer;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
@@ -17,6 +16,7 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.tags.ItemTagType;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
@@ -32,6 +32,8 @@ public class ItemTagger {
     private static final NamespacedKey ELITE_DEFENSE = new NamespacedKey(MetadataHandler.PLUGIN, "eliteDefense");
     @Getter
     private static final NamespacedKey ELITE_LEVEL = new NamespacedKey(MetadataHandler.PLUGIN, "eliteLevel");
+    private static final NamespacedKey CUSTOM_ITEM_ID =
+            new NamespacedKey(MetadataHandler.PLUGIN, "custom_item_id");
 
     // Arrow combat data — stored at launch time for accurate ranged damage calculation
     private static final NamespacedKey ARROW_WEAPON_LEVEL = new NamespacedKey(MetadataHandler.PLUGIN, "arrowWeaponLevel");
@@ -39,13 +41,14 @@ public class ItemTagger {
     private static final NamespacedKey ARROW_SKILL_LEVEL = new NamespacedKey(MetadataHandler.PLUGIN, "arrowSkillLevel");
     private static final NamespacedKey ARROW_DAMAGE_MULTIPLIER = new NamespacedKey(MetadataHandler.PLUGIN, "arrowDamageMultiplier");
     private static final NamespacedKey ARROW_LAUNCH_VELOCITY = new NamespacedKey(MetadataHandler.PLUGIN, "arrowLaunchVelocity");
+    private static final NamespacedKey ARROW_CRITICAL = new NamespacedKey(MetadataHandler.PLUGIN, "arrowCritical");
+    private static final NamespacedKey ARROW_LOUD_STRIKES = new NamespacedKey(MetadataHandler.PLUGIN, "arrowLoudStrikes");
 
     public static String itemValue = "ItemValue";
 
     public static NamespacedKey onHitPotionEffectKey = new NamespacedKey(MetadataHandler.PLUGIN, "onHitPotionEffect");
     public static NamespacedKey continuousPotionEffectKey = new NamespacedKey(MetadataHandler.PLUGIN, "continuousPotionEffect");
     public static NamespacedKey itemSource = new NamespacedKey(MetadataHandler.PLUGIN, "itemSource");
-    public static NamespacedKey enchantmentCount = new NamespacedKey(MetadataHandler.PLUGIN, "enchantmentCount");
 
     public static void registerEliteItem(ItemMeta itemMeta) {
         itemMeta.getPersistentDataContainer().set(eliteMobsItemNamespacedKey, PersistentDataType.BYTE, (byte) 1);
@@ -60,6 +63,21 @@ public class ItemTagger {
         return;
     }
 
+    /**
+     * Stores the stable content identity independently from the historical filename-as-key tag.
+     * Runtime systems should use this value when distinct custom items share one vanilla material.
+     */
+    public static void registerCustomItemId(ItemMeta itemMeta, String itemId) {
+        if (itemMeta == null || itemId == null || itemId.isBlank()) return;
+        itemMeta.getPersistentDataContainer().set(CUSTOM_ITEM_ID, PersistentDataType.STRING, itemId);
+    }
+
+    @Nullable
+    public static String getCustomItemId(@Nullable ItemStack itemStack) {
+        if (itemStack == null || !itemStack.hasItemMeta()) return null;
+        return itemStack.getItemMeta().getPersistentDataContainer()
+                .get(CUSTOM_ITEM_ID, PersistentDataType.STRING);
+    }
 
     /**
      * Used to register custom lore as a string to the item. This is necessary for the lore updater as it redraws the custom
@@ -124,26 +142,6 @@ public class ItemTagger {
         itemMeta.getPersistentDataContainer().set(enchantmentKey, PersistentDataType.INTEGER, enchantmentLevel);
     }
 
-    public static void registerCustomEnchantments(ItemMeta itemMeta, HashMap<String, Integer> customEnchantments) {
-        for (String subString : customEnchantments.keySet())
-            registerCustomEnchantment(itemMeta, subString, customEnchantments.get(subString));
-    }
-
-    /**
-     * For custom enchantments
-     *
-     * @param itemMeta
-     * @param enchantmentKey
-     * @param enchantmentLevel
-     */
-    public static void registerCustomEnchantment(ItemMeta itemMeta, String enchantmentKey, int enchantmentLevel) {
-        itemMeta.getPersistentDataContainer().set(new NamespacedKey(MetadataHandler.PLUGIN, enchantmentKey), PersistentDataType.INTEGER, enchantmentLevel);
-    }
-
-    public static void registerCustomEnchantment(ItemMeta itemMeta, String enchantmentKey, String uuid) {
-        itemMeta.getPersistentDataContainer().set(new NamespacedKey(MetadataHandler.PLUGIN, enchantmentKey), PersistentDataType.STRING, uuid);
-    }
-
     public static int getEnchantment(ItemMeta itemMeta, String enchantmentKey) {
         return getEnchantment(itemMeta, new NamespacedKey(MetadataHandler.PLUGIN, enchantmentKey));
     }
@@ -158,38 +156,24 @@ public class ItemTagger {
     public static int getEnchantment(ItemMeta itemMeta, NamespacedKey enchantmentKey) {
         if (itemMeta == null)
             return 0;
+        if (enchantmentKey.getNamespace().equals("elitemobs") && EliteEnchantmentCatalog.ownsFilename(enchantmentKey.getKey()))
+            return com.magmaguy.magmacore.enchantments.EnchantmentItems.inspectCustom(itemMeta).getOrDefault(enchantmentKey.toString(), 0);
         Integer level = itemMeta.getPersistentDataContainer().get(enchantmentKey, PersistentDataType.INTEGER);
         if (level == null) {
             Enchantment enchantment = Enchantment.getByKey(enchantmentKey);
             if (enchantment != null)
-                return itemMeta.getEnchantLevel(enchantment);
+                return itemMeta instanceof org.bukkit.inventory.meta.EnchantmentStorageMeta book
+                        ? book.getStoredEnchantLevel(enchantment) : itemMeta.getEnchantLevel(enchantment);
             else
                 return 0;
         } else
             return level;
     }
 
-    public static boolean hasEnchantment(ItemMeta itemMeta, NamespacedKey enchantmentKey) {
-        if (!itemMeta.hasLore()) //early performance tweak
-            return false;
-        if (itemMeta.getCustomTagContainer().hasCustomTag(enchantmentKey, ItemTagType.INTEGER))
-            return true;
-        return itemMeta.getPersistentDataContainer().has(enchantmentKey, PersistentDataType.INTEGER);
-    }
-
     public static boolean hasKey(ItemStack itemStack, String key) {
         if (itemStack == null) return false;
         if (!itemStack.hasItemMeta()) return false;
         return Objects.requireNonNull(itemStack.getItemMeta()).getPersistentDataContainer().has(new NamespacedKey(MetadataHandler.PLUGIN, key), PersistentDataType.STRING);
-    }
-
-    public static boolean hasEnchantment(ItemMeta itemMeta, String keyString) {
-        NamespacedKey enchantmentKey = new NamespacedKey(MetadataHandler.PLUGIN, keyString);
-        if (!itemMeta.hasLore()) //early performance tweak
-            return false;
-        if (itemMeta.getCustomTagContainer().hasCustomTag(enchantmentKey, ItemTagType.INTEGER))
-            return true;
-        return itemMeta.getPersistentDataContainer().has(enchantmentKey, PersistentDataType.INTEGER);
     }
 
     public static ArrayList<ElitePotionEffect> getPotionEffects(ItemMeta itemMeta, NamespacedKey namespacedKey) {
@@ -283,6 +267,25 @@ public class ItemTagger {
         return val != null ? val : -1;
     }
 
+    public static void setArrowEnchantmentCombat(Projectile projectile, boolean critical, double loudStrikes) {
+        if (!Double.isFinite(loudStrikes) || loudStrikes < 0) throw new IllegalArgumentException("Invalid projectile threat");
+        projectile.getPersistentDataContainer().set(ARROW_CRITICAL, PersistentDataType.BYTE, (byte) (critical ? 1 : 0));
+        projectile.getPersistentDataContainer().set(ARROW_LOUD_STRIKES, PersistentDataType.DOUBLE, loudStrikes);
+    }
+
+    public static boolean hasArrowEnchantmentCombat(Projectile projectile) {
+        return projectile.getPersistentDataContainer().has(ARROW_CRITICAL, PersistentDataType.BYTE);
+    }
+
+    public static boolean getArrowCritical(Projectile projectile) {
+        return Byte.valueOf((byte) 1).equals(projectile.getPersistentDataContainer().get(ARROW_CRITICAL, PersistentDataType.BYTE));
+    }
+
+    public static double getArrowLoudStrikes(Projectile projectile) {
+        Double value = projectile.getPersistentDataContainer().get(ARROW_LOUD_STRIKES, PersistentDataType.DOUBLE);
+        return value != null && Double.isFinite(value) && value >= 0 ? value : 0;
+    }
+
     public static void setArrowSkillType(@Nullable Projectile projectile, String skillType) {
         if (projectile == null || skillType == null) return;
         projectile.getPersistentDataContainer().set(ARROW_SKILL_TYPE, PersistentDataType.STRING, skillType);
@@ -350,6 +353,18 @@ public class ItemTagger {
         return val != null ? val : -1;
     }
 
+    /** Clears launch-time weapon identity from a projectile owned by another combat system. */
+    public static void clearArrowCombatData(@Nullable Projectile projectile) {
+        if (projectile == null) return;
+        PersistentDataContainer data = projectile.getPersistentDataContainer();
+        data.remove(ELITE_DAMAGE);
+        data.remove(ARROW_WEAPON_LEVEL);
+        data.remove(ARROW_SKILL_TYPE);
+        data.remove(ARROW_SKILL_LEVEL);
+        data.remove(ARROW_DAMAGE_MULTIPLIER);
+        data.remove(ARROW_LAUNCH_VELOCITY);
+    }
+
     public static double getEliteDefenseAttribute(@Nullable ItemStack itemStack) {
         if (itemStack == null) return 0D;
         if (itemStack.getItemMeta() == null) return 0D;
@@ -384,17 +399,6 @@ public class ItemTagger {
         itemStack.setItemMeta(itemMeta);
     }
 
-    public static void registerEnchantmentCount(@Nullable ItemMeta itemMeta, int count) {
-        if (itemMeta == null) return;
-        itemMeta.getPersistentDataContainer().set(enchantmentCount, PersistentDataType.INTEGER, count);
-    }
-
-    public static int getEnchantmentCount(@Nullable ItemStack itemStack) {
-        if (itemStack == null || itemStack.getItemMeta() == null) return 0;
-        Integer value = itemStack.getItemMeta().getPersistentDataContainer().get(enchantmentCount, PersistentDataType.INTEGER);
-        return value == null ? 0 : value;
-    }
-
     public static HashMap<NamespacedKey, Integer> getItemEnchantments(@Nullable ItemStack itemStack) {
         HashMap<NamespacedKey, Integer> itemEnchantmentFilenames = new HashMap<>();
         if (itemStack == null || itemStack.getItemMeta() == null) return itemEnchantmentFilenames;
@@ -404,11 +408,9 @@ public class ItemTagger {
             if (enchantmentLevel > 0)
                 itemEnchantmentFilenames.put(enchantment.getKey(), enchantmentLevel);
         }
-        for (CustomEnchantment customEnchantment : CustomEnchantment.getCustomEnchantmentMap().values()) {
-            int enchantmentLevel = getEnchantment(itemMeta, customEnchantment.getKey());
-            if (enchantmentLevel > 0)
-                itemEnchantmentFilenames.put(new NamespacedKey(MetadataHandler.PLUGIN, customEnchantment.getKey()), enchantmentLevel);
-        }
+
+        com.magmaguy.magmacore.enchantments.EnchantmentItems.inspectCustom(itemMeta).forEach((id, level) ->
+                itemEnchantmentFilenames.put(Objects.requireNonNull(NamespacedKey.fromString(id)), level));
         return itemEnchantmentFilenames;
     }
 
@@ -419,19 +421,15 @@ public class ItemTagger {
         for (Enchantment enchantment : Enchantment.values()) {
             int enchantmentLevel = getEnchantment(itemMeta, enchantment.getKey());
             if (enchantmentLevel > 0) {
-                EnchantmentsConfigFields enchantmentsConfigFields = EnchantmentsConfig.getEnchantment(enchantment.getName().toLowerCase(Locale.ROOT) + ".yml");
+                EnchantmentsConfigFields enchantmentsConfigFields = EnchantmentsConfig.getEnchantment(enchantment);
                 if (enchantmentsConfigFields == null) {
-                    Logger.warn("Failed to get configuration file for enchantment called " + enchantment.getName().toLowerCase(Locale.ROOT) + ".yml");
+                    Logger.warn("Failed to get configuration file for enchantment called " + enchantment.getKey().getKey().toLowerCase(Locale.ROOT) + ".yml");
                     continue;
                 }
                 itemEnchantmentFilenames.put(enchantmentsConfigFields, enchantmentLevel);
             }
         }
-        for (CustomEnchantment customEnchantment : CustomEnchantment.getCustomEnchantmentMap().values()) {
-            int enchantmentLevel = getEnchantment(itemMeta, customEnchantment.getKey());
-            if (enchantmentLevel > 0)
-                itemEnchantmentFilenames.put(customEnchantment.getEnchantmentsConfigFields(), enchantmentLevel);
-        }
+
         return itemEnchantmentFilenames;
     }
 }

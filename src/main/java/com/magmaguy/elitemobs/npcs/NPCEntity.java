@@ -2,10 +2,11 @@ package com.magmaguy.elitemobs.npcs;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.magmaguy.elitemobs.EliteMobs;
+import com.magmaguy.easyminecraftgoals.internal.StackedText;
+import org.bukkit.scheduler.BukkitTask;
 import com.magmaguy.elitemobs.MetadataHandler;
 import com.magmaguy.elitemobs.api.NPCEntityRemoveEvent;
 import com.magmaguy.elitemobs.api.internal.RemovalReason;
-import com.magmaguy.elitemobs.config.DefaultConfig;
 import com.magmaguy.elitemobs.config.ItemSettingsConfig;
 import com.magmaguy.elitemobs.config.npcs.NPCsConfig;
 import com.magmaguy.elitemobs.config.npcs.NPCsConfigFields;
@@ -17,11 +18,12 @@ import com.magmaguy.elitemobs.mobconstructor.PersistentObjectHandler;
 import com.magmaguy.elitemobs.npcs.chatter.NPCChatBubble;
 import com.magmaguy.elitemobs.npcs.scripts.NPCScriptManager;
 import com.magmaguy.elitemobs.npcs.scripts.ScriptableNPC;
+import com.magmaguy.elitemobs.pathfinding.patrol.PatrolService;
+import com.magmaguy.elitemobs.tagger.PersistentTagger;
 import com.magmaguy.magmacore.scripting.ScriptDefinition;
 import com.magmaguy.magmacore.scripting.ScriptHook;
 import com.magmaguy.magmacore.scripting.ScriptInstance;
 import com.magmaguy.elitemobs.thirdparty.custommodels.CustomModel;
-import com.magmaguy.elitemobs.thirdparty.geyser.GeyserDetector;
 import com.magmaguy.elitemobs.thirdparty.libsdisguises.DisguiseEntity;
 import com.magmaguy.elitemobs.thirdparty.worldguard.WorldGuardSpawnEventBypasser;
 import com.magmaguy.elitemobs.utils.ConfigurationLocation;
@@ -29,7 +31,6 @@ import com.magmaguy.elitemobs.utils.EventCaller;
 import com.magmaguy.elitemobs.utils.NonSolidBlockTypes;
 import com.magmaguy.magmacore.util.AttributeManager;
 import com.magmaguy.magmacore.util.ChatColorConverter;
-import com.magmaguy.magmacore.util.ChunkLocationChecker;
 import com.magmaguy.magmacore.util.Logger;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -39,7 +40,6 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -51,8 +51,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NPCEntity implements PersistentObject, PersistentMovingEntity {
 
+    private static final float NAMEPLATE_SCALE = 1F;
+    private static final double NAMEPLATE_LINE_GAP = 0.06;
     private static final ArrayListMultimap<String, InstancedNPCContainer> instancedNPCEntities = ArrayListMultimap.create();
-    public final NPCsConfigFields npCsConfigFields;
+    public NPCsConfigFields npCsConfigFields;
     @Getter
     private final UUID uuid = UUID.randomUUID();
     private boolean isInstancedDuplicate = false;
@@ -60,11 +62,9 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
     private Villager villager = null;
     private Location spawnLocation;
     private boolean isTalking = false;
-    private TextDisplay roleDisplay;
-    // Bedrock role tag: Bedrock clients can't render the TextDisplay above, so disguised NPCs get
-    // an invisible armor-stand hologram (a vanilla custom name, which Bedrock DOES render) carrying
-    // the role text. It is hidden from Java players (who keep the TextDisplay) and shown to Bedrock.
-    private ArmorStand bedrockRoleArmorStand;
+    private StackedText nameplate;
+    private int nameplateLineCount;
+    private static BukkitTask nameplateTask;
     private boolean isDisguised = false;
     private String locationString;
     @Getter
@@ -113,11 +113,18 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
      * @param location
      */
     public NPCEntity(Location location) {
-        this.npCsConfigFields = NPCsConfig.getNpcEntities().get("travelling_merchant.yml");
-        if (!npCsConfigFields.isEnabled()) return;
+        this(location, "travelling_merchant.yml");
+    }
+
+    /** Transient summons retain the ordinary NPC spawn, timeout and removal owner. */
+    public NPCEntity(Location location, String filename) {
+        this.npCsConfigFields = NPCsConfig.getNpcEntities().get(filename);
+        if (npCsConfigFields == null || !npCsConfigFields.isEnabled() || location.getWorld() == null
+                || !location.getWorld().isChunkLoaded(location.getBlockX() >> 4, location.getBlockZ() >> 4)) return;
         Location potentialLocation = location.clone();
         potentialLocation.add(potentialLocation.getDirection().normalize()).setY(location.getY());
-        if (NonSolidBlockTypes.isPassthrough(potentialLocation.getBlock().getType()))
+        if (location.getWorld().isChunkLoaded(potentialLocation.getBlockX() >> 4, potentialLocation.getBlockZ() >> 4)
+                && NonSolidBlockTypes.isPassthrough(potentialLocation.getBlock().getType()))
             this.spawnLocation = potentialLocation;
         else this.spawnLocation = location.clone();
         this.spawnLocation.setDirection(this.spawnLocation.getDirection().multiply(-1));
@@ -125,6 +132,9 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
     }
 
     public static void shutdown() {
+        if (nameplateTask != null) nameplateTask.cancel();
+        nameplateTask = null;
+        EntityTracker.getNpcEntities().values().forEach(NPCEntity::removeNameplate);
         instancedNPCEntities.clear();
     }
 
@@ -158,6 +168,16 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
         return false;
     }
 
+    /**
+     * @return whether any reference this NPC still holds (villager, spawn location) points at the
+     * given world — used to purge tracking when that world unloads
+     */
+    public boolean referencesWorld(World world) {
+        if (world == null) return false;
+        if (villager != null && world.equals(villager.getWorld())) return true;
+        return spawnLocation != null && world.equals(spawnLocation.getWorld());
+    }
+
     public void remove(RemovalReason removalReason) {
         String removedLocationString = locationString;
         NPCEntityRemoveEvent npcEntityRemoveEvent = new NPCEntityRemoveEvent(villager, this, removalReason);
@@ -165,14 +185,14 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
             new EventCaller(npcEntityRemoveEvent);
         runScripts(ScriptableNPC.ON_REMOVE, npcEntityRemoveEvent, null);
         shutdownScriptInstances();
-        if (roleDisplay != null) {
-            roleDisplay.remove();
-            roleDisplay = null;
-        }
-        removeBedrockRoleArmorStand();
+        removeNameplate();
         // Remove house earnings display if this is the gambling den owner
         com.magmaguy.elitemobs.gambling.GamblingDenOwnerDisplay.removeDisplay(uuid);
         if (villager != null) {
+            //Release the LibsDisguises registry entry before discarding the entity, or
+            //it keeps a hard reference that can pin an unloaded world in memory.
+            if (org.bukkit.Bukkit.getPluginManager().isPluginEnabled("LibsDisguises"))
+                DisguiseEntity.undisguise(villager);
             villager.remove();
             this.villager = null;
         }
@@ -218,11 +238,7 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
             new EventCaller(npcEntityRemoveEvent);
         runScripts(ScriptableNPC.ON_REMOVE, npcEntityRemoveEvent, null);
         shutdownScriptInstances();
-        if (roleDisplay != null) {
-            roleDisplay.remove();
-            roleDisplay = null;
-        }
-        removeBedrockRoleArmorStand();
+        removeNameplate();
         com.magmaguy.elitemobs.gambling.GamblingDenOwnerDisplay.removeDisplay(uuid);
         if (villager != null) {
             villager.remove();
@@ -238,9 +254,12 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
     }
 
     private void spawn() {
-        if (spawnLocation == null ||
-                spawnLocation.getWorld() == null ||
-                !ChunkLocationChecker.chunkAtLocationIsLoaded(spawnLocation)) return;
+        // Chunk load can precede entity ticking. The patrol must own retries even if no body exists yet.
+        PatrolService.registerPendingNpc(this);
+        Location effectiveSpawnLocation = PatrolService.materializationLocation(this).orElse(spawnLocation);
+        if (effectiveSpawnLocation == null ||
+                effectiveSpawnLocation.getWorld() == null ||
+                !PatrolService.canMaterialize(this, effectiveSpawnLocation)) return;
         if (villager != null && villager.isValid()) return;
         if (npCsConfigFields.getInteractionType().equals(NPCInteractions.NPCInteractionType.SCROLL_APPLIER) &&
                 !ItemSettingsConfig.isUseEliteItemScrolls()) return;
@@ -248,8 +267,12 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
             WorldGuardSpawnEventBypasser.forceSpawn();
         String displayName = ChatColorConverter.convert(npCsConfigFields.getName());
         boolean disguiseQueued = queueDisguise(displayName);
-        villager = spawnLocation.getWorld().spawn(spawnLocation, Villager.class, villagerInstance -> {
+        villager = effectiveSpawnLocation.getWorld().spawn(effectiveSpawnLocation, Villager.class, villagerInstance -> {
+            // CreatureSpawnEvent runs before world.spawn returns and before tracker publication.
+            PersistentTagger.tagNPC(villagerInstance, uuid);
             villagerInstance.setAI(false);
+            // Patrols enable AI for navigation; NPC bodies must still never push or be pushed by players.
+            villagerInstance.setCollidable(false);
             villagerInstance.setPersistent(false);
             villagerInstance.setRemoveWhenFarAway(false);
             villagerInstance.setCustomName(displayName);
@@ -272,7 +295,7 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
         if (villager == null || !villager.isValid()) return;
         initializeScripts();
         runScripts(ScriptHook.ON_SPAWN, null, null);
-        initializeRole();
+        initializeNameplate();
         setTimeout();
         // Create house earnings display if this is the gambling den owner
         com.magmaguy.elitemobs.gambling.GamblingDenOwnerDisplay.createDisplay(this);
@@ -358,7 +381,8 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
                 (player, modeledEntity) -> NPCInteractions.handleNPCInteraction(player, this),
                 (player, modeledEntity) -> NPCInteractions.handleNPCInteraction(player, this));
         if (customModel != null)
-            customModel.setSyncMovement(getNPCsConfigFields().isSyncMovement());
+            customModel.setSyncMovement(
+                    getNPCsConfigFields().isSyncMovement() || getNPCsConfigFields().getPatrolRoute() != null);
     }
 
     /**
@@ -379,6 +403,7 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
         // and calling .remove() on it would just walk FMM's now-empty registry.
         customModel = null;
         setCustomModel(villager);
+        initializeNameplate();
     }
 
     public Villager getVillager() {
@@ -392,6 +417,19 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
 
     public NPCsConfigFields getNPCsConfigFields() {
         return npCsConfigFields;
+    }
+
+    public String getLocationString() {
+        return locationString;
+    }
+
+    public void rebindPatrolConfig(NPCsConfigFields fields) {
+        this.npCsConfigFields = java.util.Objects.requireNonNull(fields, "fields");
+        if (fields.getPatrolRoute() != null) enablePatrolMovementSync();
+    }
+
+    public void enablePatrolMovementSync() {
+        if (customModel != null) customModel.setSyncMovement(true);
     }
 
     public Location getSpawnLocation() {
@@ -423,7 +461,7 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
     @Override
     public void worldLoad(World world) {
         setSpawnLocation();
-        //queueSpawn();
+        if (PatrolService.hasConfiguredPatrol(this)) spawn();
     }
 
     @Override
@@ -434,7 +472,20 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
 
     @Override
     public Location getPersistentLocation() {
-        return getSpawnLocation();
+        return PatrolService.materializationLocation(this).orElse(getSpawnLocation());
+    }
+
+    /** Re-keys the persistent handler without changing the authored route origin. */
+    public void updatePatrolPersistentLocation(Location location) {
+        if (location == null || persistentObjectHandler == null) return;
+        persistentObjectHandler.updatePersistentLocation(location.clone());
+    }
+
+    /** Keeps role entities attached to the moving villager without driving the villager by teleport. */
+    public void syncPatrolVisuals() {
+        if (villager == null || !villager.isValid()) return;
+        com.magmaguy.elitemobs.gambling.GamblingDenOwnerDisplay.syncDisplay(this);
+        updateNameplateLocation();
     }
 
     @Override
@@ -447,70 +498,75 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
         return world;
     }
 
-    //Can't be used after the NPCEntity is done initialising
-    private void initializeRole() {
-        if (npCsConfigFields.getRole() == null || npCsConfigFields.getRole().isEmpty()) return;
-
-        // Determine vertical offset based on model type
-        double yOffset;
-        if (customModel != null) {
-            // Custom models typically need more height
-            yOffset = 2.3;
-        } else if (isDisguised) {
-            yOffset = 2.30;
-        } else {
-            yOffset = 2.52;
+    private void initializeNameplate() {
+        removeNameplate();
+        List<String> lines = new ArrayList<>();
+        String role = ChatColorConverter.convert(npCsConfigFields.getRole());
+        String name = ChatColorConverter.convert(npCsConfigFields.getName());
+        if (!role.isBlank()) lines.add(role);
+        if (!name.isBlank()) lines.add(name);
+        nameplateLineCount = lines.stream().mapToInt(line -> line.split("\\R", -1).length).sum();
+        if (customModel != null && customModel.setNpcNameLines(lines, NAMEPLATE_SCALE, NAMEPLATE_LINE_GAP)) {
+            villager.setCustomNameVisible(false);
+            villager.setCustomName(null);
+            return;
         }
-
-        Location roleLocation = villager.getLocation().clone().add(0, yOffset, 0);
-
-        // Use real TextDisplay entity - Minecraft handles visibility automatically
-        roleDisplay = roleLocation.getWorld().spawn(roleLocation, TextDisplay.class, textDisplay -> {
-            textDisplay.setText(ChatColorConverter.convert(npCsConfigFields.getRole()));
-            textDisplay.setPersistent(false);
-            textDisplay.setBillboard(Display.Billboard.CENTER);
-            textDisplay.setShadowed(false);
-        });
-        EntityTracker.registerVisualEffects(roleDisplay);
-
-        // A proxy-only Geyser installation does not expose Bedrock identity to backend plugins.
-        // In that arrangement this fallback is deliberately disabled instead of spawning an
-        // armor stand which would be hidden from every player. Installing Floodgate or Geyser on
-        // this backend makes the per-player fallback available.
-        if (isDisguised && villager != null && GeyserDetector.canIdentifyBedrockPlayers()) {
-            Location bedrockRoleLocation = villager.getLocation().clone();
-            bedrockRoleLocation.setY(villager.getLocation().getY() + DefaultConfig.getBedrockNPCRoleYOffset());
-            bedrockRoleArmorStand = bedrockRoleLocation.getWorld().spawn(bedrockRoleLocation, ArmorStand.class, armorStand -> {
-                armorStand.setVisible(false);
-                armorStand.setMarker(true);
-                armorStand.setGravity(false);
-                armorStand.setPersistent(false);
-                armorStand.setRemoveWhenFarAway(false);
-                armorStand.setCustomName(ChatColorConverter.convert(npCsConfigFields.getRole()));
-                armorStand.setCustomNameVisible(true);
-            });
-            EntityTracker.registerVisualEffects(bedrockRoleArmorStand);
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers())
-                applyBedrockRoleVisibility(onlinePlayer);
+        // ModelEngine keeps its own name. EliteMobs still renders its role rows.
+        if (customModel != null) lines = role.isBlank() ? List.of() : List.of(role);
+        else {
+            villager.setCustomNameVisible(false);
+            villager.setCustomName(null);
+            if (isDisguised) DisguiseEntity.setDisguiseNameVisibility(false, villager, name);
         }
+        nameplate = new StackedText();
+        nameplate.setLines(lines);
+        nameplate.setScale(NAMEPLATE_SCALE);
+        nameplate.setLineGap(NAMEPLATE_LINE_GAP);
+        updateNameplateLocation();
     }
 
-    /**
-     * Keeps the Bedrock role-tag armor stand visible to Bedrock (Geyser) players and hidden from
-     * Java players (who see the TextDisplay role tag instead). Java players would otherwise see a
-     * duplicate floating name. Safe to call repeatedly (e.g. on join).
-     */
-    public void applyBedrockRoleVisibility(Player player) {
-        if (player == null || !player.isOnline() || bedrockRoleArmorStand == null || bedrockRoleArmorStand.isDead()) return;
-        if (GeyserDetector.bedrockPlayer(player)) return; // Bedrock players SEE the armor-stand role tag
-        player.hideEntity(MetadataHandler.PLUGIN, bedrockRoleArmorStand);
+    private void updateNameplateLocation() {
+        if (nameplate == null || villager == null || !villager.isValid()) return;
+        nameplate.move(getNameplateLocation());
     }
 
-    private void removeBedrockRoleArmorStand() {
-        if (bedrockRoleArmorStand != null) {
-            bedrockRoleArmorStand.remove();
-            bedrockRoleArmorStand = null;
-        }
+    private Location getNameplateLocation() {
+        if (customModel != null) return villager.getLocation().add(0, 2.3, 0);
+        double height = isDisguised
+                ? DisguiseEntity.getDisguiseHeight(villager, npCsConfigFields.getScale())
+                : villager.getHeight();
+        return villager.getLocation().add(0, height + 0.08, 0);
+    }
+
+    /** Anchor the marker to the same nameplate geometry rather than another body-height estimate. */
+    public Location getQuestIndicatorLocation() {
+        // StackedText rows occupy 0.225 blocks at native scale; the bottom row is the anchor.
+        double stackHeight = (nameplateLineCount * 0.225
+                + Math.max(0, nameplateLineCount - 1) * NAMEPLATE_LINE_GAP)
+                * NAMEPLATE_SCALE;
+        return getNameplateLocation().add(0, stackHeight - 0.08, 0);
+    }
+
+    private void removeNameplate() {
+        if (nameplate != null) nameplate.remove();
+        nameplate = null;
+    }
+
+    /** One task owns ordinary NPC nameplate viewers. FMM owns modeled NPC nameplates. */
+    public static void startNameplates() {
+        if (nameplateTask != null) return;
+        nameplateTask = Bukkit.getScheduler().runTaskTimer(MetadataHandler.PLUGIN, () -> {
+            var players = List.copyOf(Bukkit.getOnlinePlayers());
+            for (NPCEntity npc : EntityTracker.getNpcEntities().values()) {
+                if (npc.nameplate == null || !npc.isValid()) continue;
+                npc.updateNameplateLocation();
+                Location location = npc.villager.getLocation();
+                npc.nameplate.syncViewers(players.stream()
+                        .filter(player -> player.getWorld().equals(location.getWorld())
+                                && player.getLocation().distanceSquared(location) <= 64 * 64
+                                && player.canSee(npc.villager)).toList());
+            }
+        }, 1L, 2L);
     }
 
     /**
@@ -585,21 +641,6 @@ public class NPCEntity implements PersistentObject, PersistentMovingEntity {
             }
         }
 
-        // A joining Java player would briefly see the Bedrock role armor stand (a duplicate name)
-        // until it's hidden from them, so re-apply the per-platform visibility once their entity
-        // tracking has settled. No-op for Bedrock players (they keep seeing it).
-        @EventHandler
-        public void onPlayerJoin(PlayerJoinEvent event) {
-            Player player = event.getPlayer();
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (!player.isOnline()) return;
-                    for (NPCEntity npcEntity : new ArrayList<>(EntityTracker.getNpcEntities().values()))
-                        npcEntity.applyBedrockRoleVisibility(player);
-                }
-            }.runTaskLater(MetadataHandler.PLUGIN, 15L);
-        }
 
     }
 

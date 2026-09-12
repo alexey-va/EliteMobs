@@ -25,20 +25,29 @@ import org.bukkit.util.Vector;
 import java.util.UUID;
 
 
-public class SoulbindEnchantment extends CustomEnchantment {
+public final class SoulbindEnchantment {
 
     public static final NamespacedKey PRESTIGE_KEY = new NamespacedKey(MetadataHandler.PLUGIN, "prestige");
     public static String key = "soulbind";
     public static final NamespacedKey SOULBIND_KEY = new NamespacedKey(MetadataHandler.PLUGIN, key);
     public static boolean isEnabled;
 
-    public SoulbindEnchantment() {
-        super(key, true);
+    private SoulbindEnchantment() { }
+
+    /**
+     * Live config read. The old pattern refreshed the static only inside
+     * {@link #addEnchantment}, so after every restart soulbind silently enforced
+     * nothing until the first elite drop, and an /em reload flip didn't apply
+     * until then either. The lookup is a map get — cheap enough per check. The
+     * public field survives for API compatibility and mirrors the live value.
+     */
+    private static boolean soulbindEnabled() {
+        isEnabled = EnchantmentsConfig.getEnchantment(key + ".yml").isEnabled();
+        return isEnabled;
     }
 
     public static ItemStack addEnchantment(ItemStack itemStack, Player player) {
-        isEnabled = EnchantmentsConfig.getEnchantment(SoulbindEnchantment.key + ".yml").isEnabled();
-        if (!isEnabled) return null;
+        if (!soulbindEnabled()) return null;
         if (itemStack == null || player == null) return null;
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.getPersistentDataContainer().set(SOULBIND_KEY, PersistentDataType.STRING, player.getUniqueId().toString());
@@ -91,7 +100,7 @@ public class SoulbindEnchantment extends CustomEnchantment {
     }
 
     public static boolean isValidSoulbindUser(ItemMeta itemMeta, Player player) {
-        if (!isEnabled) return true;
+        if (!soulbindEnabled()) return true;
         if (player.hasPermission("elitemobs.soulbind.bypass")) return true;
         if (itemMeta == null)
             return true;
@@ -101,7 +110,7 @@ public class SoulbindEnchantment extends CustomEnchantment {
     }
 
     public static boolean isSoulboundItem(ItemMeta itemMeta) {
-        if (!isEnabled) return false;
+        if (!soulbindEnabled()) return false;
         if (itemMeta == null)
             return false;
         return !itemMeta.getPersistentDataContainer().has(SOULBIND_KEY, PersistentDataType.STRING);

@@ -469,7 +469,7 @@ public class LootTables implements Listener {
         return customItem.generateItemStack(level, player, eliteEntity);
     }
 
-    private static void deliverGeneratedItem(Player player, Location location, ItemStack itemStack) {
+    public static void deliverGeneratedItem(Player player, Location location, ItemStack itemStack) {
         SoulbindEnchantment.addEnchantment(itemStack, player);
         if (ItemSettingsConfig.isPutLootDirectlyIntoPlayerInventory()) {
             HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(itemStack);

@@ -34,6 +34,8 @@ public class PackageCommand {
         packContents("custombosses");
         packContents("customevents");
         packContents("npcs");
+        packContents("npc_scripts");
+        packContents("transport_routes");
         packContents("customitems");
         packContents("customquests");
         packContents("customarenas");
@@ -42,6 +44,7 @@ public class PackageCommand {
         packContents("wormholes");
         packContents("world_blueprints");
         packContents("powers");
+        packContents("behaviors");
 
         commandSender.sendMessage(CommandMessagesConfig.getPackageDoneMessage());
         commandSender.sendMessage(CommandMessagesConfig.getPackageDontForgetMessage());

@@ -8,6 +8,7 @@ import com.magmaguy.magmacore.util.Logger;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ScriptTargets {
@@ -64,6 +66,16 @@ public class ScriptTargets {
         if (parsedLocation.getWorld() == null && locationString.split(",")[0].equalsIgnoreCase("same_as_boss")) {
             parsedLocation.setWorld(eliteEntity.getLocation().getWorld());
         }
+        if (parsedLocation.getWorld() == null && eliteEntity.getLocation() != null && eliteEntity.getLocation().getWorld() != null) {
+            //Instanced dungeons clone the blueprint world under "<blueprintWorldName>_<number>", so a
+            //configured world name that isn't loaded must still resolve when the boss is inside an
+            //instance of that blueprint world - otherwise teleports and zone origins get a null world.
+            World bossWorld = eliteEntity.getLocation().getWorld();
+            String configuredWorldName = ConfigurationLocation.worldName(locationString);
+            if (configuredWorldName != null && !configuredWorldName.isBlank() &&
+                    bossWorld.getName().matches(Pattern.quote(configuredWorldName) + "_\\d+"))
+                parsedLocation.setWorld(bossWorld);
+        }
 
         addOffsets(parsedLocation, scriptActionData);
 
@@ -109,12 +121,22 @@ public class ScriptTargets {
             return new ArrayList<>();
         }
 
+        //A script task can outlive its elite: removals, phase swaps and world unloads can leave
+        //the elite without a living entity or usable location while a repeating action still
+        //ticks. Returning no targets lets conditions fail cleanly and repeating actions cancel,
+        //instead of throwing a NullPointerException every tick forever.
+        LivingEntity selfEntity = scriptActionData.getEliteEntity().getUnsyncedLivingEntity();
+        java.util.UUID selfUUID = selfEntity == null ? null : selfEntity.getUniqueId();
+        boolean eliteLocationGone = eliteEntityLocation == null || eliteEntityLocation.getWorld() == null;
+
         switch (targetBlueprint.getTargetType()) {
             case ALL_PLAYERS:
                 return new ArrayList<>(Bukkit.getOnlinePlayers());
             case WORLD_PLAYERS:
+                if (eliteLocationGone) return new ArrayList<>();
                 return new ArrayList<>(eliteEntityLocation.getWorld().getPlayers());
             case NEARBY_PLAYERS:
+                if (eliteLocationGone) return new ArrayList<>();
                 return eliteEntityLocation.getWorld()
                         .getNearbyEntities(
                                 eliteEntityLocation,
@@ -124,6 +146,7 @@ public class ScriptTargets {
                                 (entity -> entity.getType() == EntityType.PLAYER))
                         .stream().map(Player.class::cast).collect(Collectors.toSet());
             case NEARBY_MOBS:
+                if (eliteLocationGone) return new ArrayList<>();
                 return eliteEntityLocation.getWorld()
                         .getNearbyEntities(
                                 eliteEntityLocation,
@@ -131,9 +154,10 @@ public class ScriptTargets {
                                 targetBlueprint.getRange().getValue(),
                                 targetBlueprint.getRange().getValue(),
                                 (entity -> entity.getType() != EntityType.PLAYER && entity instanceof LivingEntity &&
-                                        !entity.getUniqueId().equals(scriptActionData.getEliteEntity().getUnsyncedLivingEntity().getUniqueId())))
+                                        (selfUUID == null || !entity.getUniqueId().equals(selfUUID))))
                         .stream().map(LivingEntity.class::cast).collect(Collectors.toSet());
             case NEARBY_ELITES:
+                if (eliteLocationGone) return new ArrayList<>();
                 return eliteEntityLocation.getWorld()
                         .getNearbyEntities(
                                 eliteEntityLocation,
@@ -141,7 +165,7 @@ public class ScriptTargets {
                                 targetBlueprint.getRange().getValue(),
                                 targetBlueprint.getRange().getValue(),
                                 entity -> EntityTracker.isEliteMob(entity) &&
-                                        !entity.getUniqueId().equals(scriptActionData.getEliteEntity().getUnsyncedLivingEntity().getUniqueId()))
+                                        (selfUUID == null || !entity.getUniqueId().equals(selfUUID)))
                         .stream()
                         .map(LivingEntity.class::cast)
                         .collect(Collectors.toSet());
@@ -149,7 +173,8 @@ public class ScriptTargets {
                 return new ArrayList<>(List.of(scriptActionData.getDirectTarget()));
             case SELF:
             case SELF_SPAWN:
-                return new ArrayList<>(List.of(scriptActionData.getEliteEntity().getUnsyncedLivingEntity()));
+                if (selfEntity == null) return new ArrayList<>();
+                return new ArrayList<>(List.of(selfEntity));
             case ZONE_FULL, ZONE_BORDER, INHERIT_SCRIPT_ZONE_FULL, INHERIT_SCRIPT_ZONE_BORDER:
                 return getScriptZone().getZoneEntities(scriptActionData, targetBlueprint);
             case INHERIT_SCRIPT_TARGET:

@@ -1,0 +1,5 @@
+extends: class_trial_oracle_attendant.yml
+isEnabled: true
+name: '&eThreadbound Attendant'
+healthMultiplier: 0.45
+damageMultiplier: 0.15

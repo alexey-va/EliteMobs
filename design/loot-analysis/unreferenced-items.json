@@ -1,0 +1,5192 @@
+[
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_challengers_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 140,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_challengers_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 140,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_challengers_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 140,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_challengers_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 140,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_challengers_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 140,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "KNOCKBACK": 3,
+      "MENDING": 1,
+      "LIGHTNING": 4,
+      "SWEEPING_EDGE": 4,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_grunts_boots.yml",
+    "family": "BOOTS",
+    "material": "GOLDEN_BOOTS",
+    "itemLevel": 120,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 6,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_grunts_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "GOLDEN_CHESTPLATE",
+    "itemLevel": 120,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 5,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_grunts_helmet.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": 120,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 5,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_grunts_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "GOLDEN_LEGGINGS",
+    "itemLevel": 120,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 5,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_grunts_sword.yml",
+    "family": "SWORDS",
+    "material": "GOLDEN_SWORD",
+    "itemLevel": 120,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 6,
+      "KNOCKBACK": 3,
+      "SWEEPING_EDGE": 2,
+      "UNBREAKING": 15
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_invictus_boots.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_invictus_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 8,
+      "BLAST_PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 6,
+      "THORNS": 2,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_invictus_helmet.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 8,
+      "BLAST_PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 6,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_invictus_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 9,
+      "BLAST_PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 6,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_invictus_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 8,
+      "BANE_OF_ARTHROPODS": 6,
+      "KNOCKBACK": 4,
+      "MENDING": 2,
+      "LIGHTNING": 5,
+      "SWEEPING_EDGE": 3,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_novices_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": 110,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_novices_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 110,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_novices_helmet.yml",
+    "family": "HELMETS",
+    "material": "IRON_HELMET",
+    "itemLevel": 110,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_novices_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "IRON_LEGGINGS",
+    "itemLevel": 110,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_novices_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 110,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 6,
+      "SWEEPING_EDGE": 2,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_veterans_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_veterans_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_veterans_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_veterans_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "arena-diamond-league-arena_v10",
+    "item": "arena-diamond-league-arena_v10/customitems/diamond_league_arena/diamond_veterans_sword.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 7,
+      "KNOCKBACK": 4,
+      "MENDING": 2,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "craftenmine-tools-item-pack_v1",
+    "item": "craftenmine-tools-item-pack_v1/customitems/fmm_craftenmine_tools_items_pack/em_craftenmine_basic_item_pack_arboreal_terminator_axe.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "EFFICIENCY": 3,
+      "KNOCKBACK": 2,
+      "UNBREAKING": 1,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "craftenmine-tools-item-pack_v1",
+    "item": "craftenmine-tools-item-pack_v1/customitems/fmm_craftenmine_tools_items_pack/em_craftenmine_basic_item_pack_entropy_scythe.yml",
+    "family": "HOES",
+    "material": "IRON_HOE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "EFFICIENCY": 5,
+      "FORTUNE": 4,
+      "UNBREAKING": 3,
+      "MENDING": 2,
+      "SHARPNESS": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "craftenmines-weapons-item-pack_v1",
+    "item": "craftenmines-weapons-item-pack_v1/customitems/fmm_craftenmine_weapons_items_pack/em_craftenmine_basic_item_pack_aqua_prodder_spear.yml",
+    "family": "SPEARS",
+    "material": "IRON_SPEAR",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "IMPALING": 5,
+      "LUNGE": 4,
+      "LOYALTY": 3,
+      "UNBREAKING": 2,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "craftenmines-weapons-item-pack_v1",
+    "item": "craftenmines-weapons-item-pack_v1/customitems/fmm_craftenmine_weapons_items_pack/em_craftenmine_basic_item_pack_formula_7_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "FIRE_ASPECT": 4,
+      "KNOCKBACK": 3,
+      "LOOTING": 2,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "craftenmines-weapons-item-pack_v1",
+    "item": "craftenmines-weapons-item-pack_v1/customitems/fmm_craftenmine_weapons_items_pack/em_craftenmine_basic_item_pack_inertial_persuader_mace.yml",
+    "family": "MACES",
+    "material": "MACE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "DENSITY": 5,
+      "BREACH": 4,
+      "WIND_BURST": 3,
+      "UNBREAKING": 2,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "craftenmines-weapons-item-pack_v1",
+    "item": "craftenmines-weapons-item-pack_v1/customitems/fmm_craftenmine_weapons_items_pack/em_craftenmine_basic_item_pack_velocity_enhancer_mk1_bow.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "POWER": 5,
+      "PUNCH": 4,
+      "UNBREAKING": 2,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "craftenmines-weapons-item-pack_v1",
+    "item": "craftenmines-weapons-item-pack_v1/customitems/fmm_craftenmine_weapons_items_pack/em_craftenmine_basic_item_pack_velocity_enhancer_mk2_crossbow.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PIERCING": 5,
+      "QUICK_CHARGE": 4,
+      "UNBREAKING": 2,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "free-elite-shrines_v9",
+    "item": "free-elite-shrines_v9/elitemobs/customitems/BetterStructures Free Elite Shrines/circletemple_desert_Nemes_.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 4,
+      "THORNS": 3,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "free-elite-shrines_v9",
+    "item": "free-elite-shrines_v9/elitemobs/customitems/BetterStructures Free Elite Shrines/tower_tundra_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 4,
+      "UNBREAKING": 3,
+      "FEATHER_FALLING": 4,
+      "BINDING_CURSE": 1,
+      "DEPTH_STRIDER": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "free-enchantment-challenge-sanctums_v8",
+    "item": "free-enchantment-challenge-sanctums_v8/customitems/enchantment_challenge_10/tricky_bow.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_challengers_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 90,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_challengers_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 90,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_challengers_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 90,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_challengers_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 90,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_challengers_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 90,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 6,
+      "KNOCKBACK": 2,
+      "MENDING": 1,
+      "LIGHTNING": 3,
+      "SWEEPING_EDGE": 3,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_grunts_boots.yml",
+    "family": "BOOTS",
+    "material": "GOLDEN_BOOTS",
+    "itemLevel": 60,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_grunts_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "GOLDEN_CHESTPLATE",
+    "itemLevel": 60,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_grunts_helmet.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": 60,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_grunts_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "GOLDEN_LEGGINGS",
+    "itemLevel": 60,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_grunts_sword.yml",
+    "family": "SWORDS",
+    "material": "GOLDEN_SWORD",
+    "itemLevel": 60,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "KNOCKBACK": 2,
+      "SWEEPING_EDGE": 1,
+      "UNBREAKING": 15
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_invictus_boots.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 100,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_invictus_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 100,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "THORNS": 1,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_invictus_helmet.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 100,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_invictus_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 100,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 8,
+      "BLAST_PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "MENDING": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_invictus_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 100,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 7,
+      "BANE_OF_ARTHROPODS": 5,
+      "KNOCKBACK": 3,
+      "MENDING": 2,
+      "LIGHTNING": 4,
+      "SWEEPING_EDGE": 2,
+      "UNBREAKING": 10
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_novices_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_novices_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_novices_helmet.yml",
+    "family": "HELMETS",
+    "material": "IRON_HELMET",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_novices_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "IRON_LEGGINGS",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_novices_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "SWEEPING_EDGE": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_veterans_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_veterans_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_veterans_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_veterans_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "iron-league-arena_v12",
+    "item": "iron-league-arena_v12/customitems/iron_league_arena/iron_veterans_sword.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 6,
+      "KNOCKBACK": 3,
+      "MENDING": 2,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "premium-shrines_v10",
+    "item": "premium-shrines_v10/elitemobs/customitems/bs_em_Premium_Elite_Shrines/bs_em_premium_chruch_tundra_spidr_fang.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "BANE_OF_ARTHROPODS": 6,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "premium-shrines_v10",
+    "item": "premium-shrines_v10/elitemobs/customitems/bs_em_Premium_Elite_Shrines/bs_em_premium_flagship_desert_monarch_mask.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 3,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "premium-shrines_v10",
+    "item": "premium-shrines_v10/elitemobs/customitems/bs_em_Premium_Elite_Shrines/bs_em_premium_graveyard_desert_broomstick.yml",
+    "family": "SWORDS",
+    "material": "WOODEN_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "UNBREAKING": 3,
+      "FLAMETHROWER": 1,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/em_id_primis_gladius/mythic/primis_raiders_bow_myhic.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 16,
+    "scalability": "limited",
+    "enchantments": {
+      "POWER": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_artifexs_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_blood_temple_end_climb_chest_bow.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 14,
+    "scalability": "limited",
+    "enchantments": {
+      "POWER": 1,
+      "FLAME": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_blood_temple_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 15,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FEATHER_FALLING": 3,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_blood_temple_reward_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 15,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 4,
+      "BLAST_PROTECTION": 3,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_blood_temple_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 15,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FIRE_PROTECTION": 3,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_blood_temple_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 15,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 3,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_caeruleaums_hope.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 4,
+    "scalability": "limited",
+    "enchantments": {
+      "CRITICAL_STRIKES": 1,
+      "SHARPNESS": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_chest_drop_ogre_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 5,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "CRITICAL_STRIKES": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_diving_helmet.yml",
+    "family": "HELMETS",
+    "material": "TURTLE_HELMET",
+    "itemLevel": 3,
+    "scalability": "FIXED",
+    "enchantments": {
+      "RESPIRATION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_gladius_battle_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 14,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "BANE_OF_ARTHROPODS": 4,
+      "SMITE": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_gladius_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 8,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "CRITICAL_STRIKES": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_groves_lighthouse_chest_trident.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 10,
+    "scalability": "limited",
+    "enchantments": {
+      "ICE_BREAKER": 1,
+      "VANISHING_CURSE": 0,
+      "LOYALTY": 0
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_groves_lighthouse_hill_chest_joke.yml",
+    "family": "AXES",
+    "material": "WOODEN_AXE",
+    "itemLevel": 17,
+    "scalability": "limited",
+    "enchantments": {
+      "VANISHING_CURSE": 0,
+      "KNOCKBACK": 9
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_foot_of_mountain_chest_axe.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 9,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_island_chest_trident.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 8,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 2,
+      "IMPALING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_living_nightmares_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "LEATHER_CHESTPLATE",
+    "itemLevel": 12,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_make_them_go_ouch_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "LEATHER_LEGGINGS",
+    "itemLevel": 11,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_silence_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 12,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "BLAST_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_violet_boots.yml",
+    "family": "BOOTS",
+    "material": "LEATHER_BOOTS",
+    "itemLevel": null,
+    "scalability": "limited",
+    "enchantments": {},
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_violet_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "LEATHER_LEGGINGS",
+    "itemLevel": null,
+    "scalability": "limited",
+    "enchantments": {},
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ice_village_wanna_build_a_snowman_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "LEATHER_BOOTS",
+    "itemLevel": 12,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FROST_WALKER": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_monster_slaying_spear.yml",
+    "family": "SPEARS",
+    "material": "IRON_SPEAR",
+    "itemLevel": 3,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ogre_mines_waterworks_chest_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": null,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_old_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {},
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pirate_bow.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 5,
+    "scalability": "limited",
+    "enchantments": {
+      "POWER": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_groves_spider_boots_reward.yml",
+    "family": "BOOTS",
+    "material": "CHAINMAIL_BOOTS",
+    "itemLevel": 9,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "BANE_OF_ARTHROPODS": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_groves_tree_climbing_elf_bandits_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 10,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_arena_reward_1.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 11,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "BLAST_PROTECTION": 2,
+      "PROJECTILE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_arena_reward_2.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 11,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 1,
+      "THORNS": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_arena_reward_3.yml",
+    "family": "LEGGINGS",
+    "material": "IRON_LEGGINGS",
+    "itemLevel": 11,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FEATHER_FALLING": 3,
+      "FIRE_PROTECTION": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_fields_beasts_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 10,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_fields_do_it_yourself_reward_bow.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 8,
+    "scalability": "limited",
+    "enchantments": {
+      "POWER": 3,
+      "FLAME": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_mines_goblined_up_in_the_maze_reward_axe.yml",
+    "family": "SWORDS",
+    "material": "STONE_SWORD",
+    "itemLevel": 8,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "FIRE_ASPECT": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_parkour_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 11,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "FEATHER_FALLING": 4,
+      "BLAST_PROTECTION": 1,
+      "FIRE_PROTECTION": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": 9,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "FEATHER_FALLING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 11,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "IRON_HELMET",
+    "itemLevel": 9,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "IRON_LEGGINGS",
+    "itemLevel": 10,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_reward_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": null,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "BLAST_PROTECTION": 1,
+      "PROJECTILE_PROTECTION": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 11,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "BANE_OF_ARTHROPODS": 1,
+      "SMITE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_serious_sewage_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "TURTLE_HELMET",
+    "itemLevel": 10,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "DEPTH_STRIDER": 1,
+      "AQUA_AFFINITY": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_slums_chest_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 7,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 2,
+      "BANE_OF_ARTHROPODS": 1,
+      "SMITE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_mille_to_lycan_or_not_to_lycan_reward.yml",
+    "family": "LEGGINGS",
+    "material": "CHAINMAIL_LEGGINGS",
+    "itemLevel": 11,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_pontis_redwoods_nasty_little_bandits_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 10,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "FEATHER_FALLING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ruin_relic_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ruin_relic_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ruin_relic_helmet.yml",
+    "family": "HELMETS",
+    "material": "IRON_HELMET",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_ruin_relic_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "IRON_LEGGINGS",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_shield_final_quest_reward.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 17,
+    "scalability": "limited",
+    "enchantments": {
+      "BINDING_CURSE": 9,
+      "VANISHING_CURSE": 9,
+      "UNBREAKING": 4,
+      "MENDING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_starter_boots.yml",
+    "family": "BOOTS",
+    "material": "LEATHER_BOOTS",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_starter_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "LEATHER_CHESTPLATE",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_starter_helmet.yml",
+    "family": "HELMETS",
+    "material": "LEATHER_HELMET",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_starter_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "LEATHER_LEGGINGS",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_starter_sword.yml",
+    "family": "SWORDS",
+    "material": "WOODEN_SWORD",
+    "itemLevel": 2,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_terravilla_big_trouble_in_little_pub_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 14,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_terravilla_hog_on_my_porch_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "LEATHER_HELMET",
+    "itemLevel": 13,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "primis-adventure_v42",
+    "item": "primis-adventure_v42/customitems/primis/primis_terravilla_taking_out_the_trash_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 14,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "SMITE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_climb/mythic/the_climb_bone_champion_drop_chestplate_tank_mythic.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "PROJECTILE_PROTECTION": 7,
+      "SHARPNESS": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_mines/normal/the_mines_soulfire_daine_chestplate_tank_normal.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 20,
+    "scalability": "scalable",
+    "enchantments": {
+      "THORNS": 5,
+      "PROTECTION": 3,
+      "FIRE_PROTECTION": 2,
+      "LOUD_STRIKES": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_bell/hard/em_id_the_nether_bell_chest_1_hoe_hard.yml",
+    "family": "HOES",
+    "material": "DIAMOND_HOE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 2,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_bell/hard/em_id_the_nether_bell_chest_3_axe_hard.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 55,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 2,
+      "MENDING": 1,
+      "EFFICIENCY": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_bell/mythical/em_id_the_nether_bell_chest_1_hoe_mythic.yml",
+    "family": "HOES",
+    "material": "DIAMOND_HOE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 3,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_bell/mythical/em_id_the_nether_bell_chest_3_axe_mythic.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 55,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 3,
+      "MENDING": 1,
+      "EFFICIENCY": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_bell/mythical/em_id_the_nether_bell_trash_drop_axe_dps_mythic.yml",
+    "family": "AXES",
+    "material": "IRON_AXE",
+    "itemLevel": 55,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_bell/normal/em_id_the_nether_bell_chest_1_hoe_normal.yml",
+    "family": "HOES",
+    "material": "DIAMOND_HOE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 1,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_bell/normal/em_id_the_nether_bell_chest_3_axe_normal.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 55,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 1,
+      "MENDING": 1,
+      "EFFICIENCY": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_wastes/hard/em_id_the_nether_wastes_trash_sword_dps_hard.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "SMITE": 3,
+      "BANE_OF_ARTHROPODS": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_wastes/mythical/em_id_the_nether_wastes_miniboss_axe_mythical.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 8,
+      "SHARPNESS": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 3,
+      "LOUD_STRIKES": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_wastes/mythical/em_id_the_nether_wastes_miniboss_chestplate_mythical.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 8,
+      "BLAST_PROTECTION": 5,
+      "PROTECTION": 4,
+      "UNBREAKING": 3,
+      "LOUD_STRIKES": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/em_id_the_nether_wastes/mythical/em_id_the_nether_wastes_trash_sword_dps_mythical.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 7,
+      "SMITE": 4,
+      "BANE_OF_ARTHROPODS": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_1_helmet.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 5,
+      "FEATHER_FALLING": 4,
+      "FIRE_PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 2,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_2_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 20,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 5,
+      "FEATHER_FALLING": 4,
+      "FIRE_PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 2,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_3_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 25,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 5,
+      "FEATHER_FALLING": 4,
+      "FIRE_PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 2,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_4_boots.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 30,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 6,
+      "BLAST_PROTECTION": 5,
+      "FEATHER_FALLING": 4,
+      "FIRE_PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 2,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_5_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 35,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 6,
+      "BANE_OF_ARTHROPODS": 5,
+      "SMITE": 4,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_6_bow.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 40,
+    "scalability": "scalable",
+    "enchantments": {
+      "POWER": 6,
+      "INFINITY": 5,
+      "PUNCH": 4,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_7_axe.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": 45,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 6,
+      "BANE_OF_ARTHROPODS": 5,
+      "SMITE": 4,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_8_crossbow.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PIERCING": 6,
+      "MULTISHOT": 5,
+      "LUCK_OF_THE_SEA": 4,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "story-mode-dungeons_v20",
+    "item": "story-mode-dungeons_v20/customitems/story_dungeons/story_dungeons_quest_9_trident.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 55,
+    "scalability": "scalable",
+    "enchantments": {
+      "RIPTIDE": 6,
+      "LOYALTY": 5,
+      "IMPALING": 4,
+      "MENDING": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/challengers_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 40,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/challengers_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 40,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/challengers_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 40,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/challengers_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 40,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/challengers_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 40,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "KNOCKBACK": 2,
+      "MENDING": 1,
+      "LIGHTNING": 3,
+      "SWEEPING_EDGE": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/grunts_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": 20,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/grunts_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 20,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/grunts_helmet.yml",
+    "family": "HELMETS",
+    "material": "IRON_HELMET",
+    "itemLevel": 20,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/grunts_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "IRON_LEGGINGS",
+    "itemLevel": 20,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/grunts_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 20,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "KNOCKBACK": 2,
+      "SWEEPING_EDGE": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/invictus_boots.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/invictus_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/invictus_helmet.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/invictus_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "BLAST_PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/invictus_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 50,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "KNOCKBACK": 2,
+      "MENDING": 1,
+      "LIGHTNING": 3,
+      "SWEEPING_EDGE": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/novices_boots.yml",
+    "family": "BOOTS",
+    "material": "LEATHER_BOOTS",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/novices_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "LEATHER_CHESTPLATE",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/novices_helmet.yml",
+    "family": "HELMETS",
+    "material": "LEATHER_HELMET",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/novices_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "LEATHER_LEGGINGS",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/novices_sword.yml",
+    "family": "SWORDS",
+    "material": "STONE_SWORD",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "SWEEPING_EDGE": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/veterans_boots.yml",
+    "family": "BOOTS",
+    "material": "GOLDEN_BOOTS",
+    "itemLevel": 30,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/veterans_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "GOLDEN_CHESTPLATE",
+    "itemLevel": 30,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/veterans_helmet.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": 30,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/veterans_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "GOLDEN_LEGGINGS",
+    "itemLevel": 30,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "MENDING": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-adventurers-guild_v19",
+    "item": "the-adventurers-guild_v19/customitems/wood_league_arena/veterans_sword.yml",
+    "family": "SWORDS",
+    "material": "GOLDEN_SWORD",
+    "itemLevel": 30,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "KNOCKBACK": 2,
+      "MENDING": 1,
+      "SWEEPING_EDGE": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-airship_v11",
+    "item": "the-airship_v11/customitems/the_airship/em_the_airship_chest_airship_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 49,
+    "scalability": "scalable",
+    "enchantments": {
+      "FIRE_PROTECTION": 7,
+      "PROJECTILE_PROTECTION": 6,
+      "BLAST_PROTECTION": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-airship_v11",
+    "item": "the-airship_v11/customitems/the_airship/em_the_airship_chest_forest_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": 46,
+    "scalability": "scalable",
+    "enchantments": {
+      "VANISHING_CURSE": 1,
+      "PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-airship_v11",
+    "item": "the-airship_v11/customitems/the_airship/em_the_airship_quest_reward.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 53,
+    "scalability": "scalable",
+    "enchantments": {
+      "POWER": 5,
+      "PUNCH": 2,
+      "FLAME": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-catacombs_v15",
+    "item": "the-catacombs_v15/customitems/the_catacombs/em_the_catacombs_chest_tree_drop_wooden_sword.yml",
+    "family": "SWORDS",
+    "material": "WOODEN_SWORD",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "FIRE_ASPECT": 2,
+      "KNOCKBACK": 2,
+      "SWEEPING_EDGE": 3,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-catacombs_v15",
+    "item": "the-catacombs_v15/customitems/the_catacombs/em_the_catacombs_quest_reward_trident.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 10,
+    "scalability": "scalable",
+    "enchantments": {
+      "LOYALTY": 3,
+      "IMPALING": 5,
+      "RIPTIDE": 3,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-colosseum-remake-soon_v13",
+    "item": "the-colosseum-remake-soon_v13/customitems/the_colosseum/em_colosseum_main_quest_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "LEATHER_BOOTS",
+    "itemLevel": 70,
+    "scalability": "scalable",
+    "enchantments": {
+      "FEATHER_FALLING": 5,
+      "UNBREAKING": 3,
+      "DEPTH_STRIDER": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-colosseum-remake-soon_v13",
+    "item": "the-colosseum-remake-soon_v13/customitems/the_colosseum/em_colosseum_main_quest_reward_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "LEATHER_CHESTPLATE",
+    "itemLevel": 70,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 3,
+      "FIRE_PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-colosseum-remake-soon_v13",
+    "item": "the-colosseum-remake-soon_v13/customitems/the_colosseum/em_colosseum_main_quest_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "LEATHER_HELMET",
+    "itemLevel": 70,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 5,
+      "UNBREAKING": 3,
+      "HUNTER": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-colosseum-remake-soon_v13",
+    "item": "the-colosseum-remake-soon_v13/customitems/the_colosseum/em_colosseum_main_quest_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "LEATHER_LEGGINGS",
+    "itemLevel": 70,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "UNBREAKING": 3,
+      "SWIFT_SNEAK": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-dark-spire_v13",
+    "item": "the-dark-spire_v13/customitems/the_dark_spire/darkspire_netherite_axe.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "SMITE": 4,
+      "UNBREAKING": 3,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-hallowed-haunt_v5",
+    "item": "the-hallowed-haunt_v5/customitems/em_id_the_hallowed_haunt/em_the_hallowed_haunt_main_quest_1_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 66,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "BANE_OF_ARTHROPODS": 4,
+      "SMITE": 3,
+      "UNBREAKING": 5,
+      "SWEEPING_EDGE": 6
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-hallowed-haunt_v5",
+    "item": "the-hallowed-haunt_v5/customitems/em_id_the_hallowed_haunt/em_the_hallowed_haunt_main_quest_2_reward_crossbow.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": 68,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 5,
+      "MULTISHOT": 1,
+      "PIERCING": 2,
+      "QUICK_CHARGE": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-hallowed-haunt_v5",
+    "item": "the-hallowed-haunt_v5/customitems/em_id_the_hallowed_haunt/em_the_hallowed_haunt_main_quest_3_reward_trident.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 71,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 5,
+      "MENDING": 4,
+      "RIPTIDE": 5,
+      "CHANNELING": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-invasion_v9",
+    "item": "the-invasion_v9/customitems/invasion/invasion_low_grade_tinfoil_bolt_caster.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PIERCING": 1,
+      "PUNCH": 3,
+      "QUICK_CHARGE": 5,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-invasion_v9",
+    "item": "the-invasion_v9/customitems/invasion/invasion_quality_bolt_caster.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PIERCING": 1,
+      "PUNCH": 3,
+      "QUICK_CHARGE": 5,
+      "UNBREAKING": 3,
+      "MULTISHOT": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 20,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FEATHER_FALLING": 3,
+      "PROJECTILE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 20,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 20,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FEATHER_FALLING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 20,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FIRE_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_reward_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 20,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FIRE_PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 20,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "BANE_OF_ARTHROPODS": 2,
+      "SMITE": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_starter_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "IRON_BOOTS",
+    "itemLevel": 16,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "FEATHER_FALLING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_starter_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 16,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_starter_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "IRON_HELMET",
+    "itemLevel": 16,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_starter_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "IRON_LEGGINGS",
+    "itemLevel": 16,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_starter_reward_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 16,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "BLAST_PROTECTION": 1,
+      "PROJECTILE_PROTECTION": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dessa_starter_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": 16,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "BANE_OF_ARTHROPODS": 1,
+      "SMITE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_desert_reward.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "KNOCKBACK": 4,
+      "SHARPNESS": 3,
+      "SMITE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_hauler_fear_reward.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 26,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FEATHER_FALLING": 3,
+      "BLAST_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_hill_reward.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "FEATHER_FALLING": 4,
+      "BLAST_PROTECTION": 3,
+      "FIRE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_hut_reward.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 27,
+    "scalability": "limited",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 4,
+      "BLAST_PROTECTION": 3,
+      "FIRE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_my_little_scrapper_reward.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 4,
+      "PROTECTION": 3,
+      "BLAST_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_town_reward.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "THORNS": 4,
+      "PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_vampires_reward.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "POWER": 4,
+      "PUNCH": 3,
+      "FLAME": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_dwellerquest_water_reward.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "SMITE": 3,
+      "BANE_OF_ARTHROPODS": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_boots_10.yml",
+    "family": "BOOTS",
+    "material": "GOLDEN_BOOTS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_boots_20.yml",
+    "family": "BOOTS",
+    "material": "GOLDEN_BOOTS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_boots_30.yml",
+    "family": "BOOTS",
+    "material": "GOLDEN_BOOTS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_boots_50.yml",
+    "family": "BOOTS",
+    "material": "GOLDEN_BOOTS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 4,
+      "EARTHQUAKE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_chestplate_10.yml",
+    "family": "CHESTPLATES",
+    "material": "GOLDEN_CHESTPLATE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_chestplate_20.yml",
+    "family": "CHESTPLATES",
+    "material": "GOLDEN_CHESTPLATE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_chestplate_30.yml",
+    "family": "CHESTPLATES",
+    "material": "GOLDEN_CHESTPLATE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_chestplate_50.yml",
+    "family": "CHESTPLATES",
+    "material": "GOLDEN_CHESTPLATE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 4,
+      "EARTHQUAKE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_helmet_10.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_helmet_20.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_helmet_30.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_helmet_50.yml",
+    "family": "HELMETS",
+    "material": "GOLDEN_HELMET",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 4,
+      "EARTHQUAKE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_leggings_10.yml",
+    "family": "LEGGINGS",
+    "material": "GOLDEN_LEGGINGS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_leggings_20.yml",
+    "family": "LEGGINGS",
+    "material": "GOLDEN_LEGGINGS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_leggings_30.yml",
+    "family": "LEGGINGS",
+    "material": "GOLDEN_LEGGINGS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 2,
+      "EARTHQUAKE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_earthquake_leggings_50.yml",
+    "family": "LEGGINGS",
+    "material": "GOLDEN_LEGGINGS",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 4,
+      "EARTHQUAKE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_foundrys_flaming_hammer.yml",
+    "family": "AXES",
+    "material": "GOLDEN_AXE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "FIRE_ASPECT": 5,
+      "SHARPNESS": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_golem_rejuvenator.yml",
+    "family": "HOES",
+    "material": "WOODEN_HOE",
+    "itemLevel": 16,
+    "scalability": "limited",
+    "enchantments": {},
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_hiddenquest_end_reward.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": 27,
+    "scalability": "limited",
+    "enchantments": {
+      "PIERCING": 4,
+      "QUICK_CHARGE": 3,
+      "UNBREAKING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_khesusiris_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 23,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 2,
+      "FEATHER_FALLING": 3,
+      "PROJECTILE_PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_khesusiris_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 23,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "BLAST_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_khesusiris_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 23,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "FIRE_PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_khesusiris_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 23,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_khesusiris_reward_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 23,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "BLAST_PROTECTION": 4,
+      "FIRE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_khesusiris_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 23,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 2,
+      "BANE_OF_ARTHROPODS": 3,
+      "SMITE": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_lighthouse_mobs_drop_mace.yml",
+    "family": "MACES",
+    "material": "MACE",
+    "itemLevel": 21,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "KNOCKBACK": 2,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_secondaryquest_reward_radiance.yml",
+    "family": "SWORDS",
+    "material": "GOLDEN_SWORD",
+    "itemLevel": 28,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "SMITE": 4,
+      "BANE_OF_ARTHROPODS": 3,
+      "UNBREAKING": 2,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_a_light_in_the_darkness_reward.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "SWEEPING_EDGE": 3,
+      "SMITE": 2,
+      "BANE_OF_ARTHROPODS": 1,
+      "UNBREAKING": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_clearing_the_dock_reward.yml",
+    "family": "AXES",
+    "material": "DIAMOND_AXE",
+    "itemLevel": 27,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "KNOCKBACK": 3,
+      "SMITE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_foul_waters_reward.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 21,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 4,
+      "BLAST_PROTECTION": 3,
+      "FIRE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_island_hopper_reward.yml",
+    "family": "HELMETS",
+    "material": "TURTLE_HELMET",
+    "itemLevel": 26,
+    "scalability": "limited",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 4,
+      "AQUA_AFFINITY": 3,
+      "RESPIRATION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_knowledge_reward.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 21,
+    "scalability": "limited",
+    "enchantments": {
+      "FIRE_PROTECTION": 4,
+      "FEATHER_FALLING": 3,
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_ladder_me_down_two_reward.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 16,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_not_cleared_to_dock_reward.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 26,
+    "scalability": "limited",
+    "enchantments": {
+      "PUNCH": 4,
+      "FLAME": 3,
+      "UNBREAKING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_observe_this_reward.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 21,
+    "scalability": "limited",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 4,
+      "BLAST_PROTECTION": 3,
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_revenge_reward.yml",
+    "family": "SWORDS",
+    "material": "GOLDEN_SWORD",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "SMITE": 4,
+      "UNBREAKING": 3,
+      "VANISHING_CURSE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_ruins_explorer_reward_mace.yml",
+    "family": "MACES",
+    "material": "MACE",
+    "itemLevel": 24,
+    "scalability": "limited",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "KNOCKBACK": 2,
+      "UNBREAKING": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_salted_stole_my_trident_reward.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 26,
+    "scalability": "limited",
+    "enchantments": {
+      "LOYALTY": 4,
+      "CHANNELING": 3,
+      "UNBREAKING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_swimming_through_the_depths_reward.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 21,
+    "scalability": "limited",
+    "enchantments": {
+      "RIPTIDE": 3,
+      "CHANNELING": 3,
+      "UNBREAKING": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_town_bridges_reward.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 19,
+    "scalability": "limited",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 3,
+      "BLAST_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_sidequest_water_tower_dead_reward.yml",
+    "family": "HOES",
+    "material": "NETHERITE_HOE",
+    "itemLevel": 27,
+    "scalability": "limited",
+    "enchantments": {
+      "EFFICIENCY": 4,
+      "UNBREAKING": 3,
+      "FORTUNE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_tappesheh_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 27,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 3,
+      "BLAST_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_tappesheh_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 27,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_tappesheh_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 27,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_tappesheh_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 27,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FIRE_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_tappesheh_reward_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 27,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "PROJECTILE_PROTECTION": 3,
+      "BLAST_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_tappesheh_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 27,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "BANE_OF_ARTHROPODS": 3,
+      "SMITE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_tappesheh_weapons.yml",
+    "family": "SWORDS",
+    "material": "IRON_SWORD",
+    "itemLevel": null,
+    "scalability": "limited",
+    "enchantments": {},
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_zanerun_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 24,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "FIRE_PROTECTION": 3,
+      "BLAST_PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_zanerun_reward_chest.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 24,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "PROJECTILE_PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_zanerun_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 24,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 4,
+      "BLAST_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_zanerun_reward_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 24,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 3,
+      "FIRE_PROTECTION": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_zanerun_reward_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 24,
+    "scalability": "FIXED",
+    "enchantments": {
+      "PROTECTION": 2,
+      "PROJECTILE_PROTECTION": 4,
+      "FIRE_PROTECTION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-oasis-adventure_v24",
+    "item": "the-oasis-adventure_v24/customitems/oasis/oasis_zanerun_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 24,
+    "scalability": "FIXED",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "BANE_OF_ARTHROPODS": 4,
+      "SMITE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/hard/em_the_pirate_ship_chest_ocean_deep_loot_hard.yml",
+    "family": "HELMETS",
+    "material": "TURTLE_HELMET",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "AQUA_AFFINITY": 1,
+      "RESPIRATION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/hard/em_the_pirate_ship_chest_ship_large_loot_hard.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "VANISHING_CURSE": 1,
+      "LOYALTY": 3,
+      "RIPTIDE": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/hard/em_the_pirate_ship_chest_ship_loot_hard.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 4,
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/hard/pirate_ship_tier_35_miniboss_sword_hard.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "SWEEPING_EDGE": 1,
+      "FIRE_ASPECT": 2,
+      "UNBREAKING": 5,
+      "SMITE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/mythic/em_the_pirate_ship_chest_ocean_deep_loot_mythic.yml",
+    "family": "HELMETS",
+    "material": "TURTLE_HELMET",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "AQUA_AFFINITY": 3,
+      "RESPIRATION": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/mythic/em_the_pirate_ship_chest_ship_large_loot_mythic.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "VANISHING_CURSE": 2,
+      "LOYALTY": 4,
+      "RIPTIDE": 4
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/mythic/em_the_pirate_ship_chest_ship_loot_mythic.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 6,
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/mythic/pirate_ship_tier_35_miniboss_sword_mythic.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "SWEEPING_EDGE": 2,
+      "FIRE_ASPECT": 3,
+      "UNBREAKING": 6,
+      "SMITE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/normal/em_the_pirate_ship_chest_ocean_deep_loot_normal.yml",
+    "family": "HELMETS",
+    "material": "TURTLE_HELMET",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "AQUA_AFFINITY": 1,
+      "RESPIRATION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/normal/em_the_pirate_ship_chest_ship_large_loot_normal.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "VANISHING_CURSE": 1,
+      "LOYALTY": 2,
+      "RIPTIDE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/normal/em_the_pirate_ship_chest_ship_loot_normal.yml",
+    "family": "CHESTPLATES",
+    "material": "IRON_CHESTPLATE",
+    "itemLevel": 15,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROJECTILE_PROTECTION": 4,
+      "PROTECTION": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-pirate-ship_v17",
+    "item": "the-pirate-ship_v17/customitems/the_pirate_ship/normal/pirate_ship_tier_35_miniboss_sword_normal.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 1,
+      "SWEEPING_EDGE": 1,
+      "FIRE_ASPECT": 1,
+      "UNBREAKING": 2,
+      "SMITE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-ruins_v14",
+    "item": "the-ruins_v14/customitems/the_ruins/em_the_ruins_chest_forest_log_drop_axe.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "SMITE": 5,
+      "EFFICIENCY": 5,
+      "UNBREAKING": 3,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-ruins_v14",
+    "item": "the-ruins_v14/customitems/the_ruins/em_the_ruins_chest_hill_top_drop_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "FIRE_PROTECTION": 6,
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "THORNS": 3,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-ruins_v14",
+    "item": "the-ruins_v14/customitems/the_ruins/em_the_ruins_quest_2_reward_boots.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "FIRE_PROTECTION": 4,
+      "FROST_WALKER": 2,
+      "EARTHQUAKE": 2
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-ruins_v14",
+    "item": "the-ruins_v14/customitems/the_ruins/em_the_ruins_quest_4_reward_helmet.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 4,
+      "FIRE_PROTECTION": 3,
+      "RESPIRATION": 2,
+      "THORNS": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-ruins_v14",
+    "item": "the-ruins_v14/customitems/the_ruins/em_the_ruins_quest_5_reward_sword.yml",
+    "family": "SWORDS",
+    "material": "NETHERITE_SWORD",
+    "itemLevel": 150,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "SMITE": 5,
+      "BANE_OF_ARTHROPODS": 5,
+      "LOOTING": 3,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/em_the_vampire_manor_quest_reward_1_bow.yml",
+    "family": "BOWS",
+    "material": "BOW",
+    "itemLevel": 125,
+    "scalability": "scalable",
+    "enchantments": {
+      "PUNCH": 3,
+      "FLAME": 5,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/em_the_vampire_manor_quest_reward_2_trident.yml",
+    "family": "TRIDENTS",
+    "material": "TRIDENT",
+    "itemLevel": 128,
+    "scalability": "scalable",
+    "enchantments": {
+      "LOYALTY": 3,
+      "LOOTING": 3,
+      "UNBREAKING": 3
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/em_the_vampire_manor_quest_reward_3_crossbow.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "QUICK_CHARGE": 4,
+      "PIERCING": 3,
+      "UNBREAKING": 3,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/hard/em_the_vampire_manor_chest_drop_outside_behind_manor_boots_hard.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/hard/em_the_vampire_manor_chest_drop_outside_inside_ruined_tower_helmet_hard.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/hard/em_the_vampire_manor_chest_drop_outside_near_jessamyn_leggings_hard.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/hard/em_the_vampire_manor_chest_drop_outside_near_ravine_chestplate_hard.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/hard/vampire_manor_gargoyle_granulator_hard.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "CRITICAL_STRIKES": 1,
+      "UNBREAKING": 1,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/hard/vampire_manor_stake_your_claim_hard.yml",
+    "family": "SWORDS",
+    "material": "WOODEN_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 3,
+      "CRITICAL_STRIKES": 1,
+      "UNBREAKING": 7,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "HARD",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/mythic/em_the_vampire_manor_chest_drop_outside_behind_manor_boots_mythic.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/mythic/em_the_vampire_manor_chest_drop_outside_inside_ruined_tower_helmet_mythic.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/mythic/em_the_vampire_manor_chest_drop_outside_near_jessamyn_leggings_mythic.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/mythic/em_the_vampire_manor_chest_drop_outside_near_ravine_chestplate_mythic.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 7,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/mythic/vampire_manor_gargoyle_granulator_mythic.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "CRITICAL_STRIKES": 2,
+      "UNBREAKING": 2,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/mythic/vampire_manor_stake_your_claim_mythic.yml",
+    "family": "SWORDS",
+    "material": "WOODEN_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 4,
+      "CRITICAL_STRIKES": 2,
+      "UNBREAKING": 7,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "MYTHIC",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/normal/em_the_vampire_manor_chest_drop_outside_behind_manor_boots_normal.yml",
+    "family": "BOOTS",
+    "material": "NETHERITE_BOOTS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/normal/em_the_vampire_manor_chest_drop_outside_inside_ruined_tower_helmet_normal.yml",
+    "family": "HELMETS",
+    "material": "NETHERITE_HELMET",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/normal/em_the_vampire_manor_chest_drop_outside_near_jessamyn_leggings_normal.yml",
+    "family": "LEGGINGS",
+    "material": "NETHERITE_LEGGINGS",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/normal/em_the_vampire_manor_chest_drop_outside_near_ravine_chestplate_normal.yml",
+    "family": "CHESTPLATES",
+    "material": "NETHERITE_CHESTPLATE",
+    "itemLevel": 130,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "VANISHING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/normal/vampire_manor_gargoyle_granulator_normal.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 2,
+      "CRITICAL_STRIKES": 1,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "the-vampire-manor_v19",
+    "item": "the-vampire-manor_v19/customitems/vampire_manor/normal/vampire_manor_stake_your_claim_normal.yml",
+    "family": "SWORDS",
+    "material": "WOODEN_SWORD",
+    "itemLevel": null,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 2,
+      "CRITICAL_STRIKES": 1,
+      "UNBREAKING": 5
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NORMAL",
+    "difficultySource": "item-path"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_chest_drop_tents_and_woods_axe.yml",
+    "family": "AXES",
+    "material": "NETHERITE_AXE",
+    "itemLevel": 75,
+    "scalability": "scalable",
+    "enchantments": {
+      "EFFICIENCY": 5,
+      "FORTUNE": 3,
+      "UNBREAKING": 3,
+      "MENDING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_chest_drop_under_yggdrasil_wooden_sword.yml",
+    "family": "SWORDS",
+    "material": "WOODEN_SWORD",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 7,
+      "LOOTING": 5,
+      "SWEEPING_EDGE": 5,
+      "UNBREAKING": 5,
+      "FIRE_ASPECT": 3,
+      "SMITE": 6,
+      "BANE_OF_ARTHROPODS": 6,
+      "KNOCKBACK": 3,
+      "VANISHING_CURSE": 1,
+      "BINDING_CURSE": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_chest_drop_wheat_fields_house_fishing_crossbow.yml",
+    "family": "CROSSBOWS",
+    "material": "CROSSBOW",
+    "itemLevel": 75,
+    "scalability": "scalable",
+    "enchantments": {
+      "MULTISHOT": 4,
+      "PIERCING": 3,
+      "QUICK_CHARGE": 2,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_main_quest_boots.yml",
+    "family": "BOOTS",
+    "material": "DIAMOND_BOOTS",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "FEATHER_FALLING": 3,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_main_quest_chestplate.yml",
+    "family": "CHESTPLATES",
+    "material": "DIAMOND_CHESTPLATE",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "FIRE_PROTECTION": 3,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_main_quest_helmet.yml",
+    "family": "HELMETS",
+    "material": "DIAMOND_HELMET",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "RESPIRATION": 3,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_main_quest_leggings.yml",
+    "family": "LEGGINGS",
+    "material": "DIAMOND_LEGGINGS",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "PROTECTION": 5,
+      "PROJECTILE_PROTECTION": 3,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_side_quest_shield.yml",
+    "family": "SHIELDS",
+    "material": "SHIELD",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "UNBREAKING": 5,
+      "MENDING": 3,
+      "THORNS": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  },
+  {
+    "package": "yggdrasil-realm_v7",
+    "item": "yggdrasil-realm_v7/customitems/em_yggdrasil/em_yggdrasil_side_quest_sword.yml",
+    "family": "SWORDS",
+    "material": "DIAMOND_SWORD",
+    "itemLevel": 80,
+    "scalability": "scalable",
+    "enchantments": {
+      "SHARPNESS": 5,
+      "SWEEPING_EDGE": 3,
+      "UNBREAKING": 1
+    },
+    "enabled": true,
+    "rank": "UNREFERENCED",
+    "difficulty": "NEUTRAL",
+    "difficultySource": "no-difficulty"
+  }
+]

@@ -6,8 +6,6 @@ import com.magmaguy.elitemobs.config.ProceduralItemGenerationSettingsConfig;
 import com.magmaguy.elitemobs.config.enchantments.EnchantmentsConfig;
 import com.magmaguy.elitemobs.config.enchantments.EnchantmentsConfigFields;
 import com.magmaguy.elitemobs.items.EliteEnchantments;
-import com.magmaguy.elitemobs.items.customenchantments.CriticalStrikesEnchantment;
-import com.magmaguy.elitemobs.items.customenchantments.HunterEnchantment;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,6 +15,42 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class EnchantmentGenerator {
 
+    public static HashMap<String, Integer> withProceduralCustomEnchantments(int level,
+            com.magmaguy.elitemobs.config.customitems.CustomItemsConfigFields fields,
+            HashMap<String, Integer> authored) {
+        HashMap<String, Integer> result = new HashMap<>(authored);
+        if (fields.isProceduralEnchantments())
+            com.magmaguy.elitemobs.items.itemconstructor.MagicEnchantmentGeneration.generate(level, fields.getWeaponType())
+                    .forEach((key, value) -> result.merge(key, value, Math::max));
+        return result;
+    }
+
+    public static HashMap<Enchantment, Integer> withProceduralEnchantments(int level,
+            com.magmaguy.elitemobs.config.customitems.CustomItemsConfigFields fields,
+            HashMap<Enchantment, Integer> authored) {
+        HashMap<Enchantment, Integer> result = new HashMap<>(authored);
+        if (fields.isProceduralEnchantments()) {
+            var generated = generateEnchantments(level, fields.getMaterial(), fields.getWeaponType(),
+                    new org.bukkit.inventory.ItemStack(fields.getMaterial()).getItemMeta());
+            generated.forEach((enchantment, value) -> result.merge(enchantment, value, Math::max));
+        }
+        return result;
+    }
+
+    public static HashMap<Enchantment, Integer> generateEnchantments(
+            double level, Material material, com.magmaguy.elitemobs.skills.SkillType weaponType, ItemMeta meta) {
+        if (weaponType != com.magmaguy.elitemobs.skills.SkillType.STAVES
+                && weaponType != com.magmaguy.elitemobs.skills.SkillType.WANDS)
+            return generateEnchantments(level, material, meta);
+        // Magic attacks support damage and native durability enchantments. Arrow-only effects
+        // must not be advertised on a projectile which does not implement them.
+        return generateEnchantments(level, Material.BOW, meta, true);
+    }
+
+    public static List<Enchantment> supportedMagicEnchantments() {
+        return List.of(Enchantment.POWER, Enchantment.UNBREAKING, Enchantment.MENDING, Enchantment.VANISHING_CURSE);
+    }
+
     public static ItemMeta generateEnchantments(ItemMeta itemMeta, HashMap<Enchantment, Integer> enchantmentMap) {
         for (Map.Entry<Enchantment, Integer> entry : enchantmentMap.entrySet()) {
             if (entry == null) continue;
@@ -25,16 +59,22 @@ public class EnchantmentGenerator {
             if (enchantmentMap.get(entry.getKey()) > entry.getKey().getMaxLevel()) {
                 if (EliteEnchantments.isPotentialEliteEnchantment(entry.getKey())) {
                     if (enchantmentMap.get(entry.getKey()) > entry.getKey().getMaxLevel()) {
-                        itemMeta.addEnchant(entry.getKey(), entry.getKey().getMaxLevel(), true);
+                        writeNative(itemMeta, entry.getKey(), entry.getKey().getMaxLevel());
                     } else
-                        itemMeta.addEnchant(entry.getKey(), enchantmentMap.get(entry.getKey()), true);
+                        writeNative(itemMeta, entry.getKey(), enchantmentMap.get(entry.getKey()));
                 } else
-                    itemMeta.addEnchant(entry.getKey(), entry.getValue(), true);
+                    writeNative(itemMeta, entry.getKey(), entry.getValue());
             } else {
-                itemMeta.addEnchant(entry.getKey(), entry.getValue(), true);
+                writeNative(itemMeta, entry.getKey(), entry.getValue());
             }
         }
         return itemMeta;
+    }
+
+    private static void writeNative(ItemMeta meta, Enchantment enchantment, int level) {
+        if (meta instanceof org.bukkit.inventory.meta.EnchantmentStorageMeta book)
+            book.addStoredEnchant(enchantment, level, true);
+        else meta.addEnchant(enchantment, level, true);
     }
 
     /*
@@ -42,6 +82,11 @@ public class EnchantmentGenerator {
     This only gathers the list of enchantments to be applied
      */
     public static HashMap<Enchantment, Integer> generateEnchantments(double itemTier, Material material, ItemMeta itemMeta) {
+        return generateEnchantments(itemTier, material, itemMeta, false);
+    }
+
+    private static HashMap<Enchantment, Integer> generateEnchantments(
+            double itemTier, Material material, ItemMeta itemMeta, boolean magicWeapon) {
 
         HashMap<Enchantment, Integer> enchantmentMap = new HashMap<>();
 
@@ -58,7 +103,10 @@ public class EnchantmentGenerator {
         Primary enchantments get instantly validated and applies since there is only one per item type
         Secondary enchantments get added to a common pool to be randomized later
          */
-        switch (material) {
+        if (magicWeapon) {
+            for (Enchantment enchantment : supportedMagicEnchantments())
+                validEnchantments.putAll(validateEnchantments(enchantment.getKey().getKey()));
+        } else switch (material) {
             case TRIDENT:
                 if (ThreadLocalRandom.current().nextDouble() < 0.5)
                     validEnchantments.putAll(validateEnchantments("LOYALTY"));
@@ -347,11 +395,11 @@ public class EnchantmentGenerator {
             case STONE_SWORD:
             case WOODEN_SWORD:
             case TRIDENT:
-                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments(CriticalStrikesEnchantment.key));
+                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments("critical_strikes"));
                 break;
             case BOW:
             case CROSSBOW:
-                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments(CriticalStrikesEnchantment.key));
+                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments("critical_strikes"));
                 break;
             case DIAMOND_PICKAXE:
             case GOLDEN_PICKAXE:
@@ -385,35 +433,35 @@ public class EnchantmentGenerator {
             case WOODEN_SPEAR:
             case COPPER_SPEAR:
             case NETHERITE_SPEAR:
-                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments(CriticalStrikesEnchantment.key));
+                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments("critical_strikes"));
                 break;
             case CHAINMAIL_HELMET:
             case DIAMOND_HELMET:
             case GOLDEN_HELMET:
             case IRON_HELMET:
             case LEATHER_HELMET:
-                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments(HunterEnchantment.key));
+                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments("hunter"));
                 break;
             case CHAINMAIL_CHESTPLATE:
             case DIAMOND_CHESTPLATE:
             case GOLDEN_CHESTPLATE:
             case IRON_CHESTPLATE:
             case LEATHER_CHESTPLATE:
-                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments(HunterEnchantment.key));
+                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments("hunter"));
                 break;
             case CHAINMAIL_LEGGINGS:
             case DIAMOND_LEGGINGS:
             case GOLDEN_LEGGINGS:
             case IRON_LEGGINGS:
             case LEATHER_LEGGINGS:
-                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments(HunterEnchantment.key));
+                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments("hunter"));
                 break;
             case CHAINMAIL_BOOTS:
             case DIAMOND_BOOTS:
             case GOLDEN_BOOTS:
             case IRON_BOOTS:
             case LEATHER_BOOTS:
-                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments(HunterEnchantment.key));
+                validSecondaryEnchantments.putAll(validateSecondaryCustomEnchantments("hunter"));
                 break;
             case FISHING_ROD:
                 break;
@@ -464,24 +512,6 @@ public class EnchantmentGenerator {
 
     }
 
-    private static HashMap<String, Integer> validateSecondaryCustomEnchantments(String string) {
-
-        EnchantmentsConfigFields enchantmentsConfigFields = EnchantmentsConfig.getEnchantment(string.toLowerCase(Locale.ROOT) + ".yml");
-
-        if (enchantmentsConfigFields == null ||
-                !enchantmentsConfigFields.isEnabled() ||
-                !enchantmentsConfigFields.isEnabledForProcedurallyGeneratedItems())
-            return new HashMap<>();
-
-        HashMap<String, Integer> enchantmentMap = new HashMap<>();
-
-        if (enchantmentsConfigFields != null && enchantmentsConfigFields.isEnabled())
-            enchantmentMap.put(string, ThreadLocalRandom.current().nextInt(enchantmentsConfigFields.getMaxLevel()) + 1);
-
-        return enchantmentMap;
-
-    }
-
     private static int totalSecondaryEnchantmentCount(HashMap<Enchantment, Integer> validEnchantments) {
 
         int totalCount = 0;
@@ -504,4 +534,7 @@ public class EnchantmentGenerator {
 
     }
 
+    private static HashMap<String, Integer> validateSecondaryCustomEnchantments(String name) {
+        return new HashMap<>(com.magmaguy.elitemobs.items.EliteEnchantmentCatalog.procedural("elitemobs:" + name));
+    }
 }

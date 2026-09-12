@@ -1,6 +1,7 @@
 package com.magmaguy.elitemobs.playerdata.database;
 
 import com.magmaguy.elitemobs.MetadataHandler;
+import com.magmaguy.elitemobs.api.PlayerDataLoadedEvent;
 import com.magmaguy.elitemobs.dungeons.DungeonBossLockout;
 import com.magmaguy.elitemobs.instanced.MatchInstance;
 import com.magmaguy.elitemobs.quests.CustomQuest;
@@ -116,6 +117,12 @@ public class PlayerData {
     @Getter
     @Setter
     private long skillXP_SPEARS = 0;
+    @Getter
+    @Setter
+    private long skillXP_STAVES = 0;
+    @Getter
+    @Setter
+    private long skillXP_WANDS = 0;
 
     // Skill bonus selections - JSON string mapping skill types to selected skill IDs
     @Getter
@@ -151,7 +158,7 @@ public class PlayerData {
 
                     while (true) {
                         List<DeferredDatabaseValue> deferred;
-                        synchronized (PlayerDataRepository.monitor()) {
+                        synchronized (PlayerDataRepository.stateMonitor()) {
                             if (!loadingPlayers.contains(uuid)) return;
                             deferred = deferredDatabaseValues.remove(uuid);
                             if (deferred == null || deferred.isEmpty()) {
@@ -161,8 +168,8 @@ public class PlayerData {
                                 break;
                             }
                         }
-                        // Writes arriving during this I/O go into the next batch. Publish only
-                        // after that batch is also applied, without blocking the server thread.
+                        // New writes are deferred into the next batch while this one is persisted.
+                        // Publish only after all batches are replayed, without blocking state access on SQL.
                         for (DeferredDatabaseValue value : deferred)
                             PlayerDataRepository.updateNow(uuid, value.column(), value.value());
                         PlayerDataRepository.readPlayer(uuid, resultSet -> readExistingData(uuid, resultSet));
@@ -171,7 +178,7 @@ public class PlayerData {
                     Logger.warn("Failed to load player data for " + uuid + "; the session was not published and stored data was retained.");
                     e.printStackTrace();
                     playerDataHashMap.remove(uuid, PlayerData.this);
-                    synchronized (PlayerDataRepository.monitor()) {
+                    synchronized (PlayerDataRepository.stateMonitor()) {
                         loadingPlayers.remove(uuid);
                         deferredDatabaseValues.remove(uuid);
                     }
@@ -373,7 +380,7 @@ public class PlayerData {
     public static void setDatabaseValue(UUID uuid, String key, Object value) {
         if ("Score".equals(key) && value instanceof Number number)
             PlayerDataRepository.updateCachedScore(uuid, number.intValue());
-        synchronized (PlayerDataRepository.monitor()) {
+        synchronized (PlayerDataRepository.stateMonitor()) {
             if (loadingPlayers.contains(uuid)) {
                 deferredDatabaseValues.computeIfAbsent(uuid, ignored -> new ArrayList<>())
                         .add(new DeferredDatabaseValue(key, value));
@@ -643,6 +650,8 @@ public class PlayerData {
             case HOES -> playerData.skillXP_HOES;
             case MACES -> playerData.skillXP_MACES;
             case SPEARS -> playerData.skillXP_SPEARS;
+            case STAVES -> playerData.skillXP_STAVES;
+            case WANDS -> playerData.skillXP_WANDS;
         };
     }
 
@@ -660,6 +669,8 @@ public class PlayerData {
             case HOES -> playerData.skillXP_HOES = xp;
             case MACES -> playerData.skillXP_MACES = xp;
             case SPEARS -> playerData.skillXP_SPEARS = xp;
+            case STAVES -> playerData.skillXP_STAVES = xp;
+            case WANDS -> playerData.skillXP_WANDS = xp;
         }
     }
 
@@ -804,7 +815,7 @@ public class PlayerData {
 
     public static void closeConnection() {
         DungeonRuntimeData.shutdown();
-        synchronized (PlayerDataRepository.monitor()) {
+        synchronized (PlayerDataRepository.stateMonitor()) {
             playerDataHashMap.clear();
             loadingPlayers.clear();
             deferredDatabaseValues.clear();
@@ -858,14 +869,12 @@ public class PlayerData {
         skillXP_CROSSBOWS = resultSet.getLong("SkillXP_CROSSBOWS");
         skillXP_TRIDENTS = resultSet.getLong("SkillXP_TRIDENTS");
         skillXP_HOES = resultSet.getLong("SkillXP_HOES");
-        try {
-            skillXP_MACES = resultSet.getLong("SkillXP_MACES");
-            skillXP_SPEARS = resultSet.getLong("SkillXP_SPEARS");
-        } catch (SQLException e) {
-            // Columns may not exist yet for older databases - will be added on next save
-            skillXP_MACES = 0;
-            skillXP_SPEARS = 0;
-        }
+        // Optional skill columns were introduced at different times. Read each one independently
+        // so one missing column in an older schema cannot erase valid values from the others.
+        skillXP_MACES = readOptionalSkillXp(resultSet, "SkillXP_MACES");
+        skillXP_SPEARS = readOptionalSkillXp(resultSet, "SkillXP_SPEARS");
+        skillXP_STAVES = readOptionalSkillXp(resultSet, "SkillXP_STAVES");
+        skillXP_WANDS = readOptionalSkillXp(resultSet, "SkillXP_WANDS");
 
         // Read skill bonus selections
         String skillSelections = resultSet.getString("SkillBonusSelections");
@@ -875,6 +884,15 @@ public class PlayerData {
         gamblingDebtCents = resultSet.getLong("GamblingDebtCents");
 
         Logger.info("User " + uuid + " data successfully read!");
+    }
+
+    private static long readOptionalSkillXp(ResultSet resultSet, String columnName) {
+        try {
+            return resultSet.getLong(columnName);
+        } catch (SQLException ignored) {
+            // GenerateDatabase adds missing optional columns during the schema upgrade path.
+            return 0;
+        }
     }
 
     private void writeNewData(UUID uuid, String playerName) throws Exception {
@@ -894,6 +912,8 @@ public class PlayerData {
         skillXP_HOES = 0;
         skillXP_MACES = 0;
         skillXP_SPEARS = 0;
+        skillXP_STAVES = 0;
+        skillXP_WANDS = 0;
         // Initialize skill bonus selections to empty
         skillBonusSelections = "{}";
         useBookMenus = true;
@@ -919,6 +939,7 @@ public class PlayerData {
                     customQuest.applyTemporaryPermissions(player);
             if (playerQuestCooldowns != null)
                 playerQuestCooldowns.startCooldowns(uuid);
+            Bukkit.getPluginManager().callEvent(new PlayerDataLoadedEvent(player));
         });
     }
 

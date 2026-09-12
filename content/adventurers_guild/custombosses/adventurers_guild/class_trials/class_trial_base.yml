@@ -1,0 +1,18 @@
+isEnabled: false
+entityType: HUSK
+name: '&fSparring partner'
+level: dynamic
+bossType: BOSS
+healthMultiplier: 1.0
+damageMultiplier: 1.0
+normalizedCombat: true
+ai: false
+movementSpeedAttribute: 0.24
+followDistance: 70
+dropsEliteMobsLoot: false
+dropsVanillaLoot: false
+dropsRandomLoot: false
+dropsSkillXP: false
+classLoot: false
+uniqueLootList: []
+cullReinforcements: true

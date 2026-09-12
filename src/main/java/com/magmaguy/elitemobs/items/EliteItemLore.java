@@ -6,11 +6,13 @@ import com.magmaguy.elitemobs.config.ItemSettingsConfig;
 import com.magmaguy.elitemobs.config.enchantments.EnchantmentsConfig;
 import com.magmaguy.elitemobs.config.enchantments.premade.SoulbindConfig;
 import com.magmaguy.elitemobs.config.potioneffects.PotionEffectsConfig;
-import com.magmaguy.elitemobs.items.customenchantments.CustomEnchantment;
 import com.magmaguy.elitemobs.items.customenchantments.SoulbindEnchantment;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffect;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffectContainer;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
+import com.magmaguy.magmacore.enchantments.EnchantmentDefinitions;
+import com.magmaguy.magmacore.enchantments.EnchantmentItemProfile;
+import com.magmaguy.magmacore.enchantments.EnchantmentItems;
 import com.magmaguy.magmacore.util.ChatColorConverter;
 import com.magmaguy.magmacore.util.Round;
 import lombok.Getter;
@@ -29,11 +31,12 @@ import java.util.Locale;
 
 public class EliteItemLore {
 
+    private static final EnchantmentItems ENCHANTMENT_PRESENTATION =
+            new EnchantmentItems(EnchantmentDefinitions::resolve, EnchantmentItemProfile::vanilla);
+
     private final List<String> vanillaEnchantmentsLore = new ArrayList<>();
     private final HashMap<Enchantment, Integer> eliteVanillaEnchantments = new HashMap<>();
     private final ArrayList<String> eliteVanillaEnchantmentsLore = new ArrayList<>();
-    private final HashMap<CustomEnchantment, Integer> customEnchantments = new HashMap<>();
-    private final ArrayList<String> customEnchantmentLore = new ArrayList<>();
     private final List<String> potionListLore = new ArrayList<>();
     @Getter
     private ItemStack itemStack;
@@ -47,33 +50,27 @@ public class EliteItemLore {
     private Player soulboundPlayer = null;
     private List<String> customLore = new ArrayList<>();
     private int prestigeLevel = 0;
-    private int enchantmentCount = 0;
     private List<String> thirdPartyLore = null;
 
     public EliteItemLore(ItemStack itemStack, boolean showItemWorth) {
-        initialize(itemStack, showItemWorth);
+        this(itemStack, showItemWorth, false);
     }
 
     public EliteItemLore(ItemStack itemStack, boolean showItemWorth, boolean isNewItem) {
-        if (isNewItem
-                && itemStack.hasItemMeta()
-                && itemStack.getItemMeta().hasLore()
-                && itemStack.getItemMeta().getLore() != null
-                && !itemStack.getItemMeta().getLore().isEmpty()) {
-            thirdPartyLore = itemStack.getItemMeta().getLore();
-        }
-        initialize(itemStack, showItemWorth);
+        initialize(itemStack, showItemWorth, isNewItem);
     }
 
-    private void initialize(ItemStack itemStack, boolean showItemWorth){
+    private void initialize(ItemStack itemStack, boolean showItemWorth, boolean isNewItem) {
 
         if (!EliteItemManager.isEliteMobsItem(itemStack)) {
 //            Logger.warn("Attempted to rewrite the lore of a non-elitemobs item! This is not supposed to happen.");
             return;
         }
 
-        this.itemStack = itemStack;
-        this.itemMeta = itemStack.getItemMeta();
+        // Value calculation also writes metadata. Keep every construction step on a clone
+        // until the shared renderer accepts the original prefix and the complete new lore.
+        this.itemStack = itemStack.clone();
+        this.itemMeta = this.itemStack.getItemMeta();
         this.lore = new ArrayList<>();
         this.showItemWorth = showItemWorth;
 
@@ -83,9 +80,6 @@ public class EliteItemLore {
 
         parseAllEliteEnchantments();
         constructEliteEnchantments();
-
-        parseCustomEnchantments();
-        constructCustomEnchantments();
 
         constructSoulbindEntry();
         constructSoulboundOwner();
@@ -97,14 +91,22 @@ public class EliteItemLore {
 
         constructItemWorth();
 
-        writeNewLore();
-
-        this.itemMeta.setLore(lore);
-        ItemTagger.registerEnchantmentCount(itemMeta, enchantmentCount);
         this.itemStack.setItemMeta(this.itemMeta);
+        ItemStack rendered = ENCHANTMENT_PRESENTATION.refreshPresentation(this.itemStack, hostLore -> {
+            if (isNewItem && !hostLore.isEmpty()) thirdPartyLore = hostLore;
+            writeNewLore();
+            return lore;
+        });
+        if (!itemStack.setItemMeta(rendered.getItemMeta()))
+            throw new IllegalArgumentException("Elite item rejected its rebuilt metadata");
+        this.itemStack = itemStack;
+        this.itemMeta = itemStack.getItemMeta();
     }
 
     private void constructVanillaEnchantments() {
+        // Minecraft renders visible native enchantments itself. Only replace hidden
+        // native lines; otherwise the host lore would print every enchantment twice.
+        if (!itemMeta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) return;
         for (Enchantment enchantment : itemMeta.getEnchants().keySet()) {
             if (enchantment.getName().contains("CURSE"))
                 vanillaEnchantmentsLore.add(ChatColorConverter.convert(
@@ -114,7 +116,6 @@ public class EliteItemLore {
                 vanillaEnchantmentsLore.add(ChatColorConverter.convert(
                         "&7" + EnchantmentsConfig.getEnchantment(enchantment).getName() + " "
                                 + itemMeta.getEnchants().get(enchantment)));
-            enchantmentCount += itemMeta.getEnchantLevel(enchantment);
         }
     }
 
@@ -135,7 +136,6 @@ public class EliteItemLore {
         if (enchantmentLevel > enchantment.getMaxLevel()) {
             int eliteLevel = enchantmentLevel - enchantment.getMaxLevel();
             eliteVanillaEnchantments.put(enchantment, eliteLevel);
-            enchantmentCount += eliteLevel;
         }
     }
 
@@ -146,26 +146,6 @@ public class EliteItemLore {
                             + EnchantmentsConfig.getEnchantment(enchantment).getName()
                             + " " + eliteVanillaEnchantments.get(enchantment)));
 
-    }
-
-    /**
-     * Note: This excludes the soulbind enchantment as it doesn't store an integer value
-     */
-    private void parseCustomEnchantments() {
-        for (CustomEnchantment customEnchantment : CustomEnchantment.getCustomEnchantmentMap().values()) {
-            int enchantmentLevel = ItemTagger.getEnchantment(itemMeta, customEnchantment.getKey());
-            if (enchantmentLevel > 0) {
-                customEnchantments.put(customEnchantment, enchantmentLevel);
-                enchantmentCount += enchantmentLevel;
-            }
-        }
-    }
-
-    private void constructCustomEnchantments() {
-        for (CustomEnchantment customEnchantment : customEnchantments.keySet())
-            customEnchantmentLore.add(ChatColorConverter.convert
-                    ("&6" + customEnchantment.getEnchantmentsConfigFields().getName() + " "
-                            + customEnchantments.get(customEnchantment)));
     }
 
     private void constructSoulbindEntry() {
@@ -242,8 +222,8 @@ public class EliteItemLore {
             }
 
             if (string.contains("$itemMaxDurability")) {
-                if (itemStack.getType().getMaxDurability() <= 0 || itemMeta.isUnbreakable()) continue;
-                string = stringReplacer(string, "$itemMaxDurability", itemStack.getType().getMaxDurability());
+                if (com.magmaguy.elitemobs.items.ItemDurability.maximum(itemStack) <= 0 || itemMeta.isUnbreakable()) continue;
+                string = stringReplacer(string, "$itemMaxDurability", com.magmaguy.elitemobs.items.ItemDurability.maximum(itemStack));
             }
 
             string = stringReplacer(string, "$itemMaterial", materialDisplayName(itemStack.getType()));
@@ -251,7 +231,6 @@ public class EliteItemLore {
             string = stringReplacer(string, "$EDEF", Round.twoDecimalPlaces(EliteItemManager.getEliteDefense(itemStack) + EliteItemManager.getBonusEliteDefense(itemStack)));
             string = stringReplacer(string, "$prestigeLevel", prestigeLevel);
             string = stringReplacer(string, "$itemLevel", EliteItemManager.getRoundedItemLevel(itemStack));
-
 
             if (string.contains("$enchantments")) {
                 for (String entry : vanillaEnchantmentsLore)
@@ -266,8 +245,7 @@ public class EliteItemLore {
                 for (String entry : potionListLore)
                     lore.add(ItemSettingsConfig.getPotionEffectColor() + entry);
             } else if (string.contains("$customEnchantments")) {
-                for (String entry : customEnchantmentLore)
-                    lore.add(ItemSettingsConfig.getCustomEnchantmentColor() + ChatColor.stripColor(entry));
+                // Shared Minecraft-style lines are composed by ENCHANTMENT_PRESENTATION.
             } else if (string.contains("$loreResaleValue")) {
                 lore.add(itemWorth);
             } else if (string.contains("$customLore")) {
@@ -280,14 +258,13 @@ public class EliteItemLore {
                 if (!potionListLore.isEmpty())
                     lore.add(string.replace("$ifPotionEffects", ""));
             } else if (string.contains("$ifEnchantments")) {
-                if (!vanillaEnchantmentsLore.isEmpty())
+                if (!vanillaEnchantmentsLore.isEmpty() || !eliteVanillaEnchantmentsLore.isEmpty())
                     lore.add(string.replace("$ifEnchantments", ""));
             } else if (string.contains("$ifLore")) {
                 if (!customLore.isEmpty())
                     lore.add(string.replace("$ifLore", ""));
             } else if (string.contains("$ifCustomEnchantments")) {
-                if (!customEnchantments.isEmpty())
-                    lore.add(string.replace("$ifCustomEnchantments", ""));
+                // Shared presentation owns the custom enchantment section.
             } else if (!string.isEmpty())
                 lore.add(ChatColorConverter.convert(string));
         }

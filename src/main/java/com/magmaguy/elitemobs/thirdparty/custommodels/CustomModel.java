@@ -33,7 +33,7 @@ public class CustomModel implements CustomModelInterface {
         switch (modelPlugin) {
             case FREE_MINECRAFT_MODELS:
                 customModelFMM = new CustomModelFMM(livingEntity, modelName, nametagName);
-                initialized = true;
+                initialized = customModelFMM.getDynamicEntity() != null;
                 break;
             case MODEL_ENGINE:
                 customModelMEG = new CustomModelMEG(livingEntity, modelName, nametagName);
@@ -48,7 +48,7 @@ public class CustomModel implements CustomModelInterface {
         switch (modelPlugin) {
             case FREE_MINECRAFT_MODELS:
                 customModelFMM = new CustomModelFMM(livingEntity, modelName, nametagName, leftClickCallback, rightClickCallback);
-                initialized = true;
+                initialized = customModelFMM.getDynamicEntity() != null;
                 break;
             case MODEL_ENGINE:
                 customModelMEG = new CustomModelMEG(livingEntity, modelName, nametagName);
@@ -119,6 +119,16 @@ public class CustomModel implements CustomModelInterface {
         return modelPlugin != ModelPlugin.NONE;
     }
 
+    /**
+     * Runs an EliteMobs-owned projectile damage event without letting FMM cancel and redirect it
+     * back through its OBB collision path. Other model providers need no special handling.
+     */
+    public static void runProjectileDamageBypass(Runnable damageCall) {
+        if (modelPlugin == ModelPlugin.FREE_MINECRAFT_MODELS)
+            CustomModelFMM.runProjectileDamageBypass(damageCall);
+        else damageCall.run();
+    }
+
     @Override
     public void shoot() {
         switch (modelPlugin) {
@@ -149,6 +159,12 @@ public class CustomModel implements CustomModelInterface {
             case FREE_MINECRAFT_MODELS -> customModelFMM.setName(nametagName, visible);
             case MODEL_ENGINE -> customModelMEG.setName(nametagName, visible);
         }
+    }
+
+    /** Returns true only when this model provider takes ownership of the entire NPC nameplate. */
+    public boolean setNpcNameLines(java.util.List<String> lines, float scale, double gap) {
+        return modelPlugin == ModelPlugin.FREE_MINECRAFT_MODELS && customModelFMM != null
+                && customModelFMM.setNameLines(lines, scale, gap);
     }
 
     @Override
@@ -199,6 +215,12 @@ public class CustomModel implements CustomModelInterface {
             case FREE_MINECRAFT_MODELS -> customModelFMM.setSyncMovement(syncMovement);
             case MODEL_ENGINE -> customModelMEG.setSyncMovement(syncMovement);
         }
+    }
+
+    /** Lets the model own body/head facing; null releases the previous target. */
+    public boolean setLookTarget(Location target) {
+        return modelPlugin == ModelPlugin.FREE_MINECRAFT_MODELS && customModelFMM != null
+                && customModelFMM.setLookTarget(target);
     }
 
     public enum ModelPlugin {

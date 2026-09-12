@@ -1,0 +1,7 @@
+extends: class_trial_actor_armor_stand.yml
+isEnabled: true
+name: '&dPhylactery'
+healthMultiplier: 0.25
+damageMultiplier: 0
+helmet: DECORATED_POT
+ai: false

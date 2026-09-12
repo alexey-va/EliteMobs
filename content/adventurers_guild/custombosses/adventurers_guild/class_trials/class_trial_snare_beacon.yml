@@ -1,0 +1,7 @@
+extends: class_trial_actor_armor_stand.yml
+isEnabled: true
+name: '&eSnare Beacon'
+healthMultiplier: 0.1
+damageMultiplier: 0
+helmet: TRIPWIRE_HOOK
+ai: false

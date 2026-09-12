@@ -1,0 +1,11 @@
+extends: class_trial_actor_paladin_partner.yml
+isEnabled: true
+entityType: HUSK
+name: '&fGuardian Apprentice'
+healthMultiplier: 0.3
+damageMultiplier: 0.25
+ai: true
+mainHand: IRON_SWORD
+chestplate: IRON_CHESTPLATE
+leggings: IRON_LEGGINGS
+boots: IRON_BOOTS

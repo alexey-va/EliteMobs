@@ -1,0 +1,295 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "": 1,
+        "": -1,
+        "": -0.5,
+        "": 0.5
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/gray.png",
+      "height": 54,
+      "ascent": -11,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/red.png",
+      "height": 54,
+      "ascent": -11,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/text.png",
+      "height": 7,
+      "ascent": -18,
+      "chars": [
+        "0123456789/KM"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/f_badges.png",
+      "height": 7,
+      "ascent": -33,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/health.png",
+      "height": 3,
+      "ascent": -28,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource_resolve.png",
+      "height": 3,
+      "ascent": -28,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource_fury.png",
+      "height": 3,
+      "ascent": -28,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource_focus.png",
+      "height": 3,
+      "ascent": -28,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource_grace.png",
+      "height": 3,
+      "ascent": -28,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource.png",
+      "height": 3,
+      "ascent": -28,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/xp.png",
+      "height": 2,
+      "ascent": -37,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource_stamina.png",
+      "height": 3,
+      "ascent": -28,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_level.png",
+      "height": 16,
+      "ascent": -14,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource_icons.png",
+      "height": 15,
+      "ascent": -16,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/resource_icons.png",
+      "height": 7,
+      "ascent": -55,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/cost_ready.png",
+      "height": 5,
+      "ascent": -57,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/cost_unaffordable.png",
+      "height": 5,
+      "ascent": -57,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/skill_unaffordable_0.png",
+      "height": 21,
+      "ascent": -43,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/skill_unaffordable_1.png",
+      "height": 21,
+      "ascent": -43,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/skill_unaffordable_2.png",
+      "height": 21,
+      "ascent": -43,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_badge_left.png",
+      "height": 14,
+      "ascent": -4,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_badge_middle.png",
+      "height": 14,
+      "ascent": -4,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_badge_right.png",
+      "height": 14,
+      "ascent": -4,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/abilities/paladin.signature.png",
+      "height": 13,
+      "ascent": -47,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/abilities/paladin.utility.png",
+      "height": 13,
+      "ascent": -47,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/abilities/paladin.mobility.png",
+      "height": 13,
+      "ascent": -47,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_diamond.png",
+      "height": 42,
+      "ascent": 1,
+      "chars": [
+        "",
+        "",
+        "",
+        "\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_diamond_1.png",
+      "height": 42,
+      "ascent": 1,
+      "chars": [
+        "",
+        "",
+        "",
+        "\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_diamond_2.png",
+      "height": 42,
+      "ascent": 1,
+      "chars": [
+        "",
+        "",
+        "",
+        "\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "elitemobs:gui/combat_hud_probe/class_diamond_3.png",
+      "height": 42,
+      "ascent": 1,
+      "chars": [
+        "",
+        "",
+        "",
+        "\u0000\u0000\u0000"
+      ]
+    }
+  ]
+}

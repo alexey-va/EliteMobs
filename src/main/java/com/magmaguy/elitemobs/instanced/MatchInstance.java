@@ -13,6 +13,7 @@ import com.magmaguy.elitemobs.utils.EventCaller;
 import com.magmaguy.magmacore.util.ChatColorConverter;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -38,6 +39,9 @@ import java.util.Map;
 public abstract class MatchInstance {
 
     protected static final HashSet<MatchInstance> instances = new HashSet<>();
+    /** Distinguishes successive matches that reuse the same world and physical region. */
+    @Getter
+    private final java.util.UUID runtimeId = java.util.UUID.randomUUID();
     @Getter
     protected final HashMap<Block, InstanceDeathLocation> deathBanners = new HashMap<>();
     @Getter
@@ -129,6 +133,65 @@ public abstract class MatchInstance {
         return null;
     }
 
+    /**
+     * True when this match object is a corpse: cancelled at construction, or already
+     * evicted from {@link #instances}. One-shot dungeon instances leave that registry
+     * the moment teardown begins but stay referenced by the dungeon browser for
+     * another 30–90 seconds while their world awaits deletion — and
+     * {@link #destroyMatch()} resets {@link #state} to WAITING as part of teardown,
+     * so state alone cannot tell a fresh lobby from a dead instance. That ambiguity
+     * is how players ghost-joined dungeons that were being deleted and got stranded.
+     */
+    public boolean isDefunct() {
+        return cancelled || !instances.contains(this);
+    }
+
+    /**
+     * The single admission predicate. The dungeon browsers and
+     * {@link com.magmaguy.elitemobs.instanced.InstancePlayerManager} must agree on
+     * it, or a menu can offer an entry that admission then handles differently.
+     */
+    public boolean isAcceptingNewPlayers() {
+        return !isDefunct() && !destroyingMatch && state == InstancedRegionState.WAITING;
+    }
+
+    /** Admitted players whose entry task has reached the lobby, including the start countdown. */
+    public final boolean isWaitingPlayer(Player player) {
+        return player != null && player.isOnline() && !player.isDead()
+                && !isDefunct() && !destroyingMatch
+                && (state == InstancedRegionState.WAITING || state == InstancedRegionState.STARTING)
+                && PlayerData.getMatchInstance(player) == this
+                && players.contains(player) && !spectators.contains(player)
+                && playerLives.containsKey(player)
+                && player.getWorld().equals(lobbyLocation == null ? world : lobbyLocation.getWorld());
+    }
+
+    /** Acquired after all cancellable admission preflights, before player registration. */
+    protected boolean reserveAdmission() { return true; }
+
+    /** Releases an admission reservation if registration could not finish. */
+    protected void abortAdmission() {}
+
+    protected boolean isAcceptingSpectator(Player player, boolean wasPlayer) { return true; }
+
+    /**
+     * True only when both the active participant and a prospective combat target remain inside
+     * this ongoing instance. This is the public policy seam for mechanics that must not reach
+     * across an instance boundary.
+     */
+    public final boolean authorizesCombatTarget(Player player, Location targetLocation) {
+        return player != null
+                && targetLocation != null
+                && targetLocation.getWorld() != null
+                && state == InstancedRegionState.ONGOING
+                && players.contains(player)
+                && world != null
+                && world.equals(player.getWorld())
+                && world.equals(targetLocation.getWorld())
+                && isInRegion(player.getLocation())
+                && isInRegion(targetLocation);
+    }
+
     /** Returns this participant's remaining dungeon/arena lives, or null when no counter is active. */
     public Integer getRemainingLives(Player player) {
         return playerLives.get(player);
@@ -147,6 +210,18 @@ public abstract class MatchInstance {
         lastSafeLocation.remove(player.getUniqueId());
         consecutiveRescues.remove(player.getUniqueId());
         InstancePlayerManager.removePlayer(player, this);
+    }
+
+    /** Participant exits are independent of the boundary used to eject intruders. */
+    protected Location participantExitLocation(Player player) {
+        return exitLocation;
+    }
+
+    protected Location previousLocationOrExit(Player player) {
+        Location previous = previousPlayerLocations.get(player);
+        if (previous == null || previous.getWorld() == null
+                || Bukkit.getWorld(previous.getWorld().getUID()) != previous.getWorld()) return exitLocation;
+        return previous.clone();
     }
 
     public void playerDeath(Player player) {
@@ -270,7 +345,9 @@ public abstract class MatchInstance {
             if (spectatorTarget != null && !spectatorTarget.equals(player)) {
                 boolean targetIsInThisInstance = spectatorTarget instanceof Player targetPlayer
                         && (players.contains(targetPlayer) || spectators.contains(targetPlayer));
-                if (!targetIsInThisInstance)
+                // Gamemode guard: setSpectatorTarget throws for non-spectators, and a
+                // watchdog tick must never die on one player's inconsistent state.
+                if (!targetIsInThisInstance && player.getGameMode() == GameMode.SPECTATOR)
                     player.setSpectatorTarget(null);
             }
 
@@ -537,6 +614,7 @@ public abstract class MatchInstance {
 
         @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
         public void onPlayerTeleport(PlayerTeleportEvent event) {
+            if (InstancePlayerMovement.authorizes(event)) return;
             if (teleportBypass) {
                 teleportBypass = false;
                 return;
@@ -571,6 +649,13 @@ public abstract class MatchInstance {
             }
 
             event.setCancelled(true);
+        }
+
+        @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+        public void validateAuthorizedPlayerMovement(PlayerTeleportEvent event) {
+            if (InstancePlayerMovement.hasAuthorization(event.getPlayer())
+                    && !InstancePlayerMovement.authorizes(event))
+                event.setCancelled(true);
         }
     }
 

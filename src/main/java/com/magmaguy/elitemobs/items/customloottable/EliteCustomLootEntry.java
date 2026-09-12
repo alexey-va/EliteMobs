@@ -5,6 +5,7 @@ import com.magmaguy.elitemobs.PluginState;
 import com.magmaguy.elitemobs.config.ItemSettingsConfig;
 import com.magmaguy.elitemobs.instanced.MatchInstance;
 import com.magmaguy.elitemobs.instanced.dungeons.DungeonInstance;
+import com.magmaguy.elitemobs.instanced.dungeons.DifficultyResolver;
 import com.magmaguy.elitemobs.items.customitems.CustomItem;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
 import com.magmaguy.elitemobs.mobconstructor.custombosses.CustomBossEntity;
@@ -18,7 +19,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -26,10 +26,13 @@ import java.util.Map;
 public class EliteCustomLootEntry extends CustomLootEntry implements Serializable {
     @Getter
     private String filename = null;
-    private String difficultyID = null;
+    public List<String> getDifficultyIDs() { return difficultyIDs == null ? null : List.copyOf(difficultyIDs); }
+    private List<String> difficultyIDs = null;
+    private final String configFilename;
 
     public EliteCustomLootEntry(List<CustomLootEntry> entries, String rawString, String configFilename) {
         super();
+        this.configFilename = configFilename;
         //old format
         if (!rawString.contains("filename=")) {
             parseLegacyFormat(rawString, configFilename);
@@ -46,6 +49,7 @@ public class EliteCustomLootEntry extends CustomLootEntry implements Serializabl
     }
 
     public EliteCustomLootEntry(List<CustomLootEntry> entries, Map<?, ?> configMap, String configFilename) {
+        this.configFilename = configFilename;
         for (Map.Entry<?, ?> mapEntry : configMap.entrySet()) {
             String key = (String) mapEntry.getKey();
             switch (key.toLowerCase(Locale.ROOT)) {
@@ -53,7 +57,7 @@ public class EliteCustomLootEntry extends CustomLootEntry implements Serializabl
                 case "chance" ->
                         super.setChance(MapListInterpreter.parseDouble(key, mapEntry.getValue(), configFilename));
                 case "difficultyid" ->
-                        difficultyID = MapListInterpreter.parseString(key, mapEntry.getValue(), configFilename);
+                        difficultyIDs = DifficultyResolver.parseFilter(mapEntry.getValue(), configFilename);
                 case "permission" ->
                         super.setPermission(MapListInterpreter.parseString(key, mapEntry.getValue(), configFilename));
                 case "amount" -> setAmount(MapListInterpreter.parseInteger(key, mapEntry.getValue(), configFilename));
@@ -93,6 +97,9 @@ public class EliteCustomLootEntry extends CustomLootEntry implements Serializabl
         for (String string : rawString.split(":")) {
             String[] strings = string.split("=");
             switch (strings[0].toLowerCase(Locale.ROOT)) {
+                case "difficultyid":
+                    difficultyIDs = DifficultyResolver.parseFilter(strings.length > 1 ? strings[1] : null, configFilename);
+                    break;
                 case "filename":
                     try {
                         this.filename = strings[1];
@@ -203,18 +210,18 @@ public class EliteCustomLootEntry extends CustomLootEntry implements Serializabl
             return;
         }
         String name = null;
+        int delivered = 0;
         for (int i = 0; i < getAmount(); i++) {
             ItemStack itemStack = customItem.generateItemStack(itemTier, player, null);
             if (itemStack == null) continue;
-            HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(itemStack);
-            leftOvers.values().forEach(leftOver -> player.getWorld().dropItem(player.getLocation(), leftOver));
+            delivered += deliver(player, itemStack);
             if (name == null && itemStack.getItemMeta() != null) {
                 if (itemStack.getItemMeta().hasDisplayName()) name = itemStack.getItemMeta().getDisplayName();
                 else name = itemStack.getType().toString().replace("_", " ");
             }
         }
-        if (name != null)
-            player.sendMessage(ItemSettingsConfig.getDirectDropCustomLootMessage().replace("$itemName", getAmount() + "x " + name));
+        if (name != null && delivered > 0)
+            player.sendMessage(ItemSettingsConfig.getDirectDropCustomLootMessage().replace("$itemName", delivered + "x " + name));
     }
 
     public void directDropExactLevel(int itemTier, Player player) {
@@ -224,18 +231,18 @@ public class EliteCustomLootEntry extends CustomLootEntry implements Serializabl
             return;
         }
         String name = null;
+        int delivered = 0;
         for (int i = 0; i < getAmount(); i++) {
             ItemStack itemStack = customItem.generateItemStackExact(itemTier, player, null);
             if (itemStack == null) continue;
-            HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(itemStack);
-            leftOvers.values().forEach(leftOver -> player.getWorld().dropItem(player.getLocation(), leftOver));
+            delivered += deliver(player, itemStack);
             if (name == null && itemStack.getItemMeta() != null) {
                 if (itemStack.getItemMeta().hasDisplayName()) name = itemStack.getItemMeta().getDisplayName();
                 else name = itemStack.getType().toString().replace("_", " ");
             }
         }
-        if (name != null)
-            player.sendMessage(ItemSettingsConfig.getDirectDropCustomLootMessage().replace("$itemName", getAmount() + "x " + name));
+        if (name != null && delivered > 0)
+            player.sendMessage(ItemSettingsConfig.getDirectDropCustomLootMessage().replace("$itemName", delivered + "x " + name));
     }
 
     //This is the drop for boss loot
@@ -248,35 +255,64 @@ public class EliteCustomLootEntry extends CustomLootEntry implements Serializabl
             return;
         }
         String name = null;
+        int delivered = 0;
         for (int i = 0; i < getAmount(); i++) {
             ItemStack itemStack = customItem.generateItemStack(itemTier, player, eliteEntity);
-            if (itemStack == null) return;
-            HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(itemStack);
-            leftOvers.values().forEach(leftOver -> player.getWorld().dropItem(player.getLocation(), leftOver));
+            if (itemStack == null) continue;
+            delivered += deliver(player, itemStack);
             if (name == null && itemStack.getItemMeta() != null) {
                 if (itemStack.getItemMeta().hasDisplayName()) name = itemStack.getItemMeta().getDisplayName();
                 else name = itemStack.getType().toString().replace("_", " ");
             }
         }
-        if (name != null)
-            player.sendMessage(ItemSettingsConfig.getDirectDropCustomLootMessage().replace("$itemName", getAmount() + "x " + name));
+        if (name != null && delivered > 0)
+            player.sendMessage(ItemSettingsConfig.getDirectDropCustomLootMessage().replace("$itemName", delivered + "x " + name));
+    }
+
+    private static int deliver(Player player, ItemStack item) {
+        int amount = item.getAmount();
+        var overflow = player.getInventory().addItem(item);
+        int dropped = 0;
+        for (ItemStack leftover : overflow.values()) {
+            dropped += leftover.getAmount();
+            var entity = player.getWorld().dropItem(player.getLocation(), leftover);
+            entity.setOwner(player.getUniqueId());
+        }
+        return amount - dropped;
+    }
+
+    public boolean isClassLoot() {
+        CustomItem item = generateCustomItem();
+        return item != null && item.getItemType() == CustomItem.ItemType.CLASS_LOOT;
+    }
+
+    /** Non-random eligibility; chance remains a probability applied after class selection. */
+    public boolean eligibleForClassLoot(Player player, java.util.function.Predicate<List<String>> difficultyFilter) {
+        CustomItem item = generateCustomItem();
+        return isClassLoot() && item.getCustomItemsConfigFields().isEnabled()
+                && getAmount() > 0 && Double.isFinite(getChance()) && getChance() > 0
+                && (getPermission().isEmpty() || player != null && player.hasPermission(getPermission()))
+                && (item.getPermission().isEmpty() || player != null && player.hasPermission(item.getPermission()))
+                && (difficultyIDs == null || difficultyFilter.test(difficultyIDs));
+    }
+
+    public boolean isEquipment() {
+        return com.magmaguy.elitemobs.items.LootItemPolicy.isEquipment(generateCustomItem());
     }
 
     private boolean isGroupLoot(int itemTier, Player player, EliteEntity eliteEntity) {
-        if (difficultyID != null) {
+        if (difficultyIDs != null) {
             MatchInstance matchInstance = PlayerData.getMatchInstance(player);
-            String dungeonDifficultyID = null;
-            if (matchInstance instanceof DungeonInstance dungeonInstance)
-                dungeonDifficultyID = dungeonInstance.getDifficultyID();
-            if (dungeonDifficultyID != null) {
+            if (matchInstance instanceof DungeonInstance dungeonInstance) {
                 // Beyond this point the item is for an instanced dungeon. A mismatched difficulty suppresses it.
-                if (!dungeonDifficultyID.equals(difficultyID)) return true;
+                if (!dungeonInstance.matchesDifficulty(difficultyIDs, configFilename)) return true;
+                if (!isEquipment()) return false;
                 addGroupLoot(CustomItem.limitItemLevel(player, itemTier), eliteEntity);
                 return true;
             }
         }
 
-        if (!PartyManager.shouldUsePartyLoot(player, eliteEntity)) return false;
+        if (!isEquipment() || !PartyManager.shouldUsePartyLoot(player, eliteEntity)) return false;
         return addPartyLoot(CustomItem.limitItemLevel(player, itemTier), player, eliteEntity);
     }
 
@@ -332,5 +368,11 @@ public class EliteCustomLootEntry extends CustomLootEntry implements Serializabl
     @Override
     public ItemStack previewDrop(int itemTier, Player player) {
         return generateItemStack(itemTier, player, null);
+    }
+
+    /** Administrator-selected level, without the previewer's progression cap. Fixed/limited item rules still apply. */
+    public ItemStack previewDropAtLevel(int level, Player player) {
+        CustomItem item = generateCustomItem();
+        return item == null ? null : item.generateItemStackExact(level, player, null);
     }
 }

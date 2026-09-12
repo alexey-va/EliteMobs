@@ -10,17 +10,19 @@ import com.magmaguy.elitemobs.api.ScriptZoneEnterEvent;
 import com.magmaguy.elitemobs.api.ScriptZoneLeaveEvent;
 import com.magmaguy.elitemobs.api.internal.RemovalReason;
 import com.magmaguy.elitemobs.combatsystem.antiexploit.PreventMountExploit;
+import com.magmaguy.elitemobs.combatsystem.CombatDamageContext;
 import com.magmaguy.elitemobs.entitytracker.EntityTracker;
+import com.magmaguy.elitemobs.instanced.InstanceEffectPolicy;
 import com.magmaguy.elitemobs.events.BossCustomAttackDamage;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
 import com.magmaguy.magmacore.scripting.ScriptDefinition;
 import com.magmaguy.elitemobs.mobconstructor.custombosses.CustomBossEntity;
 import com.magmaguy.elitemobs.pathfinding.Navigation;
+import com.magmaguy.elitemobs.presentation.actionbar.ActionBarCompositor;
+import com.magmaguy.elitemobs.utils.BossBarOrderManager;
 import com.magmaguy.elitemobs.utils.GameClock;
 import com.magmaguy.magmacore.util.AttributeManager;
 import com.magmaguy.magmacore.util.ChatColorConverter;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -88,8 +90,39 @@ final class LuaPowerEntityTables {
 
     LuaTable createEventTable(Event event) {
         LuaTable eventTable = new LuaTable();
+        if (event instanceof EliteMobDamagedByPlayerEvent playerDamage) {
+            eventTable.set("entity", createEntityTable(playerDamage.getEliteMobEntity().getLivingEntity()));
+            eventTable.set("is_damage_transfer", LuaValue.valueOf(CombatDamageContext.isDamageTransferActive()));
+            eventTable.set("transfer_damage", method(eventTable, args -> {
+                Entity target = support.resolveEntityReference(args.arg1());
+                double amount = args.checkdouble(2);
+                if (!Double.isFinite(amount) || amount < 0) throw new IllegalArgumentException("Invalid transferred damage");
+                if (CombatDamageContext.isDamageTransferActive() || playerDamage.isCancelled() || amount == 0)
+                    return LuaValue.FALSE;
+                if (!(target instanceof LivingEntity living) || !isAlive(living)
+                        || !InstanceEffectPolicy.canAffect(eliteEntity, living)
+                        || target.equals(playerDamage.getEliteMobEntity().getLivingEntity())) return LuaValue.FALSE;
+                EliteEntity recipient = EntityTracker.getEliteMobEntity(living);
+                if (recipient == null) throw new IllegalArgumentException("Damage transfers require an elite recipient");
+                int previousTicks = living.getNoDamageTicks();
+                double previousDamage = living.getLastDamage();
+                try {
+                    living.setNoDamageTicks(0);
+                    CombatDamageContext.runPlayerToEliteTransfer(() -> living.damage(amount, playerDamage.getPlayer()));
+                } finally {
+                    if (isAlive(living)) {
+                        living.setNoDamageTicks(previousTicks);
+                        living.setLastDamage(previousDamage);
+                    }
+                }
+                return LuaValue.TRUE;
+            }));
+        }
         if (event instanceof EliteDamageEvent eliteDamageEvent) {
             eventTable.set("damage_amount", LuaValue.valueOf(eliteDamageEvent.getDamage()));
+            eventTable.set("get_damage_amount", new VarArgFunction() {
+                @Override public Varargs invoke(Varargs args) { return LuaValue.valueOf(eliteDamageEvent.getDamage()); }
+            });
             if (event instanceof EliteMobDamagedEvent eliteMobDamagedEvent) {
                 eventTable.set("damage_cause", LuaValue.valueOf(eliteMobDamagedEvent.getEntityDamageEvent().getCause().name()));
             } else if (event instanceof EliteMobDamagedByPlayerEvent eliteMobDamagedByPlayerEvent) {
@@ -243,7 +276,8 @@ final class LuaPowerEntityTables {
             return LuaValue.NIL;
         }));
         table.set("show_action_bar", method(table, args -> {
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColorConverter.convert(args.checkjstring(1))));
+            ActionBarCompositor.show(player, ActionBarCompositor.Source.LUA,
+                    ChatColorConverter.convert(args.checkjstring(1)));
             return LuaValue.NIL;
         }));
         table.set("show_title", method(table, args -> {
@@ -260,9 +294,12 @@ final class LuaPowerEntityTables {
             BarStyle style = support.parseEnum(args.optjstring(3, "SOLID"), BarStyle.class, BarStyle.SOLID);
             int duration = args.optint(4, 40);
             BossBar bossBar = Bukkit.createBossBar(title, color, style);
-            bossBar.addPlayer(player);
+            BossBarOrderManager.show(player, bossBar);
             if (duration > 0) {
-                GameClock.scheduleLater(duration, bossBar::removeAll);
+                GameClock.scheduleLater(duration, () -> {
+                    BossBarOrderManager.hide(player, bossBar);
+                    bossBar.removeAll();
+                });
             }
             return LuaValue.NIL;
         });
@@ -292,7 +329,10 @@ final class LuaPowerEntityTables {
         entity.set("is_valid", LuaValue.valueOf(livingEntity.isValid()));
         addVehicleMethods(entity, livingEntity);
         entity.set("is_alive", method(entity, args -> LuaValue.valueOf(isAlive(livingEntity))));
-        entity.set("is_ai_enabled", method(entity, args -> LuaValue.valueOf(livingEntity.hasAI())));
+        entity.set("is_ai_enabled", method(entity, args -> {
+            EliteEntity elite = resolveAiOwner(livingEntity);
+            return LuaValue.valueOf(elite == null ? livingEntity.hasAI() : elite.isAIEnabled());
+        }));
         entity.set("is_frozen", method(entity, args -> {
             EliteEntity elite = EntityTracker.getEliteMobEntity(livingEntity);
             if (elite instanceof CustomBossEntity customBoss) {
@@ -409,12 +449,12 @@ final class LuaPowerEntityTables {
         entity.set("set_awareness_enabled", method(entity, args -> {
             if (livingEntity instanceof Mob mob) {
                 boolean aware = args.checkboolean(1);
-                mob.setAware(aware);
+                setAwarenessState(mob, aware);
                 int duration = args.optint(2, 0);
                 if (duration > 0) {
                     GameClock.scheduleLater(duration, () -> {
                         if (mob.isValid()) {
-                            mob.setAware(!aware);
+                            setAwarenessState(mob, !aware);
                         }
                     });
                 }
@@ -422,16 +462,19 @@ final class LuaPowerEntityTables {
             return LuaValue.NIL;
         }));
         entity.set("face_direction_or_location", method(entity, args -> {
-            Vector direction = support.toVector(args.arg1());
-            if (direction == null && args.arg1().istable()) {
-                Location destination = support.toLocation(args.arg1());
-                if (destination != null && livingEntity.getLocation().getWorld() != null &&
-                        livingEntity.getLocation().getWorld().getUID().equals(destination.getWorld().getUID())) {
-                    direction = destination.toVector().subtract(livingEntity.getLocation().toVector());
-                }
-            }
+            LuaValue target = args.arg1();
+            Location location = livingEntity.getLocation();
+            Vector direction;
+            // Location tables also contain a direction field. Resolve their destination
+            // first, rather than copying the target's own facing as a direction vector.
+            if (target.istable() && (target.get("world").isstring()
+                    || target.get("current_location").istable())) {
+                Location destination = support.toLocation(target);
+                if (destination == null || location.getWorld() == null
+                        || !location.getWorld().equals(destination.getWorld())) return LuaValue.NIL;
+                direction = destination.toVector().subtract(location.toVector());
+            } else direction = support.toVector(target);
             if (direction != null && direction.lengthSquared() > 0) {
-                Location location = livingEntity.getLocation();
                 location.setDirection(direction);
                 livingEntity.teleport(location);
             }
@@ -582,14 +625,33 @@ final class LuaPowerEntityTables {
         if (livingEntity == null) {
             return;
         }
-        livingEntity.setAI(targetValue);
+        setAiState(livingEntity, targetValue);
         if (duration > 0) {
             GameClock.scheduleLater(duration, () -> {
                 if (livingEntity.isValid()) {
-                    livingEntity.setAI(!targetValue);
+                    setAiState(livingEntity, !targetValue);
                 }
             });
         }
+    }
+
+    private void setAiState(LivingEntity livingEntity, boolean enabled) {
+        EliteEntity elite = resolveAiOwner(livingEntity);
+        if (elite == null) livingEntity.setAI(enabled);
+        else elite.setAIEnabled(enabled);
+    }
+
+    private void setAwarenessState(Mob mob, boolean aware) {
+        EliteEntity elite = resolveAiOwner(mob);
+        if (elite == null) mob.setAware(aware);
+        else elite.setAware(aware);
+    }
+
+    private EliteEntity resolveAiOwner(LivingEntity body) {
+        // Bootstrap and on_spawn run before the accepted actor enters EntityTracker.
+        if (eliteEntity.getLivingEntity() == body || eliteEntity.getUnsyncedLivingEntity() == body)
+            return eliteEntity;
+        return EntityTracker.getEliteMobEntity(body);
     }
 
     private float resolveVolume(Varargs args) {
@@ -669,14 +731,29 @@ final class LuaPowerEntityTables {
             }
             return LuaValue.NIL;
         }));
+        entityTable.set("damage_equipment", method(entityTable, args -> {
+            EquipmentSlot slot;
+            try {
+                slot = EquipmentDamagePolicy.parseSlot(args.checkjstring(1));
+            } catch (IllegalArgumentException exception) {
+                return LuaValue.argerror(1, exception.getMessage());
+            }
+            int amount = args.checkint(2);
+            try {
+                EquipmentDamagePolicy.requireRequestedDamage(amount);
+            } catch (IllegalArgumentException exception) {
+                return LuaValue.argerror(2, exception.getMessage());
+            }
+            return LuaValue.valueOf(EquipmentDamageRuntime.damage(livingEntity, slot, amount));
+        }));
         entityTable.set("set_fire_ticks", method(entityTable, args -> {
-            if (livingEntity != null && livingEntity.isValid()) {
+            if (InstanceEffectPolicy.canAffect(eliteEntity, livingEntity)) {
                 livingEntity.setFireTicks(args.checkint(1));
             }
             return LuaValue.NIL;
         }));
         entityTable.set("add_visual_freeze_ticks", method(entityTable, args -> {
-            if (livingEntity != null && livingEntity.isValid()) {
+            if (InstanceEffectPolicy.canAffect(eliteEntity, livingEntity)) {
                 livingEntity.setFreezeTicks(livingEntity.getFreezeTicks() + args.optint(1, 1));
             }
             return LuaValue.NIL;

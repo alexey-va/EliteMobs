@@ -1,0 +1,9 @@
+extends: class_trial_cleric_acolyte.yml
+isEnabled: true
+name: '&eForeseen Ward'
+healthMultiplier: 0.6
+damageMultiplier: 0.2
+mainHand: TRIDENT
+chestplate: LEATHER_CHESTPLATE:CAC2E2
+leggings: LEATHER_LEGGINGS:CAC2E2
+boots: LEATHER_BOOTS:CAC2E2

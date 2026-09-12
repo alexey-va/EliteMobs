@@ -10,6 +10,7 @@ import com.magmaguy.elitemobs.config.custombosses.CustomBossesConfigFields;
 import com.magmaguy.elitemobs.config.npcs.NPCsConfig;
 import com.magmaguy.elitemobs.config.npcs.NPCsConfigFields;
 import com.magmaguy.elitemobs.entitytracker.EntityTracker;
+import com.magmaguy.elitemobs.instanced.dungeons.DungeonInstance;
 import com.magmaguy.elitemobs.items.customloottable.CustomLootEntry;
 import com.magmaguy.elitemobs.items.customloottable.EliteCustomLootEntry;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
@@ -18,9 +19,9 @@ import com.magmaguy.elitemobs.mobconstructor.custombosses.RegionalBossEntity;
 import com.magmaguy.elitemobs.parties.PartyManager;
 import com.magmaguy.elitemobs.parties.PartySidebar;
 import com.magmaguy.elitemobs.playerdata.database.PlayerData;
-import com.magmaguy.elitemobs.quests.dialogue.QuestDialogueBossBarManager;
 import com.magmaguy.elitemobs.quests.objectives.*;
 import com.magmaguy.elitemobs.treasurechest.TreasureChest;
+import com.magmaguy.elitemobs.utils.BossBarOrderManager;
 import com.magmaguy.elitemobs.utils.ConfigurationLocation;
 import com.magmaguy.elitemobs.utils.SimpleScoreboard;
 import com.magmaguy.elitemobs.wormhole.WormholeNavigation;
@@ -38,22 +39,29 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class QuestTracking {
+
+    private static final double VERTICAL_ENTER_RADIUS = 4;
+    private static final double VERTICAL_EXIT_RADIUS = 6;
+    private static final double VERTICAL_ENTER_HEIGHT = 5;
+    private static final double VERTICAL_EXIT_HEIGHT = 3;
 
     @Getter
     private static final HashMap<UUID, QuestTracking> playerTrackingQuests = new HashMap<>();
     private final Player player;
     @Getter
-    private final CustomQuest customQuest;
+    private final Quest quest;
     private final List<Location> turnInNPCs = new ArrayList<>();
     private List<ObjectiveDestinations> objectiveDestinations = new ArrayList<>();
     private BukkitTask locationRefresher;
@@ -61,14 +69,29 @@ public class QuestTracking {
     private BossBar compassBar;
     private boolean questIsDone = false;
     private boolean stopped = false;
+    private boolean wasWaiting;
+    private boolean refreshQueued;
+    private Set<VerticalDestination> previousVerticalDestinations = new HashSet<>();
+    private Set<VerticalDestination> verticalDestinations = new HashSet<>();
+    private boolean targetsAbove;
+    private boolean targetsBelow;
 
-    public QuestTracking(Player player, CustomQuest customQuest) {
+    private void queueLocationRefresh() {
+        if (stopped || refreshQueued) return;
+        refreshQueued = true;
+        Bukkit.getScheduler().runTask(MetadataHandler.PLUGIN, () -> {
+            refreshQueued = false;
+            if (!stopped && player.isOnline()) updateLocations(quest);
+        });
+    }
+
+    public QuestTracking(Player player, Quest quest) {
         this.player = player;
-        this.customQuest = customQuest;
+        this.quest = quest;
         startLocationGetter();
         startCompass();
         playerTrackingQuests.put(player.getUniqueId(), this);
-        customQuest.getQuestObjectives().displayLazyObjectivesScoreboard(player);
+        quest.getQuestObjectives().displayLazyObjectivesScoreboard(player);
     }
 
     public static boolean isTracking(Player player) {
@@ -80,15 +103,15 @@ public class QuestTracking {
     }
 
     public static void toggleTracking(Player player, String questID) {
-        CustomQuest customQuest = (CustomQuest) PlayerData.getQuest(player.getUniqueId(), questID);
-        if (customQuest == null) {
+        Quest quest = PlayerData.getQuest(player.getUniqueId(), questID);
+        if (quest == null) {
             player.sendMessage(QuestsConfig.getQuestTrackingInvalidMessage());
             return;
         }
-        toggleTracking(player, customQuest);
+        toggleTracking(player, quest);
     }
 
-    public static void toggleTracking(Player player, CustomQuest quest) {
+    public static void toggleTracking(Player player, Quest quest) {
         if (playerTrackingQuests.containsKey(player.getUniqueId())) {
             playerTrackingQuests.get(player.getUniqueId()).stop();
         } else {
@@ -96,13 +119,15 @@ public class QuestTracking {
                 player.sendMessage(QuestsConfig.getQuestTrackingInvalidMessage());
                 return;
             }
-            if (!quest.getCustomQuestsConfigFields().isTrackable()) return;
+            //Only custom quests carry a trackable flag; dynamic quests are always trackable
+            if (quest instanceof CustomQuest customQuest && !customQuest.getCustomQuestsConfigFields().isTrackable())
+                return;
             new QuestTracking(player, quest);
         }
     }
 
     public void refreshScoreboard() {
-        customQuest.getQuestObjectives().displayLazyObjectivesScoreboard(player);
+        quest.getQuestObjectives().displayLazyObjectivesScoreboard(player);
     }
 
     private void startLocationGetter() {
@@ -113,7 +138,7 @@ public class QuestTracking {
                     stop();
                     return;
                 }
-                updateLocations(customQuest);
+                updateLocations(quest);
             }
         }.runTaskTimer(MetadataHandler.PLUGIN, 0L, 20L * 60L);
     }
@@ -129,6 +154,8 @@ public class QuestTracking {
                         destinations.addAll(getKillLocations((CustomKillObjective) objective));
                     else if (objective instanceof DialogObjective)
                         destinations.addAll(getDialogLocations((DialogObjective) objective));
+                    else if (objective instanceof ClassUnlockObjective unlock && unlock.getNpcFilename() != null)
+                        destinations.add(new ObjectiveDestinations(unlock, getNPCLocations(unlock.getNpcFilename())));
                     else if (objective instanceof CustomFetchObjective)
                         destinations.addAll(getFetchLocations((CustomFetchObjective) objective));
             objectiveDestinations = destinations;
@@ -170,7 +197,7 @@ public class QuestTracking {
 
     private void getTurnInNPC() {
         turnInNPCs.clear();
-        turnInNPCs.addAll(getNPCLocations(customQuest.getQuestTaker()));
+        turnInNPCs.addAll(getNPCLocations(quest.getQuestTaker()));
     }
 
     private boolean dropsCustomItem(List<CustomLootEntry> customLootEntries, String itemFilename) {
@@ -185,7 +212,30 @@ public class QuestTracking {
         List<Location> locations = new ArrayList<>();
         if (npcFilename == null) return locations;
         NPCsConfigFields npcsConfigFields = NPCsConfig.getNpcEntities().get(npcFilename);
-        if (npcsConfigFields == null) return locations;
+        if (npcsConfigFields == null || !npcsConfigFields.isEnabled()) return locations;
+        // Runtime NPCs carry the cloned world and their current patrol position.
+        for (var npc : EntityTracker.getNpcEntities().values()) {
+            if (!npcFilename.equals(npc.getNPCsConfigFields().getFilename())) continue;
+            Location location = npc.getPersistentLocation();
+            if (location != null && player.getWorld().equals(location.getWorld()))
+                addLocation(locations, location);
+        }
+        if (!locations.isEmpty()) return locations;
+        if (npcsConfigFields.isInstanced()) {
+            // NPCs may not have materialized yet. Resolve their authored coordinates only
+            // against this player's matching dungeon, never another party's copy or blueprint.
+            if (PlayerData.getMatchInstance(player) instanceof DungeonInstance dungeon
+                    && player.getWorld().equals(dungeon.getWorld())) {
+                List<String> authored = new ArrayList<>();
+                if (npcsConfigFields.getLocations() != null) authored.addAll(npcsConfigFields.getLocations());
+                if (npcsConfigFields.getSpawnLocation() != null) authored.add(npcsConfigFields.getSpawnLocation());
+                for (String raw : authored)
+                    if (raw != null && !raw.isBlank() && dungeon.getContentPackagesConfigFields().getWorldName()
+                            .equals(ConfigurationLocation.worldName(raw)))
+                        addLocation(locations, ConfigurationLocation.serializeWithInstance(dungeon.getWorld(), raw));
+            }
+            return locations;
+        }
         addLocationStrings(locations, npcsConfigFields.getLocations());
         addLocationString(locations, npcsConfigFields.getSpawnLocation());
         return locations;
@@ -234,11 +284,20 @@ public class QuestTracking {
 
     private void addLocationString(List<Location> locations, String rawLocation) {
         if (rawLocation == null || rawLocation.isBlank()) return;
+        if (PlayerData.getMatchInstance(player) instanceof DungeonInstance dungeon
+                && dungeon.getContentPackagesConfigFields().getWorldName().equals(ConfigurationLocation.worldName(rawLocation))) {
+            addLocation(locations, ConfigurationLocation.serializeWithInstance(dungeon.getWorld(), rawLocation));
+            return;
+        }
         addLocation(locations, ConfigurationLocation.serialize(rawLocation, true));
     }
 
     private void addLocation(List<Location> locations, Location location) {
         if (location == null || location.getWorld() == null) return;
+        // A loaded copy belonging to another party must not suppress the authored
+        // destination fallback for the player's own instance.
+        if (PlayerData.getMatchInstance(player) instanceof DungeonInstance dungeon
+                && !location.getWorld().equals(dungeon.getWorld())) return;
         for (Location existingLocation : locations)
             if (isSameBlockLocation(existingLocation, location))
                 return;
@@ -257,11 +316,16 @@ public class QuestTracking {
     public void stop() {
         if (stopped) return;
         stopped = true;
+        previousVerticalDestinations.clear();
+        verticalDestinations.clear();
         playerTrackingQuests.remove(player.getUniqueId());
         resetPlayerScoreboard();
         if (locationRefresher != null) locationRefresher.cancel();
         if (compassTask != null) compassTask.cancel();
-        if (compassBar != null) compassBar.removeAll();
+        if (compassBar != null) {
+            BossBarOrderManager.hide(player, compassBar);
+            compassBar.removeAll();
+        }
     }
 
     private void resetPlayerScoreboard() {
@@ -295,32 +359,44 @@ public class QuestTracking {
     }
 
     private void updateCompassContents() {
-        // While quest dialogue is showing, hide the compass bar and scoreboard so they don't clutter
-        // the dialogue box. This must be gated here because the compass re-adds the player every tick.
-        if (QuestsConfig.isHideQuestScoreboardDuringQuestDialogue()
-                && QuestDialogueBossBarManager.hasActiveSession(player)) {
-            compassBar.removePlayer(player);
+        // Reuse both sets, retaining hysteresis only for destinations seen in consecutive frames.
+        Set<VerticalDestination> reusable = previousVerticalDestinations;
+        previousVerticalDestinations = verticalDestinations;
+        verticalDestinations = reusable;
+        verticalDestinations.clear();
+        targetsAbove = false;
+        targetsBelow = false;
+        var match = PlayerData.getMatchInstance(player);
+        boolean waiting = match != null && match.isWaitingPlayer(player);
+        if (waiting != wasWaiting) {
+            wasWaiting = waiting;
+            updateLocations(quest);
+        }
+        if (waiting) {
+            previousVerticalDestinations.clear();
+            compassBar.setTitle("Waiting for the dungeon to start");
+            BossBarOrderManager.show(player, compassBar);
             return;
         }
         //for reference, character 32 is straight ahead
         String compassText = "---------------------------------------------------------------";
         List<LocationAndSymbol> locationAndSymbols = projectLocations();
-        if (!locationAndSymbols.isEmpty())
+        if (!locationAndSymbols.isEmpty() || targetsAbove || targetsBelow)
             for (LocationAndSymbol pair : locationAndSymbols)
                 compassText = compassText.substring(0, pair.getKey()) + pair.getValue() + compassText.substring(pair.getKey() + 1);
         else {
             World world = null;
             boolean locationsOutOfBounds = false;
-            List<ObjectiveDestinations> tempDestinations = new ArrayList<>(objectiveDestinations);
-            for (ObjectiveDestinations destinations : tempDestinations)
-                for (Location location : destinations.getDestinations())
-                    if (location != null && location.getWorld() != null) {
-                        world = location.getWorld();
-                        if (world.equals(player.getWorld())) {
-                            locationsOutOfBounds = true;
-                            break;
-                        }
+            List<Location> destinations = questIsDone ? new ArrayList<>(turnInNPCs)
+                    : objectiveDestinations.stream().flatMap(objective -> objective.getDestinations().stream()).toList();
+            for (Location location : destinations)
+                if (location != null && location.getWorld() != null) {
+                    world = location.getWorld();
+                    if (world.equals(player.getWorld())) {
+                        locationsOutOfBounds = true;
+                        break;
                     }
+                }
 
             if (!locationsOutOfBounds) {
                 if (world != null) {
@@ -339,8 +415,13 @@ public class QuestTracking {
             }
         }
 
+        // Draw last so another objective at the same bearing cannot hide the height cue.
+        if (targetsAbove || targetsBelow) {
+            String arrow = targetsAbove ? (targetsBelow ? "↕" : "↑") : "↓";
+            compassText = compassText.substring(0, 31) + arrow + compassText.substring(32);
+        }
         compassBar.setTitle(compassText);
-        compassBar.addPlayer(player);
+        BossBarOrderManager.show(player, compassBar);
     }
 
     private List<LocationAndSymbol> projectLocations() {
@@ -362,8 +443,25 @@ public class QuestTracking {
     private LocationAndSymbol processLocations(Location location, Objective objective) {
         if (location == null || location.getWorld() == null) return null;
         if (player.getWorld().equals(location.getWorld())) {
-            Vector toTarget = toTargetVector(player, location);
-            double angle = getAngle(toTarget, player);
+            Location playerLocation = player.getLocation();
+            double deltaX = location.getX() - playerLocation.getX();
+            double deltaY = location.getY() - playerLocation.getY();
+            double deltaZ = location.getZ() - playerLocation.getZ();
+            double horizontalDistanceSquared = deltaX * deltaX + deltaZ * deltaZ;
+            VerticalDestination destination = new VerticalDestination(location.getWorld().getUID(),
+                    location.getX(), location.getY(), location.getZ(), deltaY > 0);
+            boolean wasVertical = previousVerticalDestinations.contains(destination);
+            double radius = wasVertical ? VERTICAL_EXIT_RADIUS : VERTICAL_ENTER_RADIUS;
+            // Compare feet to feet so camera pitch, sneaking and eye height do not affect the cue.
+            boolean heightRequiresArrow = wasVertical ? Math.abs(deltaY) > VERTICAL_EXIT_HEIGHT
+                    : Math.abs(deltaY) >= VERTICAL_ENTER_HEIGHT;
+            if (horizontalDistanceSquared <= radius * radius && heightRequiresArrow) {
+                verticalDestinations.add(destination);
+                if (deltaY > 0) targetsAbove = true;
+                else targetsBelow = true;
+                return null;
+            }
+            double angle = getAngle(deltaX, deltaZ, playerLocation.getYaw());
             if (Math.abs(angle) > Math.PI / 2D) return null;
             //Convert to degrees, each character has a resolution of 3 degrees
             return new LocationAndSymbol((int) (angle * 57D / 3D), getSymbol(objective));
@@ -371,16 +469,16 @@ public class QuestTracking {
         return null;
     }
 
-    private Vector toTargetVector(Player player, Location location) {
-        return location.clone().add(new Vector(0, 1.85, 0)).subtract(player.getEyeLocation()).toVector().normalize();
+    private double getAngle(double deltaX, double deltaZ, float yaw) {
+        if (deltaX == 0 && deltaZ == 0) return 0;
+        double facingX = -Math.sin(Math.toRadians(yaw));
+        double facingZ = Math.cos(Math.toRadians(yaw));
+        // atan2 also works when looking straight up/down, without normalizing a zero vector.
+        return Math.atan2(facingX * deltaZ - facingZ * deltaX, facingX * deltaX + facingZ * deltaZ);
     }
 
-    private double getAngle(Vector toTarget, Player player) {
-        double angle = player.getEyeLocation().getDirection().setY(0).angle(toTarget.clone().setY(0));
-        if (toTarget.getX() * player.getEyeLocation().getDirection().getZ() - toTarget.getZ() * player.getEyeLocation().getDirection().getX() > 0)
-            angle *= -1;
-        return angle;
-    }
+    // Ignore target yaw/pitch when locations refresh; direction changes must cross the entry threshold again.
+    private record VerticalDestination(UUID worldId, double x, double y, double z, boolean above) {}
 
     private String getSymbol(Objective objective) {
         //case for portals
@@ -398,6 +496,20 @@ public class QuestTracking {
     }
 
     public static class QuestTrackingEvents implements Listener {
+        @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+        public void onTargetSpawn(com.magmaguy.elitemobs.api.EliteMobSpawnEvent event) {
+            if (!(event.getEliteMobEntity() instanceof CustomBossEntity)) return;
+            for (QuestTracking tracking : playerTrackingQuests.values())
+                if (tracking.player.getWorld().equals(event.getEntity().getWorld())) tracking.queueLocationRefresh();
+        }
+        @EventHandler
+        public void onWorldChanged(PlayerChangedWorldEvent event) {
+            Bukkit.getScheduler().runTask(MetadataHandler.PLUGIN, () -> {
+                QuestTracking tracking = getPlayerTrackingQuests().get(event.getPlayer().getUniqueId());
+                if (tracking != null) tracking.updateLocations(tracking.getQuest());
+            });
+        }
+
         @EventHandler
         public void onPlayerLogout(PlayerQuitEvent event) {
             QuestTracking questTracking = getPlayerTrackingQuests().get(event.getPlayer().getUniqueId());
@@ -409,27 +521,49 @@ public class QuestTracking {
         public void onQuestProgressEvent(QuestProgressionEvent event) {
             //if (event.getObjective().isObjectiveCompleted()) return;
             if (!isTracking(event.getPlayer())) return;
-            if (!getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).getCustomQuest().getQuestID().equals(event.getQuest().getQuestID()))
+            if (!getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).getQuest().getQuestID().equals(event.getQuest().getQuestID()))
                 return;
             getPlayerTrackingQuests().get(event.getPlayer().getUniqueId())
-                    .updateLocations(getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).getCustomQuest());
+                    .updateLocations(getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).getQuest());
             getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).refreshScoreboard();
         }
 
         @EventHandler(ignoreCancelled = true)
         public void onQuestCompleteEvent(QuestCompleteEvent event) {
             if (!isTracking(event.getPlayer())) return;
-            if (!getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).getCustomQuest().getQuestID().equals(event.getQuest().getQuestID()))
+            if (!getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).getQuest().getQuestID().equals(event.getQuest().getQuestID()))
                 return;
             getPlayerTrackingQuests().get(event.getPlayer().getUniqueId()).stop();
+            if (!QuestsConfig.isAutoTrackNextQuestOnCompletion()) return;
+            //Completing the tracked quest hands tracking to the player's next active
+            //quest instead of leaving the compass empty. Deferred a tick so every
+            //completion listener (turn-in, rewards, quest removal) settles first;
+            //the completed quest is excluded by ID in case it still lingers.
+            Player player = event.getPlayer();
+            UUID completedQuestID = event.getQuest().getQuestID();
+            Bukkit.getScheduler().runTask(MetadataHandler.PLUGIN, () -> {
+                if (!player.isOnline() || isTracking(player)) return;
+                List<Quest> activeQuests = PlayerData.getQuests(player.getUniqueId());
+                if (activeQuests == null) return;
+                for (Quest nextQuest : new ArrayList<>(activeQuests)) {
+                    if (nextQuest == null || nextQuest.getQuestID().equals(completedQuestID)) continue;
+                    if (nextQuest instanceof CustomQuest customQuest
+                            && !customQuest.getCustomQuestsConfigFields().isTrackable()) continue;
+                    new QuestTracking(player, nextQuest);
+                    player.sendMessage(QuestsConfig.getQuestAutoTrackNextMessage()
+                            .replace("$questName", nextQuest.getQuestName() == null ? "" : nextQuest.getQuestName()));
+                    return;
+                }
+            });
         }
 
         @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
         public void onQuestAcceptEvent(QuestAcceptEvent event) {
-            if (!(event.getQuest() instanceof CustomQuest)) return;
-            if (!((CustomQuest) event.getQuest()).getCustomQuestsConfigFields().isTrackable()) return;
+            //Dynamic quests are always trackable; only custom quests carry a trackable flag
+            if (event.getQuest() instanceof CustomQuest customQuest && !customQuest.getCustomQuestsConfigFields().isTrackable())
+                return;
             if (QuestsConfig.isAutoTrackQuestsOnAccept()) {
-                toggleTracking(event.getPlayer(), (CustomQuest) event.getQuest());
+                toggleTracking(event.getPlayer(), event.getQuest());
                 event.getPlayer().spigot().sendMessage(SpigotMessage.commandHoverMessage(
                         QuestsConfig.getChatTrackingMessage(),
                         QuestsConfig.getChatTrackingHover(),

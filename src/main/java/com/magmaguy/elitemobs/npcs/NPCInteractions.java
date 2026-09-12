@@ -7,8 +7,10 @@ import com.magmaguy.elitemobs.entitytracker.EntityTracker;
 import com.magmaguy.elitemobs.menus.*;
 import com.magmaguy.elitemobs.menus.gambling.BettingMenu;
 import com.magmaguy.elitemobs.npcs.scripts.ScriptableNPC;
+import com.magmaguy.elitemobs.pathfinding.patrol.PatrolEditor;
 import com.magmaguy.elitemobs.playerdata.database.PlayerData;
 import com.magmaguy.elitemobs.quests.QuestInteractionHandler;
+import com.magmaguy.elitemobs.quests.objectives.DialogObjective;
 import com.magmaguy.magmacore.util.ChatColorConverter;
 import com.magmaguy.magmacore.util.Logger;
 import org.bukkit.Bukkit;
@@ -36,14 +38,28 @@ public class NPCInteractions implements Listener {
     }
 
     public static void handleNPCInteraction(Player player, NPCEntity npcEntity) {
+        if (PatrolEditor.isEditing(npcEntity)) return;
         UUID playerUUID = player.getUniqueId();
         if (cooldowns.contains(playerUUID)) return;
         cooldowns.add(playerUUID);
         Bukkit.getScheduler().runTaskLater(MetadataHandler.PLUGIN, () -> cooldowns.remove(playerUUID), 1);
 
+        com.magmaguy.elitemobs.quests.objectives.ClassUnlockObjective.refresh(player);
+        if (DialogObjective.progressAtNPC(player, npcEntity)) return;
         npcEntity.runScripts(ScriptableNPC.ON_INTERACT, null, player);
 
         switch (npcEntity.getNPCsConfigFields().getInteractionType()) {
+            case TRANSPORT:
+                var transport = com.magmaguy.elitemobs.transport.TransportModule.get();
+                if (transport != null) Bukkit.getScheduler().runTask(MetadataHandler.PLUGIN,
+                        () -> transport.openDestinations(player, npcEntity));
+                break;
+            case CLASS_TRAINER:
+                if (player.hasPermission("elitemobs.command") && npcEntity.getNPCsConfigFields().getClassRoot() != null)
+                    Bukkit.getScheduler().runTask(MetadataHandler.PLUGIN, () ->
+                            com.magmaguy.elitemobs.advancedcombat.menu.ClassSelectionMenu.openTrainer(
+                                    player, npcEntity.getNPCsConfigFields().getClassRoot()));
+                break;
             case GUILD_GREETER:
                 if (player.hasPermission("elitemobs.skill.npc")) {
                     new BukkitRunnable() {
@@ -248,6 +264,10 @@ public class NPCInteractions implements Listener {
         if (event.isCancelled()) return;
         NPCEntity npcEntity = EntityTracker.getNPCEntity(event.getRightClicked());
         if (npcEntity == null) return;
+        if (PatrolEditor.isEditing(npcEntity)) {
+            event.setCancelled(true);
+            return;
+        }
         Player player = event.getPlayer();
         if (player.getInventory().getItemInMainHand().getType().equals(Material.NAME_TAG)) {
             event.setCancelled(true);
@@ -272,6 +292,8 @@ public class NPCInteractions implements Listener {
     }
 
     public enum NPCInteractionType {
+        CLASS_TRAINER,
+        TRANSPORT,
         GUILD_GREETER,
         CHAT,
         CUSTOM_SHOP,

@@ -1,0 +1,7 @@
+extends: class_trial_actor_armor_stand.yml
+isEnabled: true
+name: '&eBreakable Chain Stake'
+healthMultiplier: 0.15
+damageMultiplier: 0
+helmet: IRON_BLOCK
+ai: false

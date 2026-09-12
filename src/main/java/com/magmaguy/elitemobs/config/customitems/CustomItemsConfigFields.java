@@ -3,6 +3,8 @@ package com.magmaguy.elitemobs.config.customitems;
 import com.magmaguy.elitemobs.config.CustomConfigFields;
 import com.magmaguy.elitemobs.config.LegacyValueConverter;
 import com.magmaguy.elitemobs.items.customitems.CustomItem;
+import com.magmaguy.elitemobs.items.ItemConsumables;
+import com.magmaguy.elitemobs.skills.SkillType;
 import com.magmaguy.magmacore.util.Logger;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +40,8 @@ public class CustomItemsConfigFields extends CustomConfigFields {
     @Setter
     private CustomItem.ItemType itemType = CustomItem.ItemType.CUSTOM;
     @Getter
+    private com.magmaguy.elitemobs.items.ClassLootFamily classLootFamily;
+    @Getter
     @Setter
     private String customModelID = null;
     @Getter
@@ -46,6 +50,15 @@ public class CustomItemsConfigFields extends CustomConfigFields {
     @Getter
     @Setter
     private String scriptedItem = null;
+    @Getter
+    @Setter
+    private SkillType weaponType = null;
+    @Getter
+    @Setter
+    private String fmmItemModel = null;
+    @Getter
+    @Setter
+    private boolean proceduralEnchantments = false;
     @Getter
     @Setter
     private String permission = "";
@@ -58,6 +71,9 @@ public class CustomItemsConfigFields extends CustomConfigFields {
     @Getter
     @Setter
     private boolean showSource = true;
+    @Getter
+    @Setter
+    private ItemConsumables.Definition consumable;
 
     public CustomItemsConfigFields(String fileName,
                                    boolean isEnabled,
@@ -80,8 +96,11 @@ public class CustomItemsConfigFields extends CustomConfigFields {
      */
     @Override
     public void processConfigFields() {
+        Object authoredMaterial = fileConfiguration.get("material");
+        Object authoredName = fileConfiguration.get("name");
+        Object authoredLore = fileConfiguration.get("lore");
         this.isEnabled = processBoolean("isEnabled", isEnabled, true, true);
-        // Materials for future versions (e.g. spears) may not exist yet — skip silently
+        // Materials for future versions (e.g. spears) may not exist yet â€” skip silently
         if (configHas("material")) {
             String rawMaterial = fileConfiguration.getString("material");
             if (rawMaterial != null && rawMaterial.toUpperCase(java.util.Locale.ROOT).endsWith("_SPEAR")
@@ -104,17 +123,73 @@ public class CustomItemsConfigFields extends CustomConfigFields {
         this.customModelID = processString("customModelV2", customModelID, null, false);
         this.equipmentModelID = processString("equipmentModelID", equipmentModelID, null, false);
         this.scriptedItem = processString("scriptedItem", scriptedItem, null, false);
+        this.weaponType = processEnum("weaponType", weaponType, null, SkillType.class, false);
+        if (weaponType != null && weaponType != SkillType.STAVES && weaponType != SkillType.WANDS) {
+            Logger.warn("Item " + filename + ": weaponType accepts STAVES or WANDS; other weapons use their material.");
+            weaponType = null;
+        }
+        this.fmmItemModel = processString("fmmItemModel", fmmItemModel, null, false);
+        this.proceduralEnchantments = processBoolean("proceduralEnchantments", proceduralEnchantments, false, false);
         this.permission = processString("permission", permission, "", false);
         this.level = processInt("level", level, 0, false);
         this.soulbound = processBoolean("soulbound", soulbound, true, false);
         this.showSource = processBoolean("showSource", showSource, showSource, false);
+        classLootFamily = null;
+        if (itemType == CustomItem.ItemType.CLASS_LOOT) {
+            try {
+                if (!(authoredMaterial instanceof String) || !(authoredName instanceof String text) || text.isBlank()
+                        || !(authoredLore instanceof List<?> lines)
+                        || !lines.stream().allMatch(String.class::isInstance))
+                    throw new IllegalArgumentException("material, name and lore must be valid item fields (lore: [] is allowed)");
+                if (Material.getMaterial(fileConfiguration.getString("material").toUpperCase(java.util.Locale.ROOT)) == null)
+                    throw new IllegalArgumentException("material is unavailable on this server");
+                classLootFamily = com.magmaguy.elitemobs.items.ClassLootFamily.resolve(material, weaponType,
+                        fileConfiguration.getString("classLootFamily"));
+            } catch (IllegalArgumentException invalid) {
+                this.isEnabled = false;
+                Logger.warn("Invalid CLASS_LOOT item " + filename + ": " + invalid.getMessage() + "; item disabled.");
+            }
+        }
+        processConsumable();
         updatePostProcessor();
+    }
+
+    private void processConsumable() {
+        try {
+            if (configHas("consumable") && !fileConfiguration.isConfigurationSection("consumable"))
+                throw new IllegalArgumentException("consumable must contain type and optional repair tier");
+            var section = fileConfiguration.getConfigurationSection("consumable");
+            if (section != null && !java.util.Set.of("type", "tier").containsAll(section.getKeys(false)))
+                throw new IllegalArgumentException("Unknown consumable field");
+            String type = processString("consumable.type", consumable == null ? null
+                    : consumable.type().name().toLowerCase(java.util.Locale.ROOT), null, false);
+            if (type == null) {
+                if (section != null) throw new IllegalArgumentException("consumable.type is required");
+                consumable = null;
+                return;
+            }
+            if (material == null || material.isAir() || !material.isItem())
+                throw new IllegalArgumentException("Consumables require a valid item material");
+            var parsed = ItemConsumables.Type.valueOf(type.toUpperCase(java.util.Locale.ROOT));
+            if (configHas("consumable.tier") && !(fileConfiguration.get("consumable.tier") instanceof Integer))
+                throw new IllegalArgumentException("consumable.tier must be an integer");
+            if (parsed != ItemConsumables.Type.REPAIR_SCRAP && configHas("consumable.tier"))
+                throw new IllegalArgumentException("Only repair_scrap accepts consumable.tier");
+            int tier = parsed == ItemConsumables.Type.REPAIR_SCRAP
+                    ? processInt("consumable.tier", consumable == null ? 0 : consumable.tier(), 0, false) : 0;
+            consumable = new ItemConsumables.Definition(parsed, tier);
+        } catch (IllegalArgumentException invalid) {
+            consumable = null;
+            isEnabled = false;
+            Logger.warn("Item " + filename + " disabled: " + invalid.getMessage());
+        }
     }
 
     private void updatePostProcessor() {
         List<String> newEnchantments = new ArrayList<>();
         for (String enchantment : enchantments) {
             if (!enchantment.contains(",")) {
+                if (enchantment.contains(":") && !enchantment.startsWith("minecraft:")) isEnabled = false;
                 Logger.warn("Invalid format for enchantment in file " + filename + " for enchantment " + enchantment + " : missing ',' for valid level after the enchantment name");
                 continue;
             }

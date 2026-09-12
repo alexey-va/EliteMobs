@@ -450,7 +450,7 @@ public class CustomSummonPower extends ElitePower implements Listener {
             }
         }
         customBossesConfigFields.getPowers().add(replacement);
-        customBossesConfigFields.getFileConfiguration().set("powers", customBossesConfigFields.getPowers());
+        customBossesConfigFields.getWritableFileConfiguration().set("powers", customBossesConfigFields.getPowers());
         customBossesConfigFields.saveFile();
     }
 
@@ -779,7 +779,7 @@ public class CustomSummonPower extends ElitePower implements Listener {
                 logOnHitGate(event, "rejected: the elite has no living entity");
                 return;
             }
-            if (!livingEntity.hasAI()) {
+            if (!eliteEntity.isAIActive()) {
                 logOnHitGate(event, "rejected: the living entity has AI disabled");
                 return;
             }

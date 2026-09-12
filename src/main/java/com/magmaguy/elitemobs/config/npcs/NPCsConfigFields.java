@@ -3,11 +3,13 @@ package com.magmaguy.elitemobs.config.npcs;
 import com.magmaguy.elitemobs.config.ConfigurationEngine;
 import com.magmaguy.elitemobs.config.CustomConfigFields;
 import com.magmaguy.elitemobs.npcs.NPCInteractions;
+import com.magmaguy.elitemobs.pathfinding.patrol.PatrolRoute;
 import com.magmaguy.magmacore.util.Logger;
 import com.magmaguy.magmacore.util.VersionChecker;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.Keyed;
 import org.bukkit.entity.Villager;
 
 import java.util.ArrayList;
@@ -71,6 +73,9 @@ public class NPCsConfigFields extends CustomConfigFields {
     private String arenaFilename;
     @Getter
     @Setter
+    private String classRoot;
+    @Getter
+    @Setter
     private List<String> locations = new ArrayList<>();
     @Getter
     @Setter
@@ -87,6 +92,17 @@ public class NPCsConfigFields extends CustomConfigFields {
     @Getter
     @Setter
     private List<String> scripts = new ArrayList<>();
+    @Getter
+    private List<String> transportRoutes = new ArrayList<>();
+    @Getter
+    private PatrolRoute patrolRoute;
+    /** Zero disables proximity pauses. Independent of chatter and manual patrol holds. */
+    @Getter
+    @Setter
+    private double patrolPauseNearPlayersRadius;
+    @Getter
+    @Setter
+    private boolean patrolFaceNearbyPlayers;
 
     public NPCsConfigFields(String fileName,
                             boolean isEnabled,
@@ -133,8 +149,8 @@ public class NPCsConfigFields extends CustomConfigFields {
 
     private void saveSpawnLocations() {
         try {
-            this.fileConfiguration.set("spawnLocations", locations);
-            ConfigurationEngine.fileSaverCustomValues(fileConfiguration, this.file);
+            this.getWritableFileConfiguration().set("spawnLocations", locations);
+            ConfigurationEngine.fileSaverCustomValues(getWritableFileConfiguration(), this.file);
         } catch (Exception ex) {
             Logger.warn("Attempted to update the location status for an NPC with no config file! Did you delete it during runtime?");
         }
@@ -180,11 +196,25 @@ public class NPCsConfigFields extends CustomConfigFields {
         this.customDisguiseData = processString("customDisguiseData", customDisguiseData, null, false);
         this.customModel = processString("customModel", customModel, null, false);
         this.arenaFilename = processString("arena", arenaFilename, null, false);
+        this.classRoot = processString("classRoot", classRoot, null, false);
         this.command = processString("command", command, null, false);
         this.instanced = processBoolean("instanced", instanced, false, false);
         this.scale = processDouble("scale", scale, 1, false);
         this.syncMovement = processBoolean("syncMovement", syncMovement, false, true);
         this.scripts = processStringList("scripts", scripts, new ArrayList<>(), false);
+        this.transportRoutes = processStringList("transportRoutes", transportRoutes, new ArrayList<>(), false);
+        patrolPauseNearPlayersRadius = processDouble("patrol.pauseNearPlayersRadius", patrolPauseNearPlayersRadius, 0D, false);
+        patrolFaceNearbyPlayers = processBoolean("patrol.faceNearbyPlayers", patrolFaceNearbyPlayers, false, false);
+        if (!Double.isFinite(patrolPauseNearPlayersRadius) || patrolPauseNearPlayersRadius < 0D) {
+            Logger.warn("Invalid patrol.pauseNearPlayersRadius in " + filename + ": expected a finite, non-negative radius. Disabling proximity pauses.");
+            patrolPauseNearPlayersRadius = 0D;
+        }
+        try {
+            this.patrolRoute = PatrolRoute.parse(fileConfiguration);
+        } catch (IllegalArgumentException exception) {
+            this.patrolRoute = null;
+            Logger.warn("Invalid patrol in " + filename + ": " + exception.getMessage());
+        }
     }
 
     public Villager.Profession getProfession() {
@@ -194,14 +224,14 @@ public class NPCsConfigFields extends CustomConfigFields {
 
     private String professionConfigName() {
         if (profession == null) return "nitwit";
-        return profession.toString();
+        return ((Keyed) profession).getKey().getKey();
     }
 
     public void setEnabled(boolean enabled) {
         this.isEnabled = enabled;
-        this.fileConfiguration.set("isEnabled", enabled);
+        this.getWritableFileConfiguration().set("isEnabled", enabled);
         try {
-            ConfigurationEngine.fileSaverCustomValues(this.fileConfiguration, this.file);
+            ConfigurationEngine.fileSaverCustomValues(this.getWritableFileConfiguration(), this.file);
         } catch (Exception e) {
             Logger.warn("Attempted to update the enabled status for an NPC with no config file! Did you delete it during runtime?");
         }
@@ -211,6 +241,17 @@ public class NPCsConfigFields extends CustomConfigFields {
         if (locations == null) return;
         locations.removeIf(entry -> Objects.equals(entry, locationString));
         saveSpawnLocations();
+    }
+
+    public boolean reloadPatrolRoute() {
+        try {
+            patrolRoute = PatrolRoute.parse(getWritableFileConfiguration());
+            return patrolRoute != null;
+        } catch (IllegalArgumentException exception) {
+            patrolRoute = null;
+            Logger.warn("Invalid patrol in " + filename + ": " + exception.getMessage());
+            return false;
+        }
     }
 
 }

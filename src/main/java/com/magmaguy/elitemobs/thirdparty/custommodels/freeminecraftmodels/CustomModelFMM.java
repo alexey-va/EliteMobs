@@ -4,6 +4,7 @@ import com.magmaguy.elitemobs.MetadataHandler;
 import com.magmaguy.elitemobs.commands.admin.RemoveCommand;
 import com.magmaguy.elitemobs.api.EliteMobDamagedByPlayerEventFilter;
 import com.magmaguy.elitemobs.entitytracker.EntityTracker;
+import com.magmaguy.elitemobs.advancedcombat.abilities.ClassAbilityProjectileCarrier;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
 import com.magmaguy.elitemobs.mobconstructor.custombosses.CustomBossEntity;
 import com.magmaguy.elitemobs.thirdparty.custommodels.CustomModelInterface;
@@ -45,11 +46,30 @@ public class CustomModelFMM implements CustomModelInterface {
         dynamicEntity.setDisplayName(nametagName);
     }
 
+    public boolean setNameLines(List<String> lines, float scale, double gap) {
+        if (dynamicEntity == null) return false;
+        dynamicEntity.setDisplayNameLines(lines);
+        dynamicEntity.setDisplayNameScale(scale);
+        dynamicEntity.setDisplayNameLineGap(gap);
+        dynamicEntity.setDisplayNameVisible(true);
+        return true;
+    }
+
+    public boolean setLookTarget(Location target) {
+        if (dynamicEntity == null) return false;
+        dynamicEntity.setLookTarget(target);
+        return true;
+    }
+
     public CustomModelFMM(LivingEntity livingEntity, String modelName, String nametagName,
                           ModeledEntityLeftClickCallback leftClickCallback,
                           ModeledEntityRightClickCallback rightClickCallback) {
         dynamicEntity = DynamicEntity.create(modelName, livingEntity);
         if (dynamicEntity == null) return;
+        // NPC models use click interactions, never hostile contact. Patrols need AI enabled,
+        // so FMM's AI guard cannot distinguish these villagers from combat models.
+        dynamicEntity.setDamagesOnContact(false);
+        dynamicEntity.setHitboxContactCallback(null);
         dynamicEntity.setDisplayName(nametagName);
         if (leftClickCallback != null) dynamicEntity.setLeftClickCallback(leftClickCallback);
         if (rightClickCallback != null) dynamicEntity.setRightClickCallback(rightClickCallback);
@@ -61,6 +81,20 @@ public class CustomModelFMM implements CustomModelInterface {
 
     public static boolean modelExists(String modelName) {
         return ModeledEntityManager.modelExists(modelName);
+    }
+
+    /** Prevents FMM from cancelling or re-routing a projectile damage event already owned by EliteMobs. */
+    public static void runProjectileDamageBypass(Runnable damageCall) {
+        boolean previousApplyDamage = OBBHitDetection.applyDamage;
+        boolean previousBypassProjectileRedirect = OBBHitDetection.bypassProjectileRedirect;
+        OBBHitDetection.applyDamage = true;
+        OBBHitDetection.bypassProjectileRedirect = true;
+        try {
+            damageCall.run();
+        } finally {
+            OBBHitDetection.applyDamage = previousApplyDamage;
+            OBBHitDetection.bypassProjectileRedirect = previousBypassProjectileRedirect;
+        }
     }
 
     @Override
@@ -88,6 +122,7 @@ public class CustomModelFMM implements CustomModelInterface {
     public void setName(String nametagName, boolean visible) {
         if (dynamicEntity == null) return;
         dynamicEntity.setDisplayName(nametagName);
+        dynamicEntity.setDisplayNameVisible(visible);
     }
 
     @Override
@@ -117,9 +152,8 @@ public class CustomModelFMM implements CustomModelInterface {
 
     @Override
     public boolean hasNametagBone() {
-        if (dynamicEntity == null) return true;
-        List<Bone> nametagBones = dynamicEntity.getNametagBones();
-        return nametagBones != null && !nametagBones.isEmpty();
+        // FMM provides a hitbox-top fallback when no authored name anchor exists.
+        return dynamicEntity != null;
     }
 
     @Override
@@ -189,13 +223,21 @@ public class CustomModelFMM implements CustomModelInterface {
 
         @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
         public void onFmmProjectileHit(ModeledEntityHitByProjectileEvent event) {
+            Projectile projectile = event.getProjectile();
+            if (ClassAbilityProjectileCarrier.isCarrier(projectile)) {
+                event.setCancelled(true);
+                Entity underlying = event.getEntity().getUnderlyingEntity();
+                ClassAbilityProjectileCarrier.tryModeledImpact(projectile, underlying);
+                event.getEntity().getSkeleton().tint();
+                return;
+            }
+
             Entity underlying = event.getEntity().getUnderlyingEntity();
             if (!(underlying instanceof LivingEntity)) return;
 
             EliteEntity eliteEntity = EntityTracker.getEliteMobEntity(underlying);
             if (eliteEntity == null || !eliteEntity.isValid()) return;
 
-            Projectile projectile = event.getProjectile();
             if (!(projectile.getShooter() instanceof Player player)) return;
 
             event.setCancelled(true);
@@ -213,17 +255,10 @@ public class CustomModelFMM implements CustomModelInterface {
                 damage = Math.max(1.0, Math.ceil(arrow.getDamage() * projectile.getVelocity().length()));
             }
 
-            boolean previousApplyDamage = OBBHitDetection.applyDamage;
-            boolean previousBypassProjectileRedirect = OBBHitDetection.bypassProjectileRedirect;
-            OBBHitDetection.applyDamage = true;
-            OBBHitDetection.bypassProjectileRedirect = true;
-            try {
+            double modeledDamage = damage;
+            runProjectileDamageBypass(() ->
                 EliteMobDamagedByPlayerEventFilter.applyModeledProjectileHit(
-                        player, eliteEntity, projectile, damage);
-            } finally {
-                OBBHitDetection.applyDamage = previousApplyDamage;
-                OBBHitDetection.bypassProjectileRedirect = previousBypassProjectileRedirect;
-            }
+                        player, eliteEntity, projectile, modeledDamage));
             event.getEntity().getSkeleton().tint();
         }
     }
