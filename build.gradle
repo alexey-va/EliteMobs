@@ -159,6 +159,38 @@ tasks.named('compileTestJava', JavaCompile) {
     javaCompiler = javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
 }
 
+// Opt-in benchmark tooling: never packaged in the plugin or run by `test`/`build`.
+sourceSets {
+    benchmark {
+        compileClasspath += sourceSets.main.output + sourceSets.test.output
+        runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+    }
+}
+configurations {
+    benchmarkImplementation.extendsFrom testImplementation
+    benchmarkRuntimeOnly.extendsFrom testRuntimeOnly
+}
+dependencies {
+    benchmarkImplementation 'org.openjdk.jmh:jmh-core:1.37'
+    benchmarkAnnotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.37'
+}
+configurations.matching { it.name in ['benchmarkCompileClasspath', 'benchmarkRuntimeClasspath'] }.configureEach {
+    attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 25)
+}
+tasks.named('compileBenchmarkJava', JavaCompile) {
+    javaCompiler = javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+    options.encoding = 'UTF-8'
+}
+tasks.register('serializationBenchmark', JavaExec) {
+    group = 'verification'
+    description = 'Compare the real player-data JSON codec with legacy Java serialization using JMH.'
+    dependsOn tasks.named('benchmarkClasses')
+    classpath = sourceSets.benchmark.runtimeClasspath
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+    mainClass = 'com.magmaguy.elitemobs.playerdata.database.SerializationBenchmark'
+    args providers.gradleProperty('benchmarkArgs').getOrElse('').tokenize()
+}
+
 artifacts { // task 'build' runs generates uberjar
     archives shadowJar
 }
