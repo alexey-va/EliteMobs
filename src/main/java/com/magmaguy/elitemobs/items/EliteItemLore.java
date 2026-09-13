@@ -4,7 +4,6 @@ import com.magmaguy.elitemobs.api.utils.EliteItemManager;
 import com.magmaguy.elitemobs.config.EconomySettingsConfig;
 import com.magmaguy.elitemobs.config.ItemSettingsConfig;
 import com.magmaguy.elitemobs.config.enchantments.EnchantmentsConfig;
-import com.magmaguy.elitemobs.config.menus.premade.SkillBonusMenuConfig;
 import com.magmaguy.elitemobs.config.enchantments.premade.SoulbindConfig;
 import com.magmaguy.elitemobs.config.potioneffects.PotionEffectsConfig;
 import com.magmaguy.elitemobs.items.customenchantments.SoulbindEnchantment;
@@ -52,7 +51,6 @@ public class EliteItemLore {
     private List<String> customLore = new ArrayList<>();
     private int prestigeLevel = 0;
     private List<String> thirdPartyLore = null;
-    private String skillRequirement = null;
 
     public EliteItemLore(ItemStack itemStack, boolean showItemWorth) {
         this(itemStack, showItemWorth, false);
@@ -88,7 +86,6 @@ public class EliteItemLore {
         constructItemSource();
         constructCustomLore();
         constructPrestigeLevel();
-        constructSkillRequirement();
 
         constructPotionEffects();
 
@@ -166,14 +163,6 @@ public class EliteItemLore {
         this.prestigeLevel = SoulbindEnchantment.getPrestigeLevel(itemMeta);
     }
 
-    private void constructSkillRequirement() {
-        GearRestrictionHandler.GearRequirement requirement = GearRestrictionHandler.getGearRequirement(itemStack);
-        if (requirement == null) return;
-        skillRequirement = ItemSettingsConfig.getSkillRequirementLore()
-                .replace("$skillType", SkillBonusMenuConfig.getSkillTypeDisplayName(requirement.skillType()))
-                .replace("$itemLevel", String.valueOf(requirement.level()));
-    }
-
     private void constructItemWorth() {
         //Note: This writes a new value every time. Value might not have changed. This is not really an issue.
         itemStack.setItemMeta(itemMeta);
@@ -242,12 +231,6 @@ public class EliteItemLore {
             string = stringReplacer(string, "$EDEF", Round.twoDecimalPlaces(EliteItemManager.getEliteDefense(itemStack) + EliteItemManager.getBonusEliteDefense(itemStack)));
             string = stringReplacer(string, "$prestigeLevel", prestigeLevel);
             string = stringReplacer(string, "$itemLevel", EliteItemManager.getRoundedItemLevel(itemStack));
-
-            if (string.contains("$ifSkillRequirement")) {
-                if (skillRequirement == null) continue;
-                string = string.replace("$ifSkillRequirement", "");
-            }
-            string = stringReplacer(string, "$skillRequirement", skillRequirement == null ? "" : skillRequirement);
 
             if (string.contains("$enchantments")) {
                 for (String entry : vanillaEnchantmentsLore)

@@ -35,15 +35,15 @@ public final class AdvancedCombatSuggestion implements Listener {
 
     private static void sendSuggestion(Player player) {
         player.spigot().sendMessage(
-                SpigotMessage.simpleMessage("&6[EliteMobs] &fСообщение разработчика MagmaGuy о новой боевой системе. "),
+                SpigotMessage.simpleMessage("&6[EliteMobs] &fA message from the MagmaGuy, the developer about the new combat system. "),
                 SpigotMessage.hoverLinkMessage(
-                        "&a[Прочитать]",
-                        "&7Открыть бесплатную публикацию MagmaGuy на Patreon",
+                        "&a[Click to read!]",
+                        "&7Read MagmaGuy's free Patreon post",
                         DEVELOPER_MESSAGE_URL),
                 SpigotMessage.simpleMessage(" "),
                 SpigotMessage.commandHoverMessage(
-                        "&c[Больше не показывать]",
-                        "&7Скрыть это сообщение для всех администраторов сервера",
+                        "&c[Dismiss permanently]",
+                        "&7Stop showing this message to all administrators on this server",
                         "/em advancedcombat dismiss"));
     }
 }

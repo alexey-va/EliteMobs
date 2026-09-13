@@ -19,8 +19,6 @@ public class ItemSettingsConfig extends ConfigurationFile {
     @Getter
     private static List<String> loreStructure;
     @Getter
-    private static String skillRequirementLore;
-    @Getter
     private static String mobItemSource;
     @Getter
     private static String loreWorth;
@@ -169,8 +167,6 @@ public class ItemSettingsConfig extends ConfigurationFile {
                         "The following are valid placeholders:",
                         "$itemLevel - shows the item level",
                         "$prestigeLevel - shows the prestige level",
-                        "$ifSkillRequirement - makes a line only appear when skill-based gear restrictions apply to the item",
-                        "$skillRequirement - shows the skill and level required to equip the item",
                         "$itemMaterial - shows the base material of the item, like Diamond Sword. Useful when resource pack skins hide the material. Uses the server-side English name",
                         "$itemMaxDurability - shows the maximum durability of the item. Lines with this placeholder are skipped for items without durability and unbreakable items",
                         "$weaponOrArmorStats - shows the elite DPS or elite armor stats, depending on the item",
@@ -190,7 +186,6 @@ public class ItemSettingsConfig extends ConfigurationFile {
                 file, fileConfiguration, "itemLoreStructureV2", new ArrayList<>(List.of(
                         ChatColorConverter.convert("&7&m&l---------&7<&lEquip Info&7>&m&l---------"),
                         ChatColorConverter.convert("&7Item level: &f$itemLevel &7Prestige &6$prestigeLevel"),
-                        ChatColorConverter.convert("$ifSkillRequirement$skillRequirement"),
                         ChatColorConverter.convert("$weaponOrArmorStats"),
                         ChatColorConverter.convert("$soulbindInfo"),
                         ChatColorConverter.convert("$itemSource"),
@@ -206,11 +201,6 @@ public class ItemSettingsConfig extends ConfigurationFile {
                         ChatColorConverter.convert("&7&l&m-----------------------------"),
                         ChatColorConverter.convert("$loreResaleValue")
                 )), true);
-        skillRequirementLore = ConfigurationEngine.setString(
-                List.of("Sets the skill requirement line used by $skillRequirement.",
-                        "$skillType is the localized skill name and $itemLevel is the required level."),
-                file, fileConfiguration, "skillRequirementLore",
-                "&c⚠ Requires &f$skillType &clevel &f$itemLevel", true);
         shopItemSource = ConfigurationEngine.setString(
                 List.of("Sets the shop source lore for store purchased"),
                 file, fileConfiguration, "shopSourceItemLores", "&7Purchased from a store", true);

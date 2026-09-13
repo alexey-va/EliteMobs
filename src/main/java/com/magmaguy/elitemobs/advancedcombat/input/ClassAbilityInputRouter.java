@@ -283,11 +283,11 @@ public final class ClassAbilityInputRouter implements Listener {
 
     private static void sendControlFeedback(Player player, ClassControlMode.FAction action) {
         String header = ClassPresentationTheme.gradient(
-                ClassPresentationTheme.PURPLE, "Управление классом");
+                ClassPresentationTheme.PURPLE, "Class Controls");
         String message = switch (action) {
-            case TOGGLED_ON -> header + " &8» &aВКЛ &8— &7F,F: манёвр | F+ЛКМ: главный навык | F+ПКМ: поддержка";
-            case TOGGLED_OFF -> header + " &8» &cВЫКЛ &8— &7F снова меняет предметы в руках";
-            case TOGGLE_BLOCKED -> header + " &8» &cНЕДОСТУПНО &8— &7вне миров EliteMobs";
+            case TOGGLED_ON -> header + " &8» &aON &8- &7F,F: Mobility | F+LMB: Signature | F+RMB: Utility";
+            case TOGGLED_OFF -> header + " &8» &cOFF &8- &7F swaps hands again";
+            case TOGGLE_BLOCKED -> header + " &8» &cBLOCKED &8- &7outside EliteMobs worlds";
             default -> null;
         };
         if (message != null)

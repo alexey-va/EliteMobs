@@ -270,7 +270,7 @@ public final class ClassMinionManager implements Listener, AutoCloseable {
         Location markerLocation = deathLocation.clone().add(0D, .35D, 0D);
         TextDisplay display = markerLocation.getWorld().spawn(
                 markerLocation, TextDisplay.class, text -> {
-                    text.setText(ChatColorConverter.convert("&5&lТруп"));
+                    text.setText(ChatColorConverter.convert("&5&lCorpse"));
                     text.setBillboard(Display.Billboard.CENTER);
                     text.setShadowed(true);
                     text.setPersistent(false);

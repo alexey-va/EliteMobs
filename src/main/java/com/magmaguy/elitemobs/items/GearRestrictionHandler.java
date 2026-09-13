@@ -80,17 +80,6 @@ public class GearRestrictionHandler {
         return new RestrictionContext(true, playerDataLoaded, skillType, playerSkillLevel);
     }
 
-    /** Returns the requirement shown to players for an item, independent of their current progress. */
-    public static GearRequirement getGearRequirement(ItemStack itemStack) {
-        if (!AdventurersGuildConfig.isSkillBasedGearRestriction()) return null;
-        if (itemStack == null || itemStack.getType().isAir()) return null;
-        if (!EliteItemManager.isEliteMobsItem(itemStack)) return null;
-        int itemLevel = EliteItemManager.getRoundedItemLevel(itemStack);
-        if (itemLevel <= 20) return null;
-        SkillType skillType = WeaponIdentityResolver.progressionSkillIncludingArmor(itemStack);
-        return skillType == null ? null : new GearRequirement(skillType, itemLevel);
-    }
-
     /**
      * Gets the effective item level for combat purposes.
      * If the player can't use the item, returns 0 (no elite damage).
@@ -145,8 +134,5 @@ public class GearRestrictionHandler {
                                      boolean playerDataLoaded,
                                      SkillType skillType,
                                      int playerSkillLevel) {
-    }
-
-    public record GearRequirement(SkillType skillType, int level) {
     }
 }
