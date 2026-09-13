@@ -162,16 +162,17 @@ public final class DungeonRuntimeData {
     }
 
     public static List<String> loadTreasureChestPlayerCooldowns(String configFile, List<String> legacyValues) {
-        if (!available) return legacyValues;
+        List<String> safeLegacyValues = legacyValues == null ? new ArrayList<>() : legacyValues;
+        if (!available) return safeLegacyValues;
         List<String> stored = cachedPlayerCooldowns(configFile);
-        if (!stored.isEmpty() || legacyValues == null || legacyValues.isEmpty()) return stored;
+        if (!stored.isEmpty() || safeLegacyValues.isEmpty()) return stored;
         synchronized (PlayerDataRepository.jdbcMonitor()) {
             try {
                 Connection connection = PlayerDataRepository.connection();
                 boolean oldAutoCommit = connection.getAutoCommit();
                 try {
                     connection.setAutoCommit(false);
-                    for (String legacyValue : legacyValues) {
+                    for (String legacyValue : safeLegacyValues) {
                         String[] split = legacyValue.split(":", 2);
                         if (split.length != 2) continue;
                         try {
@@ -184,7 +185,7 @@ public final class DungeonRuntimeData {
                     synchronized (QUEUE_MONITOR) {
                         Map<UUID, Long> cooldowns = treasureChestPlayerCooldowns
                                 .computeIfAbsent(configFile, ignored -> new HashMap<>());
-                        for (String legacyValue : legacyValues) {
+                        for (String legacyValue : safeLegacyValues) {
                             String[] split = legacyValue.split(":", 2);
                             if (split.length != 2) continue;
                             try {
@@ -205,7 +206,7 @@ public final class DungeonRuntimeData {
                 available = false;
                 LOGGER.warning("Failed to load treasure chest player cooldowns for " + configFile + ".");
                 exception.printStackTrace();
-                return legacyValues;
+                return safeLegacyValues;
             }
         }
     }

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,6 +54,16 @@ class DungeonRuntimeDataTest {
 
         assertEquals(playerId + ":200", DungeonRuntimeData.readPlayerCooldowns(connection, "chest.yml").getFirst());
         assertEquals(1, rowCount(DungeonRuntimeData.TREASURE_CHEST_PLAYER_TABLE));
+    }
+
+    @Test
+    void missingLegacyPlayerCooldownsLoadAsMutableEmptyListWhenDatabaseIsUnavailable() {
+        DungeonRuntimeData.shutdown();
+
+        List<String> cooldowns = DungeonRuntimeData.loadTreasureChestPlayerCooldowns("chest.yml", null);
+        cooldowns.add(UUID.randomUUID() + ":200");
+
+        assertEquals(1, cooldowns.size());
     }
 
     @Test
