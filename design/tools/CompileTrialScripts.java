@@ -16,3 +16,4 @@ class CompileTrialScripts {
         System.out.println("Compiled and validated canonical hook declarations for " + count + " encounter scripts; no gameplay executed.");
     }
 }
+

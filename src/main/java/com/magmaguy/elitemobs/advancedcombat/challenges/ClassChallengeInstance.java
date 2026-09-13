@@ -265,3 +265,4 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
 
     private static void tell(Player player, String text) { if (player.isOnline()) player.sendMessage(ChatColorConverter.convert(text)); }
 }
+
