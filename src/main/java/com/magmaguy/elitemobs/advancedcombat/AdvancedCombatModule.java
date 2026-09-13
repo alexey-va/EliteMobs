@@ -967,9 +967,9 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
             if (!player.isOnline() || !AdvancedCombatSystemConfig.isEnabled()) return;
             if (!outsideControlsAllowed() || !fLayerSupported(player)) return;
             player.sendMessage(ChatColorConverter.convert(
-                    ClassPresentationTheme.gradient(ClassPresentationTheme.ELITE, "[Alpha] Advanced Combat System")
-                            + " &8» &7New: hold &fsneak&7 and double-tap &fF&7 to toggle class"
-                            + " controls anywhere outside EliteMobs content."));
+                    ClassPresentationTheme.gradient(ClassPresentationTheme.ELITE, "[Альфа] Боевая система")
+                            + " &8» &7Новинка: зажмите &fShift&7 и дважды нажмите &fF&7, чтобы переключить"
+                            + " управление классом вне контента EliteMobs."));
         }, CONTROL_TOGGLE_NOTICE_DELAY_TICKS);
     }
 
