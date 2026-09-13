@@ -19,14 +19,14 @@ final class ClassMenuPresenter {
                 .findFirst()
                 .orElse(null);
         String activeClass = activeForm == null
-                ? "&7None"
+                ? "&7Не выбран"
                 : ClassMenuStyle.themed(activeForm, activeForm.displayName());
         List<String> body = new ArrayList<>();
-        body.add(ClassMenuStyle.section(ClassMenuStyle.GOLD, "Active class:") + " " + activeClass);
+        body.add(ClassMenuStyle.section(ClassMenuStyle.GOLD, "Активный класс:") + " " + activeClass);
         for (ClassMenuView.FormView root : view.roots()) {
             if (root.band() == com.magmaguy.elitemobs.advancedcombat.classes.ClassBand.STARTER)
-                body.add("&7Start as " + root.displayName() + ". Reach level " + root.band().effectiveEnd()
-                        + " to challenge the other class instructors.");
+                body.add("&7Начните путь как " + root.displayName() + ". Достигните " + root.band().effectiveEnd()
+                        + " уровня, чтобы бросить вызов наставникам других классов.");
         }
 
         List<ClassMenuPresentation.ActionView> actions = new ArrayList<>();
@@ -36,19 +36,19 @@ final class ClassMenuPresenter {
         actions.add(new ClassMenuPresentation.ActionView(
                 ClassMenuPresentation.ActionKind.CONTROLS,
                 ClassMenuPresentation.Tone.CONTROL,
-                ClassMenuStyle.section(ClassMenuStyle.TEAL, "Ability Controls"),
-                "&7View the controls for your three abilities.",
+                ClassMenuStyle.section(ClassMenuStyle.TEAL, "Управление навыками"),
+                "&7Посмотреть управление тремя навыками класса.",
                 new ClassMenuAction.OpenControls()));
         if (activeForm != null) {
             actions.add(new ClassMenuPresentation.ActionView(
                     ClassMenuPresentation.ActionKind.DEACTIVATE,
                     ClassMenuPresentation.Tone.CONTROL,
-                    ClassMenuStyle.section(ClassMenuStyle.RED, "Deactivate Class"),
-                    "&7Play without any class. Your levels are kept.",
+                    ClassMenuStyle.section(ClassMenuStyle.RED, "Отключить класс"),
+                    "&7Играть без класса. Достигнутые уровни сохранятся.",
                     new ClassMenuAction.DeactivateClass()));
         }
         return new ClassMenuPresentation(
-                ClassMenuStyle.title("Classes"), body, 2, BUTTON_WIDTH, actions);
+                ClassMenuStyle.title("Классы"), body, 2, BUTTON_WIDTH, actions);
     }
 
     static ClassMenuPresentation form(ClassMenuView view, ClassMenuView.FormView form) {
@@ -58,14 +58,14 @@ final class ClassMenuPresenter {
     static ClassMenuPresentation form(ClassMenuView view, ClassMenuView.FormView form, boolean showAllClasses) {
         List<String> body = new ArrayList<>();
         if (form.lineage().size() > 1) {
-            body.add("&7Path &8• " + String.join(" &8> ", form.lineage().stream()
+            body.add("&7Путь &8• " + String.join(" &8> ", form.lineage().stream()
                     .map(name -> ClassMenuStyle.themed(form, name))
                     .toList()));
         }
         if (form.unlocked()) {
             body.add(ClassMenuStyle.state(form) + " &8• &fLv "
                     + form.effectiveLevel() + "/" + form.effectiveCap());
-            body.add("&7XP &8• &f" + form.xpSummary());
+            body.add("&7Опыт &8• &f" + form.xpSummary());
         } else {
             body.add(ClassMenuStyle.state(form));
         }
@@ -78,15 +78,15 @@ final class ClassMenuPresenter {
         body.add(ClassMenuStyle.themed(form, form.resourceName())
                 + " &8• &7" + form.resourceDescription());
         body.add("");
-        body.add(abilityLine(ClassMenuStyle.BLUE, "Mobility", form.mobility()));
-        body.add(abilityLine(ClassMenuStyle.ORANGE, "Signature", form.signature()));
-        body.add(abilityLine(ClassMenuStyle.GREEN, "Utility", form.utility()));
+        body.add(abilityLine(ClassMenuStyle.BLUE, "Манёвр", form.mobility()));
+        body.add(abilityLine(ClassMenuStyle.ORANGE, "Главный навык", form.signature()));
+        body.add(abilityLine(ClassMenuStyle.GREEN, "Поддержка", form.utility()));
         for (ClassMenuView.PassiveView passive : form.passives()) {
             body.addAll(ClassMenuBonusText.lines(form, passive));
         }
         if (view.runLocked() && !form.selected()) {
             body.add("");
-            body.add("&cYour active class is locked for this run.");
+            body.add("&cАктивный класс нельзя менять во время этого прохождения.");
         }
 
         List<ClassMenuPresentation.ActionView> actions = new ArrayList<>();
@@ -96,7 +96,7 @@ final class ClassMenuPresenter {
                     ClassMenuPresentation.ActionKind.PARENT,
                     ClassMenuPresentation.Tone.NAVIGATION,
                     "← " + ClassMenuStyle.themed(parent, parent.displayName()),
-                    "&7Back to the previous class.",
+                    "&7Вернуться к предыдущему классу.",
                     new ClassMenuAction.OpenForm(parent.id(), showAllClasses)));
         }
         for (ClassMenuView.FormLink childLink : form.children()) {
@@ -109,8 +109,8 @@ final class ClassMenuPresenter {
             actions.add(new ClassMenuPresentation.ActionView(
                     ClassMenuPresentation.ActionKind.SELECT,
                     ClassMenuPresentation.Tone.CONTROL,
-                    ClassMenuStyle.section(ClassMenuStyle.GREEN, "Activate " + form.displayName()),
-                    "&7Make this your active class.",
+                    ClassMenuStyle.section(ClassMenuStyle.GREEN, "Выбрать " + form.displayName()),
+                    "&7Сделать этот класс активным.",
                     new ClassMenuAction.SelectForm(form.id(), showAllClasses)));
         }
         if (!showAllClasses && form.challengeEligible() && !view.runLocked()) {
@@ -118,16 +118,16 @@ final class ClassMenuPresenter {
             actions.add(new ClassMenuPresentation.ActionView(
                     ClassMenuPresentation.ActionKind.SELECT,
                     ClassMenuPresentation.Tone.CONTROL,
-                    "&6Challenge Instructor · " + fee + " coins",
-                    "&7Solo trial, level " + form.band().skillUnlockLevel()
-                            + ". Costs " + fee + " coins when combat begins. Win to unlock and activate " + form.displayName() + ".",
+                    "&6Испытать наставника · " + fee + " кристаллов",
+                    "&7Одиночное испытание " + form.band().skillUnlockLevel()
+                            + " уровня. При начале боя спишется " + fee + " кристаллов. Победите, чтобы открыть и выбрать " + form.displayName() + ".",
                     new ClassMenuAction.Challenge(form.id(), form.challengeFee())));
         }
         if (showAllClasses) actions.add(new ClassMenuPresentation.ActionView(
                 ClassMenuPresentation.ActionKind.OVERVIEW,
                 ClassMenuPresentation.Tone.NAVIGATION,
-                "← " + ClassMenuStyle.section(ClassMenuStyle.GOLD, "All Classes"),
-                "&7Return to all classes.",
+                "← " + ClassMenuStyle.section(ClassMenuStyle.GOLD, "Все классы"),
+                "&7Вернуться к списку классов.",
                 new ClassMenuAction.OpenOverview()));
 
         return new ClassMenuPresentation(
@@ -139,9 +139,9 @@ final class ClassMenuPresenter {
                 .filter(ClassMenuView.FormView::active)
                 .findFirst()
                 .orElse(null);
-        String mobility = active == null ? "Mobility" : active.mobility().displayName();
-        String signature = active == null ? "Signature" : active.signature().displayName();
-        String utility = active == null ? "Utility" : active.utility().displayName();
+        String mobility = active == null ? "Манёвр" : active.mobility().displayName();
+        String signature = active == null ? "Главный навык" : active.signature().displayName();
+        String utility = active == null ? "Поддержка" : active.utility().displayName();
         List<String> body = List.of(
                 ClassMenuStyle.section(ClassMenuStyle.BLUE, "F, F")
                         + " &8• &f" + mobility,
@@ -154,11 +154,11 @@ final class ClassMenuPresenter {
                 new ClassMenuPresentation.ActionView(
                         ClassMenuPresentation.ActionKind.OVERVIEW,
                         ClassMenuPresentation.Tone.NAVIGATION,
-                        "← " + ClassMenuStyle.section(ClassMenuStyle.GOLD, "All Classes"),
-                        "&7Return to all classes.",
+                        "← " + ClassMenuStyle.section(ClassMenuStyle.GOLD, "Все классы"),
+                        "&7Вернуться к списку классов.",
                         new ClassMenuAction.OpenOverview()));
         return new ClassMenuPresentation(
-                ClassMenuStyle.title("Ability Controls"), body, 1, BODY_WIDTH, actions);
+                ClassMenuStyle.title("Управление навыками"), body, 1, BODY_WIDTH, actions);
     }
 
     private static ClassMenuPresentation.ActionView formAction(
@@ -191,7 +191,7 @@ final class ClassMenuPresenter {
                     + requirement.displayName() + " "
                     + requirement.currentLevel() + "&8/&f" + requirement.requiredLevel());
         }
-        return ClassMenuStyle.section(ClassMenuStyle.GOLD, "Skills") + " &8• " + skills;
+        return ClassMenuStyle.section(ClassMenuStyle.GOLD, "Навыки") + " &8• " + skills;
     }
 
     private static String abilityLine(

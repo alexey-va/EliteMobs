@@ -4,7 +4,6 @@ import com.magmaguy.elitemobs.api.EliteMobRemoveEvent;
 import com.magmaguy.elitemobs.api.EliteMobSpawnEvent;
 import com.magmaguy.elitemobs.api.internal.RemovalReason;
 import com.magmaguy.elitemobs.mobconstructor.custombosses.RegionalBossEntity;
-import com.magmaguy.magmacore.util.ChunkLocationChecker;
 import com.magmaguy.magmacore.util.Logger;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,25 +15,35 @@ import org.bukkit.event.Listener;
 
 public class TransitiveBossBlock implements Listener {
 
-    private static void setBlockData(RegionalBossEntity regionalBossEntity, TransitiveBlock transitiveBlock, Location spawnLocation) {
-        Location location;
-        if (!ChunkLocationChecker.chunkAtLocationIsLoaded(spawnLocation)) return;
+    private static void setBlockData(TransitiveBlock transitiveBlock, Location spawnLocation) {
+        if (spawnLocation == null || spawnLocation.getWorld() == null) return;
         double rotation = 0;
 
         BlockData blockData = transitiveBlock.getBlockData().clone();
-
-        if (rotation == 0)
-            location = spawnLocation.clone().add(transitiveBlock.getRelativeLocation());
-        else {
-            location = spawnLocation.clone().add(transitiveBlock.getRelativeLocation().clone().rotateAroundY(Math.toRadians(rotation)));
+        Location location = targetLocation(spawnLocation, transitiveBlock, rotation);
+        if (rotation != 0) {
             if (blockData instanceof Directional)
                 ((Directional) blockData).setFacing(rotateBlockFace(((Directional) blockData).getFacing(), rotation));
         }
+
+        // Authored transitions may target a door several chunks away from the boss arena.
+        // Reading or writing an unloaded target chunk silently leaves the transition unapplied.
+        // Load the actual destination chunk; the old check only inspected the boss's chunk.
+        int chunkX = location.getBlockX() >> 4;
+        int chunkZ = location.getBlockZ() >> 4;
+        if (!location.getWorld().isChunkLoaded(chunkX, chunkZ))
+            location.getWorld().getChunkAt(chunkX, chunkZ);
 
         //Minor optimization, does not replace blocks that are already identical
         if (!location.getBlock().getBlockData().equals(blockData))
             location.getBlock().setBlockData(blockData, blockData.getMaterial() == Material.WATER || blockData.getMaterial() == Material.LAVA);
 
+    }
+
+    static Location targetLocation(Location spawnLocation, TransitiveBlock transitiveBlock, double rotation) {
+        if (rotation == 0) return spawnLocation.clone().add(transitiveBlock.getRelativeLocation());
+        return spawnLocation.clone().add(
+                transitiveBlock.getRelativeLocation().clone().rotateAroundY(Math.toRadians(rotation)));
     }
 
     /*
@@ -89,7 +98,7 @@ public class TransitiveBossBlock implements Listener {
         if (!(event.getEliteMobEntity() instanceof RegionalBossEntity regionalBossEntity)) return;
         if (regionalBossEntity.getOnSpawnTransitiveBlocks() != null && !regionalBossEntity.getOnSpawnTransitiveBlocks().isEmpty())
             for (TransitiveBlock transitiveBlock : regionalBossEntity.getOnSpawnTransitiveBlocks())
-                setBlockData(regionalBossEntity, transitiveBlock, regionalBossEntity.getSpawnLocation());
+                setBlockData(transitiveBlock, regionalBossEntity.getSpawnLocation());
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -106,6 +115,6 @@ public class TransitiveBossBlock implements Listener {
         if (reason != RemovalReason.DEATH && reason != RemovalReason.KILL_COMMAND) return;
         if (regionalBossEntity.getOnRemoveTransitiveBlocks() != null && !regionalBossEntity.getOnRemoveTransitiveBlocks().isEmpty())
             for (TransitiveBlock transitiveBlock : regionalBossEntity.getOnRemoveTransitiveBlocks())
-                setBlockData(regionalBossEntity, transitiveBlock, regionalBossEntity.getSpawnLocation());
+                setBlockData(transitiveBlock, regionalBossEntity.getSpawnLocation());
     }
 }

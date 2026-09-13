@@ -40,7 +40,7 @@ final class ClassMenuInventoryAdapter implements ClassMenuRenderer, Listener {
     @Override
     public void showOverview(Player player, ClassMenuView view) {
         ClassMenuPresentation page = ClassMenuPresenter.overview(view);
-        Inventory inventory = inventory(player, "&6Classes");
+        Inventory inventory = inventory(player, "&6Классы");
         InventorySession session = new InventorySession(player.getUniqueId());
         inventory.setItem(4, item(
                 Material.NETHER_STAR,
@@ -63,32 +63,32 @@ final class ClassMenuInventoryAdapter implements ClassMenuRenderer, Listener {
                         action.label(), tooltipLore(action), player, action.action());
             }
         }
-        inventory.setItem(49, item(Material.BARRIER, "&cClose", List.of("&7Close this menu.")));
+        inventory.setItem(49, item(Material.BARRIER, "&cЗакрыть", List.of("&7Вернуться в игру.")));
         open(player, inventory, session);
     }
 
     @Override
     public void showForm(Player player, ClassMenuView view, ClassMenuView.FormView form, boolean showAllClasses) {
         ClassMenuPresentation page = ClassMenuPresenter.form(view, form, showAllClasses);
-        Inventory inventory = inventory(player, "&6Class: " + form.displayName());
+        Inventory inventory = inventory(player, "&6Класс: " + form.displayName());
         InventorySession session = new InventorySession(player.getUniqueId());
 
         List<String> summary = new ArrayList<>();
         if (form.lineage().size() > 1) summary.add("&7" + String.join(" &8> &7", form.lineage()));
         summary.add(ClassMenuStyle.state(form));
         if (form.unlocked()) {
-            summary.add("&7Level &8• &f" + form.effectiveLevel() + "/" + form.effectiveCap());
-            summary.add("&7XP &8• &f" + form.xpSummary());
+            summary.add("&7Уровень &8• &f" + form.effectiveLevel() + "/" + form.effectiveCap());
+            summary.add("&7Опыт &8• &f" + form.xpSummary());
         }
         summary.add(ClassMenuStyle.themed(form, form.resourceName()) + " &8• &7" + form.resourceDescription());
         inventory.setItem(13, item(rootMaterial(form), ClassMenuStyle.themed(form, form.displayName()), summary));
 
         inventory.setItem(20, abilityItem(Material.FEATHER,
-                ClassMenuStyle.section(ClassMenuStyle.BLUE, "Mobility"), form.mobility()));
+                ClassMenuStyle.section(ClassMenuStyle.BLUE, "Манёвр"), form.mobility()));
         inventory.setItem(22, abilityItem(Material.NETHER_STAR,
-                ClassMenuStyle.section(ClassMenuStyle.ORANGE, "Signature"), form.signature()));
+                ClassMenuStyle.section(ClassMenuStyle.ORANGE, "Главный навык"), form.signature()));
         inventory.setItem(24, abilityItem(Material.COMPASS,
-                ClassMenuStyle.section(ClassMenuStyle.GREEN, "Utility"), form.utility()));
+                ClassMenuStyle.section(ClassMenuStyle.GREEN, "Поддержка"), form.utility()));
         inventory.setItem(29, requirementsItem(form));
         inventory.setItem(33, passivesItem(form));
 
@@ -120,10 +120,10 @@ final class ClassMenuInventoryAdapter implements ClassMenuRenderer, Listener {
     @Override
     public void showControls(Player player, ClassMenuView view) {
         ClassMenuPresentation page = ClassMenuPresenter.controls(view);
-        Inventory inventory = inventory(player, "&6Class Ability Controls");
+        Inventory inventory = inventory(player, "&6Управление навыками класса");
         InventorySession session = new InventorySession(player.getUniqueId());
         inventory.setItem(4, item(Material.WRITABLE_BOOK,
-                ClassMenuStyle.title("Ability Controls"), page.bodyLines()));
+                ClassMenuStyle.title("Управление навыками"), page.bodyLines()));
 
         for (ClassMenuPresentation.ActionView action : page.actions()) {
             switch (action.kind()) {
@@ -226,7 +226,7 @@ final class ClassMenuInventoryAdapter implements ClassMenuRenderer, Listener {
                 lore.addAll(ClassMenuText.wrap("", ClassMenuStyle.blockerText(blocker)));
         }
         return item(Material.EXPERIENCE_BOTTLE,
-                ClassMenuStyle.section(ClassMenuStyle.GOLD, "Skills"), lore);
+                ClassMenuStyle.section(ClassMenuStyle.GOLD, "Навыки"), lore);
     }
 
     private static ItemStack passivesItem(ClassMenuView.FormView form) {
@@ -236,7 +236,7 @@ final class ClassMenuInventoryAdapter implements ClassMenuRenderer, Listener {
             lore.addAll(ClassMenuBonusText.lines(form, passive));
         }
         return item(Material.ENCHANTED_BOOK,
-                ClassMenuStyle.section(ClassMenuStyle.PURPLE, "Bonuses"), lore);
+                ClassMenuStyle.section(ClassMenuStyle.PURPLE, "Бонусы"), lore);
     }
 
     private static List<String> tooltipLore(ClassMenuPresentation.ActionView action) {

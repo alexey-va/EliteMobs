@@ -65,25 +65,25 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
         if (!Bukkit.isPrimaryThread()) throw new IllegalStateException("Trial admission requires the server thread");
         var module = AdvancedCombatModule.get();
         if (!module.canChallenge(player, formId)) {
-            tell(player, "&cMeet this class's training requirements before challenging its instructor.");
+            tell(player, "&cСначала выполните требования обучения этого класса.");
             return;
         }
         var form = module.catalog().require(formId);
         if (Double.compare(quotedFee, fee(form)) != 0) {
-            tell(player, "&eThe entry fee changed. Reopen the class menu for the current price.");
+            tell(player, "&eЦена входа изменилась. Откройте меню класса заново.");
             return;
         }
         ArenaInstance league = ArenaInstance.getArenaInstances().get("wood_league.yml");
         if (league == null || league.isDefunct()) {
-            tell(player, "&cThe Wood League arena is not available.");
+            tell(player, "&cАрена Деревянной лиги сейчас недоступна.");
             return;
         }
         if (league.getContainer().occupied()) {
-            tell(player, "&eThe arena is in use. Wait for the current group or class trial to finish.");
+            tell(player, "&eАрена занята. Дождитесь завершения текущего боя или испытания класса.");
             return;
         }
         if (EconomyHandler.checkCurrency(player.getUniqueId()) < quotedFee) {
-            tell(player, "&cThis attempt costs " + EconomyHandler.formatCurrency(quotedFee) + " coins.");
+            tell(player, "&cДля попытки нужно " + EconomyHandler.formatCurrency(quotedFee) + " кристаллов.");
             return;
         }
         ClassTrialDefinition trial;
@@ -91,7 +91,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
             trial = ClassTrialDefinition.forForm(formId);
         } catch (RuntimeException failure) {
             Logger.warn("Could not prepare class trial " + formId + ": " + failure.getMessage());
-            tell(player, "&cThis instructor's trial is unavailable. Ask an administrator to check its required content. You were not charged.");
+            tell(player, "&cИспытание этого наставника недоступно. Сообщите администрации; кристаллы не списаны.");
             return;
         }
         ClassChallengeInstance run = new ClassChallengeInstance(league.getContainer(), player, trial, quotedFee);
@@ -107,7 +107,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
         } catch (RuntimeException failure) {
             run.destroyMatch();
             Logger.warn("Could not admit class trial " + formId + ": " + failure.getMessage());
-            tell(player, "&cThe trial could not begin. You were not charged.");
+            tell(player, "&cНе удалось начать испытание. Кристаллы не списаны.");
         }
     }
 
@@ -135,7 +135,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
             if (!instructor.exists()) throw new IllegalStateException("Instructor spawn was rejected");
             requireActivePowers();
             if (!EconomyHandler.tryWithdraw(challenger.getUniqueId(), quotedFee)) {
-                tell(challenger, "&cThe entry fee could not be paid. The trial was cancelled.");
+                tell(challenger, "&cНе удалось оплатить вход. Испытание отменено.");
                 destroyMatch();
                 return;
             }
@@ -145,7 +145,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
             combatTask = Bukkit.getScheduler().runTaskTimer(MetadataHandler.PLUGIN, this::tickCombat, 5, 5);
         } catch (RuntimeException failure) {
             Logger.warn("Class trial " + trial.form().id() + " failed: " + failure.getMessage());
-            tell(challenger, "&cThe instructor could not complete this trial.");
+            tell(challenger, "&cНаставник не смог продолжить испытание.");
             refund();
             endMatch();
         }
@@ -155,7 +155,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
         if (closing || state != InstancedRegionState.ONGOING) return;
         if (!instructor.exists()) {
             // Despawns, reloads and other removals never count as completing training.
-            tell(challenger, "&cThe instructor disappeared; no class was unlocked.");
+            tell(challenger, "&cНаставник исчез; класс не открыт.");
             refund();
             endMatch();
             return;
@@ -169,7 +169,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
             return;
         }
         if ((elapsedTicks += 5) >= 6000 && state == InstancedRegionState.ONGOING) {
-            tell(challenger, "&eThe trial time limit was reached.");
+            tell(challenger, "&eВремя испытания закончилось.");
             defeat();
         }
     }
@@ -197,7 +197,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
             classUnlocked = true;
             victory();
         } else {
-            tell(challenger, "&cYour class data became unavailable. Contact an administrator about this victory.");
+            tell(challenger, "&cДанные классов стали недоступны. Сообщите администрации об этой победе.");
             refund();
             endMatch();
         }
@@ -230,9 +230,9 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
         }
         if (classUnlocked && challenger.isOnline() && AdvancedCombatModule.isInitialized()) {
             AdvancedCombatModule.get().onClassTrialEnded(challenger);
-            tell(challenger, "&aUnlocked and activated " + trial.form().displayName() + "!");
-            challenger.sendTitle(ChatColorConverter.convert("&6Class Unlocked!"),
-                    ChatColorConverter.convert("&f" + trial.form().displayName() + " &ais now active"),
+            tell(challenger, "&aОткрыт и выбран класс " + trial.form().displayName() + "!");
+            challenger.sendTitle(ChatColorConverter.convert("&6Класс открыт!"),
+                    ChatColorConverter.convert("&f" + trial.form().displayName() + " &aтеперь активен"),
                     10, 70, 20);
             challenger.playSound(challenger.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f);
         }
@@ -259,7 +259,7 @@ public final class ClassChallengeInstance extends MatchInstance implements Liste
         if (!feeCharged) return;
         feeCharged = false;
         if (EconomyHandler.refundPayment(challenger.getUniqueId(), quotedFee))
-            tell(challenger, "&eYour trial entry fee was refunded.");
+            tell(challenger, "&eПлата за испытание возвращена.");
         else Logger.warn("Trial refund failed for " + challenger.getUniqueId() + ": " + quotedFee);
     }
 

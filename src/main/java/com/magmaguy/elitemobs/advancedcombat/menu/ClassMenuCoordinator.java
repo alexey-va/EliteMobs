@@ -40,7 +40,7 @@ final class ClassMenuCoordinator {
         project(player).ifPresent(view -> {
             ClassMenuView.FormView form = view.forms().get(formId);
             if (form == null) {
-                send(player, "&cThat class form no longer exists. The class list has been refreshed.");
+                send(player, "&cЭтой формы класса больше нет. Список классов обновлён.");
                 open(player);
                 return;
             }
@@ -59,7 +59,7 @@ final class ClassMenuCoordinator {
     void dispatch(Player player, String token) {
         Optional<ClassMenuAction> optionalAction = tokens.consume(player.getUniqueId(), token);
         if (optionalAction.isEmpty()) {
-            send(player, "&eThat class-menu action expired. A fresh menu has been opened.");
+            send(player, "&eЭто действие устарело. Открыто обновлённое меню классов.");
             open(player);
             return;
         }
@@ -83,25 +83,24 @@ final class ClassMenuCoordinator {
         }
         SelectionResult result = AdvancedCombatModule.get().clearSelectedForm(player);
         switch (result.status()) {
-            case APPLIED -> send(player, "&aClass deactivated. Your levels are kept; pick a class"
-                    + " any time with &f/em class&a.");
-            case UNCHANGED -> send(player, "&7You have no active class.");
-            case NOT_READY -> send(player, "&eYour class profile is still loading.");
-            case LOCKED_FORM -> send(player, "&cYour class is locked until this dungeon run ends.");
-            default -> send(player, "&cYour class could not be deactivated.");
+            case APPLIED -> send(player, "&aКласс отключён. Уровни сохранены; выбрать класс снова можно в меню классов.");
+            case UNCHANGED -> send(player, "&7У вас нет активного класса.");
+            case NOT_READY -> send(player, "&eДанные классов ещё загружаются.");
+            case LOCKED_FORM -> send(player, "&cКласс нельзя сменить до завершения этого похода.");
+            default -> send(player, "&cНе удалось отключить класс.");
         }
         open(player);
     }
 
     private Optional<ClassMenuView> project(Player player) {
         if (!AdvancedCombatModule.isInitialized()) {
-            send(player, "&c[Alpha] Advanced Combat System is disabled on this server.");
+            send(player, "&cНовая система классов отключена на этом сервере.");
             return Optional.empty();
         }
         AdvancedCombatModule module = AdvancedCombatModule.get();
         ProfileSnapshot profile = module.profile(player.getUniqueId()).orElse(null);
         if (profile == null) {
-            send(player, "&eYour class profile is still loading. Try again in a moment.");
+            send(player, "&eДанные классов ещё загружаются. Повторите через несколько секунд.");
             return Optional.empty();
         }
         // Both values are deliberately acquired here, for every render after every action.
@@ -121,21 +120,21 @@ final class ClassMenuCoordinator {
             case APPLIED -> {
                 // Deliberately three tiny lines: players stop reading anything longer.
                 send(player, ClassPresentationTheme.gradient(ClassPresentationTheme.GREEN,
-                        "Class active:") + " &f"
+                        "Класс выбран:") + " &f"
                         + AdvancedCombatModule.get().catalog().require(formId).displayName());
                 send(player, ClassPresentationTheme.gradient(ClassPresentationTheme.GOLD,
-                        "How to play:") + " &fF,F&7: Mobility | &fF+LMB&7: Signature | &fF+RMB&7: Utility.");
+                        "Управление:") + " &fF, F&7: мобильность | &fF + ЛКМ&7: коронный приём | &fF + ПКМ&7: особый навык.");
                 send(player, ClassPresentationTheme.gradient(ClassPresentationTheme.RED,
-                        "Weapons:") + " " + com.magmaguy.elitemobs.advancedcombat.ClassWeaponAffinity.description(
+                        "Оружие:") + " " + com.magmaguy.elitemobs.advancedcombat.ClassWeaponAffinity.description(
                         AdvancedCombatModule.get().catalog().require(formId)));
             }
-            case UNCHANGED -> send(player, "&7That is already your active class.");
-            case NOT_READY -> send(player, "&eYour class profile is still loading.");
-            case UNKNOWN_FORM -> send(player, "&cThat class form no longer exists.");
+            case UNCHANGED -> send(player, "&7Этот класс уже выбран.");
+            case NOT_READY -> send(player, "&eДанные классов ещё загружаются.");
+            case UNKNOWN_FORM -> send(player, "&cЭтой формы класса больше нет.");
             case LOCKED_FORM -> send(player, result.snapshot() != null
                     && result.snapshot().lockedRunSelection() != null
-                    ? "&cYour class is locked until this dungeon run ends."
-                    : "&cThat class form is still locked.");
+                    ? "&cКласс нельзя сменить до завершения этого похода."
+                    : "&cЭта форма класса ещё не открыта.");
         }
         openForm(player, formId, showAllClasses);
     }

@@ -426,19 +426,19 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
     @Override
     public AbilityResult useAbility(Player player, AbilitySlot slot) {
         if (com.magmaguy.elitemobs.transport.TransportModule.isInTransit(player)) {
-            sendFeedback(player, "&eClass skills are unavailable during transport.");
+            sendFeedback(player, "&eНавыки класса недоступны во время перемещения.");
             return AbilityResult.failure("transport." + slot.name().toLowerCase(Locale.ROOT), AbilityFailureReason.INVALID_PLAYER);
         }
         Optional<ProfileSnapshot> optionalProfile = progression.snapshot(player.getUniqueId());
         if (!mechanicsActive(player) || optionalProfile.isEmpty()) {
-            sendFeedback(player, "&cClass controls are not active here.");
+            sendFeedback(player, "&cУправление навыками класса здесь неактивно.");
             return AbilityResult.failure("unavailable." + slot.name().toLowerCase(Locale.ROOT),
                     AbilityFailureReason.INVALID_PLAYER);
         }
         ProfileSnapshot profile = optionalProfile.get();
         ActiveLineageSnapshot active = profile.activeLineage();
         if (active == null) {
-            sendFeedback(player, "&eSelect an unlocked class with &f/em class&e first.");
+            sendFeedback(player, "&eСначала выберите открытый класс в меню классов.");
             return AbilityResult.failure("unselected." + slot.name().toLowerCase(Locale.ROOT),
                     AbilityFailureReason.INVALID_PLAYER);
         }
@@ -452,8 +452,8 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
             observeFailedCast(player, abilitySpec);
             ClassResourceController.Snapshot resource = resources.snapshot(player.getUniqueId()).orElse(null);
             String amount = resource == null ? "0" : String.valueOf((int) Math.floor(resource.amount()));
-            sendFeedback(player, "&cNot enough " + resourceName(lineage.resourceType()) + " &7(" + amount
-                    + "/" + (int) abilityCost + " required).");
+            sendFeedback(player, "&cНе хватает ресурса «" + resourceName(lineage.resourceType()) + "» &7(" + amount
+                    + "/" + (int) abilityCost + ").");
             return AbilityResult.failure(abilityId(lineage, slot), AbilityFailureReason.INVALID_PLAYER);
         }
 
@@ -516,8 +516,8 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
         if (result.changed()) {
             if (result.currentLocalLevel() > result.previousLocalLevel()) {
                 ClassFormDefinition form = catalog.require(result.formId());
-                player.sendMessage(ChatColorConverter.convert("&b&lClass level up! &f"
-                        + form.displayName() + " &7is now level &f" + result.currentEffectiveLevel() + "&7."));
+                player.sendMessage(ChatColorConverter.convert("&b&lНовый уровень класса! &f"
+                        + form.displayName() + " &7теперь &f" + result.currentEffectiveLevel() + " уровня&7."));
             }
             CombatLevelDisplay.updateDisplay(player);
         }
@@ -542,7 +542,7 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
                         Logger.warn("Could not load [Alpha] Advanced Combat System class data for " + player.getName()
                                 + ": " + rootCause(failure).getMessage());
                         player.sendMessage(ChatColorConverter.convert(
-                                "&cYour [Alpha] Advanced Combat System class data could not be loaded. Please report this to the developer."));
+                                "&cНе удалось загрузить данные классов. Пожалуйста, сообщите администрации."));
                         return;
                     }
                     progressionFailureWarnings.remove(player.getUniqueId());
@@ -572,7 +572,7 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
                     Logger.warn("[Alpha] Advanced Combat System class progression became unavailable for "
                             + player.getName() + (failure == null ? "." : ": " + rootCause(failure).getMessage()));
                     player.sendMessage(ChatColorConverter.convert(
-                            "&cYour [Alpha] Advanced Combat System class data became unavailable. Class mechanics were disabled safely; please report this to the developer."));
+                            "&cДанные классов стали недоступны. Механики классов безопасно отключены; сообщите администрации."));
                 }
                 if (readiness == ProgressionReadiness.UNLOADED
                         && PlayerData.isDataLoaded(player.getUniqueId())) load(player);
@@ -612,7 +612,7 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
             RunLockResult result = progression.lockRun(playerId, runId);
             if (result.status() == RunLockResult.Status.NO_SELECTED_FORM)
                 player.sendMessage(ChatColorConverter.convert(
-                        "&eNo class was selected when this instance began, so class abilities are unavailable for this run."));
+                        "&eПри запуске этого похода класс не был выбран, поэтому навыки класса здесь недоступны."));
         }
     }
 
@@ -677,11 +677,11 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
                 || PlayerData.getMatchInstance(player) instanceof
                 com.magmaguy.elitemobs.advancedcombat.challenges.ClassChallengeInstance) {
             player.sendMessage(ChatColorConverter.convert(
-                    "&cYour class and input profile are locked until this run ends."));
+                    "&cКласс и схема управления закреплены до завершения этого похода."));
             return false;
         }
         if (combatState.isInCombat(player.getUniqueId())) {
-            player.sendMessage(ChatColorConverter.convert("&cYou cannot change classes or controls while in combat."));
+            player.sendMessage(ChatColorConverter.convert("&cНельзя менять класс или управление во время боя."));
             return false;
         }
         return true;
@@ -808,20 +808,21 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
         ClassFormDefinition form = catalog.require(result.formId());
         String message;
         if (result.capReason() == ProgressionCapReason.BAND_COMPLETE) {
-            String choices = String.join(" or ", catalog.childrenOf(form.id()).stream()
+            String choices = String.join(" или ", catalog.childrenOf(form.id()).stream()
                     .map(ClassFormDefinition::displayName)
                     .toList());
             message = choices.isBlank()
-                    ? "&eClass XP paused at &f" + form.displayName() + " " + result.currentEffectiveLevel()
-                    + "&e, the current v0 cap. Overflow XP is not banked."
-                    : "&eClass XP paused at &f" + form.displayName() + " " + result.currentEffectiveLevel()
-                    + "&e. Choose &f" + choices + " &ewith &f/em class&e; overflow XP is not banked.";
+                    ? "&eОпыт класса остановлен на &f" + form.displayName() + " " + result.currentEffectiveLevel()
+                    + "&e — это текущий предел. Лишний опыт не сохраняется."
+                    : "&eОпыт класса остановлен на &f" + form.displayName() + " " + result.currentEffectiveLevel()
+                    + "&e. Выберите &f" + choices + " &eв меню классов; лишний опыт не сохраняется.";
         } else {
             String skills = result.limitingSkills().isEmpty()
-                    ? "its required skills"
-                    : String.join(" and ", result.limitingSkills().stream().map(SkillType::getDisplayName).toList());
-            message = "&eClass XP paused at &f" + form.displayName() + " " + result.currentEffectiveLevel()
-                    + "&e because &f" + skills + " &eis the limiting requirement. Raise it to progress; overflow XP is not banked.";
+                    ? "требуемые навыки"
+                    : String.join(" и ", result.limitingSkills().stream()
+                    .map(com.magmaguy.elitemobs.config.menus.premade.SkillBonusMenuConfig::getSkillTypeDisplayName).toList());
+            message = "&eОпыт класса остановлен на &f" + form.displayName() + " " + result.currentEffectiveLevel()
+                    + "&e: ограничение — &f" + skills + "&e. Повысьте навык, чтобы продолжить; лишний опыт не сохраняется.";
         }
         player.sendMessage(ChatColorConverter.convert(message));
     }
@@ -981,13 +982,13 @@ public final class AdvancedCombatModule implements Listener, ClassAbilityInput, 
 
     private static String failureMessage(String abilityName, AbilityFailureReason reason) {
         return switch (reason) {
-            case NO_VALID_TARGET -> "&c" + abilityName + " needs a valid target.";
-            case NO_CORPSE -> "&cAim at a recent Elite corpse.";
-            case PATH_BLOCKED -> "&c" + abilityName + " is blocked by terrain.";
-            case UNSAFE_DESTINATION -> "&c" + abilityName + " could not find safe footing.";
-            case ENGINE_CLOSED, WRONG_THREAD, ABILITY_NOT_REGISTERED -> "&c" + abilityName
-                    + " is unavailable due to an internal error. Please report this.";
-            case INVALID_LEVEL, INVALID_PLAYER, NONE -> "&c" + abilityName + " cannot be used right now.";
+            case NO_VALID_TARGET -> "&cДля навыка «" + abilityName + "» нужна подходящая цель.";
+            case NO_CORPSE -> "&cНаведитесь на недавний труп элитного противника.";
+            case PATH_BLOCKED -> "&cНавыку «" + abilityName + "» мешает препятствие.";
+            case UNSAFE_DESTINATION -> "&cНавык «" + abilityName + "» не нашёл безопасного места.";
+            case ENGINE_CLOSED, WRONG_THREAD, ABILITY_NOT_REGISTERED -> "&cНавык «" + abilityName
+                    + "» недоступен из-за внутренней ошибки. Сообщите администрации.";
+            case INVALID_LEVEL, INVALID_PLAYER, NONE -> "&cНавык «" + abilityName + "» сейчас нельзя применить.";
         };
     }
 

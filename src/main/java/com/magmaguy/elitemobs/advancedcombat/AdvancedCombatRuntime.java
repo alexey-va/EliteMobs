@@ -51,9 +51,9 @@ public final class AdvancedCombatRuntime implements Listener, PlayerCombatState.
 
     private static final String HEALTH_MODIFIER_KEY = "advanced_combat_health";
     private static final String ENTRY_WARNING =
-            "&6&l[Alpha] Advanced Combat System &7is active here. The combat system is still in alpha, but testers have found it extremely enjoyable. &fPlease share your feedback with the developer&7!";
-    private static final String COMBAT_STARTED = "&cEntering combat!";
-    private static final String COMBAT_ENDED = "&aOut of combat &8- &7slow healing resumed";
+            "&6&l[Альфа] Новая боевая система &7активна в этой локации. &fРасскажите разработчику о впечатлениях и найденных проблемах&7!";
+    private static final String COMBAT_STARTED = "&cВы вступили в бой!";
+    private static final String COMBAT_ENDED = "&aБой окончен &8— &7медленное восстановление снова работает";
 
     private static AdvancedCombatRuntime instance;
     private static Function<Player, String> hudProvider = AdvancedCombatRuntime::defaultHud;
@@ -188,14 +188,14 @@ public final class AdvancedCombatRuntime implements Listener, PlayerCombatState.
         if (AdvancedCombatModule.isInitialized()
                 && !AdvancedCombatModule.get().hasActiveClass(player)) {
             player.sendMessage(ChatColorConverter.convert(
-                    ClassPresentationTheme.gradient(ClassPresentationTheme.GOLD, "No class active!")
-                            + " &7Open &f/em class &7and pick a free class to use abilities here."));
+                    ClassPresentationTheme.gradient(ClassPresentationTheme.GOLD, "Класс не выбран!")
+                            + " &7Откройте меню классов и выберите бесплатный класс, чтобы применять способности."));
             ActionBarCompositor.show(
                     player,
                     ActionBarCompositor.Source.SKILL_FEEDBACK,
                     ChatColorConverter.convert(
-                            ClassPresentationTheme.gradient(ClassPresentationTheme.GOLD, "No class")
-                                    + " &8» &7pick one with &f/em class"));
+                            ClassPresentationTheme.gradient(ClassPresentationTheme.GOLD, "Нет класса")
+                                    + " &8» &7выберите его в меню классов"));
         }
     }
 

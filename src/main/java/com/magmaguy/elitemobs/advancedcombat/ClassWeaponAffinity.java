@@ -62,29 +62,30 @@ public final class ClassWeaponAffinity implements Listener {
                 .orElse(null);
         if (form == null) return;
         lastWarnings.put(player.getUniqueId(), now);
-        String header = ClassPresentationTheme.gradient(ClassPresentationTheme.RED, "Off-class weapon");
+        String header = ClassPresentationTheme.gradient(ClassPresentationTheme.RED, "Чужое оружие");
         String bonus = bonusDescription(form);
         ActionBarCompositor.show(
                 player,
                 ActionBarCompositor.Source.AFFINITY_WARNING,
                 ChatColorConverter.convert(
-                        header + " &8» &c-" + OFF_CLASS_WEAPON_PENALTY_PERCENT + "% damage&7. " + bonus));
+                        header + " &8» &c-" + OFF_CLASS_WEAPON_PENALTY_PERCENT + "% урона&7. " + bonus));
         if (chatWarnedThisSession.add(player.getUniqueId()))
             player.sendMessage(ChatColorConverter.convert(
-                    header + " &8» &7This weapon does not match your class: &c-"
-                            + OFF_CLASS_WEAPON_PENALTY_PERCENT + "% damage&7."
+                    header + " &8» &7Это оружие не подходит вашему классу: &c-"
+                            + OFF_CLASS_WEAPON_PENALTY_PERCENT + "% урона&7."
                             + " " + bonus));
     }
 
     public static String description(ClassFormDefinition form) {
-        return bonusDescription(form) + " &7Other weapons deal &c"
-                + OFF_CLASS_WEAPON_PENALTY_PERCENT + "% less damage&7.";
+        return bonusDescription(form) + " &7Остальное оружие наносит на &c"
+                + OFF_CLASS_WEAPON_PENALTY_PERCENT + "% меньше урона&7.";
     }
 
     private static String bonusDescription(ClassFormDefinition form) {
         return "&f" + form.weaponAffinities().stream()
-                .map(SkillType::getDisplayName).collect(Collectors.joining(" &7and &f"))
-                + " &7deal &a" + CLASS_WEAPON_BONUS_PERCENT + "% more damage &7with &f"
+                .map(com.magmaguy.elitemobs.config.menus.premade.SkillBonusMenuConfig::getSkillTypeDisplayName)
+                .collect(Collectors.joining(" &7и &f"))
+                + " &7наносят на &a" + CLASS_WEAPON_BONUS_PERCENT + "% больше урона &7для класса &f"
                 + form.displayName() + "&7.";
     }
 

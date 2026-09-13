@@ -30,12 +30,12 @@ final class ClassMenuStyle {
 
     static String formButtonLabel(ClassMenuView.FormView form) {
         if (!form.unlocked()) {
-            return gradient(RED, form.displayName()) + " &8• " + gradient(RED, "Locked");
+            return gradient(RED, form.displayName()) + " &8• " + gradient(RED, "Закрыт");
         }
 
         String status;
-        if (form.active()) status = gradient(GOLD, "Active");
-        else status = gradient(TEAL, "Lv " + form.effectiveLevel());
+        if (form.active()) status = gradient(GOLD, "Активен");
+        else status = gradient(TEAL, "Ур. " + form.effectiveLevel());
         return themed(form, form.displayName()) + " &8• " + status;
     }
 
@@ -46,7 +46,7 @@ final class ClassMenuStyle {
     }
 
     static String lockTooltip(ClassMenuView.FormView form) {
-        StringBuilder tooltip = new StringBuilder(gradient(RED, "Locked"));
+        StringBuilder tooltip = new StringBuilder(gradient(RED, "Закрыт"));
         for (ClassMenuView.BlockerView blocker : form.blockers()) {
             tooltip.append('\n').append(blockerText(blocker));
         }
@@ -56,10 +56,10 @@ final class ClassMenuStyle {
 
     static String trialInstructions(ClassMenuView.FormView form) {
         String fee = com.magmaguy.elitemobs.economy.EconomyHandler.formatCurrency(form.challengeFee());
-        return "&eVisit the " + form.trainerName() + " trainer in the Adventurer's Guild.\n"
-                + "&7Meet the training requirements, then select Challenge Instructor.\n"
-                + "&7Each solo attempt costs " + fee + " coins when combat begins.\n"
-                + "&7Defeat the instructor to unlock and activate " + form.displayName() + ".";
+        return "&eНайдите наставника " + form.trainerName() + " в Гильдии искателей приключений.\n"
+                + "&7Выполните требования и выберите испытание наставника.\n"
+                + "&7При начале каждой попытки спишется " + fee + " кристаллов.\n"
+                + "&7Победите наставника, чтобы открыть и выбрать " + form.displayName() + ".";
     }
 
     static String blockerText(ClassMenuView.BlockerView blocker) {
@@ -68,19 +68,19 @@ final class ClassMenuStyle {
                 ? themedResource(blocker.classResourceName(), blocker.displayName())
                 : "&f" + blocker.displayName();
         if (blocker.classRequirement()) {
-            return "&cYou need to be level &f" + blocker.requiredLevel()
-                    + " &cin " + name + "&c. &7You are level &f"
+            return "&cНужен &f" + blocker.requiredLevel()
+                    + " &cуровень класса " + name + "&c. &7Сейчас: &f"
                     + blocker.currentLevel() + "&7.";
         }
-        return "&cYou need level &f" + blocker.requiredLevel()
-                + " &cin " + name + "&c. &7You are level &f"
+        return "&cНужен &f" + blocker.requiredLevel()
+                + " &cуровень навыка " + name + "&c. &7Сейчас: &f"
                 + blocker.currentLevel() + "&7.";
     }
 
     static String state(ClassMenuView.FormView form) {
-        if (!form.unlocked()) return gradient(RED, "Locked");
-        if (form.active()) return gradient(GOLD, "Active");
-        return gradient(TEAL, "Unlocked");
+        if (!form.unlocked()) return gradient(RED, "Закрыт");
+        if (form.active()) return gradient(GOLD, "Активен");
+        return gradient(TEAL, "Открыт");
     }
 
     static String section(String colors, String text) {
