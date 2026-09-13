@@ -11,6 +11,8 @@ import com.magmaguy.elitemobs.items.customenchantments.SoulbindEnchantment;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffect;
 import com.magmaguy.elitemobs.items.potioneffects.ElitePotionEffectContainer;
 import com.magmaguy.elitemobs.mobconstructor.EliteEntity;
+import com.magmaguy.elitemobs.skills.SkillType;
+import com.magmaguy.elitemobs.skills.WeaponIdentityResolver;
 import com.magmaguy.magmacore.enchantments.EnchantmentDefinitions;
 import com.magmaguy.magmacore.enchantments.EnchantmentItemProfile;
 import com.magmaguy.magmacore.enchantments.EnchantmentItems;
@@ -167,9 +169,14 @@ public class EliteItemLore {
     }
 
     private void constructSkillRequirement() {
-        GearRestrictionHandler.GearRequirement requirement = GearRestrictionHandler.getGearRequirement(itemStack);
-        if (requirement == null) return;
-        skillRequirement = ItemSettingsConfig.getSkillRequirementLore()
+        SkillType skillType = WeaponIdentityResolver.progressionSkillIncludingArmor(itemStack);
+        skillRequirement = skillRequirementLore(skillType, GearRestrictionHandler.getGearRequirement(itemStack));
+    }
+
+    static String skillRequirementLore(SkillType skillType, GearRestrictionHandler.GearRequirement requirement) {
+        if (skillType == null) return null;
+        if (requirement == null) return ItemSettingsConfig.getNoSkillRequirementLore();
+        return ItemSettingsConfig.getSkillRequirementLore()
                 .replace("$skillType", SkillBonusMenuConfig.getSkillTypeDisplayName(requirement.skillType()))
                 .replace("$itemLevel", String.valueOf(requirement.level()));
     }
