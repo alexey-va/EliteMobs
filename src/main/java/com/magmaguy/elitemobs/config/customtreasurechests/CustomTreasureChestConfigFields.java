@@ -141,13 +141,17 @@ public class CustomTreasureChestConfigFields extends CustomConfigFields {
             if (DungeonRuntimeData.isAvailable()) this.locationsString = authoredLocations;
         } else Logger.warn("No locations found for chest " + filename);
 
-        if (DungeonRuntimeData.isAvailable() && (migrated || !legacyRestockTimers.isEmpty())) {
+        if (DungeonRuntimeData.isAvailable() && (migrated || hasLegacyRestockTimers(legacyRestockTimers))) {
             fileConfiguration.set("locations", locationsString);
             fileConfiguration.set("restockTime", null);
             fileConfiguration.set("restockTimers", null);
             ConfigurationEngine.fileSaverCustomValues(fileConfiguration, file);
             restockTime = 0;
         }
+    }
+
+    static boolean hasLegacyRestockTimers(List<String> legacyRestockTimers) {
+        return legacyRestockTimers != null && !legacyRestockTimers.isEmpty();
     }
 
     /**
