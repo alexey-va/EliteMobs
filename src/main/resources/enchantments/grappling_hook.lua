@@ -22,7 +22,7 @@ local function zipline(context,destination)
 end
 return {api_version=1,on_projectile_launch=function(context)
   local arrow=context.world:get_entity(context.source.projectile)
-  if not arrow or (arrow.entity_type~='arrow' and arrow.entity_type~='spectral_arrow') then return end
+  if not arrow or (arrow.entity_type~='ARROW' and arrow.entity_type~='SPECTRAL_ARROW') then return end
   if not context.action:own_entity(arrow.uuid) then return end
   context.action:replace_previous()
   local ticks,task=0,nil
