@@ -2154,6 +2154,17 @@ index 32c96946..f60acfd1 100644
                  SkillBonusType.PROC, SKILL_ID);
      }
  
+diff --git a/src/main/resources/plugin.yml b/src/main/resources/plugin.yml
+index de394f10..8b81baea 100644
+--- a/src/main/resources/plugin.yml
++++ b/src/main/resources/plugin.yml
+@@ -1,5 +1,5 @@
+ name: EliteMobs
+-version: 10.9.8
++version: 10.9.8-ruscrafting.1
+ author: MagmaGuy
+ main: com.magmaguy.elitemobs.EliteMobs
+ api-version: '1.21.4'
 diff --git a/src/test/java/com/magmaguy/elitemobs/advancedcombat/CombatBehaviorFixture.java b/src/test/java/com/magmaguy/elitemobs/advancedcombat/CombatBehaviorFixture.java
 index 1acbeace..9dbb280f 100644
 --- a/src/test/java/com/magmaguy/elitemobs/advancedcombat/CombatBehaviorFixture.java
