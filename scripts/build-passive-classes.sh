@@ -36,7 +36,7 @@ fi
 
 candidate="$source_dir/build/libs/EliteMobs.jar"
 if [[ -f "$candidate" ]]; then
-    cp "$candidate" "$output/EliteMobs-10.9.8-ruscrafting.1.jar"
-    shasum -a 256 "$output/EliteMobs-10.9.8-ruscrafting.1.jar" > "$output/SHA256SUMS"
-    printf 'Candidate: %s\n' "$output/EliteMobs-10.9.8-ruscrafting.1.jar"
+    cp "$candidate" "$output/EliteMobs-10.9.8-ruscrafting.2.jar"
+    shasum -a 256 "$output/EliteMobs-10.9.8-ruscrafting.2.jar" > "$output/SHA256SUMS"
+    printf 'Candidate: %s\n' "$output/EliteMobs-10.9.8-ruscrafting.2.jar"
 fi

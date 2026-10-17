@@ -1,10 +1,18 @@
-# Passive classes release
+# Passive classes and arena difficulty release
 
 `passive-classes-10.9.8.patch` is the maintained source change for the installed
 EliteMobs 10.9.8 baseline, upstream commit
 `af46989ba2ec64609f39901dc5071bdd9d4a04c7`. It makes classes passive while retaining
 native progression, class selection, weapon identity, dungeon authorization and
 weapon abilities.
+
+`10.9.8-ruscrafting.2` also adds first-wave enemy level selection to the native
+arena menu. It preserves all wave/reward transitions and locks the choice on
+first successful admission. Raised difficulty propagates to boss phases and
+summons, with the configured `Arenas.yml` `maximumEnemyLevel` ceiling (200 by
+default). Authored difficulty remains unchanged. Player-facing menu strings
+are configurable in `menus/arena_menu.yml`. Arena content references and Russian
+menu overrides are maintained separately in the operations repository.
 
 Build with `bash scripts/build-passive-classes.sh`. The helper reconstructs the
 exact upstream sources, checks and applies the text patch, then runs the upstream

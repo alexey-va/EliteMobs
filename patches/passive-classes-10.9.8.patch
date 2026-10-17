@@ -1,5 +1,5 @@
 diff --git a/build.gradle b/build.gradle
-index 918e3d99..9368427a 100644
+index 918e3d99..4f299a60 100644
 --- a/build.gradle
 +++ b/build.gradle
 @@ -31,7 +31,7 @@ processResources {
@@ -7,7 +7,7 @@ index 918e3d99..9368427a 100644
  
  group 'com.magmaguy'
 -version '10.9.8'
-+version '10.9.8-ruscrafting.1'
++version '10.9.8-ruscrafting.2'
  
  repositories {
      maven {
@@ -1630,6 +1630,82 @@ index 7569b8bb..2ed873e0 100644
              case NOT_READY -> send(player, "&eYour class profile is still loading.");
              case UNKNOWN_FORM -> send(player, "&cUnknown class form: &f" + requestedId);
              case LOCKED_FORM -> {
+diff --git a/src/main/java/com/magmaguy/elitemobs/config/ArenasConfig.java b/src/main/java/com/magmaguy/elitemobs/config/ArenasConfig.java
+index 76a14072..c4bff34c 100644
+--- a/src/main/java/com/magmaguy/elitemobs/config/ArenasConfig.java
++++ b/src/main/java/com/magmaguy/elitemobs/config/ArenasConfig.java
+@@ -6,6 +6,8 @@ import lombok.Getter;
+ import java.util.List;
+ 
+ public class ArenasConfig extends ConfigurationFile {
++    @Getter
++    private static int maximumEnemyLevel = 200;
+     @Getter
+     private static String notEnoughPlayersMessage;
+     @Getter
+@@ -55,6 +57,9 @@ public class ArenasConfig extends ConfigurationFile {
+ 
+     @Override
+     public void initializeValues() {
++        maximumEnemyLevel = Math.max(1, ConfigurationEngine.setInt(
++                List.of("Maximum enemy level when players raise an arena's starting level. Original difficulty is unchanged."),
++                fileConfiguration, "maximumEnemyLevel", 200));
+         notEnoughPlayersMessage = ConfigurationEngine.setString(
+                 List.of("Message that appears when not enough players are present to start an arena."),
+                 file, fileConfiguration, "notEnoughPlayersMessage", "&8[EliteMobs] &cYou need at least $amount to start the match!", true);
+diff --git a/src/main/java/com/magmaguy/elitemobs/config/menus/premade/ArenaMenuConfig.java b/src/main/java/com/magmaguy/elitemobs/config/menus/premade/ArenaMenuConfig.java
+index 98a444fe..f82e5db6 100644
+--- a/src/main/java/com/magmaguy/elitemobs/config/menus/premade/ArenaMenuConfig.java
++++ b/src/main/java/com/magmaguy/elitemobs/config/menus/premade/ArenaMenuConfig.java
+@@ -23,6 +23,22 @@ public class ArenaMenuConfig extends MenusConfigFields {
+     private static int spectatorItemSlot;
+     @Getter
+     private static String invalidArenaMessage;
++    @Getter private static String enemyLevelName;
++    @Getter private static String lockedEnemyLevelName;
++    @Getter private static String currentWaveName;
++    @Getter private static String originalDifficultyName;
++    @Getter private static String firstWaveLevelLine;
++    @Getter private static String lastWaveLevelLine;
++    @Getter private static String unknownLevelLine;
++    @Getter private static String fullRunLine;
++    @Getter private static String rewardsLine;
++    @Getter private static String allowedLevelsLine;
++    @Getter private static String decreaseLevelName;
++    @Getter private static String increaseLevelName;
++    @Getter private static String decreaseLevelHint;
++    @Getter private static String increaseLevelHint;
++    @Getter private static String joinLevelLine;
++    @Getter private static String lobbyChangedMessage;
+ 
+     public ArenaMenuConfig() {
+         super("arena_menu", true);
+@@ -39,6 +55,25 @@ public class ArenaMenuConfig extends MenusConfigFields {
+         spectatorItemSlot = ConfigurationEngine.setInt(fileConfiguration, "spectatorItemSlot", 2);
+         invalidArenaMessage = ConfigurationEngine.setString(file, fileConfiguration, "invalidArenaMessage",
+                 "&4[EliteMobs] &cInvalid arena name! The arena you are trying to join is not correctly setup.", true);
++        enemyLevelName = text("enemyLevelName", "&eStarting enemy level $level");
++        lockedEnemyLevelName = text("lockedEnemyLevelName", "&eEnemy level selected: $level");
++        currentWaveName = text("currentWaveName", "&eWave $wave/$total");
++        originalDifficultyName = text("originalDifficultyName", "&eOriginal difficulty");
++        firstWaveLevelLine = text("firstWaveLevelLine", "&fFirst wave: level $range");
++        lastWaveLevelLine = text("lastWaveLevelLine", "&fFinal wave: level $range");
++        unknownLevelLine = text("unknownLevelLine", "&fThis arena uses its original enemy levels.");
++        fullRunLine = text("fullRunLine", "&fAll $total waves, starting with wave 1.");
++        rewardsLine = text("rewardsLine", "&fReward contents and levels stay the same.");
++        allowedLevelsLine = text("allowedLevelsLine", "&fAvailable starting levels: $minimum–$maximum");
++        decreaseLevelName = text("decreaseLevelName", "&f−1 enemy level");
++        increaseLevelName = text("increaseLevelName", "&f+1 enemy level");
++        decreaseLevelHint = text("decreaseLevelHint", "&fShift-click: −10 levels");
++        increaseLevelHint = text("increaseLevelHint", "&fShift-click: +10 levels");
++        joinLevelLine = text("joinLevelLine", "&fStarting enemy level: $level");
++        lobbyChangedMessage = text("lobbyChangedMessage", "&eThe arena lobby changed. Review the enemy level and join again.");
+     }
+ 
++    private String text(String key, String fallback) {
++        return ConfigurationEngine.setString(file, fileConfiguration, key, fallback, true);
++    }
+ }
 diff --git a/src/main/java/com/magmaguy/elitemobs/config/skillbonuses/premade/StavesConcussiveBlastConfig.java b/src/main/java/com/magmaguy/elitemobs/config/skillbonuses/premade/StavesConcussiveBlastConfig.java
 index 93bd017f..d452d52a 100644
 --- a/src/main/java/com/magmaguy/elitemobs/config/skillbonuses/premade/StavesConcussiveBlastConfig.java
@@ -1872,6 +1948,479 @@ index 3eb8f373..00a94eb3 100644
                SkillType.WANDS, 3, 0.1, 0.001, 0.1, Material.FERMENTED_SPIDER_EYE);
          this.loreTemplates = List.of(
                  "&7Chance: &f$procChance%",
+diff --git a/src/main/java/com/magmaguy/elitemobs/instanced/arena/ArenaInstance.java b/src/main/java/com/magmaguy/elitemobs/instanced/arena/ArenaInstance.java
+index 25a378b0..b8f7a5de 100644
+--- a/src/main/java/com/magmaguy/elitemobs/instanced/arena/ArenaInstance.java
++++ b/src/main/java/com/magmaguy/elitemobs/instanced/arena/ArenaInstance.java
+@@ -10,6 +10,7 @@ import com.magmaguy.elitemobs.config.AdventurersGuildConfig;
+ import com.magmaguy.elitemobs.config.ArenasConfig;
+ import com.magmaguy.elitemobs.config.ItemSettingsConfig;
+ import com.magmaguy.elitemobs.config.customarenas.CustomArenasConfigFields;
++import com.magmaguy.elitemobs.config.custombosses.CustomBossesConfig;
+ import com.magmaguy.elitemobs.instanced.MatchInstance;
+ import com.magmaguy.elitemobs.mobconstructor.custombosses.CustomBossEntity;
+ import com.magmaguy.elitemobs.playerdata.ElitePlayerInventory;
+@@ -72,6 +73,13 @@ public class ArenaInstance extends MatchInstance {
+     @Getter
+     private int currentWave = 0;
+     @Getter
++    private int originalEnemyLevel;
++    @Getter
++    private int selectedEnemyLevel;
++    @Getter
++    private int maximumStartingEnemyLevel;
++    private boolean levelAdmissionInProgress;
++    @Getter
+     private ArenaState arenaState = ArenaState.IDLE;
+ 
+     private int highestArenaMobLevel = -1;
+@@ -100,7 +108,7 @@ public class ArenaInstance extends MatchInstance {
+ 
+         this.customArenasConfigFields = customArenasConfigFields;
+         this.arenaWaves = waves;
+-
++        initializeEnemyLevels();
+ 
+         arenaInstances.put(customArenasConfigFields.getFilename(), this);
+         arenaWatchdog();
+@@ -231,6 +239,62 @@ public class ArenaInstance extends MatchInstance {
+         return !resetting && super.isAcceptingNewPlayers() && container.availableTo(this);
+     }
+ 
++    private void initializeEnemyLevels() {
++        int first = Integer.MAX_VALUE, highest = 0;
++        for (int wave = 1; wave <= customArenasConfigFields.getWaveCount(); wave++) {
++            for (ArenaEntity entity : arenaWaves.getWaveEntities(wave)) {
++                var boss = entity.isMythicMob() ? null : CustomBossesConfig.getCustomBoss(entity.getBossfile());
++                if (boss == null || boss.getLevel() < 1) return;
++                if (wave == 1) first = Math.min(first, boss.getLevel());
++                highest = Math.max(highest, boss.getLevel());
++            }
++        }
++        originalEnemyLevel = selectedEnemyLevel = first;
++        maximumStartingEnemyLevel = first + Math.max(0, ArenasConfig.getMaximumEnemyLevel() - highest);
++    }
++
++    public boolean isEnemyLevelSelectable() {
++        return originalEnemyLevel > 0 && isAcceptingNewPlayers() && players.isEmpty() && !levelAdmissionInProgress;
++    }
++
++    /** Returns the actual configured range plus this run's adjustment, never the wave number. */
++    public int[] getEnemyLevelRange(int wave, int startingLevel) {
++        var entities = arenaWaves.getWaveEntities(wave);
++        if (entities == null) return null;
++        int lowest = Integer.MAX_VALUE, highest = 0;
++        int offset = originalEnemyLevel == 0 ? 0 : Math.max(0, startingLevel - originalEnemyLevel);
++        for (ArenaEntity entity : entities) {
++            var boss = entity.isMythicMob() ? null : CustomBossesConfig.getCustomBoss(entity.getBossfile());
++            if (boss == null || boss.getLevel() < 1) return null;
++            int level = offset == 0 ? boss.getLevel()
++                    : (int) Math.min(ArenasConfig.getMaximumEnemyLevel(), (long) boss.getLevel() + offset);
++            lowest = Math.min(lowest, level);
++            highest = Math.max(highest, level);
++        }
++        return new int[]{lowest, highest};
++    }
++
++    @Override
++    public boolean addNewPlayer(Player player) {
++        return addNewPlayer(player, selectedEnemyLevel);
++    }
++
++    /** The first successful admission fixes the level for this lobby, before join callbacks run. */
++    public boolean addNewPlayer(Player player, int requestedLevel) {
++        if (levelAdmissionInProgress || !isAcceptingNewPlayers()
++                || requestedLevel < originalEnemyLevel || requestedLevel > maximumStartingEnemyLevel
++                || (!players.isEmpty() && requestedLevel != selectedEnemyLevel)) return false;
++        boolean firstPlayer = players.isEmpty();
++        if (firstPlayer) selectedEnemyLevel = requestedLevel;
++        levelAdmissionInProgress = true;
++        try {
++            return super.addNewPlayer(player);
++        } finally {
++            levelAdmissionInProgress = false;
++            if (firstPlayer && players.isEmpty()) selectedEnemyLevel = originalEnemyLevel;
++        }
++    }
++
+     @Override
+     protected boolean reserveAdmission() { return container.acquire(this); }
+ 
+@@ -341,6 +405,9 @@ public class ArenaInstance extends MatchInstance {
+                     Logger.warn("Failed to generate custom boss " + arenaEntity.getBossfile() + " because the filename was not valid!");
+                     return false;
+                 }
++                if (selectedEnemyLevel > originalEnemyLevel)
++                    customBossEntity.setArenaLevelAdjustment(selectedEnemyLevel - originalEnemyLevel,
++                            ArenasConfig.getMaximumEnemyLevel());
+                 customBossEntity.setNormalizedCombat();
+                 customBossEntity.setEliteLoot(false);
+                 customBossEntity.setVanillaLoot(false);
+@@ -427,6 +494,7 @@ public class ArenaInstance extends MatchInstance {
+         }, customArenasConfigFields.getDelayBetweenWaves());
+     }
+ 
++    @Getter
+     private long runGeneration;
+     private boolean resetting;
+ 
+@@ -438,6 +506,7 @@ public class ArenaInstance extends MatchInstance {
+         try {
+         arenaState = ArenaState.IDLE;
+         currentWave = 0;
++        selectedEnemyLevel = originalEnemyLevel;
+         new HashSet<>(customBosses).forEach(customBoss -> customBoss.remove(RemovalReason.ARENA_RESET));
+         customBosses.clear();
+         nonEliteMobsEntities.forEach(Entity::remove);
+diff --git a/src/main/java/com/magmaguy/elitemobs/menus/ArenaMenu.java b/src/main/java/com/magmaguy/elitemobs/menus/ArenaMenu.java
+index 35c5fe92..0514fc3a 100644
+--- a/src/main/java/com/magmaguy/elitemobs/menus/ArenaMenu.java
++++ b/src/main/java/com/magmaguy/elitemobs/menus/ArenaMenu.java
+@@ -1,87 +1,222 @@
+ package com.magmaguy.elitemobs.menus;
+ 
++import com.magmaguy.elitemobs.MetadataHandler;
+ import com.magmaguy.elitemobs.config.ArenasConfig;
+ import com.magmaguy.elitemobs.config.DefaultConfig;
+ import com.magmaguy.elitemobs.config.DungeonsConfig;
+ import com.magmaguy.elitemobs.config.menus.premade.ArenaMenuConfig;
+ import com.magmaguy.elitemobs.instanced.arena.ArenaInstance;
+-import lombok.Getter;
++import com.magmaguy.magmacore.util.ChatColorConverter;
++import com.magmaguy.magmacore.util.ItemStackGenerator;
+ import org.bukkit.Bukkit;
++import org.bukkit.Material;
+ import org.bukkit.entity.Player;
+ import org.bukkit.event.EventHandler;
+ import org.bukkit.event.Listener;
+ import org.bukkit.event.inventory.InventoryClickEvent;
+ import org.bukkit.event.inventory.InventoryCloseEvent;
++import org.bukkit.event.inventory.InventoryDragEvent;
+ import org.bukkit.inventory.Inventory;
++import org.bukkit.inventory.ItemStack;
++import org.bukkit.scheduler.BukkitTask;
+ 
++import java.util.ArrayList;
+ import java.util.HashMap;
++import java.util.HashSet;
++import java.util.List;
+ import java.util.Map;
++import java.util.Set;
+ 
+ public class ArenaMenu {
+     public void constructArenaMenu(Player player, String arenaFilename) {
+-        ArenaInstance arenaInstance = ArenaInstance.getArenaInstances().get(arenaFilename);
+-        if (arenaInstance == null) {
++        ArenaInstance arena = ArenaInstance.getArenaInstances().get(arenaFilename);
++        if (arena == null) {
+             player.sendMessage(ArenaMenuConfig.getInvalidArenaMessage());
+             return;
+         }
+-        String menuName = ArenaMenuConfig.getMenuName() + arenaInstance.getCustomArenasConfigFields().getArenaName();
++        String title = ArenaMenuConfig.getMenuName() + arena.getCustomArenasConfigFields().getArenaName();
+         if (DefaultConfig.useResourcePackModels())
+-            menuName = "\uDB83\uDEF1\uDB83\uDE0A\uDB83\uDEF5          " + menuName;
+-        Inventory shopInventory = Bukkit.createInventory(player, 9, menuName);
+-        shopInventory.setItem(ArenaMenuConfig.getPlayerItemSlot(), ArenaMenuConfig.getPlayerItem());
++            title = "\uDB83\uDEF1\uDB83\uDE0A\uDB83\uDEF5          " + title;
++        Inventory inventory = Bukkit.createInventory(player, 9, title);
++        MenuContainer menu = new MenuContainer(inventory, arena,
++                slots(ArenaMenuConfig.getPlayerItemSlot(), ArenaMenuConfig.getSpectatorItemSlot()));
++        render(menu);
++        player.openInventory(inventory);
++        ArenaMenuEvents.menus.put(inventory, menu);
++        ArenaMenuEvents.startRefreshing();
++    }
++
++    static int changedLevel(int level, int direction, boolean fast, int minimum, int maximum) {
++        return (int) Math.clamp((long) level + direction * (fast ? 10L : 1L), minimum, maximum);
++    }
++
++    /** Keep configured entry buttons; place new controls only in remaining slots. */
++    static Slots slots(int player, int spectator) {
++        Set<Integer> used = new HashSet<>();
++        int playerSlot = freeSlot(player >= 0 && player < 9 ? player : 6, used);
++        int spectatorSlot = freeSlot(spectator >= 0 && spectator < 9 ? spectator : 2, used);
++        int value = freeSlot(4, used);
++        int decrease = freeSlot(3, used);
++        int increase = freeSlot(5, used);
++        return new Slots(playerSlot, spectatorSlot, decrease, value, increase);
++    }
++
++    private static int freeSlot(int preferred, Set<Integer> used) {
++        if (used.add(preferred)) return preferred;
++        for (int slot = 0; slot < 9; slot++) if (used.add(slot)) return slot;
++        throw new IllegalStateException("Arena menu has no free slot");
++    }
++
++    record Slots(int player, int spectator, int decrease, int value, int increase) { }
++
++    private static String fill(String text, MenuContainer menu) {
++        return text.replace("$level", Integer.toString(menu.level))
++                .replace("$total", Integer.toString(menu.arena.getCustomArenasConfigFields().getWaveCount()))
++                .replace("$wave", Integer.toString(Math.min(menu.arena.getCurrentWave(), menu.arena.getCustomArenasConfigFields().getWaveCount())))
++                .replace("$minimum", Integer.toString(menu.arena.getOriginalEnemyLevel()))
++                .replace("$maximum", Integer.toString(menu.arena.getMaximumStartingEnemyLevel()));
++    }
++
++    private static String range(int[] levels) {
++        return levels[0] == levels[1] ? Integer.toString(levels[0]) : levels[0] + "–" + levels[1];
++    }
++
++    private static void render(MenuContainer menu) {
++        ArenaInstance arena = menu.arena;
++        boolean selectable = arena.isEnemyLevelSelectable();
++        if (menu.generation != arena.getRunGeneration()
++                || (menu.selectable && !selectable && menu.level != arena.getSelectedEnemyLevel()))
++            menu.needsConfirmation = true;
++        if (!selectable) menu.level = arena.getSelectedEnemyLevel();
++        else if (!menu.selectable || menu.generation != arena.getRunGeneration()) menu.level = arena.getOriginalEnemyLevel();
++        menu.selectable = selectable;
++        menu.generation = arena.getRunGeneration();
++        menu.inventory.clear();
++
++        boolean supported = arena.getOriginalEnemyLevel() > 0;
++        String name = !arena.isAcceptingNewPlayers() && arena.getCurrentWave() > 0 ? ArenaMenuConfig.getCurrentWaveName()
++                : !supported ? ArenaMenuConfig.getOriginalDifficultyName()
++                : selectable ? ArenaMenuConfig.getEnemyLevelName() : ArenaMenuConfig.getLockedEnemyLevelName();
++        List<String> lore = new ArrayList<>();
++        if (supported) {
++            int[] first = arena.getEnemyLevelRange(1, menu.level);
++            int[] last = arena.getEnemyLevelRange(arena.getCustomArenasConfigFields().getWaveCount(), menu.level);
++            if (first != null) lore.add(ArenaMenuConfig.getFirstWaveLevelLine().replace("$range", range(first)));
++            if (last != null) lore.add(ArenaMenuConfig.getLastWaveLevelLine().replace("$range", range(last)));
++            if (selectable) lore.add(fill(ArenaMenuConfig.getAllowedLevelsLine(), menu));
++        } else lore.add(ArenaMenuConfig.getUnknownLevelLine());
++        lore.add("");
++        lore.add(fill(ArenaMenuConfig.getFullRunLine(), menu));
++        lore.add(ArenaMenuConfig.getRewardsLine());
++        menu.inventory.setItem(menu.slots.value(), ItemStackGenerator.generateItemStack(Material.PAPER, fill(name, menu), lore));
++
++        if (selectable && menu.level > arena.getOriginalEnemyLevel())
++            menu.inventory.setItem(menu.slots.decrease(), ItemStackGenerator.generateItemStack(Material.ARROW,
++                    ArenaMenuConfig.getDecreaseLevelName(), List.of(ArenaMenuConfig.getDecreaseLevelHint())));
++        if (selectable && menu.level < arena.getMaximumStartingEnemyLevel())
++            menu.inventory.setItem(menu.slots.increase(), ItemStackGenerator.generateItemStack(Material.ARROW,
++                    ArenaMenuConfig.getIncreaseLevelName(), List.of(ArenaMenuConfig.getIncreaseLevelHint())));
++        if (arena.isAcceptingNewPlayers()) {
++            ItemStack entry = ArenaMenuConfig.getPlayerItem().clone();
++            var meta = entry.getItemMeta();
++            List<String> entryLore = new ArrayList<>(meta.hasLore() ? meta.getLore() : List.of());
++            entryLore.add("");
++            entryLore.add(ChatColorConverter.convert(supported ? fill(ArenaMenuConfig.getJoinLevelLine(), menu)
++                    : ArenaMenuConfig.getOriginalDifficultyName()));
++            meta.setLore(entryLore);
++            entry.setItemMeta(meta);
++            menu.inventory.setItem(menu.slots.player(), entry);
++        }
+         if (DungeonsConfig.isAllowSpectatorsInInstancedContent())
+-            shopInventory.setItem(ArenaMenuConfig.getSpectatorItemSlot(), ArenaMenuConfig.getSpectatorItem());
+-        player.openInventory(shopInventory);
+-        ArenaMenuEvents.menus.put(shopInventory, new MenuContainer(shopInventory, arenaInstance));
++            menu.inventory.setItem(menu.slots.spectator(), ArenaMenuConfig.getSpectatorItem());
+     }
+ 
+     public static class ArenaMenuEvents implements Listener {
+         private static final Map<Inventory, MenuContainer> menus = new HashMap<>();
++        private static BukkitTask refreshTask;
++
++        private static void startRefreshing() {
++            if (refreshTask != null) return;
++            refreshTask = Bukkit.getScheduler().runTaskTimer(MetadataHandler.PLUGIN,
++                    () -> menus.values().forEach(ArenaMenu::render), 20L, 20L);
++        }
+ 
+         public static void shutdown() {
+             menus.clear();
++            if (refreshTask != null) refreshTask.cancel();
++            refreshTask = null;
+         }
+ 
+         @EventHandler
+         public void onInventoryClick(InventoryClickEvent event) {
+-            Player player = ((Player) event.getWhoClicked()).getPlayer();
+-            if (!menus.containsKey(event.getInventory())) return;
++            MenuContainer menu = menus.get(event.getView().getTopInventory());
++            if (menu == null) return;
+             event.setCancelled(true);
+-            if (event.getSlot() == ArenaMenuConfig.getPlayerItemSlot()) {
+-                ArenaInstance arenaInstance = menus.get(event.getInventory()).getArenaInstance();
+-                if (arenaInstance.getCustomArenasConfigFields().getPermission() != null &&
+-                        !arenaInstance.getCustomArenasConfigFields().getPermission().isEmpty())
+-                    if (!player.hasPermission(arenaInstance.getCustomArenasConfigFields().getPermission())) {
+-                        player.sendMessage(ArenasConfig.getNoArenaPermissionMessage());
+-                        player.closeInventory();
+-                        return;
+-                    }
+-                menus.get(event.getInventory()).getArenaInstance().addNewPlayer(player);
++            if (event.getRawSlot() < 0 || event.getRawSlot() >= menu.inventory.getSize()
++                    || (!event.isLeftClick() && !event.isRightClick())) return;
++            Player player = (Player) event.getWhoClicked();
++            ArenaInstance arena = menu.arena;
++            int slot = event.getRawSlot();
++            if (slot == menu.slots.spectator() && DungeonsConfig.isAllowSpectatorsInInstancedContent()) {
++                arena.addSpectator(player, false);
+                 player.closeInventory();
+                 return;
+             }
+-            if (event.getSlot() == ArenaMenuConfig.getSpectatorItemSlot() &&
+-                    DungeonsConfig.isAllowSpectatorsInInstancedContent()) {
+-                menus.get(event.getInventory()).getArenaInstance().addSpectator(player, false);
+-                player.closeInventory();
++            if (menu.needsConfirmation || menu.generation != arena.getRunGeneration() || menu.selectable != arena.isEnemyLevelSelectable()
++                    || (!menu.selectable && menu.level != arena.getSelectedEnemyLevel())) {
++                render(menu);
++                menu.needsConfirmation = false;
++                player.sendMessage(ArenaMenuConfig.getLobbyChangedMessage());
++                return;
++            }
++            if (menu.selectable && (slot == menu.slots.decrease() || slot == menu.slots.increase())) {
++                menu.level = changedLevel(menu.level, slot == menu.slots.decrease() ? -1 : 1,
++                        event.isShiftClick(), arena.getOriginalEnemyLevel(), arena.getMaximumStartingEnemyLevel());
++                render(menu);
++                return;
++            }
++            if (slot != menu.slots.player() || !arena.isAcceptingNewPlayers()) return;
++            String permission = arena.getCustomArenasConfigFields().getPermission();
++            if (permission != null && !permission.isEmpty() && !player.hasPermission(permission)) {
++                player.sendMessage(ArenasConfig.getNoArenaPermissionMessage());
++                return;
+             }
++            if (arena.addNewPlayer(player, menu.level)) player.closeInventory();
++            else render(menu);
++        }
++
++        @EventHandler
++        public void onInventoryDrag(InventoryDragEvent event) {
++            if (menus.containsKey(event.getView().getTopInventory())
++                    && event.getRawSlots().stream().anyMatch(slot -> slot < event.getView().getTopInventory().getSize()))
++                event.setCancelled(true);
+         }
+ 
+         @EventHandler
+         public void onInventoryClose(InventoryCloseEvent event) {
+             menus.remove(event.getInventory());
++            if (menus.isEmpty() && refreshTask != null) {
++                refreshTask.cancel();
++                refreshTask = null;
++            }
+         }
+     }
+ 
+-    private class MenuContainer {
+-        @Getter
+-        private final Inventory inventory;
+-        @Getter
+-        private final ArenaInstance arenaInstance;
++    private static class MenuContainer {
++        final Inventory inventory;
++        final ArenaInstance arena;
++        final Slots slots;
++        int level;
++        boolean selectable = true;
++        boolean needsConfirmation;
++        long generation;
+ 
+-        private MenuContainer(Inventory inventory, ArenaInstance arenaInstance) {
++        MenuContainer(Inventory inventory, ArenaInstance arena, Slots slots) {
+             this.inventory = inventory;
+-            this.arenaInstance = arenaInstance;
++            this.arena = arena;
++            this.slots = slots;
++            this.level = arena.getSelectedEnemyLevel();
++            this.generation = arena.getRunGeneration();
+         }
+     }
+ }
+diff --git a/src/main/java/com/magmaguy/elitemobs/mobconstructor/custombosses/CustomBossEntity.java b/src/main/java/com/magmaguy/elitemobs/mobconstructor/custombosses/CustomBossEntity.java
+index 3f1f70a1..5e0e297d 100644
+--- a/src/main/java/com/magmaguy/elitemobs/mobconstructor/custombosses/CustomBossEntity.java
++++ b/src/main/java/com/magmaguy/elitemobs/mobconstructor/custombosses/CustomBossEntity.java
+@@ -104,6 +104,8 @@ public class CustomBossEntity extends EliteEntity implements Listener, Persisten
+     @Getter
+     @Setter
+     private boolean dynamicLevel = false;
++    private int arenaLevelOffset;
++    private int arenaMaximumEnemyLevel;
+ 
+     /**
+      * Uses a builder pattern in order to construct a CustomBossEntity at an arbitrary point in the future. Does not
+@@ -198,8 +200,26 @@ public class CustomBossEntity extends EliteEntity implements Listener, Persisten
+     @Override
+     public void setSummoningEntity(EliteEntity summoningEntity) {
+         this.summoningEntity = summoningEntity;
+-        if (summoningEntity instanceof CustomBossEntity)
+-            this.emPackage = ((CustomBossEntity) summoningEntity).emPackage;
++        if (summoningEntity instanceof CustomBossEntity summoner) {
++            this.emPackage = summoner.emPackage;
++            if (livingEntity == null && summoner.arenaLevelOffset > 0)
++                setArenaLevelAdjustment(summoner.arenaLevelOffset, summoner.arenaMaximumEnemyLevel);
++        }
++    }
++
++    /** Arena-only adjustment, installed before materialization and retained through phase changes. */
++    public void setArenaLevelAdjustment(int offset, int maximumLevel) {
++        if (offset < 0 || maximumLevel < 1 || livingEntity != null)
++            throw new IllegalArgumentException("Arena level adjustment requires an unspawned boss and valid levels");
++        arenaLevelOffset = offset;
++        arenaMaximumEnemyLevel = maximumLevel;
++        if (customBossesConfigFields.getLevel() > 0)
++            super.setLevel(arenaLevel(customBossesConfigFields.getLevel()));
++    }
++
++    private int arenaLevel(int configuredLevel) {
++        return arenaLevelOffset == 0 || configuredLevel < 1 ? configuredLevel
++                : (int) Math.min(arenaMaximumEnemyLevel, (long) configuredLevel + arenaLevelOffset);
+     }
+ 
+     /**
+@@ -232,7 +252,7 @@ public class CustomBossEntity extends EliteEntity implements Listener, Persisten
+         // instead of holding the instance level for the whole encounter.
+         int newConfigLevel = customBossesConfigFields.getLevel();
+         if (newConfigLevel != -1 || super.level == -1) {
+-            super.setLevel(newConfigLevel);
++            super.setLevel(arenaLevel(newConfigLevel));
+         }
+         setPluginName();
+         super.setElitePowers(ElitePowerParser.parsePowers(customBossesConfigFields, this));
+@@ -495,7 +515,7 @@ public class CustomBossEntity extends EliteEntity implements Listener, Persisten
+ 
+     private void getDynamicLevel(Location location, DynamicLevelPass pass) {
+         startUpdatingDynamicLevel();
+-        super.setLevel(pass.highestLevel(location));
++        super.setLevel(arenaLevel(pass.highestLevel(location)));
+     }
+ 
+     /** One synchronous update pass, never a cache spanning XP changes or reconnects. */
+diff --git a/src/main/java/com/magmaguy/elitemobs/powers/meta/CustomSummonPower.java b/src/main/java/com/magmaguy/elitemobs/powers/meta/CustomSummonPower.java
+index cd1adff0..be4bf8b2 100644
+--- a/src/main/java/com/magmaguy/elitemobs/powers/meta/CustomSummonPower.java
++++ b/src/main/java/com/magmaguy/elitemobs/powers/meta/CustomSummonPower.java
+@@ -471,12 +471,12 @@ public class CustomSummonPower extends ElitePower implements Listener {
+                 }
+                 if (eliteEntity instanceof CustomBossEntity summoner && summoner.isNormalizedCombat())
+                     regionalBossEntity.setNormalizedCombat();
++                regionalBossEntity.setSummoningEntity(eliteEntity);
+                 if (customBossReinforcement.inheritLevel)
+                     regionalBossEntity.setLevel(eliteEntity.getLevel());
+                 if (!customBossReinforcement.summonType.equals(SummonType.ON_DEATH))
+                     eliteEntity.addReinforcement(regionalBossEntity);
+                 customBossReinforcement.isSummoned = true;
+-                regionalBossEntity.setSummoningEntity(eliteEntity);
+                 if (customBossReinforcement.inheritAggro)
+                     regionalBossEntity.inheritAggroFrom(eliteEntity);
+                 regionalBossEntity.initialize();
+@@ -493,9 +493,9 @@ public class CustomSummonPower extends ElitePower implements Listener {
+                     customBossEntity.setNormalizedCombat();
+                 customBossEntity.setSpawnLocation(spawnLocation);
+                 customBossEntity.setBypassesProtections(eliteEntity.getBypassesProtections());
++                customBossEntity.setSummoningEntity(eliteEntity);
+                 if (customBossReinforcement.inheritLevel)
+                     customBossEntity.setLevel(eliteEntity.getLevel());
+-                customBossEntity.setSummoningEntity(eliteEntity);
+                 try {
+                     customBossEntity.spawn(false);
+                 } finally {
 diff --git a/src/main/java/com/magmaguy/elitemobs/presentation/actionbar/ActionBarCompositor.java b/src/main/java/com/magmaguy/elitemobs/presentation/actionbar/ActionBarCompositor.java
 index a34026b4..898e8100 100644
 --- a/src/main/java/com/magmaguy/elitemobs/presentation/actionbar/ActionBarCompositor.java
@@ -2155,13 +2704,13 @@ index 32c96946..f60acfd1 100644
      }
  
 diff --git a/src/main/resources/plugin.yml b/src/main/resources/plugin.yml
-index de394f10..8b81baea 100644
+index de394f10..f5346acb 100644
 --- a/src/main/resources/plugin.yml
 +++ b/src/main/resources/plugin.yml
 @@ -1,5 +1,5 @@
  name: EliteMobs
 -version: 10.9.8
-+version: 10.9.8-ruscrafting.1
++version: 10.9.8-ruscrafting.2
  author: MagmaGuy
  main: com.magmaguy.elitemobs.EliteMobs
  api-version: '1.21.4'
@@ -4287,5 +4836,523 @@ index 00000000..44972209
 +        return new PassiveConditionContext(health, false, false, false,
 +                true, 1D, false, false, true, false, 10D,
 +                false, false, false, magicWeapon, false, false);
++    }
++}
+diff --git a/src/test/java/com/magmaguy/elitemobs/instanced/ArenaEnemyLevelTest.java b/src/test/java/com/magmaguy/elitemobs/instanced/ArenaEnemyLevelTest.java
+new file mode 100644
+index 00000000..863ba43c
+--- /dev/null
++++ b/src/test/java/com/magmaguy/elitemobs/instanced/ArenaEnemyLevelTest.java
+@@ -0,0 +1,127 @@
++package com.magmaguy.elitemobs.instanced;
++
++import com.magmaguy.elitemobs.MetadataHandler;
++import com.magmaguy.elitemobs.api.instanced.MatchJoinEvent;
++import com.magmaguy.elitemobs.config.customarenas.CustomArenasConfigFields;
++import com.magmaguy.elitemobs.config.custombosses.CustomBossesConfig;
++import com.magmaguy.elitemobs.config.custombosses.CustomBossesConfigFields;
++import com.magmaguy.elitemobs.instanced.arena.ArenaInstance;
++import com.magmaguy.elitemobs.items.customloottable.CustomLootTable;
++import org.bukkit.entity.EntityType;
++import org.bukkit.event.EventHandler;
++import org.bukkit.event.Listener;
++import org.junit.jupiter.api.AfterEach;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.mockito.MockedStatic;
++
++import java.util.List;
++
++import static org.junit.jupiter.api.Assertions.*;
++import static org.mockito.ArgumentMatchers.anyString;
++import static org.mockito.Mockito.*;
++
++class ArenaEnemyLevelTest extends InstanceFixture {
++    private MockedStatic<CustomBossesConfig> bosses;
++
++    @BeforeEach void configureBosses() {
++        bosses = mockStatic(CustomBossesConfig.class);
++        bosses.when(() -> CustomBossesConfig.getCustomBoss(anyString())).thenAnswer(call -> {
++            String name = call.getArgument(0);
++            if (name.equals("missing.yml")) return null;
++            return new CustomBossesConfigFields(name, EntityType.ZOMBIE, true, "Guard",
++                    name.equals("dynamic.yml") ? "dynamic" : name.equals("first.yml") ? "51" : "100");
++        });
++    }
++
++    @AfterEach void closeBosses() {
++        bosses.close();
++        ArenaInstance.shutdown();
++    }
++
++    private ArenaInstance arena(String firstBoss) {
++        var fields = new CustomArenasConfigFields("test_arena.yml", true);
++        fields.setArenaName("Test arena");
++        fields.setMinimumPlayerCount(1);
++        fields.setMaximumPlayerCount(5);
++        fields.setWaveCount(2);
++        fields.setDelayBetweenWaves(5);
++        fields.setSpawnPoints(List.of("name=center:location=em_instance,0.5,64,0.5"));
++        fields.setBossList(List.of("wave=1:spawnPoint=center:boss=" + firstBoss,
++                "wave=2:spawnPoint=center:boss=last.yml"));
++        fields.setArenaRewards(mock(CustomLootTable.class));
++        return new ArenaInstance(fields, at(instanceWorld, -20, 0, -20), at(instanceWorld, 20, 100, 20), start(), exit());
++    }
++
++    @Test void chosenLevelRaisesTheAuthoredRangeAndCannotLowerOrExceedTheCap() {
++        var arena = arena("first.yml");
++        assertEquals(51, arena.getOriginalEnemyLevel());
++        assertEquals(151, arena.getMaximumStartingEnemyLevel());
++        assertArrayEquals(new int[]{81, 81}, arena.getEnemyLevelRange(1, 81));
++        assertArrayEquals(new int[]{130, 130}, arena.getEnemyLevelRange(2, 81));
++        assertFalse(arena.addNewPlayer(alex, 50));
++        assertFalse(arena.addNewPlayer(alex, 152));
++        assertTrue(arena.addNewPlayer(alex, 81));
++        assertEquals(81, arena.getSelectedEnemyLevel());
++        assertEquals(0, arena.getCurrentWave(), "Level selection must not skip any wave");
++    }
++
++    @Test void firstSuccessfulAdmissionLocksTheLobbyAndAConflictingSecondChoiceIsRefused() {
++        var arena = arena("first.yml");
++        assertTrue(arena.isEnemyLevelSelectable());
++        assertTrue(arena.addNewPlayer(alex, 81));
++        assertFalse(arena.isEnemyLevelSelectable());
++        assertFalse(arena.addNewPlayer(bea, 91));
++        assertFalse(arena.getPlayers().contains(bea));
++        assertTrue(arena.addNewPlayer(bea, 81));
++        assertEquals(81, arena.getSelectedEnemyLevel());
++    }
++
++    @Test void aVetoedAdmissionDoesNotReserveTheChosenLevel() {
++        var arena = arena("first.yml");
++        server.getPluginManager().registerEvents(new Listener() {
++            @EventHandler public void veto(MatchJoinEvent event) {
++                if (event.getPlayer().equals(bea)) event.setCancelled(true);
++            }
++        }, MetadataHandler.PLUGIN);
++        assertFalse(arena.addNewPlayer(bea, 91));
++        assertEquals(51, arena.getSelectedEnemyLevel());
++        assertTrue(arena.isEnemyLevelSelectable());
++        assertTrue(arena.addNewPlayer(alex, 61));
++    }
++
++    @Test void emptyLobbyResetReleasesItsLevelForTheNextRun() {
++        var arena = arena("first.yml");
++        assertTrue(arena.addNewPlayer(alex, 81));
++        ticks(1);
++        arena.removePlayer(alex);
++        ticks(6);
++        assertEquals(51, arena.getSelectedEnemyLevel());
++        assertTrue(arena.isEnemyLevelSelectable());
++        assertTrue(arena.addNewPlayer(bea, 101));
++    }
++
++    @Test void spectatorDoesNotChooseOrLockTheLevel() throws Exception {
++        setAllowSpectators(true);
++        var arena = arena("first.yml");
++        arena.addSpectator(cam, false);
++        ticks(1);
++        assertTrue(arena.isSpectator(cam));
++        assertTrue(arena.isEnemyLevelSelectable());
++        assertTrue(arena.addNewPlayer(alex, 81));
++        assertEquals(81, arena.getSelectedEnemyLevel());
++    }
++
++    @Test void missingAndDynamicDefinitionsRetainOnlyTheOriginalMode() {
++        for (String boss : List.of("missing.yml", "dynamic.yml")) {
++            var arena = arena(boss);
++            assertFalse(arena.isEnemyLevelSelectable());
++            assertEquals(0, arena.getOriginalEnemyLevel());
++            assertFalse(arena.addNewPlayer(alex, 1));
++            assertTrue(arena.addNewPlayer(alex));
++            ticks(1);
++            arena.removePlayer(alex);
++            ticks(6);
++        }
++    }
++}
+diff --git a/src/test/java/com/magmaguy/elitemobs/menus/ArenaMenuPreviewExport.java b/src/test/java/com/magmaguy/elitemobs/menus/ArenaMenuPreviewExport.java
+new file mode 100644
+index 00000000..070482e1
+--- /dev/null
++++ b/src/test/java/com/magmaguy/elitemobs/menus/ArenaMenuPreviewExport.java
+@@ -0,0 +1,102 @@
++package com.magmaguy.elitemobs.menus;
++
++import com.google.gson.GsonBuilder;
++import com.magmaguy.elitemobs.MetadataHandler;
++import com.magmaguy.elitemobs.config.DefaultConfig;
++import com.magmaguy.elitemobs.config.DungeonsConfig;
++import com.magmaguy.elitemobs.config.customarenas.CustomArenasConfigFields;
++import com.magmaguy.elitemobs.config.menus.premade.ArenaMenuConfig;
++import com.magmaguy.elitemobs.instanced.arena.ArenaInstance;
++import org.bukkit.configuration.file.YamlConfiguration;
++import org.bukkit.event.inventory.ClickType;
++import org.bukkit.event.inventory.InventoryAction;
++import org.bukkit.event.inventory.InventoryClickEvent;
++import org.bukkit.event.inventory.InventoryType;
++import org.mockbukkit.mockbukkit.MockBukkit;
++
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.util.ArrayList;
++import java.util.LinkedHashMap;
++import java.util.List;
++import java.util.Map;
++
++import static org.mockito.ArgumentMatchers.anyInt;
++import static org.mockito.Mockito.*;
++
++/** Exports actual menu ItemMeta for representative states; this does not simulate a Minecraft client. */
++public final class ArenaMenuPreviewExport {
++    public static void main(String[] args) throws Exception {
++        Path menuSource = Path.of(args[0]);
++        Path arenaSource = Path.of(args[1]);
++        Path output = Path.of(args[2]);
++        boolean resourcePackModels = args.length > 3 && Boolean.parseBoolean(args[3]);
++        Files.createDirectories(output);
++        var server = MockBukkit.mock();
++        MetadataHandler.PLUGIN = MockBukkit.createMockPlugin("EliteMobs");
++        try (var defaults = mockStatic(DefaultConfig.class); var dungeons = mockStatic(DungeonsConfig.class)) {
++            defaults.when(DefaultConfig::useResourcePackModels).thenReturn(resourcePackModels);
++            dungeons.when(DungeonsConfig::isAllowSpectatorsInInstancedContent).thenReturn(true);
++            var config = new ArenaMenuConfig();
++            config.setFile(output.resolve("resolved-menu.yml").toFile());
++            config.setFileConfiguration(YamlConfiguration.loadConfiguration(menuSource.toFile()));
++            config.processConfigFields();
++            var player = server.addPlayer();
++            var fields = new CustomArenasConfigFields("preview.yml", true);
++            fields.setArenaName(YamlConfiguration.loadConfiguration(arenaSource.toFile()).getString("arenaName"));
++            fields.setWaveCount(50);
++            var arena = mock(ArenaInstance.class);
++            when(arena.getCustomArenasConfigFields()).thenReturn(fields);
++            when(arena.isAcceptingNewPlayers()).thenReturn(true);
++            when(arena.getOriginalEnemyLevel()).thenReturn(51);
++            when(arena.getSelectedEnemyLevel()).thenReturn(51);
++            when(arena.getMaximumStartingEnemyLevel()).thenReturn(151);
++            when(arena.getEnemyLevelRange(anyInt(), anyInt())).thenAnswer(call -> {
++                int level = (int) call.getArgument(1) + ((int) call.getArgument(0) == 1 ? 0 : 49);
++                return new int[]{level, level};
++            });
++            ArenaInstance.getArenaInstances().put("preview.yml", arena);
++            server.getPluginManager().registerEvents(new ArenaMenu.ArenaMenuEvents(), MetadataHandler.PLUGIN);
++            Map<String, Object> content = new LinkedHashMap<>();
++            List<Object> inventories = new ArrayList<>();
++            for (String state : List.of("editable", "locked", "original")) {
++                when(arena.isEnemyLevelSelectable()).thenReturn(state.equals("editable"));
++                when(arena.getSelectedEnemyLevel()).thenReturn(state.equals("original") ? 0 : state.equals("locked") ? 81 : 51);
++                when(arena.getOriginalEnemyLevel()).thenReturn(state.equals("original") ? 0 : 51);
++                new ArenaMenu().constructArenaMenu(player, "preview.yml");
++                if (state.equals("editable")) for (int index = 0; index < 3; index++)
++                    server.getPluginManager().callEvent(new InventoryClickEvent(player.getOpenInventory(),
++                            InventoryType.SlotType.CONTAINER, ArenaMenu.slots(ArenaMenuConfig.getPlayerItemSlot(),
++                            ArenaMenuConfig.getSpectatorItemSlot()).increase(), ClickType.SHIFT_LEFT, InventoryAction.PICKUP_ALL));
++                Map<String, Object> text = new LinkedHashMap<>();
++                text.put("title", player.getOpenInventory().getTitle());
++                List<Object> items = new ArrayList<>();
++                var inventory = player.getOpenInventory().getTopInventory();
++                for (int slot = 0; slot < inventory.getSize(); slot++) {
++                    var item = inventory.getItem(slot);
++                    if (item == null || item.getType().isAir()) continue;
++                    var meta = item.getItemMeta();
++                    text.put("name-" + slot, meta.getDisplayName());
++                    text.put("lore-" + slot, meta.hasLore() ? meta.getLore() : List.of());
++                    items.add(Map.of("slot", slot, "material", item.getType().name(),
++                            "name", state + ":name-" + slot, "lore", state + ":lore-" + slot));
++                }
++                content.put(state, text);
++                inventories.add(Map.of("id", state, "title", state + ":title", "rows", 1, "filler", "AIR", "items", items));
++                player.closeInventory();
++            }
++            var gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
++            Files.writeString(output.resolve("content.json"), gson.toJson(content));
++            Files.writeString(output.resolve("inventories.json"), gson.toJson(inventories));
++            Files.writeString(output.resolve("export-evidence.json"), gson.toJson(Map.of(
++                    "kind", "source-derived ItemMeta export; native client unverified",
++                    "producer", ArenaMenuPreviewExport.class.getName(), "menuSource", menuSource.toString(),
++                    "arenaSource", arenaSource.toString(), "resourcePackModels", resourcePackModels,
++                    "fixture", "Iron arena authored main levels 51–100, start81, cap200; original-only uses the same title as a representative unsupported definition")));
++        } finally {
++            ArenaMenu.ArenaMenuEvents.shutdown();
++            ArenaInstance.shutdown();
++            MockBukkit.unmock();
++        }
++    }
++}
+diff --git a/src/test/java/com/magmaguy/elitemobs/menus/ArenaMenuTest.java b/src/test/java/com/magmaguy/elitemobs/menus/ArenaMenuTest.java
+new file mode 100644
+index 00000000..85b27773
+--- /dev/null
++++ b/src/test/java/com/magmaguy/elitemobs/menus/ArenaMenuTest.java
+@@ -0,0 +1,158 @@
++package com.magmaguy.elitemobs.menus;
++
++import com.magmaguy.elitemobs.MetadataHandler;
++import com.magmaguy.elitemobs.config.DefaultConfig;
++import com.magmaguy.elitemobs.config.DungeonsConfig;
++import com.magmaguy.elitemobs.config.customarenas.CustomArenasConfigFields;
++import com.magmaguy.elitemobs.config.menus.premade.ArenaMenuConfig;
++import com.magmaguy.elitemobs.instanced.arena.ArenaInstance;
++import org.bukkit.configuration.file.YamlConfiguration;
++import org.bukkit.event.inventory.ClickType;
++import org.bukkit.event.inventory.InventoryAction;
++import org.bukkit.event.inventory.InventoryClickEvent;
++import org.bukkit.event.inventory.InventoryType;
++import org.bukkit.inventory.Inventory;
++import org.junit.jupiter.api.AfterEach;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.mockito.MockedStatic;
++import org.mockbukkit.mockbukkit.MockBukkit;
++import org.mockbukkit.mockbukkit.ServerMock;
++import org.mockbukkit.mockbukkit.entity.PlayerMock;
++
++import java.io.File;
++import java.util.HashSet;
++import java.util.List;
++import java.util.Set;
++
++import static org.junit.jupiter.api.Assertions.*;
++import static org.mockito.ArgumentMatchers.*;
++import static org.mockito.Mockito.*;
++
++class ArenaMenuTest {
++    private ServerMock server;
++    private PlayerMock player;
++    private ArenaInstance arena;
++    private MockedStatic<DefaultConfig> defaults;
++    private MockedStatic<DungeonsConfig> dungeons;
++    private Inventory inventory;
++
++    @BeforeEach void open() {
++        server = MockBukkit.mock();
++        MetadataHandler.PLUGIN = MockBukkit.createMockPlugin("EliteMobs");
++        player = server.addPlayer();
++        defaults = mockStatic(DefaultConfig.class);
++        dungeons = mockStatic(DungeonsConfig.class);
++        dungeons.when(DungeonsConfig::isAllowSpectatorsInInstancedContent).thenReturn(true);
++        var config = new ArenaMenuConfig();
++        config.setFile(new File(MetadataHandler.PLUGIN.getDataFolder(), "arena_menu.yml"));
++        config.setFileConfiguration(new YamlConfiguration());
++        config.processConfigFields();
++        arena = mock(ArenaInstance.class);
++        var fields = new CustomArenasConfigFields("test_arena.yml", true);
++        fields.setArenaName("Iron arena");
++        fields.setWaveCount(50);
++        when(arena.getCustomArenasConfigFields()).thenReturn(fields);
++        when(arena.isAcceptingNewPlayers()).thenReturn(true);
++        when(arena.isEnemyLevelSelectable()).thenReturn(true);
++        when(arena.getOriginalEnemyLevel()).thenReturn(51);
++        when(arena.getSelectedEnemyLevel()).thenReturn(51);
++        when(arena.getMaximumStartingEnemyLevel()).thenReturn(151);
++        when(arena.getEnemyLevelRange(anyInt(), anyInt())).thenAnswer(call -> {
++            int level = call.getArgument(1);
++            return new int[]{level + ((int) call.getArgument(0) == 1 ? 0 : 49), level + ((int) call.getArgument(0) == 1 ? 0 : 49)};
++        });
++        when(arena.addNewPlayer(eq(player), anyInt())).thenReturn(true);
++        ArenaInstance.getArenaInstances().put("test_arena.yml", arena);
++        server.getPluginManager().registerEvents(new ArenaMenu.ArenaMenuEvents(), MetadataHandler.PLUGIN);
++    }
++
++    @AfterEach void close() {
++        player.closeInventory();
++        ArenaMenu.ArenaMenuEvents.shutdown();
++        ArenaInstance.shutdown();
++        defaults.close();
++        dungeons.close();
++        MockBukkit.unmock();
++    }
++
++    private void menu() {
++        new ArenaMenu().constructArenaMenu(player, "test_arena.yml");
++        inventory = player.getOpenInventory().getTopInventory();
++    }
++
++    private void click(int rawSlot, boolean fast) {
++        var event = new InventoryClickEvent(player.getOpenInventory(), InventoryType.SlotType.CONTAINER,
++                rawSlot, fast ? ClickType.SHIFT_LEFT : ClickType.LEFT, InventoryAction.PICKUP_ALL);
++        server.getPluginManager().callEvent(event);
++        assertTrue(event.isCancelled());
++    }
++
++    @Test void exactAndFastSelectionClampAtBothBounds() {
++        assertEquals(51, ArenaMenu.changedLevel(51, -1, false, 51, 151));
++        assertEquals(51, ArenaMenu.changedLevel(55, -1, true, 51, 151));
++        assertEquals(61, ArenaMenu.changedLevel(51, 1, true, 51, 151));
++        assertEquals(151, ArenaMenu.changedLevel(148, 1, true, 51, 151));
++        menu();
++        assertNull(inventory.getItem(3));
++        click(5, true);
++        assertTrue(inventory.getItem(4).getItemMeta().getDisplayName().contains("61"));
++        assertTrue(inventory.getItem(4).getItemMeta().getLore().stream().anyMatch(line -> line.contains("110")));
++        click(6, false);
++        verify(arena).addNewPlayer(player, 61);
++    }
++
++    @Test void customEntrySlotsKeepTheirPositionsAndNeverOverlapNewControls() {
++        var slots = ArenaMenu.slots(3, 4);
++        assertEquals(3, slots.player());
++        assertEquals(4, slots.spectator());
++        assertEquals(5, Set.of(slots.player(), slots.spectator(), slots.value(), slots.decrease(), slots.increase()).size());
++    }
++
++    @Test void staleSelectionRequiresAnotherClickEvenAfterTheAutomaticRefresh() {
++        menu();
++        click(5, true);
++        when(arena.isEnemyLevelSelectable()).thenReturn(false);
++        when(arena.getSelectedEnemyLevel()).thenReturn(81);
++        server.getScheduler().performTicks(20);
++        assertNull(inventory.getItem(3));
++        assertNull(inventory.getItem(5));
++        click(6, false);
++        verify(arena, never()).addNewPlayer(any(), anyInt());
++        click(6, false);
++        verify(arena).addNewPlayer(player, 81);
++    }
++
++    @Test void runningArenaHidesEntryAndAdjustmentsButStillOffersSpectating() {
++        when(arena.isAcceptingNewPlayers()).thenReturn(false);
++        when(arena.isEnemyLevelSelectable()).thenReturn(false);
++        when(arena.getSelectedEnemyLevel()).thenReturn(81);
++        when(arena.getCurrentWave()).thenReturn(23);
++        menu();
++        assertNull(inventory.getItem(6));
++        assertNull(inventory.getItem(3));
++        assertNull(inventory.getItem(5));
++        assertTrue(inventory.getItem(4).getItemMeta().getDisplayName().contains("23/50"));
++        click(6, false);
++        verify(arena, never()).addNewPlayer(any(), anyInt());
++        click(2, false);
++        verify(arena).addSpectator(player, false);
++    }
++
++    @Test void playerInventorySlotWithTheSameNumberCannotTriggerEntry() {
++        menu();
++        click(15, false);
++        verify(arena, never()).addNewPlayer(any(), anyInt());
++    }
++
++    @Test void originalOnlyArenaDoesNotExposeAZeroLevelOrAdjustmentControls() {
++        when(arena.getOriginalEnemyLevel()).thenReturn(0);
++        when(arena.getSelectedEnemyLevel()).thenReturn(0);
++        when(arena.isEnemyLevelSelectable()).thenReturn(false);
++        menu();
++        assertNull(inventory.getItem(3));
++        assertNull(inventory.getItem(5));
++        assertEquals(ArenaMenuConfig.getOriginalDifficultyName(), inventory.getItem(4).getItemMeta().getDisplayName());
++        assertTrue(inventory.getItem(4).getItemMeta().getLore().contains(ArenaMenuConfig.getRewardsLine()));
++    }
++}
+diff --git a/src/test/java/com/magmaguy/elitemobs/mobconstructor/custombosses/ArenaBossLevelTest.java b/src/test/java/com/magmaguy/elitemobs/mobconstructor/custombosses/ArenaBossLevelTest.java
+new file mode 100644
+index 00000000..50d12ba2
+--- /dev/null
++++ b/src/test/java/com/magmaguy/elitemobs/mobconstructor/custombosses/ArenaBossLevelTest.java
+@@ -0,0 +1,107 @@
++package com.magmaguy.elitemobs.mobconstructor.custombosses;
++
++import com.magmaguy.elitemobs.MetadataHandler;
++import com.magmaguy.elitemobs.combatsystem.LevelScaling;
++import com.magmaguy.elitemobs.config.MobCombatSettingsConfig;
++import com.magmaguy.elitemobs.config.custombosses.CustomBossesConfigFields;
++import com.magmaguy.elitemobs.playerdata.ElitePlayerInventory;
++import org.bukkit.entity.EntityType;
++import org.junit.jupiter.api.AfterEach;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.mockbukkit.mockbukkit.MockBukkit;
++
++import static org.junit.jupiter.api.Assertions.*;
++import static org.mockito.Mockito.mockStatic;
++import static org.mockito.Mockito.mock;
++import static org.mockito.Mockito.when;
++
++class ArenaBossLevelTest {
++    @BeforeEach void open() {
++        MockBukkit.mock();
++        MetadataHandler.PLUGIN = MockBukkit.createMockPlugin("EliteMobs");
++    }
++
++    @AfterEach void close() {
++        CustomBossEntity.shutdown();
++        MockBukkit.unmock();
++    }
++
++    private CustomBossesConfigFields fields(int level) {
++        return new CustomBossesConfigFields("guard_" + level + ".yml", EntityType.ZOMBIE, true, "Guard", Integer.toString(level));
++    }
++
++    @Test void originalBossesKeepTheirAuthoredPhaseLevels() {
++        var boss = new CustomBossEntity(fields(100));
++        assertEquals(100, boss.getLevel());
++        boss.setCustomBossesConfigFields(fields(50));
++        assertEquals(50, boss.getLevel());
++        assertNull(boss.getLivingEntity());
++    }
++
++    @Test void adjustmentIsReadyBeforeMaterializationAndFeedsNativeHealthScaling() {
++        try (var settings = mockStatic(MobCombatSettingsConfig.class)) {
++            settings.when(MobCombatSettingsConfig::getNormalizedBaselineHealth).thenReturn(20.0);
++            var boss = new CustomBossEntity(fields(21));
++            boss.setArenaLevelAdjustment(10, 200);
++            assertEquals(31, boss.getLevel());
++            assertNull(boss.getLivingEntity(), "The adjustment must precede entity materialization");
++            boss.setNormalizedMaxHealth();
++            assertEquals(LevelScaling.calculateMobHealth(31, 20), boss.getMaxHealth());
++            boss.setCustomBossesConfigFields(fields(26));
++            boss.setNormalizedMaxHealth();
++            assertEquals(36, boss.getLevel());
++            assertEquals(LevelScaling.calculateMobHealth(36, 20), boss.getMaxHealth());
++        }
++    }
++
++    @Test void phasesAndSummonsKeepOneOffsetAndRespectTheCap() {
++        var parent = new CustomBossEntity(fields(100));
++        parent.setArenaLevelAdjustment(30, 200);
++        parent.setCustomBossesConfigFields(fields(50));
++        assertEquals(80, parent.getLevel(), "Preserve authored phase differences");
++        var child = new CustomBossEntity(fields(25));
++        child.setSummoningEntity(parent);
++        assertEquals(55, child.getLevel());
++        child.setSummoningEntity(parent);
++        assertEquals(55, child.getLevel(), "Repeated ownership binding must not add the offset twice");
++        child.setCustomBossesConfigFields(fields(190));
++        assertEquals(200, child.getLevel());
++    }
++
++    @Test void inheritedSummonLevelIsAppliedAfterItsArenaContextWithoutDoubleAdjustment() {
++        var parent = new CustomBossEntity(fields(51));
++        parent.setArenaLevelAdjustment(30, 200);
++        var child = new CustomBossEntity(fields(5));
++        child.setSummoningEntity(parent);
++        child.setLevel(parent.getLevel());
++        assertEquals(81, child.getLevel());
++        var grandchild = new CustomBossEntity(fields(20));
++        grandchild.setSummoningEntity(child);
++        assertEquals(50, grandchild.getLevel());
++    }
++
++    @Test void dynamicRefreshRetainsTheArenaOffsetAndCapWithoutChangingOrdinaryBosses() {
++        var server = MockBukkit.getMock();
++        var world = server.addSimpleWorld("arena");
++        var player = server.addPlayer();
++        player.teleport(world.getSpawnLocation());
++        var inventory = mock(ElitePlayerInventory.class);
++        try (var inventories = mockStatic(ElitePlayerInventory.class)) {
++            inventories.when(() -> ElitePlayerInventory.getPlayer(player)).thenReturn(inventory);
++            when(inventory.getNaturalMobSpawnLevel(false)).thenReturn(40, 190, 40);
++            var parent = new CustomBossEntity(fields(51));
++            parent.setArenaLevelAdjustment(30, 200);
++            var dynamic = new CustomBossesConfigFields("dynamic.yml", EntityType.ZOMBIE, true, "Dynamic", "dynamic");
++            var child = new CustomBossEntity(dynamic);
++            child.setSummoningEntity(parent);
++            child.getDynamicLevel(player.getLocation());
++            assertEquals(70, child.getLevel());
++            child.getDynamicLevel(player.getLocation());
++            assertEquals(200, child.getLevel());
++            var ordinary = new CustomBossEntity(dynamic);
++            ordinary.getDynamicLevel(player.getLocation());
++            assertEquals(40, ordinary.getLevel());
++        }
 +    }
 +}
